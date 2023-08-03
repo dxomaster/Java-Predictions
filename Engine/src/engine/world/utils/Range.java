@@ -2,22 +2,29 @@ package engine.world.utils;
 import java.util.Random;
 import java.util.TimerTask;
 
-public class Range<T>{
-    private final T from;
-    private final T to;
+public class Range{
+    private final float from;
+    private final float to;
 
-    public boolean isInRange(T value) {
+
+    public boolean isInRange(float value) {
         return (float)value >= (float)from && (float)value <= (float)to;
     }
-    public Range(T from, T to ){
+    public Range(float from, float to ){
+        if (from > to) throw new IllegalArgumentException("from must be less than to");
         this.from = from;
         this.to = to;
     }
-    public T getFrom() {
+    public Range(int from, int to ){
+        if (from > to) throw new IllegalArgumentException("from must be less than to");
+        this.from = from;
+        this.to = to;
+    }
+    public float getFrom() {
         return from;
     }
 
-    public T getTo() {
+    public float getTo() {
         return to;
     }
 
@@ -27,18 +34,5 @@ public class Range<T>{
                 "from=" + from +
                 ", to=" + to +
                 '}';
-    }
-
-    public T generateRandomValueInRange()
-    {
-        Random random = new Random();
-        if (from.getClass() == Integer.class)
-        {
-            return (T)Integer.valueOf(random.nextInt((Integer)to - (Integer)from) + (Integer)from);
-        }
-        else {
-            return (T)Float.valueOf(random.nextFloat() * ((Float)to - (Float)from) + (Float)from);
-        }
-
     }
 }

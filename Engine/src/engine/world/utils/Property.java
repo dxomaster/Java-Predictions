@@ -3,35 +3,51 @@ package engine.world.utils;
 
 import java.util.Random;
 
-public class Property<T> {
+public class Property {
     private final boolean isRandomlyGenerated;
     private final String name;
-    private final Range<T> range;
-    private T value;
+    private  Range range;
+    private final PropertyType type;
+    private Object value;
 
-    public Property(String name, Range<T> range, T value) {
+    public Property(String name, PropertyType type, Range range, Object value) {
+        this.type = type;
         this.name = name;
-        this.range = range;
-        this.setValue(value);
         this.isRandomlyGenerated = false;
+        this.setRange(range);
+        this.setValue(value);
+
     }
 
-    public Property(String name, Range<T> range) {
+    public Property(String name, PropertyType type, Range range) {
         Random random = new Random();
         this.name = name;
-        this.range = range;
-        if (range != null)
-            this.setValue(range.generateRandomValueInRange());
-        if (value.getClass() == Integer.class) {
-            this.setValue((T) Integer.valueOf(random.nextInt()));
-        } else if (value.getClass() == Float.class) {
-            this.setValue((T) Float.valueOf(random.nextFloat()));
-        } else if (value.getClass() == String.class) {
-            this.setValue((T) generateRandomString());
-        } else {
-            this.setValue((T) Boolean.valueOf(random.nextBoolean()));
-        }
+        this.type = type;
         this.isRandomlyGenerated = true;
+        this.setRange(range);
+
+        if (range != null) {
+            if (type == PropertyType.DECIMAL) {
+                this.setValue((Integer)random.nextInt((int) (range.getTo() - range.getFrom() + range.getFrom())));
+            } else {
+                this.setValue((Float)random.nextFloat() * (range.getTo() - range.getFrom()) + range.getFrom());
+            }
+        }
+        else {
+            if (this.type == PropertyType.DECIMAL) {
+                this.setValue(random.nextInt());
+            }
+            else if (this.type == PropertyType.FLOAT) {
+                this.setValue(random.nextFloat());
+            }
+            else if (this.type == PropertyType.BOOLEAN) {
+                this.setValue(random.nextBoolean());
+            }
+            else if (this.type == PropertyType.STRING) {
+                this.setValue(generateRandomString());
+            }
+        }
+
     }
 
     public String getName() {
@@ -42,15 +58,18 @@ public class Property<T> {
     public String toString() {
         return "Property{" +
                 ", name='" + name + '\'' +
-                ", type=" + value.getClass().getSimpleName() +
+                ", type=" + type.propertyClass.getSimpleName() +
                 ", range=" + range +
                 "isRandomlyGenerated=" + isRandomlyGenerated +
                 '}';
     }
 
-    public void setValue(T value) {
-        if (value.getClass() == Integer.class || value.getClass() == Float.class) {
-            if (range != null && !range.isInRange(value)) {
+    public void setValue(Object value) {
+        if (value.getClass() != this.type.propertyClass) {
+            throw new IllegalArgumentException("Value must be of type " + this.type.propertyClass.getSimpleName());
+        }
+        if (this.type == PropertyType.DECIMAL || this.type == PropertyType.FLOAT) {
+            if (range != null && !range.isInRange((float) value)) {
                 throw new IllegalArgumentException("Value must be in range " + range.getFrom() + " to " + range.getTo());
             }
 
@@ -58,8 +77,23 @@ public class Property<T> {
         this.value = value;
     }
 
-    public T getValue() {
+    public Object getValue() {
         return value;
+    }
+    private void setRange(Range range) {
+        if (range == null)
+        {
+            return;
+        }
+        else {
+            if (this.type == PropertyType.STRING) {
+                throw new IllegalArgumentException("String properties cannot have a range");
+            }
+            if (this.type == PropertyType.BOOLEAN) {
+                throw new IllegalArgumentException("Boolean properties cannot have a range");
+            }
+        }
+        this.range = range;
     }
 
     private String generateRandomString() {
@@ -75,4 +109,7 @@ public class Property<T> {
         return randomString.toString();
     }
 
+    public PropertyType getType() {
+        return type;
+    }
 }
