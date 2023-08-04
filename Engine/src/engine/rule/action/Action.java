@@ -1,55 +1,53 @@
 package engine.rule.action;
 
 import engine.entity.Entity;
-import engine.rule.action.condition.Condition;
+import engine.entity.EntityDefinition;
 import engine.rule.action.expression.Expression;
 
-public class Action {
-    CalculationOperator operator;
-    Condition condition;
-    Entity entity;
-    Actions actionToPreform;
-    Expression[] expression;
-    String propertyNameInString;
-public Action(Entity entity, Actions actionToPreform, String propertyNameInString, Condition condition, Expression ... expression) {
-        this.entity = entity;
-        this.actionToPreform = actionToPreform;
-        this.expression = expression;
+public class Action implements Actionable {
+    protected CalculationOperator operator;
+    protected EntityDefinition entityDefinition;
+    protected Expression secondExpressionOptional;
+    protected ActionNames action;
+    protected Expression[] expressions;
+    protected String propertyNameInString;
+    public Action(EntityDefinition entityDefinition, String propertyNameInString, ActionNames action, Expression ... expressions) {
+        this.entityDefinition = entityDefinition;
+        this.action = action;
+        this.expressions = expressions;
         this.propertyNameInString = propertyNameInString;
-        this.condition = condition;
-    }public Action(Entity entity, Actions actionToPreform, String propertyNameInString,CalculationOperator operator, Condition condition, Expression ... expression) {
-        this.entity = entity;
-        this.actionToPreform = actionToPreform;
-        this.expression = expression;
-        this.propertyNameInString = propertyNameInString;
-        this.condition = condition;
+
+    }
+    public Action(EntityDefinition entityDefinition, String propertyNameInString, CalculationOperator operator, ActionNames action , Expression ... expressions) {
+        this(entityDefinition, propertyNameInString,action,expressions);
         this.operator = operator;
     }
-    public void preformAction() {
-        if(condition == null || condition.isSatisfied(entity)) {
-            switch (actionToPreform) {
-                case INCREASE:
-                    entity.increaseProperty(propertyNameInString, expression[0].evaluate());
-                    break;
-                case DECREASE:
-                    entity.decreaseProperty(propertyNameInString, expression[0].evaluate());
-                    break;
-                case SET:
-                    entity.setProperty(propertyNameInString, expression[0].evaluate());
-                    break;
-                case CALCULATION:
-                    if(this.operator == CalculationOperator.MULTIPLY) {
-                        entity.multiplyProperty(propertyNameInString, expression[0].evaluate(),expression[1].evaluate());
-                    } else if(this.operator == CalculationOperator.DIVIDE) {
-                        entity.divideProperty(propertyNameInString, expression[0].evaluate(),expression[1].evaluate());
-                    }
-                    entity.setProperty(propertyNameInString, expression[0].evaluate());
-                    break;
-                case KILL:
-                    entity.kill();
-                    break;
-            }
+
+    public void performAction(Entity entity) {
+                switch (action) {
+                    case INCREASE:
+                        entity.increaseProperty(propertyNameInString, expressions[0].evaluate());
+                        break;
+                    case DECREASE:
+                        entity.decreaseProperty(propertyNameInString, expressions[0].evaluate());
+                        break;
+                    case SET:
+                        entity.setProperty(propertyNameInString, expressions[0].evaluate());
+                        break;
+                    case CALCULATION:
+                        if(this.operator == CalculationOperator.MULTIPLY) {
+                            entity.multiplyProperty(propertyNameInString, expressions[0].evaluate(),expressions[1].evaluate());
+                        } else if(this.operator == CalculationOperator.DIVIDE) {
+                            entity.divideProperty(propertyNameInString, expressions[0].evaluate(),expressions[1].evaluate());
+                        }
+                        entity.setProperty(propertyNameInString, expressions[0].evaluate());
+                        break;
+                    case KILL:
+                        entity.kill();
+                        break;
+                }
+
         }
     }
 
-}
+

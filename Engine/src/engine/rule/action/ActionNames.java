@@ -1,13 +1,13 @@
 package engine.rule.action;
 
-public enum Actions {
+public enum ActionNames {
     INCREASE("increase"),
     DECREASE("decrease"),
     SET("set"),
     CALCULATION("calculation"),
     KILL("kill");
-    public String actionInString;
-    Actions(String actionInString) {
+    public final String actionInString;
+    ActionNames(String actionInString) {
         this.actionInString = actionInString;
     }
 }

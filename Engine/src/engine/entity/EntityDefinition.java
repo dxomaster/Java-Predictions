@@ -13,6 +13,9 @@ public class EntityDefinition {
         this.entityProperties = entityProperties;
         this.population = population;
     }
+    public String getName() {
+        return name;
+    }
     public Property getPropertyByName(String name) {
         for (Property property : entityProperties) {
             if (property.getName().equals(name)) {
@@ -28,5 +31,8 @@ public class EntityDefinition {
                 ", population=" + population +
                 ", entityProperties=" + entityProperties +
                 '}';
+    }
+    public List<Property> getEntityProperties() {
+        return entityProperties;
     }
 }

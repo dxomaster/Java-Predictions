@@ -3,8 +3,8 @@ import java.util.Random;
 import java.util.TimerTask;
 
 public class Range{
-    private final float from;
-    private final float to;
+    private final double from;
+    private final double to;
 
 
     public boolean isInRange(float value) {
@@ -15,16 +15,21 @@ public class Range{
         this.from = from;
         this.to = to;
     }
+    public Range(double from, double to ){
+        if (from > to) throw new IllegalArgumentException("from must be less than to");
+        this.from = from;
+        this.to = to;
+    }
     public Range(int from, int to ){
         if (from > to) throw new IllegalArgumentException("from must be less than to");
         this.from = from;
         this.to = to;
     }
-    public float getFrom() {
+    public double getFrom() {
         return from;
     }
 
-    public float getTo() {
+    public double getTo() {
         return to;
     }
 

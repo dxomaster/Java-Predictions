@@ -4,56 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="did stuff">
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/EngineImp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/ObjectFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDActions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDActivation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDBySecond.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDByTicks.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDCondition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDDivide.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDElse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEntities.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEnvProperty.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEvironment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDMultiply.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDProperty.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRange.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRules.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDTermination.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDThen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDWorld.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/Actions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/CalculationOperator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Condition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/ConditionOperator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/LogicalOperator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/MultipleCondition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Satisfiable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/Expression.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/FunctionExpression.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/PropertyExpression.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/ValueExpression.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/functionEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/PropertyType.java" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="did more stuff">
+      <change afterPath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Engine/src/engine/factory/RangeFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Engine/src/engine/factory/WorldFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/Actionable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/Engine.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/utils/Action.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/Actions.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/ActionNames.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Condition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/MultipleCondition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Predictions.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Predictions.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/UI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/UI.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,9 +26,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -83,8 +46,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "WebServerToolWindowFactoryState": "false",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "extract.method.default.visibility": "private",
     "git-widget-placeholder": "master",
     "jdk.selected.JAVA_MODULE": "1.8",
     "node.js.detected.package.eslint": "true",
@@ -117,7 +82,8 @@
       <workItem from="1691067518044" duration="7635000" />
       <workItem from="1691076854131" duration="241000" />
       <workItem from="1691077136795" duration="236000" />
-      <workItem from="1691077416305" duration="18668000" />
+      <workItem from="1691077416305" duration="24835000" />
+      <workItem from="1691147178074" duration="7910000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -135,7 +101,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690808062497</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="did more stuff">
+      <option name="closed" value="true" />
+      <created>1691106826102</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1691106826102</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +118,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value="did stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="did stuff" />
+    <MESSAGE value="did more stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="did more stuff" />
   </component>
 </project>

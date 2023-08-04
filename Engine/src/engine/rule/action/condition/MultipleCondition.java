@@ -1,12 +1,13 @@
 package engine.rule.action.condition;
 
 import engine.entity.Entity;
+import engine.rule.action.Actionable;
 
 import java.util.List;
 
-public class MultipleCondition implements Satisfiable {
+public class MultipleCondition implements Satisfiable, Actionable {
     private LogicalOperator operator;
-    List<Satisfiable> conditions;
+    List<Condition> conditions;
     @Override
     public boolean isSatisfied(Entity entity) {
         switch (operator)
@@ -27,6 +28,15 @@ public class MultipleCondition implements Satisfiable {
                 return false;
             default:
                 return false;
+        }
+    }
+
+    @Override
+    public void performAction(Entity entity) {
+        if (isSatisfied(entity)) {
+            for (Actionable condition : conditions) {
+                condition.performAction(entity);
+            }
         }
     }
 }
