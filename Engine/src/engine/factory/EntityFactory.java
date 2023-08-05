@@ -3,9 +3,7 @@ package engine.factory;
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDEntity;
-import engine.jaxb.schema.generated.PRDProperty;
 import engine.world.utils.Property;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +12,6 @@ public class EntityFactory {
         List<Property> entityProperties = PropertyFactory.createPropertyList(prdEntity);
         return new Entity(prdEntity.getName(),entityProperties);
     }
-
     public static EntityDefinition createEntityDefinition(PRDEntity prdEntity) {
         List<Property> entityProperties = PropertyFactory.createPropertyList(prdEntity);
         return new EntityDefinition(prdEntity.getName(),entityProperties,prdEntity.getPRDPopulation());
@@ -35,5 +32,4 @@ public class EntityFactory {
         }
         return entities;
     }
-
 }

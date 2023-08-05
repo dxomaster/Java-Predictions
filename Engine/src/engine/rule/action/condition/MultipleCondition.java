@@ -6,8 +6,16 @@ import engine.rule.action.Actionable;
 import java.util.List;
 
 public class MultipleCondition implements Satisfiable, Actionable {
+    List<Actionable> actionsToPreformIfConditionIsSatisfied;
+    List<Actionable> actionsToPreformIfConditionIsNotSatisfied;
     private LogicalOperator operator;
-    List<Condition> conditions;
+    List<Satisfiable> conditions;
+    public MultipleCondition(LogicalOperator operator, List<Satisfiable> conditions, List<Actionable> actionsToPreformIfConditionIsSatisfied, List<Actionable> actionsToPreformIfConditionIsNotSatisfied) {
+        this.operator = operator;
+        this.conditions = conditions;
+        this.actionsToPreformIfConditionIsSatisfied = actionsToPreformIfConditionIsSatisfied;
+        this.actionsToPreformIfConditionIsNotSatisfied = actionsToPreformIfConditionIsNotSatisfied;
+    }
     @Override
     public boolean isSatisfied(Entity entity) {
         switch (operator)
@@ -34,9 +42,24 @@ public class MultipleCondition implements Satisfiable, Actionable {
     @Override
     public void performAction(Entity entity) {
         if (isSatisfied(entity)) {
-            for (Actionable condition : conditions) {
-                condition.performAction(entity);
+            for (Actionable action : actionsToPreformIfConditionIsSatisfied) {
+                action.performAction(entity);
             }
         }
+        else {
+            for (Actionable action : actionsToPreformIfConditionIsNotSatisfied) {
+                action.performAction(entity);
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "MultipleCondition{" +
+                "actionsToPreformIfConditionIsSatisfied=" + actionsToPreformIfConditionIsSatisfied +
+                ", actionsToPreformIfConditionIsNotSatisfied=" + actionsToPreformIfConditionIsNotSatisfied +
+                ", operator=" + operator +
+                ", conditions=" + conditions +
+                '}';
     }
 }

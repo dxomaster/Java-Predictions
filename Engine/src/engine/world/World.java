@@ -11,7 +11,7 @@ import java.util.Map;
 public class World {
     private static List<Property> environmentVariables;
     private static Map<String,List<Entity>> entityList;
-    private final List<EntityDefinition> entityDefinitionList;
+    private static List<EntityDefinition> entityDefinitionList;
     private final List<Rule> rules;
     private final Integer terminationByTicks;
     private final Integer terminationBySeconds;
@@ -20,8 +20,9 @@ public class World {
 
         if (terminationByTicks == null && terminationBySeconds == null)
             throw new IllegalArgumentException("At least one termination condition must be specified");
-        this.environmentVariables = environmentVariables;
-        this.entityList = entityList;
+        World.entityDefinitionList = entityDefinitionList;
+        World.environmentVariables = environmentVariables;
+        World.entityList = entityList;
         this.rules = rules;
         if (terminationByTicks != null && terminationByTicks < 1)
             throw new IllegalArgumentException("Termination by ticks must be greater than 0");
@@ -30,7 +31,13 @@ public class World {
 
         this.terminationByTicks = terminationByTicks;
         this.terminationBySeconds = terminationBySeconds;
-        this.entityDefinitionList = entityDefinitionList;
+
+    }
+    public static void setEnvironmentVariables(List<Property> environmentVariables) {
+        World.environmentVariables = environmentVariables;
+    }
+    public static void setEntityDefinitionList(List<EntityDefinition> entityDefinitionList) {
+        World.entityDefinitionList = entityDefinitionList;
     }
     public static Property getEnvironmentVariableByName(String name) {
         for (Property property : environmentVariables) {
@@ -75,6 +82,14 @@ public class World {
             }
 
         }
+    }
+    public static EntityDefinition getEntityDefinitionByName(String name) {
+        for (EntityDefinition entityDefinition : entityDefinitionList) {
+            if (entityDefinition.getName().equals(name)) {
+                return entityDefinition;
+            }
+        }
+        return null;
     }
     public Integer getTerminationBySeconds() {
         return terminationBySeconds;

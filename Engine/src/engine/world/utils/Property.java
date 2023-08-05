@@ -28,9 +28,9 @@ public class Property {
 
         if (range != null) {
             if (type == PropertyType.DECIMAL) {
-                this.setValue((Integer)random.nextInt((int) (range.getTo() - range.getFrom() + range.getFrom())));
+                this.setValue((Integer)random.nextInt((Integer)range.getTo() - (Integer)range.getFrom()) + (Integer)range.getFrom());
             } else {
-                this.setValue((Float)random.nextFloat() * (range.getTo() - range.getFrom()) + range.getFrom());
+                this.setValue((Float)random.nextFloat() * ((Float)range.getTo() - (Float)range.getFrom())+ (Float)range.getFrom());
             }
         }
         else {
@@ -69,7 +69,7 @@ public class Property {
             throw new IllegalArgumentException("Value must be of type " + this.type.propertyClass.getSimpleName());
         }
         if (this.type == PropertyType.DECIMAL || this.type == PropertyType.FLOAT) {
-            if (range != null && !range.isInRange((float) value)) {
+            if (range != null && !range.isInRange(value)) {
                 throw new IllegalArgumentException("Value must be in range " + range.getFrom() + " to " + range.getTo());
             }
 

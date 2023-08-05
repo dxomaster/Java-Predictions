@@ -3,33 +3,37 @@ import java.util.Random;
 import java.util.TimerTask;
 
 public class Range{
-    private final double from;
-    private final double to;
+    private PropertyType type;
+    private final Object from;
+    private final Object to;
 
 
-    public boolean isInRange(float value) {
-        return (float)value >= (float)from && (float)value <= (float)to;
+    public boolean isInRange(Object value) {
+        if(type == PropertyType.DECIMAL)
+            return (Integer)value >= (Integer) from && (Integer)value <= (Integer) to;
+        else
+            return (Float)value >= (Float) from && (Float)value <= (Float) to;
     }
-    public Range(float from, float to ){
-        if (from > to) throw new IllegalArgumentException("from must be less than to");
+    public Range(Object from, Object to, PropertyType type) {
+        if (type == PropertyType.DECIMAL) {
+            if ((Integer)from > (Integer)to) {
+                throw new IllegalArgumentException("From cannot be greater than to");
+            }
+        }
+        else {
+            if ((Float)from > (Float)to) {
+                throw new IllegalArgumentException("From cannot be greater than to");
+            }
+        }
         this.from = from;
         this.to = to;
+        this.type = type;
     }
-    public Range(double from, double to ){
-        if (from > to) throw new IllegalArgumentException("from must be less than to");
-        this.from = from;
-        this.to = to;
-    }
-    public Range(int from, int to ){
-        if (from > to) throw new IllegalArgumentException("from must be less than to");
-        this.from = from;
-        this.to = to;
-    }
-    public double getFrom() {
+    public Object getFrom() {
         return from;
     }
 
-    public double getTo() {
+    public Object getTo() {
         return to;
     }
 

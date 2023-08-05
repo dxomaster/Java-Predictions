@@ -1,16 +1,25 @@
 package engine.rule.action.expression;
 
 import engine.entity.Entity;
+import engine.entity.EntityDefinition;
+import engine.world.utils.Property;
 
 public class PropertyExpression implements Expression{
-    private String property;
-    private Entity entity;
+    private Property property;
     @Override
-    public Object evaluate() {
-        return entity.getPropertyByName(property).getValue();
+    public Object evaluate(Entity entity) {
+
+        return entity.getPropertyByName(property.getName()).getValue();
     }
-    public PropertyExpression(Entity entity, String property) {
-        this.property = property;
-        this.entity = entity;
+    public PropertyExpression(EntityDefinition entityDefinition, String propertyName) {
+        this.property = entityDefinition.getPropertyByName(propertyName);
+
+    }
+
+    @Override
+    public String toString() {
+        return "PropertyExpression{" +
+                "property=" + property +
+                '}';
     }
 }

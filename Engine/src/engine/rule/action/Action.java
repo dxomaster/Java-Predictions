@@ -4,10 +4,11 @@ import engine.entity.Entity;
 import engine.entity.EntityDefinition;
 import engine.rule.action.expression.Expression;
 
+import java.util.Arrays;
+
 public class Action implements Actionable {
     protected CalculationOperator operator;
     protected EntityDefinition entityDefinition;
-    protected Expression secondExpressionOptional;
     protected ActionNames action;
     protected Expression[] expressions;
     protected String propertyNameInString;
@@ -26,21 +27,21 @@ public class Action implements Actionable {
     public void performAction(Entity entity) {
                 switch (action) {
                     case INCREASE:
-                        entity.increaseProperty(propertyNameInString, expressions[0].evaluate());
+                        entity.increaseProperty(propertyNameInString, expressions[0].evaluate(entity));
                         break;
                     case DECREASE:
-                        entity.decreaseProperty(propertyNameInString, expressions[0].evaluate());
+                        entity.decreaseProperty(propertyNameInString, expressions[0].evaluate(entity));
                         break;
                     case SET:
-                        entity.setProperty(propertyNameInString, expressions[0].evaluate());
+                        entity.setProperty(propertyNameInString, expressions[0].evaluate(entity));
                         break;
                     case CALCULATION:
                         if(this.operator == CalculationOperator.MULTIPLY) {
-                            entity.multiplyProperty(propertyNameInString, expressions[0].evaluate(),expressions[1].evaluate());
+                            entity.multiplyProperty(propertyNameInString, expressions[0].evaluate(entity),expressions[1].evaluate(entity));
                         } else if(this.operator == CalculationOperator.DIVIDE) {
-                            entity.divideProperty(propertyNameInString, expressions[0].evaluate(),expressions[1].evaluate());
+                            entity.divideProperty(propertyNameInString, expressions[0].evaluate(entity),expressions[1].evaluate(entity));
                         }
-                        entity.setProperty(propertyNameInString, expressions[0].evaluate());
+                        entity.setProperty(propertyNameInString, expressions[0].evaluate(entity));
                         break;
                     case KILL:
                         entity.kill();
@@ -48,6 +49,17 @@ public class Action implements Actionable {
                 }
 
         }
+
+    @Override
+    public String toString() {
+        return "Action{" +
+                "operator=" + operator +
+                ", entityDefinition=" + entityDefinition +
+                ", action=" + action +
+                ", expressions=" + Arrays.toString(expressions) +
+                ", propertyNameInString='" + propertyNameInString + '\'' +
+                '}';
     }
+}
 
 
