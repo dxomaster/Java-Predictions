@@ -1,15 +1,12 @@
 package engine.factory;
 
-import engine.entity.Entity;
 import engine.entity.EntityDefinition;
 import engine.jaxb.schema.generated.*;
 import engine.rule.Rule;
 import engine.world.World;
 import engine.world.utils.Property;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class WorldFactory {
     public static World defineWorld(PRDWorld prdWorld)

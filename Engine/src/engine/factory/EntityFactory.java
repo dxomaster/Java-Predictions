@@ -30,13 +30,7 @@ public class EntityFactory {
         return entityDefinitions;
 
     }
-    public static List<Entity> createEntityList(PRDEntity prdEntity) {
-        List<Entity> entities = new ArrayList<>();
-        for (int i =0; i< prdEntity.getPRDPopulation();i++) {
-            entities.add(createEntity(prdEntity));
-        }
-        return entities;
-    }
+
     public static List<Entity> createEntityList(EntityDefinition entityDefinition) {
         List<Entity> entities = new ArrayList<>();
         for (int i =0; i< entityDefinition.getPopulation();i++) {
