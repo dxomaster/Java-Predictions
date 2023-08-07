@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityFactory {
-    public static Entity createEntity(PRDEntity prdEntity) {
-        List<Property> entityProperties = PropertyFactory.createPropertyList(prdEntity);
-        return new Entity(prdEntity.getName(),entityProperties);
-    }
     public static Entity createEntity(EntityDefinition entityDefinition) {
         List<Property> entityProperties = PropertyFactory.createPropertyList(entityDefinition);
         return new Entity(entityDefinition.getName(),entityProperties);
