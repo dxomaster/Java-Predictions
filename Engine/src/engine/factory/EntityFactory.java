@@ -6,15 +6,16 @@ import engine.jaxb.schema.generated.PRDEntity;
 import engine.world.utils.Property;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class EntityFactory {
     public static Entity createEntity(EntityDefinition entityDefinition) {
-        List<Property> entityProperties = PropertyFactory.createPropertyList(entityDefinition);
+        Map<String,Property> entityProperties = PropertyFactory.createPropertyList(entityDefinition);
         return new Entity(entityDefinition.getName(),entityProperties);
     }
     public static EntityDefinition createEntityDefinition(PRDEntity prdEntity) {
 
-        List<Property> entityProperties = PropertyFactory.createPropertyList(prdEntity);
+        Map<String,Property> entityProperties = PropertyFactory.createPropertyList(prdEntity);
         return new EntityDefinition(prdEntity.getName(),entityProperties,prdEntity.getPRDPopulation());
     }
 
