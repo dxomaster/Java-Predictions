@@ -2,7 +2,6 @@ package engine.factory;
 
 import engine.entity.EntityDefinition;
 import engine.jaxb.schema.generated.*;
-import engine.world.World;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
 import engine.world.utils.Range;
@@ -34,7 +33,7 @@ public class PropertyFactory {
         }
         else
         {
-            if (!isValid(prdProperty.getPRDValue().getInit(), type)) {
+            if (isInvalid(prdProperty.getPRDValue().getInit(), type)) {
                 throw new IllegalArgumentException("Invalid init value for type: " + type);
             }
             switch (type) {
@@ -62,7 +61,7 @@ public class PropertyFactory {
         }
         else
         {
-            if (!isValid(prdProperty.getPRDValue().getInit(), type)) {
+            if (isInvalid(prdProperty.getPRDValue().getInit(), type)) {
                 throw new IllegalArgumentException("Invalid init value for type: " + type);
             }
             switch (type) {
@@ -175,26 +174,26 @@ public class PropertyFactory {
         }
     }
 
-    private static boolean isValid(String init, String type) {
+    private static boolean isInvalid(String init, String type) {
         switch (type) {
             case "decimal":
                 try {
                     Integer.parseInt(init);
                 } catch (NumberFormatException e) {
-                    return false;
+                    return true;
                 }
-                return true;
+                return false;
             case "float":
                 try {
                     Float.parseFloat(init);
                 } catch (NumberFormatException e) {
-                    return false;
+                    return true;
                 }
-                return true;
+                return false;
             case "boolean":
-                return init.equals("true") || init.equals("false");
+                return !init.equals("true") && !init.equals("false");
             case "string":
-                return true;
+                return false;
             default:
                 throw new IllegalArgumentException("Invalid property type: " + type);
         }

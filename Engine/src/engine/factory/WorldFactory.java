@@ -32,12 +32,4 @@ public class WorldFactory {
         return new World(environmentProperties,ruleList,ticks,seconds,entityDefinitions);
 
     }
-     public static void createEntitiesInWorld(PRDWorld prdWorld) {
-         Map<String,List<Entity>> entityMap = new HashMap<>();
-         for (PRDEntity prdEntity : prdWorld.getPRDEntities().getPRDEntity()) {
-             List<Entity> entityList = EntityFactory.createEntityList(prdEntity);
-             entityMap.put(prdEntity.getName(),entityList);
-         }
-         World.setEntityList(entityMap);
-     }
 }

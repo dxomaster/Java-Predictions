@@ -5,7 +5,7 @@ import engine.entity.EntityDefinition;
 import engine.world.utils.Property;
 
 public class PropertyExpression implements Expression{
-    private Property property;
+    private final Property property;
     @Override
     public Object evaluate(Entity entity) {
 

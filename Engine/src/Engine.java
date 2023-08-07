@@ -9,7 +9,6 @@ import java.io.File;
 
 public class Engine implements engine.Engine{
     private World world;
-    private PRDWorld prdWorld;
     @Override
     public void runSimulation() {
         world.createEntities();
@@ -25,8 +24,7 @@ public class Engine implements engine.Engine{
 
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             PRDWorld jaxbWorld = (PRDWorld) jaxbUnmarshaller.unmarshal(file);
-            World world = WorldFactory.defineWorld(jaxbWorld);
-            this.world = world;
+            this.world = WorldFactory.defineWorld(jaxbWorld);
 
         } catch (JAXBException e) {
             e.printStackTrace();

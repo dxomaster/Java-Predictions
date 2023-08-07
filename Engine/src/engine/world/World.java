@@ -29,23 +29,7 @@ public class World {
         this.terminationByTicks = terminationByTicks;
         this.terminationBySeconds = terminationBySeconds;
     }
-    public World(List<Property> environmentVariables, Map<String,List<Entity>> entityList, List<Rule> rules, Integer terminationByTicks, Integer terminationBySeconds, List<EntityDefinition> entityDefinitionList) {
 
-        if (terminationByTicks == null && terminationBySeconds == null)
-            throw new IllegalArgumentException("At least one termination condition must be specified");
-        World.entityDefinitionList = entityDefinitionList;
-        World.environmentVariables = environmentVariables;
-        World.entityList = entityList;
-        this.rules = rules;
-        if (terminationByTicks != null && terminationByTicks < 1)
-            throw new IllegalArgumentException("Termination by ticks must be greater than 0");
-        if (terminationBySeconds != null && terminationBySeconds < 1)
-            throw new IllegalArgumentException("Termination by seconds must be greater than 0");
-
-        this.terminationByTicks = terminationByTicks;
-        this.terminationBySeconds = terminationBySeconds;
-
-    }
     public static void setEnvironmentVariables(List<Property> environmentVariables) {
         World.environmentVariables = environmentVariables;
     }

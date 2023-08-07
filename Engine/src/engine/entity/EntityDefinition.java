@@ -7,7 +7,7 @@ import java.util.List;
 
 public class EntityDefinition {
     private final String name;
-    private int population;
+    private final int population;
     private final List<Property> entityProperties;
     public EntityDefinition(String name, List<Property> entityProperties, int population) {
         this.name = name;

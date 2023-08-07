@@ -3,7 +3,6 @@ package engine.factory;
 import engine.entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDAction;
 import engine.jaxb.schema.generated.PRDCondition;
-import engine.jaxb.schema.generated.PRDMultiply;
 import engine.rule.action.expression.*;
 import engine.world.World;
 
@@ -96,9 +95,7 @@ public class ExpressionFactory {
     private static Object[] getArguments(String expression) {
         String[] arguments = expression.substring(expression.indexOf("(") + 1, expression.indexOf(")")).split(",");
         Object[] argumentsObject = new Object[arguments.length];
-        for (int i = 0; i < arguments.length; i++) {
-            argumentsObject[i] = arguments[i];
-        }
+        System.arraycopy(arguments, 0, argumentsObject, 0, arguments.length);
         return argumentsObject;
     }
 }
