@@ -3,18 +3,17 @@ package engine.entity;
 import engine.world.World;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
-
-import java.util.List;
+import java.util.Map;
 
 public class Entity {// todo: population
     private final String name;
-    private final List<Property> entityProperties;
-    public Entity(String name, List<Property> entityProperties) {
+    private final Map<String,Property> entityProperties;
+    public Entity(String name, Map<String,Property> entityProperties) {
         this.name = name;
         this.entityProperties = entityProperties;
     }
 
-    public List<Property> getEntityProperties() {
+    public Map<String,Property> getEntityProperties() {
         return entityProperties;
     }
 
@@ -27,12 +26,7 @@ public class Entity {// todo: population
         return name;
     }
     public Property getPropertyByName(String name) {
-        for (Property property : entityProperties) {
-            if (property.getName().equals(name)) {
-                return property;
-            }
-        }
-        return null;
+        return this.entityProperties.get(name);
     }
     public void increaseProperty(String propertyNameInString, Object evaluate) {
         Property property = getPropertyByName(propertyNameInString);

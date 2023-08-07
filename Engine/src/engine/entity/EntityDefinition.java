@@ -4,12 +4,13 @@ import engine.factory.EntityFactory;
 import engine.world.utils.Property;
 
 import java.util.List;
+import java.util.Map;
 
 public class EntityDefinition {
     private final String name;
     private final int population;
-    private final List<Property> entityProperties;
-    public EntityDefinition(String name, List<Property> entityProperties, int population) {
+    private final Map<String,Property> entityProperties;
+    public EntityDefinition(String name, Map<String,Property> entityProperties, int population) {
         this.name = name;
         this.entityProperties = entityProperties;
         this.population = population;
@@ -18,12 +19,7 @@ public class EntityDefinition {
         return name;
     }
     public Property getPropertyByName(String name) {
-        for (Property property : entityProperties) {
-            if (property.getName().equals(name)) {
-                return property;
-            }
-        }
-        return null;
+        return this.entityProperties.get(name);
     }
     @Override
     public String toString() {
@@ -33,7 +29,7 @@ public class EntityDefinition {
                 ", entityProperties=" + entityProperties +
                 '}';
     }
-    public List<Property> getEntityProperties() {
+    public Map<String,Property> getEntityProperties() {
         return entityProperties;
     }
 
@@ -45,7 +41,7 @@ public class EntityDefinition {
         return population;
     }
 
-    public List<Property> getProperties() {
+    public Map<String,Property> getProperties() {
         return entityProperties;
     }
 }

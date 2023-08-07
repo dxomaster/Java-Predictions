@@ -5,10 +5,8 @@ import engine.jaxb.schema.generated.*;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
 import engine.world.utils.Range;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 public class PropertyFactory {
     public static Property createEntityProperty(PRDProperty prdProperty) {
@@ -80,7 +78,7 @@ public class PropertyFactory {
 
     }
 
-    public static List<Property> createPropertyList(PRDEntity prdEntity)
+    public static Map<String,Property> createPropertyList(PRDEntity prdEntity)
     {
         String duplicate = isEntityPropertyNameUnique(prdEntity.getPRDProperties().getPRDProperty());
         if (duplicate != null)
@@ -88,16 +86,19 @@ public class PropertyFactory {
             throw new IllegalArgumentException("Problem with "+prdEntity.getName() +" Property name is not unique: " + duplicate);
         }
         List<PRDProperty> prdProperties = prdEntity.getPRDProperties().getPRDProperty();
-        List<Property> propertyList = new ArrayList<>();
+        Map<String,Property> propertyList = new HashMap<>();
         for (PRDProperty prdProperty : prdProperties) {
             Property property = PropertyFactory.createEntityProperty(prdProperty);
-            propertyList.add(property);
+            propertyList.put(property.getName(),property);
         }
         return propertyList;
     }
-    public static List<Property> createPropertyList(EntityDefinition entityDefinition){
-        return new ArrayList<>(entityDefinition.getProperties());
-
+    public static Map<String,Property> createPropertyList(EntityDefinition entityDefinition){
+        Map<String,Property> propertyList = new HashMap<>();
+        for (Property property : entityDefinition.getProperties().values())  {
+            propertyList.put(property.getName(),property);
+        }
+        return propertyList;
     }
     private static String isEntityPropertyNameUnique(List<PRDProperty> prdProperty)
     {
