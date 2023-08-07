@@ -3,8 +3,6 @@ package engine.entity;
 import engine.world.World;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
-
-import java.util.List;
 import java.util.Map;
 
 public class Entity {// todo: population
