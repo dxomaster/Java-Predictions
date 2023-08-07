@@ -23,6 +23,7 @@ public class RuleFactory {
     }
 
     public static List<Rule> createRuleList(List<PRDRule> prdRule) {
+
         List<Rule> rules = new ArrayList<>();
         for (PRDRule rule : prdRule) {
             rules.add(createRule(rule));

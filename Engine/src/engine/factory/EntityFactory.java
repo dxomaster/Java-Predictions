@@ -12,7 +12,12 @@ public class EntityFactory {
         List<Property> entityProperties = PropertyFactory.createPropertyList(prdEntity);
         return new Entity(prdEntity.getName(),entityProperties);
     }
+    public static Entity createEntity(EntityDefinition entityDefinition) {
+        List<Property> entityProperties = PropertyFactory.createPropertyList(entityDefinition);
+        return new Entity(entityDefinition.getName(),entityProperties);
+    }
     public static EntityDefinition createEntityDefinition(PRDEntity prdEntity) {
+
         List<Property> entityProperties = PropertyFactory.createPropertyList(prdEntity);
         return new EntityDefinition(prdEntity.getName(),entityProperties,prdEntity.getPRDPopulation());
     }
@@ -29,6 +34,13 @@ public class EntityFactory {
         List<Entity> entities = new ArrayList<>();
         for (int i =0; i< prdEntity.getPRDPopulation();i++) {
             entities.add(createEntity(prdEntity));
+        }
+        return entities;
+    }
+    public static List<Entity> createEntityList(EntityDefinition entityDefinition) {
+        List<Entity> entities = new ArrayList<>();
+        for (int i =0; i< entityDefinition.getPopulation();i++) {
+            entities.add(createEntity(entityDefinition));
         }
         return entities;
     }

@@ -15,7 +15,20 @@ public class World {
     private final List<Rule> rules;
     private final Integer terminationByTicks;
     private final Integer terminationBySeconds;
+    public World(List<Property> environmentVariables, List<Rule> rules, Integer terminationByTicks, Integer terminationBySeconds,List<EntityDefinition> entityDefinitionList) {
+        if (terminationByTicks == null && terminationBySeconds == null)
+            throw new IllegalArgumentException("At least one termination condition must be specified");
+        World.entityDefinitionList = entityDefinitionList;
+        World.environmentVariables = environmentVariables;
+        this.rules = rules;
+        if (terminationByTicks != null && terminationByTicks < 1)
+            throw new IllegalArgumentException("Termination by ticks must be greater than 0");
+        if (terminationBySeconds != null && terminationBySeconds < 1)
+            throw new IllegalArgumentException("Termination by seconds must be greater than 0");
 
+        this.terminationByTicks = terminationByTicks;
+        this.terminationBySeconds = terminationBySeconds;
+    }
     public World(List<Property> environmentVariables, Map<String,List<Entity>> entityList, List<Rule> rules, Integer terminationByTicks, Integer terminationBySeconds, List<EntityDefinition> entityDefinitionList) {
 
         if (terminationByTicks == null && terminationBySeconds == null)
@@ -55,6 +68,10 @@ public class World {
         return entityList;
     }
 
+    public static void setEntityList(Map<String, List<Entity>> entityList) {
+        World.entityList = entityList;
+    }
+
     public List<Rule> getRules() {
         return rules;
     }
@@ -68,6 +85,7 @@ public class World {
         return "World{" +
                 "entityDefinitions=" + entityDefinitionList +
                 ", rules=" + rules +
+                ".environmentVariables=" + environmentVariables +
                 ", terminationByTicks=" + terminationByTicks +
                 ", terminationBySeconds=" + terminationBySeconds +
                 '}';
@@ -81,6 +99,16 @@ public class World {
                 return;
             }
 
+        }
+    }
+    public void createEntities()
+    {
+        entityList = new java.util.HashMap<>();
+        if (entityDefinitionList == null)
+            throw new IllegalArgumentException("Entity definition list is empty");
+        for (EntityDefinition entityDefinition : entityDefinitionList) {
+            List<Entity> entityList = entityDefinition.createEntityList();
+            World.entityList.put(entityDefinition.getName(),entityList);
         }
     }
     public static EntityDefinition getEntityDefinitionByName(String name) {

@@ -14,6 +14,7 @@ public class PropertyExpression implements Expression{
     public PropertyExpression(EntityDefinition entityDefinition, String propertyName) {
         this.property = entityDefinition.getPropertyByName(propertyName);
 
+
     }
 
     @Override

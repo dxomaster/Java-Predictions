@@ -1,5 +1,6 @@
 package engine.entity;
 
+import engine.factory.EntityFactory;
 import engine.world.utils.Property;
 
 import java.util.List;
@@ -33,6 +34,18 @@ public class EntityDefinition {
                 '}';
     }
     public List<Property> getEntityProperties() {
+        return entityProperties;
+    }
+
+    public List<Entity> createEntityList() {
+        return EntityFactory.createEntityList(this);
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public List<Property> getProperties() {
         return entityProperties;
     }
 }

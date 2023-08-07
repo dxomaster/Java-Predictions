@@ -4,8 +4,8 @@ public class Main {
     public static void main(String[] args) {
 
         Engine engine = new Engine();
-        engine.loadSimulationParametersFromFile("master-ex1.xml");
+        engine.loadSimulationParametersFromFile("ex1-error-2.xml");
         engine.runSimulation();
-        //engine.runSimulation();
+        engine.viewSimulationParameters();
     }
 }

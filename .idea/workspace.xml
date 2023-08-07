@@ -4,34 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="guess what &#10;did even more stuff">
-      <change afterPath="$PROJECT_DIR$/Engine/src/Engine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActionFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActionableFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActivationFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ConditionFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ExpressionFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/factory/RuleFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/SimpleCondition.java" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="surprise&#10;did a lot more stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActionableFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActionableFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ExpressionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ExpressionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/RangeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/RangeFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/RuleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/RuleFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/WorldFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/WorldFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/ActionNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/ActionNames.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/MultipleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/Expression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/FunctionExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Satisfiable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Satisfiable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/PropertyExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/ValueExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/utils/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/utils/Activation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +50,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "ToolWindowRun.ShowToolbar": "false",
     "WebServerToolWindowFactoryState": "false",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "extract.method.default.visibility": "private",
@@ -74,7 +63,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "inlay.hints",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -99,7 +88,9 @@
       <workItem from="1691076854131" duration="241000" />
       <workItem from="1691077136795" duration="236000" />
       <workItem from="1691077416305" duration="24835000" />
-      <workItem from="1691147178074" duration="41470000" />
+      <workItem from="1691147178074" duration="43922000" />
+      <workItem from="1691315982176" duration="164000" />
+      <workItem from="1691316200654" duration="9459000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -133,7 +124,23 @@
       <option name="project" value="LOCAL" />
       <updated>1691160436069</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="surprise&#10;did a lot more stuff">
+      <option name="closed" value="true" />
+      <created>1691255855671</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1691255855671</updated>
+    </task>
+    <task id="LOCAL-00006" summary="surprise&#10;did a lot more stuff">
+      <option name="closed" value="true" />
+      <created>1691255872142</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1691255872143</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,7 +151,8 @@
     <MESSAGE value="did stuff" />
     <MESSAGE value="did more stuff" />
     <MESSAGE value="guess what &#10;did even more stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="guess what &#10;did even more stuff" />
+    <MESSAGE value="surprise&#10;did a lot more stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="surprise&#10;did a lot more stuff" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -154,24 +162,36 @@
           <line>72</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/world/World.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/factory/ExpressionFactory.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/world/World.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="10" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/src.zip!/java/lang/Enum.java</url>
-          <line>129</line>
-          <properties class="java.lang.Enum" method="toString">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="engine.rule.action.expression.PropertyExpression" memberName="property" />
+        <PinnedItemInfo parentTag="engine.rule.Rule" memberName="actions" />
       </pinned-members>
     </pin-to-top-manager>
   </component>

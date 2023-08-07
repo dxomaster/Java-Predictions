@@ -56,7 +56,7 @@ public class ExpressionFactory {
                 return createPropertyExpression(entityName, expression);
             } catch (RuntimeException e1) {
                 try {
-                    return createValueExpression(expression);
+                    return createValueExpression(entityName, expression);
                 } catch (RuntimeException e2) {
                     throw new RuntimeException("Expression " + expression + " is invalid");
                 }
@@ -75,10 +75,17 @@ public class ExpressionFactory {
         if (entity == null) {
             throw new RuntimeException("Entity " + entityName + " not found");
         }
+        if(entity.getPropertyByName(propertyName) == null){
+            throw new RuntimeException("Property " + propertyName + " not found");
+        }
         return new PropertyExpression(entity, propertyName);
     }
 
-    public static Expression createValueExpression(Object value) {
+    public static Expression createValueExpression(String entityName, Object value) {
+        EntityDefinition entity = World.getEntityDefinitionByName(entityName);
+        if (entity == null) {
+            throw new RuntimeException("Entity " + entityName + " not found");
+        }
         return new ValueExpression(value);
     }
 

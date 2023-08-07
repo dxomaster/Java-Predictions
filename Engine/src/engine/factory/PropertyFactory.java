@@ -2,11 +2,14 @@ package engine.factory;
 
 import engine.entity.EntityDefinition;
 import engine.jaxb.schema.generated.*;
+import engine.world.World;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
 import engine.world.utils.Range;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PropertyFactory {
     public static Property createEntityProperty(PRDProperty prdProperty) {
@@ -80,6 +83,11 @@ public class PropertyFactory {
 
     public static List<Property> createPropertyList(PRDEntity prdEntity)
     {
+        String duplicate = isEntityPropertyNameUnique(prdEntity.getPRDProperties().getPRDProperty());
+        if (duplicate != null)
+        {
+            throw new IllegalArgumentException("Problem with "+prdEntity.getName() +" Property name is not unique: " + duplicate);
+        }
         List<PRDProperty> prdProperties = prdEntity.getPRDProperties().getPRDProperty();
         List<Property> propertyList = new ArrayList<>();
         for (PRDProperty prdProperty : prdProperties) {
@@ -88,15 +96,59 @@ public class PropertyFactory {
         }
         return propertyList;
     }
+    public static List<Property> createPropertyList(EntityDefinition entityDefinition){
+        return new ArrayList<>(entityDefinition.getProperties());
+
+    }
+    private static String isEntityPropertyNameUnique(List<PRDProperty> prdProperty)
+    {
+        List<String> propertyNames = new ArrayList<>();
+        for (PRDProperty property : prdProperty) {
+
+            propertyNames.add(property.getPRDName());
+        }
+        Set<String> set = new HashSet<>();
+
+        for (String name: propertyNames){
+            if (!set.add(name))
+                return name;
+        }
+
+        return null;
+    }
     public static List<Property> createPropertyList(List<PRDEnvProperty> prdEnvProperties) {
         List<Property> propertyList = new ArrayList<>();
+        String duplicate = isEnvPropertyNameUnique(prdEnvProperties);
+        if(duplicate != null)
+        {
+            throw new IllegalArgumentException("Environment variable name is not unique: " + duplicate);
+        }
         for (PRDEnvProperty prdEnvProperty : prdEnvProperties) {
+
             Property property = PropertyFactory.createEnvProperty(prdEnvProperty);
             propertyList.add(property);
         }
         return propertyList;
     }
+    private static String isEnvPropertyNameUnique(List<PRDEnvProperty> prdEnvProperty)
+    {
+
+        List<String> propertyNames = new ArrayList<>();
+        for (PRDEnvProperty property : prdEnvProperty) {
+
+            propertyNames.add(property.getPRDName());
+        }
+        Set<String> set = new HashSet<>();
+
+        for (String name: propertyNames){
+            if (!set.add(name))
+                return name;
+        }
+
+        return null;
+    }
     public static Property createEnvProperty(PRDEnvProperty prdEnvProperty) {
+
         if(prdEnvProperty.getPRDRange() != null)
         {
             return createRandomInitEntityProperty(prdEnvProperty.getPRDName(), RangeFactory.createRange(prdEnvProperty.getPRDRange(),PropertyType.valueOf(prdEnvProperty.getType().toUpperCase())), prdEnvProperty.getType());

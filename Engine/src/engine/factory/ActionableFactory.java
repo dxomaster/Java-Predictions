@@ -5,6 +5,7 @@ import engine.rule.action.Actionable;
 
 public class ActionableFactory {
     public static Actionable createAction(PRDAction prdAction){
+
         if(prdAction.getPRDCondition() != null)
         {
             return ConditionFactory.createCondition(prdAction);

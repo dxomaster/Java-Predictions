@@ -8,10 +8,12 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 public class Engine implements engine.Engine{
-
+    private World world;
+    private PRDWorld prdWorld;
     @Override
     public void runSimulation() {
-
+        world.createEntities();
+        //world.run(); /*todo - implement*/
     }
 
     @Override
@@ -23,8 +25,8 @@ public class Engine implements engine.Engine{
 
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             PRDWorld jaxbWorld = (PRDWorld) jaxbUnmarshaller.unmarshal(file);
-            World world = WorldFactory.createWorld(jaxbWorld);
-            System.out.println(world);
+            World world = WorldFactory.defineWorld(jaxbWorld);
+            this.world = world;
 
         } catch (JAXBException e) {
             e.printStackTrace();
@@ -34,7 +36,7 @@ public class Engine implements engine.Engine{
 
     @Override
     public void viewSimulationParameters() {
-
+        System.out.println(world);
     }
 
     @Override

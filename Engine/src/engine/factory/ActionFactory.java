@@ -17,9 +17,9 @@ public class ActionFactory {
                 return new Action(World.getEntityDefinitionByName(prdAction.getEntity()),prdAction.getProperty(), ActionNames.SET,ExpressionFactory.createExpression(prdAction));
             case "calculation":
                 if (prdAction.getPRDMultiply() != null)
-                    return new Action(World.getEntityDefinitionByName(prdAction.getEntity()),prdAction.getProperty(),CalculationOperator.MULTIPLY, ActionNames.CALCULATION,ExpressionFactory.createExpression(prdAction));
+                    return new Action(World.getEntityDefinitionByName(prdAction.getEntity()),prdAction.getResultProp(),CalculationOperator.MULTIPLY, ActionNames.CALCULATION,ExpressionFactory.createExpression(prdAction));
                 else if (prdAction.getPRDDivide() != null)
-                    return new Action(World.getEntityDefinitionByName(prdAction.getEntity()),prdAction.getProperty(),CalculationOperator.DIVIDE, ActionNames.CALCULATION,ExpressionFactory.createExpression(prdAction));
+                    return new Action(World.getEntityDefinitionByName(prdAction.getEntity()),prdAction.getResultProp(),CalculationOperator.DIVIDE, ActionNames.CALCULATION,ExpressionFactory.createExpression(prdAction));
                 else
                     throw new RuntimeException("Calculation type not found");
             case "kill":

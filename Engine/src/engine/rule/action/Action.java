@@ -22,6 +22,7 @@ public class Action implements Actionable {
     public Action(EntityDefinition entityDefinition, String propertyNameInString, CalculationOperator operator, ActionNames action , Expression ... expressions) {
         this(entityDefinition, propertyNameInString,action,expressions);
         this.operator = operator;
+
     }
 
     public void performAction(Entity entity) {
