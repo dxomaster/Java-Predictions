@@ -1,5 +1,6 @@
 package engine.factory;
 
+import engine.entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDAction;
 import engine.jaxb.schema.generated.PRDCondition;
 import engine.rule.action.Action;
@@ -82,6 +83,11 @@ public class ConditionFactory {
     }
     private static SimpleCondition createSimpleCondition(PRDCondition prdCondition)
     {
+        EntityDefinition entityDefinition = World.getEntityDefinitionByName(prdCondition.getEntity());
+        if(entityDefinition == null)
+            throw new RuntimeException("Entity " + prdCondition.getEntity() + " not found");
+        if(entityDefinition.getPropertyByName(prdCondition.getProperty()) == null)
+            throw new RuntimeException("Property " + prdCondition.getProperty() + " not found");
         switch (prdCondition.getOperator()) {
             case "bt":
                 return new SimpleCondition(World.getEntityDefinitionByName(prdCondition.getEntity()), ExpressionFactory.createExpression(prdCondition), prdCondition.getProperty(), ConditionOperator.GREATER_THAN);
@@ -96,6 +102,7 @@ public class ConditionFactory {
         }
     }
     private static Condition createSingleCondition(PRDAction prdAction,SimpleCondition simpleCondition) {
+
         List<Actionable> thenActions = new ArrayList<>();
         List<Actionable> elseActions = new ArrayList<>();
         if (prdAction.getPRDThen()!=null)

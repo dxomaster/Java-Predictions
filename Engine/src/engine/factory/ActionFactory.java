@@ -7,6 +7,8 @@ import engine.rule.action.CalculationOperator;
 import engine.world.World;
 public class ActionFactory {
     public static Action createAction(PRDAction prdAction) {
+        if (World.getEntityDefinitionByName(prdAction.getEntity()) == null)
+            throw new RuntimeException("Entity " + prdAction.getEntity() + " not found");
         switch (prdAction.getType()) {
             case "increase":
                 return new Action(World.getEntityDefinitionByName(prdAction.getEntity()),prdAction.getProperty(), ActionNames.INCREASE,ExpressionFactory.createExpression(prdAction));

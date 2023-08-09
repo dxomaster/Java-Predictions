@@ -11,8 +11,7 @@ public class Engine implements engine.Engine{
     private World world;
     @Override
     public void runSimulation() {
-        world.createEntities();
-        //world.run(); /*todo - implement*/
+        world.run(); /*todo - implement*/
     }
 
     @Override

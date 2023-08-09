@@ -3,9 +3,11 @@ package engine.rule.action.expression;
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
 import engine.world.utils.Property;
+import engine.world.utils.PropertyType;
 
 public class PropertyExpression implements Expression{
     private final Property property;
+
     @Override
     public Object evaluate(Entity entity) {
 
@@ -16,7 +18,9 @@ public class PropertyExpression implements Expression{
 
 
     }
-
+    public PropertyType getType() {
+        return property.getType();
+    }
     @Override
     public String toString() {
         return "PropertyExpression{" +

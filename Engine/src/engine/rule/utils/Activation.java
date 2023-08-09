@@ -35,4 +35,7 @@ public class Activation {
                 ", probability=" + probability +
                 '}';
     }
+    public boolean isActivated(Integer tick) {
+        return tick % ticks == 0 && Math.random() < probability;
+    }
 }

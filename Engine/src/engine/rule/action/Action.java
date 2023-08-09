@@ -1,10 +1,13 @@
 package engine.rule.action;
 
+import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
 import engine.rule.action.expression.Expression;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Action implements Actionable {
     protected CalculationOperator operator;
@@ -19,13 +22,14 @@ public class Action implements Actionable {
         this.propertyNameInString = propertyNameInString;
 
     }
+
     public Action(EntityDefinition entityDefinition, String propertyNameInString, CalculationOperator operator, ActionNames action , Expression ... expressions) {
         this(entityDefinition, propertyNameInString,action,expressions);
         this.operator = operator;
 
     }
 
-    public void performAction(Entity entity) {
+    public void performAction(Entity entity) throws WarnException {
                 switch (action) {
                     case INCREASE:
                         entity.increaseProperty(propertyNameInString, expressions[0].evaluate(entity));
@@ -52,10 +56,23 @@ public class Action implements Actionable {
         }
 
     @Override
+    public List<String> getEntities() {
+            List<String> entities = new ArrayList<>();
+            entities.add(entityDefinition.getName());
+            return entities;
+    }
+
+    @Override
+    public String getName() {
+        return action.actionInString;
+    }
+
+
+    @Override
     public String toString() {
         return "Action{" +
                 "operator=" + operator +
-                ", entityDefinition=" + entityDefinition +
+                ", entityName=" + entityDefinition.getName() +
                 ", action=" + action +
                 ", expressions=" + Arrays.toString(expressions) +
                 ", propertyNameInString='" + propertyNameInString + '\'' +

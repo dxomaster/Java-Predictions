@@ -1,10 +1,13 @@
 package engine.world;
 
+import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
 import engine.rule.Rule;
+import engine.rule.action.Actionable;
 import engine.world.utils.Property;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +47,12 @@ public class World {
         }
         return null;
     }
+
+    public static Property getPropertyByName(String entity, String resultProp) {
+        EntityDefinition entityDefinition = getEntityDefinitionByName(entity);
+        return entityDefinition.getPropertyByName(resultProp);
+    }
+
     public List<Property> getEnvironmentVariables() {
         return environmentVariables;
     }
@@ -66,24 +75,31 @@ public class World {
 
     @Override
     public String toString() {
-        return "World{" +
-                "entityDefinitions=" + entityDefinitionList +
-                ", rules=" + rules +
-                ".environmentVariables=" + environmentVariables +
-                ", terminationByTicks=" + terminationByTicks +
-                ", terminationBySeconds=" + terminationBySeconds +
-                '}';
+        StringBuilder out= new StringBuilder();
+        out.append("World:\n" +
+                "Environment Variables:\n");
+        for (Property environmentVariable : environmentVariables) {
+            out.append(environmentVariable.toString()).append("\n");
+
+        }
+        out.append("Entity Definitions:\n");
+        for (EntityDefinition entityDefinition: entityDefinitionList) {
+            out.append(entityDefinition.toString()).append("\n");
+        }
+        out.append("Rules:\n");
+        for (Rule rule : rules) {
+            out.append(rule.toString()).append("\n");
+
+        }
+        return out.toString();
+
     }
     public static void RemoveEntity(Entity toRemove)
     {
         List<Entity> listToSearchIn = entityList.get(toRemove.getName());
-        for (Entity entity : listToSearchIn){
-            if (entity == toRemove) {
-                listToSearchIn.remove(entity);
-                return;
-            }
+        //listToSearchIn.removeIf(entity -> entity.equals(toRemove));
 
-        }
+
     }
     public void createEntities()
     {
@@ -105,5 +121,51 @@ public class World {
     }
     public Integer getTerminationBySeconds() {
         return terminationBySeconds;
+    }
+    public void run(){
+        long startTime = System.currentTimeMillis();
+        Integer ticks = 0;
+        createEntities();
+        List<List<Entity>> actionCandidates = new ArrayList<>();
+        while (!checkTerminationConditions(ticks, startTime)){
+            for (Rule rule : rules) {//change this, might run actions on entities that shouldn't
+                actionCandidates.clear();
+                for (Actionable action : rule.getActions()) {
+                    List<String> entityNames = action.getEntities();
+                    for (String entityName : entityNames) {
+                        actionCandidates.add(entityList.get(entityName));
+                    }
+                }
+                    for (List<Entity> entityList : actionCandidates) {
+                        for (Entity entity : entityList) {
+                            if(rule.checkActivation(ticks)) {
+                            for (Actionable action : rule.getActions()) {
+
+                                    try {
+                                        action.performAction(entity);
+                                    } catch (WarnException ignored) {
+
+                                    } catch (Exception e) {
+                                        System.out.println("Problem with rule: " + rule.getName() + " action: " + action.getName() + " entity: " + entity.getName());
+                                        System.out.println("error: " + e.getMessage());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ticks++;
+            }
+        System.out.println("done");
+
+        }
+
+
+    private boolean checkTerminationConditions(Integer ticks, long startTime) {
+        if (terminationByTicks != null && ticks >= terminationByTicks)
+            return true;
+        if (terminationBySeconds != null && (System.currentTimeMillis() - startTime) / 1000 >= terminationBySeconds)
+            return true;
+        return false;
     }
 }

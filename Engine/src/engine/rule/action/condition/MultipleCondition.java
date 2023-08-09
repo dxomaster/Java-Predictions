@@ -1,8 +1,10 @@
 package engine.rule.action.condition;
 
+import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.rule.action.Actionable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleCondition implements Satisfiable, Actionable {
@@ -40,7 +42,7 @@ public class MultipleCondition implements Satisfiable, Actionable {
     }
 
     @Override
-    public void performAction(Entity entity) {
+    public void performAction(Entity entity) throws WarnException {
         if (isSatisfied(entity)) {
             for (Actionable action : actionsToPreformIfConditionIsSatisfied) {
                 action.performAction(entity);
@@ -51,6 +53,20 @@ public class MultipleCondition implements Satisfiable, Actionable {
                 action.performAction(entity);
             }
         }
+    }
+
+    @Override
+    public List<String> getEntities() {
+        List<String> entities = new ArrayList<>();
+        for (Satisfiable condition : conditions) {
+                entities.addAll(condition.getEntities());
+        }
+        return entities;
+    }
+
+    @Override
+    public String getName() {
+        return "multiple condition";
     }
 
     @Override
