@@ -7,6 +7,7 @@ public enum ActionNames {
     CALCULATION("calculation"),
     KILL("kill");
     public final String actionInString;
+
     ActionNames(String actionInString) {
         this.actionInString = actionInString;
     }

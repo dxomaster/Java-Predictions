@@ -8,18 +8,14 @@
 
 package engine.jaxb.schema.generated;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -30,8 +26,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
@@ -45,7 +39,6 @@ public class PRDRange {
 
     /**
      * Gets the value of the to property.
-     * 
      */
     public double getTo() {
         return to;
@@ -53,7 +46,6 @@ public class PRDRange {
 
     /**
      * Sets the value of the to property.
-     * 
      */
     public void setTo(double value) {
         this.to = value;
@@ -61,7 +53,6 @@ public class PRDRange {
 
     /**
      * Gets the value of the from property.
-     * 
      */
     public double getFrom() {
         return from;
@@ -69,7 +60,6 @@ public class PRDRange {
 
     /**
      * Sets the value of the from property.
-     * 
      */
     public void setFrom(double value) {
         this.from = value;

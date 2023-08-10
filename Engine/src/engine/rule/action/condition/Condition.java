@@ -1,13 +1,9 @@
 package engine.rule.action.condition;
 
+import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import engine.entity.Entity;
-import engine.entity.EntityDefinition;
-import engine.rule.action.Action;
 import engine.rule.action.Actionable;
-import engine.rule.action.expression.Expression;
-import engine.world.utils.PropertyType;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +12,9 @@ public class Condition implements Satisfiable, Actionable {
     List<Actionable> actionsToPreformIfConditionIsSatisfied;
     List<Actionable> actionsToPreformIfConditionIsNotSatisfied;
     SimpleCondition simpleCondition;
+
     @Override
-    public boolean isSatisfied(Entity entity) {
+    public boolean isSatisfied(Entity entity) throws ErrorException {
         return simpleCondition.isSatisfied(entity);
     }
 
@@ -28,7 +25,7 @@ public class Condition implements Satisfiable, Actionable {
     }
 
     @Override
-    public void performAction(Entity entity) throws WarnException {
+    public void performAction(Entity entity) throws WarnException, ErrorException {
         if (isSatisfied(entity)) {
             for (Actionable action : actionsToPreformIfConditionIsSatisfied) {
                 action.performAction(entity);
@@ -39,9 +36,11 @@ public class Condition implements Satisfiable, Actionable {
             }
         }
     }
+
     public String toString() {
         return simpleCondition.toString();
     }
+
     @Override
     public List<String> getEntities() {
         List<String> entities = new ArrayList<>();

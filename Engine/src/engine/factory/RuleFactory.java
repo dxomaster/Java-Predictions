@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RuleFactory {
-    public static Rule createRule(PRDRule prdRule){
+    public static Rule createRule(PRDRule prdRule) {
         List<Actionable> actions = createActions(prdRule.getPRDActions());
         return new Rule(prdRule.getName(), actions, ActivationFactory.createActivation(prdRule.getPRDActivation()));
     }
+
     private static List<Actionable> createActions(PRDActions prdActions) {
         List<Actionable> actions = new ArrayList<>();
         for (PRDAction prdAction : prdActions.getPRDAction()) {

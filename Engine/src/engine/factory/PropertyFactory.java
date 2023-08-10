@@ -1,7 +1,9 @@
 package engine.factory;
 
 import engine.entity.EntityDefinition;
-import engine.jaxb.schema.generated.*;
+import engine.jaxb.schema.generated.PRDEntity;
+import engine.jaxb.schema.generated.PRDEnvProperty;
+import engine.jaxb.schema.generated.PRDProperty;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
 import engine.world.utils.Range;
@@ -10,12 +12,9 @@ import java.util.*;
 
 public class PropertyFactory {
     public static Property createEntityProperty(PRDProperty prdProperty) {
-        if(prdProperty.getPRDRange() != null)
-        {
+        if (prdProperty.getPRDRange() != null) {
             return createEntityPropertyWithRange(prdProperty);
-        }
-        else
-        {
+        } else {
             return createEntityPropertyWithoutRange(prdProperty);
         }
 
@@ -28,9 +27,7 @@ public class PropertyFactory {
         if (randomInit) {
 
             return createRandomInitEntityProperty(prdProperty.getPRDName(), range, type);
-        }
-        else
-        {
+        } else {
             if (isInvalid(prdProperty.getPRDValue().getInit(), type)) {
                 throw new IllegalArgumentException("Invalid init value for type: " + type);
             }
@@ -56,9 +53,7 @@ public class PropertyFactory {
         if (randomInit) {
 
             return createRandomInitEntityProperty(prdProperty.getPRDName(), null, type);
-        }
-        else
-        {
+        } else {
             if (isInvalid(prdProperty.getPRDValue().getInit(), type)) {
                 throw new IllegalArgumentException("Invalid init value for type: " + type);
             }
@@ -78,30 +73,30 @@ public class PropertyFactory {
 
     }
 
-    public static Map<String,Property> createPropertyList(PRDEntity prdEntity)
-    {
+    public static Map<String, Property> createPropertyList(PRDEntity prdEntity) {
         String duplicate = isEntityPropertyNameUnique(prdEntity.getPRDProperties().getPRDProperty());
-        if (duplicate != null)
-        {
-            throw new IllegalArgumentException("Problem with "+prdEntity.getName() +" Property name is not unique: " + duplicate);
+        if (duplicate != null) {
+            throw new IllegalArgumentException("Problem with " + prdEntity.getName() + " Property name is not unique: " + duplicate);
         }
         List<PRDProperty> prdProperties = prdEntity.getPRDProperties().getPRDProperty();
-        Map<String,Property> propertyList = new HashMap<>();
+        Map<String, Property> propertyList = new HashMap<>();
         for (PRDProperty prdProperty : prdProperties) {
             Property property = PropertyFactory.createEntityProperty(prdProperty);
-            propertyList.put(property.getName(),property);
+            propertyList.put(property.getName(), property);
         }
         return propertyList;
     }
-    public static Map<String,Property> createPropertyList(EntityDefinition entityDefinition){
-        Map<String,Property> propertyList = new HashMap<>();
-        for (Property property : entityDefinition.getProperties().values())  {
-            propertyList.put(property.getName(),property);
+
+    public static Map<String, Property> createPropertyList(EntityDefinition entityDefinition) {
+        Map<String, Property> propertyList = new HashMap<>();
+        for (Property property : entityDefinition.getProperties().values()) {
+            Property propertyClone = new Property(property);
+            propertyList.put(propertyClone.getName(), propertyClone);
         }
         return propertyList;
     }
-    private static String isEntityPropertyNameUnique(List<PRDProperty> prdProperty)
-    {
+
+    private static String isEntityPropertyNameUnique(List<PRDProperty> prdProperty) {
         List<String> propertyNames = new ArrayList<>();
         for (PRDProperty property : prdProperty) {
 
@@ -109,18 +104,18 @@ public class PropertyFactory {
         }
         Set<String> set = new HashSet<>();
 
-        for (String name: propertyNames){
+        for (String name : propertyNames) {
             if (!set.add(name))
                 return name;
         }
 
         return null;
     }
+
     public static List<Property> createPropertyList(List<PRDEnvProperty> prdEnvProperties) {
         List<Property> propertyList = new ArrayList<>();
         String duplicate = isEnvPropertyNameUnique(prdEnvProperties);
-        if(duplicate != null)
-        {
+        if (duplicate != null) {
             throw new IllegalArgumentException("Environment variable name is not unique: " + duplicate);
         }
         for (PRDEnvProperty prdEnvProperty : prdEnvProperties) {
@@ -130,8 +125,8 @@ public class PropertyFactory {
         }
         return propertyList;
     }
-    private static String isEnvPropertyNameUnique(List<PRDEnvProperty> prdEnvProperty)
-    {
+
+    private static String isEnvPropertyNameUnique(List<PRDEnvProperty> prdEnvProperty) {
 
         List<String> propertyNames = new ArrayList<>();
         for (PRDEnvProperty property : prdEnvProperty) {
@@ -140,21 +135,19 @@ public class PropertyFactory {
         }
         Set<String> set = new HashSet<>();
 
-        for (String name: propertyNames){
+        for (String name : propertyNames) {
             if (!set.add(name))
                 return name;
         }
 
         return null;
     }
+
     public static Property createEnvProperty(PRDEnvProperty prdEnvProperty) {
 
-        if(prdEnvProperty.getPRDRange() != null)
-        {
-            return createRandomInitEntityProperty(prdEnvProperty.getPRDName(), RangeFactory.createRange(prdEnvProperty.getPRDRange(),PropertyType.valueOf(prdEnvProperty.getType().toUpperCase())), prdEnvProperty.getType());
-        }
-        else
-        {
+        if (prdEnvProperty.getPRDRange() != null) {
+            return createRandomInitEntityProperty(prdEnvProperty.getPRDName(), RangeFactory.createRange(prdEnvProperty.getPRDRange(), PropertyType.valueOf(prdEnvProperty.getType().toUpperCase())), prdEnvProperty.getType());
+        } else {
             return createRandomInitEntityProperty(prdEnvProperty.getPRDName(), null, prdEnvProperty.getType());
         }
     }

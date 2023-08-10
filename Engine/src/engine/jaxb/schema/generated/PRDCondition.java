@@ -8,21 +8,16 @@
 
 package engine.jaxb.schema.generated;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -63,12 +58,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "prdCondition"
+        "prdCondition"
 })
 @XmlRootElement(name = "PRD-condition")
 public class PRDCondition {
@@ -90,25 +83,23 @@ public class PRDCondition {
 
     /**
      * Gets the value of the prdCondition property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the prdCondition property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getPRDCondition().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link PRDCondition }
-     * 
-     * 
      */
     public List<PRDCondition> getPRDCondition() {
         if (prdCondition == null) {
@@ -119,11 +110,9 @@ public class PRDCondition {
 
     /**
      * Gets the value of the value property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getValue() {
         return value;
@@ -131,11 +120,9 @@ public class PRDCondition {
 
     /**
      * Sets the value of the value property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setValue(String value) {
         this.value = value;
@@ -143,11 +130,9 @@ public class PRDCondition {
 
     /**
      * Gets the value of the singularity property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getSingularity() {
         return singularity;
@@ -155,11 +140,9 @@ public class PRDCondition {
 
     /**
      * Sets the value of the singularity property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSingularity(String value) {
         this.singularity = value;
@@ -167,11 +150,9 @@ public class PRDCondition {
 
     /**
      * Gets the value of the operator property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getOperator() {
         return operator;
@@ -179,11 +160,9 @@ public class PRDCondition {
 
     /**
      * Sets the value of the operator property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOperator(String value) {
         this.operator = value;
@@ -191,11 +170,9 @@ public class PRDCondition {
 
     /**
      * Gets the value of the property property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getProperty() {
         return property;
@@ -203,11 +180,9 @@ public class PRDCondition {
 
     /**
      * Sets the value of the property property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setProperty(String value) {
         this.property = value;
@@ -215,11 +190,9 @@ public class PRDCondition {
 
     /**
      * Gets the value of the logical property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getLogical() {
         return logical;
@@ -227,11 +200,9 @@ public class PRDCondition {
 
     /**
      * Sets the value of the logical property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLogical(String value) {
         this.logical = value;
@@ -239,11 +210,9 @@ public class PRDCondition {
 
     /**
      * Gets the value of the entity property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getEntity() {
         return entity;
@@ -251,11 +220,9 @@ public class PRDCondition {
 
     /**
      * Sets the value of the entity property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEntity(String value) {
         this.entity = value;

@@ -1,8 +1,13 @@
 package engine;
+
 public interface Engine {
-    public void runSimulation();
-    public void loadSimulationParametersFromFile(String filename);
-    public void viewSimulationParameters();
-    public void viewOldSimulationRuns();
-    public void viewSingleSimulationRun(String runId);
+    void runSimulation();
+
+    void loadSimulationParametersFromFile(String filename);
+
+    void viewSimulationParameters();
+
+    void viewOldSimulationRuns();
+
+    void viewSingleSimulationRun(String runId);
 }

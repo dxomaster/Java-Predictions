@@ -7,8 +7,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
-public class Engine implements engine.Engine{
+public class Engine implements engine.Engine {
     private World world;
+
     @Override
     public void runSimulation() {
         world.run(); /*todo - implement*/

@@ -1,5 +1,6 @@
 package engine.rule.action.condition;
 
+import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.rule.action.Actionable;
@@ -10,18 +11,19 @@ import java.util.List;
 public class MultipleCondition implements Satisfiable, Actionable {
     List<Actionable> actionsToPreformIfConditionIsSatisfied;
     List<Actionable> actionsToPreformIfConditionIsNotSatisfied;
-    private LogicalOperator operator;
+    private final LogicalOperator operator;
     List<Satisfiable> conditions;
+
     public MultipleCondition(LogicalOperator operator, List<Satisfiable> conditions, List<Actionable> actionsToPreformIfConditionIsSatisfied, List<Actionable> actionsToPreformIfConditionIsNotSatisfied) {
         this.operator = operator;
         this.conditions = conditions;
         this.actionsToPreformIfConditionIsSatisfied = actionsToPreformIfConditionIsSatisfied;
         this.actionsToPreformIfConditionIsNotSatisfied = actionsToPreformIfConditionIsNotSatisfied;
     }
+
     @Override
-    public boolean isSatisfied(Entity entity) {
-        switch (operator)
-        {
+    public boolean isSatisfied(Entity entity) throws ErrorException {
+        switch (operator) {
             case AND:
                 for (Satisfiable condition : conditions) {
                     if (!condition.isSatisfied(entity)) {
@@ -42,13 +44,12 @@ public class MultipleCondition implements Satisfiable, Actionable {
     }
 
     @Override
-    public void performAction(Entity entity) throws WarnException {
+    public void performAction(Entity entity) throws WarnException, ErrorException {
         if (isSatisfied(entity)) {
             for (Actionable action : actionsToPreformIfConditionIsSatisfied) {
                 action.performAction(entity);
             }
-        }
-        else {
+        } else {
             for (Actionable action : actionsToPreformIfConditionIsNotSatisfied) {
                 action.performAction(entity);
             }
@@ -59,7 +60,7 @@ public class MultipleCondition implements Satisfiable, Actionable {
     public List<String> getEntities() {
         List<String> entities = new ArrayList<>();
         for (Satisfiable condition : conditions) {
-                entities.addAll(condition.getEntities());
+            entities.addAll(condition.getEntities());
         }
         return entities;
     }

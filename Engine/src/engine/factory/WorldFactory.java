@@ -1,8 +1,9 @@
 package engine.factory;
 
-import Exception.WARN.WarnException;
 import engine.entity.EntityDefinition;
-import engine.jaxb.schema.generated.*;
+import engine.jaxb.schema.generated.PRDBySecond;
+import engine.jaxb.schema.generated.PRDByTicks;
+import engine.jaxb.schema.generated.PRDWorld;
 import engine.rule.Rule;
 import engine.world.World;
 import engine.world.utils.Property;
@@ -10,8 +11,7 @@ import engine.world.utils.Property;
 import java.util.List;
 
 public class WorldFactory {
-    public static World defineWorld(PRDWorld prdWorld)
-    {
+    public static World defineWorld(PRDWorld prdWorld) {
         try {
             List<EntityDefinition> entityDefinitions = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());
             World.setEntityDefinitionList(entityDefinitions);
@@ -28,9 +28,7 @@ public class WorldFactory {
                 }
             }
             return new World(environmentProperties, ruleList, ticks, seconds, entityDefinitions);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;

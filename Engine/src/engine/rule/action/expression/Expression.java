@@ -1,7 +1,8 @@
 package engine.rule.action.expression;
 
+import Exception.ERROR.ErrorException;
 import engine.entity.Entity;
 
 public interface Expression {
-    public Object evaluate(Entity entity);
+    Object evaluate(Entity entity) throws ErrorException;
 }

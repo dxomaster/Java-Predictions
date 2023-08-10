@@ -8,19 +8,14 @@
 
 package engine.jaxb.schema.generated;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -43,13 +38,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "prdName",
-    "prdRange"
+        "prdName",
+        "prdRange"
 })
 @XmlRootElement(name = "PRD-env-property")
 public class PRDEnvProperty {
@@ -63,11 +56,9 @@ public class PRDEnvProperty {
 
     /**
      * Gets the value of the prdName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getPRDName() {
         return prdName;
@@ -75,11 +66,9 @@ public class PRDEnvProperty {
 
     /**
      * Sets the value of the prdName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPRDName(String value) {
         this.prdName = value;
@@ -87,11 +76,9 @@ public class PRDEnvProperty {
 
     /**
      * Gets the value of the prdRange property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PRDRange }
-     *     
+     *
+     * @return possible object is
+     * {@link PRDRange }
      */
     public PRDRange getPRDRange() {
         return prdRange;
@@ -99,11 +86,9 @@ public class PRDEnvProperty {
 
     /**
      * Sets the value of the prdRange property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PRDRange }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PRDRange }
      */
     public void setPRDRange(PRDRange value) {
         this.prdRange = value;
@@ -111,11 +96,9 @@ public class PRDEnvProperty {
 
     /**
      * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getType() {
         return type;
@@ -123,11 +106,9 @@ public class PRDEnvProperty {
 
     /**
      * Sets the value of the type property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setType(String value) {
         this.type = value;

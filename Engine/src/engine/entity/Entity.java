@@ -4,6 +4,7 @@ import Exception.WARN.WarnException;
 import engine.world.World;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
+
 import java.util.Map;
 
 public class Entity {// todo: population
@@ -15,9 +16,6 @@ public class Entity {// todo: population
         this.entityProperties = entityProperties;
     }
 
-    public Map<String, Property> getEntityProperties() {
-        return entityProperties;
-    }
 
     @Override
     public String toString() {
@@ -34,14 +32,13 @@ public class Entity {// todo: population
 
     public void increaseProperty(String propertyNameInString, Object evaluate) throws WarnException {
 
-            Property property = getPropertyByName(propertyNameInString);
-            Object currentValue = property.getValue();
-            if (property.getType() == PropertyType.DECIMAL)
-                property.setValue((Integer) currentValue + (Integer) evaluate);
-            else
-                property.setValue((Float) currentValue + (Float) evaluate);
-        }
-
+        Property property = getPropertyByName(propertyNameInString);
+        Object currentValue = property.getValue();
+        if (property.getType() == PropertyType.DECIMAL)
+            property.setValue((Integer) currentValue + (Integer) evaluate);
+        else
+            property.setValue((Float) currentValue + (Float) evaluate);
+    }
 
 
     public void decreaseProperty(String propertyNameInString, Object evaluate) {

@@ -8,18 +8,14 @@
 
 package engine.jaxb.schema.generated;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -34,15 +30,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "prdEvironment",
-    "prdEntities",
-    "prdRules",
-    "prdTermination"
+        "prdEvironment",
+        "prdEntities",
+        "prdRules",
+        "prdTermination"
 })
 @XmlRootElement(name = "PRD-world")
 public class PRDWorld {
@@ -58,11 +52,9 @@ public class PRDWorld {
 
     /**
      * Gets the value of the prdEvironment property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PRDEvironment }
-     *     
+     *
+     * @return possible object is
+     * {@link PRDEvironment }
      */
     public PRDEvironment getPRDEvironment() {
         return prdEvironment;
@@ -70,11 +62,9 @@ public class PRDWorld {
 
     /**
      * Sets the value of the prdEvironment property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PRDEvironment }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PRDEvironment }
      */
     public void setPRDEvironment(PRDEvironment value) {
         this.prdEvironment = value;
@@ -82,11 +72,9 @@ public class PRDWorld {
 
     /**
      * Gets the value of the prdEntities property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PRDEntities }
-     *     
+     *
+     * @return possible object is
+     * {@link PRDEntities }
      */
     public PRDEntities getPRDEntities() {
         return prdEntities;
@@ -94,11 +82,9 @@ public class PRDWorld {
 
     /**
      * Sets the value of the prdEntities property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PRDEntities }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PRDEntities }
      */
     public void setPRDEntities(PRDEntities value) {
         this.prdEntities = value;
@@ -106,11 +92,9 @@ public class PRDWorld {
 
     /**
      * Gets the value of the prdRules property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PRDRules }
-     *     
+     *
+     * @return possible object is
+     * {@link PRDRules }
      */
     public PRDRules getPRDRules() {
         return prdRules;
@@ -118,11 +102,9 @@ public class PRDWorld {
 
     /**
      * Sets the value of the prdRules property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PRDRules }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PRDRules }
      */
     public void setPRDRules(PRDRules value) {
         this.prdRules = value;
@@ -130,11 +112,9 @@ public class PRDWorld {
 
     /**
      * Gets the value of the prdTermination property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PRDTermination }
-     *     
+     *
+     * @return possible object is
+     * {@link PRDTermination }
      */
     public PRDTermination getPRDTermination() {
         return prdTermination;
@@ -142,11 +122,9 @@ public class PRDWorld {
 
     /**
      * Sets the value of the prdTermination property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PRDTermination }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PRDTermination }
      */
     public void setPRDTermination(PRDTermination value) {
         this.prdTermination = value;
