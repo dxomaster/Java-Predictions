@@ -1,13 +1,15 @@
 package engine.world.utils;
 
 
+import Exception.WARN.WarnException;
+
 import java.util.Random;
 
 public class Property {
-    private final boolean isRandomlyGenerated;
-    private final String name;
-    private  Range range;
-    private final PropertyType type;
+    private boolean isRandomlyGenerated;
+    private String name;
+    private Range range;
+    private PropertyType type;
     private Object value;
 
     public Property(String name, PropertyType type, Range range, Object value) {
@@ -15,38 +17,65 @@ public class Property {
         this.name = name;
         this.isRandomlyGenerated = false;
         this.setRange(range);
-        this.setValue(value);
+        try {
+            this.setValue(value);
+        } catch (WarnException ignored) {
+
+        }
 
     }
 
     public Property(String name, PropertyType type, Range range) {
-        Random random = new Random();
-        this.name = name;
-        this.type = type;
-        this.isRandomlyGenerated = true;
-        this.setRange(range);
+        try {
+            Random random = new Random();
+            this.name = name;
+            this.type = type;
+            this.isRandomlyGenerated = true;
+            this.setRange(range);
 
-        if (range != null) {
-            if (type == PropertyType.DECIMAL) {
-                this.setValue((Integer)random.nextInt((Integer)range.getTo() - (Integer)range.getFrom()) + (Integer)range.getFrom());
+            if (range != null) {
+                if (type == PropertyType.DECIMAL) {
+                    this.setValue((Integer) random.nextInt((Integer) range.getTo() - (Integer) range.getFrom()) + (Integer) range.getFrom());
+                } else {
+                    this.setValue(random.nextFloat() * ((Float) range.getTo() - (Float) range.getFrom()) + (Float) range.getFrom());
+                }
             } else {
-                this.setValue((Float)random.nextFloat() * ((Float)range.getTo() - (Float)range.getFrom())+ (Float)range.getFrom());
+                if (this.type == PropertyType.DECIMAL) {
+                    this.setValue(random.nextInt());
+                } else if (this.type == PropertyType.FLOAT) {
+                    this.setValue(random.nextFloat());
+                } else if (this.type == PropertyType.BOOLEAN) {
+                    this.setValue(random.nextBoolean());
+                } else if (this.type == PropertyType.STRING) {
+                    this.setValue(generateRandomString());
+                }
             }
+        } catch (WarnException ignored) {
+
         }
-        else {
-            if (this.type == PropertyType.DECIMAL) {
-                this.setValue(random.nextInt());
-            }
-            else if (this.type == PropertyType.FLOAT) {
-                this.setValue(random.nextFloat());
-            }
-            else if (this.type == PropertyType.BOOLEAN) {
-                this.setValue(random.nextBoolean());
-            }
-            else if (this.type == PropertyType.STRING) {
-                this.setValue(generateRandomString());
-            }
-        }
+    }
+
+    public Property(Property property) {
+        this.name = property.name;
+        this.type = property.type;
+        this.isRandomlyGenerated = property.isRandomlyGenerated;
+        this.range = property.range;
+        this.value = property.value;
+//        switch(property.type)
+//        {
+//            case DECIMAL:
+//                this.value = new Integer((Integer) property.value);
+//                break;
+//            case FLOAT:
+//                this.value = new Float((Float) property.value) ;
+//                break;
+//            case BOOLEAN:
+//                this.value = new Boolean((Boolean) property.value) ;
+//                break;
+//            case STRING:
+//                this.value = new String((String) property.value);
+//                break;
+//        }
 
     }
 
@@ -64,28 +93,43 @@ public class Property {
                 '}';
     }
 
-    public void setValue(Object value) {
+    public void setValue(Object value) throws WarnException {
         if (value.getClass() != this.type.propertyClass) {
-            throw new IllegalArgumentException("Value must be of type " + this.type.propertyClass.getSimpleName());
+            throw new IllegalArgumentException("Error with Property " + this.name + " Value must be of type " + this.type.propertyClass.getSimpleName());
         }
         if (this.type == PropertyType.DECIMAL || this.type == PropertyType.FLOAT) {
             if (range != null && !range.isInRange(value)) {
-                throw new IllegalArgumentException("Value must be in range " + range.getFrom() + " to " + range.getTo());
+                throw new WarnException("Error with Property " + this.name + " Value must be in range " + range.getFrom() + " to " + range.getTo());
             }
 
+
         }
+//        switch(this.type)
+//        {
+//            case DECIMAL:
+//                this.value = new Integer((Integer) value);
+//                break;
+//            case FLOAT:
+//                this.value = new Float((Float) value) ;
+//                break;
+//            case BOOLEAN:
+//                this.value = new Boolean((Boolean) value) ;
+//                break;
+//            case STRING:
+//                this.value = new String((String) value);
+//                break;
+//        }
         this.value = value;
     }
 
     public Object getValue() {
         return value;
     }
+
     private void setRange(Range range) {
-        if (range == null)
-        {
+        if (range == null) {
             return;
-        }
-        else {
+        } else {
             if (this.type == PropertyType.STRING) {
                 throw new IllegalArgumentException("String properties cannot have a range");
             }
@@ -111,5 +155,9 @@ public class Property {
 
     public PropertyType getType() {
         return type;
+    }
+
+    public Range getRange() {
+        return range;
     }
 }

@@ -8,19 +8,14 @@
 
 package engine.jaxb.schema.generated;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -34,13 +29,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "prdActions",
-    "prdActivation"
+        "prdActions",
+        "prdActivation"
 })
 @XmlRootElement(name = "PRD-rule")
 public class PRDRule {
@@ -54,11 +47,9 @@ public class PRDRule {
 
     /**
      * Gets the value of the prdActions property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PRDActions }
-     *     
+     *
+     * @return possible object is
+     * {@link PRDActions }
      */
     public PRDActions getPRDActions() {
         return prdActions;
@@ -66,11 +57,9 @@ public class PRDRule {
 
     /**
      * Sets the value of the prdActions property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PRDActions }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PRDActions }
      */
     public void setPRDActions(PRDActions value) {
         this.prdActions = value;
@@ -78,11 +67,9 @@ public class PRDRule {
 
     /**
      * Gets the value of the prdActivation property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PRDActivation }
-     *     
+     *
+     * @return possible object is
+     * {@link PRDActivation }
      */
     public PRDActivation getPRDActivation() {
         return prdActivation;
@@ -90,11 +77,9 @@ public class PRDRule {
 
     /**
      * Sets the value of the prdActivation property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PRDActivation }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PRDActivation }
      */
     public void setPRDActivation(PRDActivation value) {
         this.prdActivation = value;
@@ -102,11 +87,9 @@ public class PRDRule {
 
     /**
      * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getName() {
         return name;
@@ -114,11 +97,9 @@ public class PRDRule {
 
     /**
      * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setName(String value) {
         this.name = value;

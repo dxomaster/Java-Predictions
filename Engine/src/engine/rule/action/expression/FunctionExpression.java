@@ -1,37 +1,38 @@
 package engine.rule.action.expression;
 
-import engine.entity.EntityDefinition;
+import Exception.ERROR.ErrorException;
+import engine.entity.Entity;
 import engine.world.World;
 import engine.world.utils.Property;
-import engine.entity.Entity;
+import engine.world.utils.PropertyType;
 
 import java.util.Arrays;
 import java.util.Random;
 
 public class FunctionExpression implements Expression {
     functionEnum function;
-    private Object[] arguments;
+    private final Object[] arguments;
 
     public FunctionExpression(String functionName, Object[] arguments) {
+        this.arguments = new Object[1];
         if (arguments == null) throw new IllegalArgumentException("Arguments cannot be null");
         try {
             this.function = functionEnum.valueOf(functionName.toUpperCase());
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Function " + functionName + " not found");
         }
-        this.arguments = arguments;
+
 
         switch (function) {
             case ENVIRONMENT:
+                this.arguments[0] = arguments[0];
                 Property envVariable = World.getEnvironmentVariableByName((String) arguments[0]);
                 if (envVariable == null) {
-                    throw new RuntimeException("Environment variable " +  arguments[0] + " not found");
+                    throw new RuntimeException("Environment variable " + arguments[0] + " not found");
                 }
                 break;
             case RANDOM:
-                if (!(arguments[0] instanceof Integer))
-                    throw new RuntimeException("Argument of random function must be an integer");
+                this.arguments[0] = Integer.parseInt((String) arguments[0]);
                 break;
             default:
                 throw new RuntimeException("Function " + function.functionInString + " not found");
@@ -39,14 +40,28 @@ public class FunctionExpression implements Expression {
     }
 
     @Override
-    public Object evaluate(Entity entity) {
+    public Object evaluate(Entity entity) throws ErrorException {
         switch (function) {
             case ENVIRONMENT:
                 Property envVariable = World.getEnvironmentVariableByName((String) arguments[0]);
+                assert envVariable != null;
                 return envVariable.getValue();
             case RANDOM:
                 Random random = new Random();
                 return random.nextInt((int) arguments[0]);
+            default:
+                return null;
+        }
+    }
+
+    public PropertyType getType() {
+        switch (function) {
+            case ENVIRONMENT:
+                Property envVariable = World.getEnvironmentVariableByName((String) arguments[0]);
+                assert envVariable != null;
+                return envVariable.getType();
+            case RANDOM:
+                return PropertyType.DECIMAL;
             default:
                 return null;
         }

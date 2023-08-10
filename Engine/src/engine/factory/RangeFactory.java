@@ -6,13 +6,11 @@ import engine.world.utils.Range;
 
 public class RangeFactory {
     public static Range createRange(PRDRange prdRange, PropertyType type) {
-        if (type  == PropertyType.DECIMAL)
-        {
-            Integer from = new Integer((int)prdRange.getFrom());
-            Integer to = new Integer((int)prdRange.getTo());
+        if (type == PropertyType.DECIMAL) {
+            Integer from = new Integer((int) prdRange.getFrom());
+            Integer to = new Integer((int) prdRange.getTo());
             return new Range(from, to, type);
-        }
-        else {
+        } else {
             Float from = new Float(prdRange.getFrom());
             Float to = new Float(prdRange.getTo());
             return new Range(from, to, type);

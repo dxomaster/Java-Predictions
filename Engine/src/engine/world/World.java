@@ -1,5 +1,6 @@
 package engine.world;
 
+import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
 import engine.rule.Rule;
@@ -10,12 +11,13 @@ import java.util.Map;
 
 public class World {
     private static List<Property> environmentVariables;
-    private static Map<String,List<Entity>> entityList;
+    private static Map<String, List<Entity>> entityList;
     private static List<EntityDefinition> entityDefinitionList;
     private final List<Rule> rules;
     private final Integer terminationByTicks;
     private final Integer terminationBySeconds;
-    public World(List<Property> environmentVariables, List<Rule> rules, Integer terminationByTicks, Integer terminationBySeconds,List<EntityDefinition> entityDefinitionList) {
+
+    public World(List<Property> environmentVariables, List<Rule> rules, Integer terminationByTicks, Integer terminationBySeconds, List<EntityDefinition> entityDefinitionList) {
         if (terminationByTicks == null && terminationBySeconds == null)
             throw new IllegalArgumentException("At least one termination condition must be specified");
         World.entityDefinitionList = entityDefinitionList;
@@ -33,9 +35,11 @@ public class World {
     public static void setEnvironmentVariables(List<Property> environmentVariables) {
         World.environmentVariables = environmentVariables;
     }
+
     public static void setEntityDefinitionList(List<EntityDefinition> entityDefinitionList) {
         World.entityDefinitionList = entityDefinitionList;
     }
+
     public static Property getEnvironmentVariableByName(String name) {
         for (Property property : environmentVariables) {
             if (property.getName().equals(name)) {
@@ -44,57 +48,46 @@ public class World {
         }
         return null;
     }
-    public List<Property> getEnvironmentVariables() {
-        return environmentVariables;
-    }
-
-    public Map<String,List<Entity>> getEntityList() {
-        return entityList;
-    }
-
-    public static void setEntityList(Map<String, List<Entity>> entityList) {
-        World.entityList = entityList;
-    }
-
-    public List<Rule> getRules() {
-        return rules;
-    }
-
-    public Integer getTerminationByTicks() {
-        return terminationByTicks;
-    }
 
     @Override
     public String toString() {
-        return "World{" +
-                "entityDefinitions=" + entityDefinitionList +
-                ", rules=" + rules +
-                ".environmentVariables=" + environmentVariables +
-                ", terminationByTicks=" + terminationByTicks +
-                ", terminationBySeconds=" + terminationBySeconds +
-                '}';
-    }
-    public static void RemoveEntity(Entity toRemove)
-    {
-        List<Entity> listToSearchIn = entityList.get(toRemove.getName());
-        for (Entity entity : listToSearchIn){
-            if (entity == toRemove) {
-                listToSearchIn.remove(entity);
-                return;
-            }
+        StringBuilder out = new StringBuilder();
+        out.append("World:\n" +
+                "Environment Variables:\n");
+        for (Property environmentVariable : environmentVariables) {
+            out.append(environmentVariable.toString()).append("\n");
 
         }
+        out.append("Entity Definitions:\n");
+        for (EntityDefinition entityDefinition : entityDefinitionList) {
+            out.append(entityDefinition.toString()).append("\n");
+        }
+        out.append("Rules:\n");
+        for (Rule rule : rules) {
+            out.append(rule.toString()).append("\n");
+
+        }
+        return out.toString();
+
     }
-    public void createEntities()
-    {
+
+    public static void RemoveEntity(Entity toRemove) {
+        List<Entity> listToSearchIn = entityList.get(toRemove.getName());
+        //listToSearchIn.removeIf(entity -> entity.equals(toRemove));
+
+
+    }
+
+    public void createEntities() {
         entityList = new java.util.HashMap<>();
         if (entityDefinitionList == null)
             throw new IllegalArgumentException("Entity definition list is empty");
         for (EntityDefinition entityDefinition : entityDefinitionList) {
             List<Entity> entityList = entityDefinition.createEntityList();
-            World.entityList.put(entityDefinition.getName(),entityList);
+            World.entityList.put(entityDefinition.getName(), entityList);
         }
     }
+
     public static EntityDefinition getEntityDefinitionByName(String name) {
         for (EntityDefinition entityDefinition : entityDefinitionList) {
             if (entityDefinition.getName().equals(name)) {
@@ -103,7 +96,35 @@ public class World {
         }
         return null;
     }
-    public Integer getTerminationBySeconds() {
-        return terminationBySeconds;
+
+    public void run() {
+        long startTime = System.currentTimeMillis();
+        Integer ticks = 0;
+        createEntities();
+        while (!checkTerminationConditions(ticks, startTime)) {
+            for (List<Entity> entities : entityList.values()) {
+                for (Entity entity : entities) {
+                    for (Rule rule : rules) {
+                        try {
+                            rule.applyRule(entity, ticks);
+                        } catch (WarnException ignored) {
+
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                }
+            }
+            ticks++;
+        }
+        System.out.println("done");
+
+    }
+
+
+    private boolean checkTerminationConditions(Integer ticks, long startTime) {
+        if (terminationByTicks != null && ticks >= terminationByTicks)
+            return true;
+        return terminationBySeconds != null && (System.currentTimeMillis() - startTime) / 1000 >= terminationBySeconds;
     }
 }

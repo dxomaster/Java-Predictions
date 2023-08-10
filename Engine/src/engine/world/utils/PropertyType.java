@@ -6,6 +6,7 @@ public enum PropertyType {
     BOOLEAN(Boolean.class),
     STRING(String.class);
     public final Class propertyClass;
+
     PropertyType(Class propertyClass) {
         this.propertyClass = propertyClass;
     }
