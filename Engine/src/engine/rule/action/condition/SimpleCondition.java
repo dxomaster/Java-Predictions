@@ -7,6 +7,7 @@ import engine.rule.action.expression.Expression;
 import engine.rule.action.expression.FunctionExpression;
 import engine.rule.action.expression.PropertyExpression;
 import engine.rule.action.expression.ValueExpression;
+import engine.world.World;
 import engine.world.utils.PropertyType;
 
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class SimpleCondition implements Satisfiable {
     private final Expression expression;
 
     @Override
-    public boolean isSatisfied(Entity entity) throws ErrorException {
-        Object comparisonValue = expression.evaluate(entity);
+    public boolean isSatisfied(World world, Entity entity) throws ErrorException {
+        Object comparisonValue = expression.evaluate(world, entity);
         Object entityValue = entity.getPropertyByName(property).getValue();
         PropertyType type;
         if (expression instanceof ValueExpression) {

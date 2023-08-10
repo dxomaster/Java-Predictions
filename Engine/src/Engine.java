@@ -1,4 +1,4 @@
-import engine.factory.WorldFactory;
+import DTO.EnvDTO;
 import engine.jaxb.schema.generated.PRDWorld;
 import engine.world.World;
 
@@ -6,12 +6,20 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.util.List;
 
 public class Engine implements engine.Engine {
     private World world;
 
     @Override
+    public List<EnvDTO> getEnvDTO() {
+
+
+    }
+
+    @Override
     public void runSimulation() {
+
         world.run(); /*todo - implement*/
     }
 
@@ -24,7 +32,7 @@ public class Engine implements engine.Engine {
 
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             PRDWorld jaxbWorld = (PRDWorld) jaxbUnmarshaller.unmarshal(file);
-            this.world = WorldFactory.defineWorld(jaxbWorld);
+            this.world = new World(jaxbWorld);
 
         } catch (JAXBException e) {
             e.printStackTrace();

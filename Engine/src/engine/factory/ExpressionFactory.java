@@ -14,57 +14,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpressionFactory {
-    public static Expression createExpression(PRDCondition prdCondition) {
+    public static Expression createExpression(World world, PRDCondition prdCondition) {
 
-        return createExpression(prdCondition.getEntity(), prdCondition.getProperty(), prdCondition.getValue());
+        return createExpression(world, prdCondition.getEntity(), prdCondition.getProperty(), prdCondition.getValue());
     }
 
-    private static PropertyType getTypeByPropertyName(String propertyName, String entityName) {
-        return World.getEntityDefinitionByName(entityName).getPropertyByName(propertyName).getType();
+    private static PropertyType getTypeByPropertyName(World world, String propertyName, String entityName) {
+        return world.getEntityDefinitionByName(entityName).getPropertyByName(propertyName).getType();
     }
 
-    public static Expression[] createExpression(PRDAction prdAction) {
+    public static Expression[] createExpression(World world, PRDAction prdAction) {
         List<Expression> expressions = new ArrayList<>();
         switch (prdAction.getType()) {
             case "increase":
             case "decrease":
-                expressions.add(createExpression(prdAction.getEntity(), prdAction.getProperty(), prdAction.getBy()));
+                expressions.add(createExpression(world, prdAction.getEntity(), prdAction.getProperty(), prdAction.getBy()));
                 break;
             case "set":
-                expressions.add(createExpression(prdAction.getEntity(), prdAction.getProperty(), prdAction.getValue()));
+                expressions.add(createExpression(world, prdAction.getEntity(), prdAction.getProperty(), prdAction.getValue()));
                 break;
             case "calculation":
-                return createExpressionArray(prdAction);
+                return createExpressionArray(world, prdAction);
             default:
                 throw new RuntimeException("Expression type " + prdAction.getType() + " not found");
         }
         return expressions.toArray(new Expression[0]);
     }
 
-    public static Expression[] createExpressionArray(PRDAction prdAction) {
+    public static Expression[] createExpressionArray(World world, PRDAction prdAction) {
         Expression[] expressions = new Expression[2];
         if (prdAction.getPRDMultiply() != null) {
-            expressions[0] = createExpression(prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDMultiply().getArg1());
-            expressions[1] = createExpression(prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDMultiply().getArg2());
+            expressions[0] = createExpression(world, prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDMultiply().getArg1());
+            expressions[1] = createExpression(world, prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDMultiply().getArg2());
         } else if (prdAction.getPRDDivide() != null) {
-            expressions[0] = createExpression(prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDDivide().getArg1());
-            expressions[1] = createExpression(prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDDivide().getArg2());
+            expressions[0] = createExpression(world, prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDDivide().getArg1());
+            expressions[1] = createExpression(world, prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDDivide().getArg2());
         } else {
             throw new RuntimeException("Calculation type " + prdAction.getType() + " not found");
         }
         return expressions;
     }
 
-    public static Expression createExpression(String entityName, String PropertyName, String expression) {
-        PropertyType type = getTypeByPropertyName(PropertyName, entityName);
+    public static Expression createExpression(World world, String entityName, String PropertyName, String expression) {
+        PropertyType type = getTypeByPropertyName(world, PropertyName, entityName);
         try {
-            return createfunctionExpression(expression);
+            return createfunctionExpression(world, expression);
         } catch (RuntimeException e) {
             try {
-                return createPropertyExpression(entityName, expression);
+                return createPropertyExpression(world, entityName, expression);
             } catch (RuntimeException e1) {
                 try {
-                    return createValueExpression(entityName, expression, type);
+                    return createValueExpression(world, entityName, expression, type);
                 } catch (RuntimeException e2) {
                     throw new RuntimeException("Expression " + expression + " is invalid");
                 }
@@ -72,14 +72,14 @@ public class ExpressionFactory {
         }
     }
 
-    public static Expression createfunctionExpression(String expression) {
+    public static Expression createfunctionExpression(World world, String expression) {
         String functionName = getFunctionName(expression);
         Object[] arguments = getArguments(expression);
-        return new FunctionExpression(functionName, arguments);
+        return new FunctionExpression(world, functionName, arguments);
     }
 
-    public static Expression createPropertyExpression(String entityName, String propertyName) {
-        EntityDefinition entity = World.getEntityDefinitionByName(entityName);
+    public static Expression createPropertyExpression(World world, String entityName, String propertyName) {
+        EntityDefinition entity = world.getEntityDefinitionByName(entityName);
         if (entity == null) {
             throw new RuntimeException("Entity " + entityName + " not found");
         }
@@ -89,8 +89,8 @@ public class ExpressionFactory {
         return new PropertyExpression(entity, propertyName);
     }
 
-    public static Expression createValueExpression(String entityName, Object value, PropertyType type) {
-        EntityDefinition entity = World.getEntityDefinitionByName(entityName);
+    public static Expression createValueExpression(World world, String entityName, Object value, PropertyType type) {
+        EntityDefinition entity = world.getEntityDefinitionByName(entityName);
         if (entity == null) {
             throw new RuntimeException("Entity " + entityName + " not found");
         }

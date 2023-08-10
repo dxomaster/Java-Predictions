@@ -1,6 +1,7 @@
 package engine.rule.action.expression;
 
 import engine.entity.Entity;
+import engine.world.World;
 import engine.world.utils.PropertyType;
 
 public class ValueExpression implements Expression {
@@ -8,7 +9,7 @@ public class ValueExpression implements Expression {
     private final Object value;
 
     @Override
-    public Object evaluate(Entity entity) {
+    public Object evaluate(World world, Entity entity) {
         return value;
     }
 

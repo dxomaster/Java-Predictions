@@ -2,6 +2,7 @@ package engine.rule.action.expression;
 
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
+import engine.world.World;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
 
@@ -9,7 +10,7 @@ public class PropertyExpression implements Expression {
     private final Property property;
 
     @Override
-    public Object evaluate(Entity entity) {
+    public Object evaluate(World world, Entity entity) {
 
         return entity.getPropertyByName(property.getName()).getValue();
     }

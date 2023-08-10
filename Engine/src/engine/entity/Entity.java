@@ -11,6 +11,8 @@ public class Entity {// todo: population
     private final String name;
     private final Map<String, Property> entityProperties;
 
+    boolean toKill = false;
+
     public Entity(String name, Map<String, Property> entityProperties) {
         this.name = name;
         this.entityProperties = entityProperties;
@@ -76,7 +78,11 @@ public class Entity {// todo: population
     }
 
     public void kill() {
-        World.RemoveEntity(this);
+        toKill = true;
+    }
+
+    public boolean getToKill() {
+        return toKill;
     }
 
     public void divideProperty(String propertyNameInString, Object evaluate, Object evaluate1) {

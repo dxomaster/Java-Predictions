@@ -5,6 +5,7 @@ import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.rule.action.Actionable;
 import engine.rule.utils.Activation;
+import engine.world.World;
 
 import java.util.List;
 
@@ -28,11 +29,11 @@ public class Rule {
                 '}';
     }
 
-    public void applyRule(Entity entity, Integer ticks) throws WarnException, ErrorException {
+    public void applyRule(World world, Entity entity, Integer ticks) throws WarnException, ErrorException {
         if (activation.isActivated(ticks)) {
             for (Actionable action : actions) {
                 if (action.getEntities().contains(entity.getName()))
-                    action.performAction(entity);
+                    action.performAction(world, entity);
             }
         }
 

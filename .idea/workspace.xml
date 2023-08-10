@@ -8,55 +8,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="fix simulation run">
+      <change afterPath="$PROJECT_DIR$/DTO/src/DTO/EnvDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/Exception/ERROR/ErrorException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/Exception/ERROR/ErrorException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/Exception/WARN/WarnException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/Exception/WARN/WarnException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActionableFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActionableFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActivationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActivationFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ConditionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ConditionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ExpressionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ExpressionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/RangeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/RangeFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/RuleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/RuleFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/WorldFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/WorldFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/ObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/ObjectFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDActivation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDActivation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDBySecond.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDBySecond.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDByTicks.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDByTicks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDDivide.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDDivide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDElse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDElse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEntities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEnvProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEnvProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEvironment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEvironment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDMultiply.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDMultiply.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRange.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRange.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRules.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRules.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDTermination.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDTermination.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDThen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDThen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDValue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/WorldFactory.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/ActionNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/ActionNames.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/Actionable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/Actionable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/CalculationOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/CalculationOperator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/ConditionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/ConditionOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/LogicalOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/LogicalOperator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/MultipleCondition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Satisfiable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Satisfiable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/SimpleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/SimpleCondition.java" afterDir="false" />
@@ -64,12 +31,7 @@
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/FunctionExpression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/PropertyExpression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/ValueExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/functionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/functionEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/utils/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/utils/Activation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/PropertyType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/PropertyType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +50,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="change_property_list_to_map" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -118,6 +80,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "onboarding.tips.debug.path": "C:/Users/97250/intellijU_projects/Java-Predictions/DTO/src/Main.java",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -130,6 +93,11 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="engine.factory" />
       <recent name="engine.world.utils" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\97250\intellijU_projects\Java-Predictions\DTO\src\DTO" />
+      <recent name="C:\Users\97250\intellijU_projects\Java-Predictions\DTO" />
+      <recent name="C:\Users\97250\intellijU_projects\Java-Predictions" />
     </key>
   </component>
   <component name="RunManager">
@@ -298,13 +266,18 @@
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java</url>
-          <line>28</line>
+          <line>29</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/factory/ExpressionFactory.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="38" />
+          <url>file://$PROJECT_DIR$/Engine/src/engine/world/World.java</url>
+          <line>152</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DTO/src/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
