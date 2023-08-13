@@ -7,6 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Engine" />
+    <orderEntry type="module" module-name="DataTransferObjects" />
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="e9bb274f-342c-4660-bb2e-c40e4eb777e7" />

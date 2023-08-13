@@ -9,16 +9,16 @@ import engine.world.utils.PropertyType;
 public class PropertyExpression implements Expression {
     private final Property property;
 
-    @Override
-    public Object evaluate(World world, Entity entity) {
-
-        return entity.getPropertyByName(property.getName()).getValue();
-    }
-
     public PropertyExpression(EntityDefinition entityDefinition, String propertyName) {
         this.property = entityDefinition.getPropertyByName(propertyName);
 
 
+    }
+
+    @Override
+    public Object evaluate(World world, Entity entity) {
+
+        return entity.getPropertyByName(property.getName()).getValue();
     }
 
     public PropertyType getType() {

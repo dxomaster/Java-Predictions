@@ -19,26 +19,48 @@ public class SimpleCondition implements Satisfiable {
     private final ConditionOperator operator;
     private final Expression expression;
 
+    public SimpleCondition(EntityDefinition entityDefinition, Expression expression, String property, ConditionOperator operator) {
+        this.expression = expression;
+        this.property = property;
+        this.entityDefinition = entityDefinition;
+        this.operator = operator;
+        if (this.entityDefinition.getPropertyByName(property) == null) {
+            throw new IllegalArgumentException("Property " + property + " does not exist in " + entityDefinition);
+        }
+
+        if (operator == ConditionOperator.LESS_THAN || ConditionOperator.GREATER_THAN == operator) {
+            PropertyType entityType = this.entityDefinition.getPropertyByName(property).getType();
+            if (entityType != PropertyType.FLOAT && entityType != PropertyType.DECIMAL) {
+                throw new IllegalArgumentException("Property " + property + " is not a number");
+            }
+        }
+
+    }
+
     @Override
     public boolean isSatisfied(World world, Entity entity) throws ErrorException {
-        Object comparisonValue = expression.evaluate(world, entity);
-        Object entityValue = entity.getPropertyByName(property).getValue();
-        PropertyType type;
-        if (expression instanceof ValueExpression) {
-            type = ((ValueExpression) expression).getType();
-        } else if (expression instanceof PropertyExpression) {
-            type = ((PropertyExpression) expression).getType();
-        } else {
-            type = ((FunctionExpression) expression).getType();
-        }
-        if (type == PropertyType.FLOAT) {
-            return compareFloat((Float) entityValue, (Float) comparisonValue);
-        } else if (type == PropertyType.DECIMAL) {
-            return compareInteger((Integer) entityValue, (Integer) comparisonValue);
-        } else if (type == PropertyType.BOOLEAN) {
-            return compareBoolean((Boolean) entityValue, (Boolean) comparisonValue);
-        } else {
-            return compareStrings((String) entityValue, (String) comparisonValue);
+        try {
+            Object comparisonValue = expression.evaluate(world, entity);
+            Object entityValue = entity.getPropertyByName(property).getValue();
+            PropertyType type;
+            if (expression instanceof ValueExpression) {
+                type = ((ValueExpression) expression).getType();
+            } else if (expression instanceof PropertyExpression) {
+                type = ((PropertyExpression) expression).getType();
+            } else {
+                type = ((FunctionExpression) expression).getType();
+            }
+            if (type == PropertyType.FLOAT) {
+                return compareFloat((Float) entityValue, (Float) comparisonValue);
+            } else if (type == PropertyType.DECIMAL) {
+                return compareInteger((Integer) entityValue, (Integer) comparisonValue);
+            } else if (type == PropertyType.BOOLEAN) {
+                return compareBoolean((Boolean) entityValue, (Boolean) comparisonValue);
+            } else {
+                return compareStrings((String) entityValue, (String) comparisonValue);
+            }
+        } catch (ClassCastException e) {
+            throw new ErrorException("Cannot compare " + expression + " to " + entity.getPropertyByName(property).getValue());
         }
 
 
@@ -97,24 +119,6 @@ public class SimpleCondition implements Satisfiable {
         List<String> entities = new ArrayList<>();
         entities.add(entityDefinition.getName());
         return entities;
-    }
-
-
-    public SimpleCondition(EntityDefinition entityDefinition, Expression expression, String property, ConditionOperator operator) {
-        this.expression = expression;
-        this.property = property;
-        this.entityDefinition = entityDefinition;
-        this.operator = operator;
-        if (this.entityDefinition.getPropertyByName(property) == null) {
-            throw new IllegalArgumentException("Property " + property + " does not exist in " + entityDefinition);
-        }
-        if (operator == ConditionOperator.LESS_THAN || ConditionOperator.GREATER_THAN == operator) {
-            PropertyType entityType = this.entityDefinition.getPropertyByName(property).getType();
-            if (entityType != PropertyType.FLOAT && entityType != PropertyType.DECIMAL) {
-                throw new IllegalArgumentException("Property " + property + " is not a number");
-            }
-        }
-
     }
 
     public String getEntityName() {

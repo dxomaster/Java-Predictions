@@ -1,5 +1,7 @@
 package engine.world;
 
+import DTO.SimulationArtifactDTO;
+import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
@@ -19,15 +21,16 @@ import java.util.List;
 import java.util.Map;
 
 public class World {
-    private List<Property> environmentVariables;
+    private List<Property> environmentVariables;//todo change this to map
     private Map<String, List<Entity>> entityList;
-    private List<EntityDefinition> entityDefinitionList;
-    private List<Rule> rules;
+    private List<EntityDefinition> entityDefinitionList;//todo change this to map
+    private final List<Rule> rules;
     private Integer terminationByTicks;
     private Integer terminationBySeconds;
+    private String UUID;
     private String formattedDateTime;
 
-    public World(PRDWorld prdWorld) {
+    public World(PRDWorld prdWorld) throws ErrorException {
         try {
             List<EntityDefinition> entityDefinitionList = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());
             this.setEntityDefinitionList(entityDefinitionList);
@@ -54,12 +57,8 @@ public class World {
                 throw new IllegalArgumentException("Termination by seconds must be greater than 0");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new ErrorException("Error in creating world: " + e.getMessage());
         }
-    }
-
-    public void setEnvironmentVariables(List<Property> environmentVariables) {
-        this.environmentVariables = environmentVariables;
     }
 
     public void setEntityDefinitionList(List<EntityDefinition> entityDefinitionList) {
@@ -98,11 +97,11 @@ public class World {
     }
 
     public void RemoveEntities() {
-        for (List<Entity> currentList: entityList.values()) {
-            List<Entity> mockList = new ArrayList<Entity>(currentList);
-            for (Entity enitity: mockList) {
-                if (enitity.getToKill())
-                    currentList.remove(enitity);
+        for (List<Entity> currentList : entityList.values()) {
+            List<Entity> mockList = new ArrayList<>(currentList);
+            for (Entity entity : mockList) {
+                if (entity.getToKill())
+                    currentList.remove(entity);
             }
         }
     }
@@ -126,7 +125,7 @@ public class World {
         return null;
     }
 
-    public void run() {
+    public SimulationArtifactDTO run() throws ErrorException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         this.formattedDateTime = currentDateTime.format(formatter);
@@ -134,30 +133,56 @@ public class World {
         long startTime = System.currentTimeMillis();
         Integer ticks = 0;
         createEntities();
-        while (!checkTerminationConditions(ticks, startTime)) {
+        String finishedBy = checkTerminationConditions(ticks, startTime);
+        while (finishedBy.equals("")) {
             for (List<Entity> entities : entityList.values()) {
                 for (Entity entity : entities) {
                     for (Rule rule : rules) {
                         try {
                             rule.applyRule(this, entity, ticks);
                         } catch (WarnException ignored) {
-
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
+                            //these exceptions are OK, continue to next rule
                         }
+
                     }
                 }
             }
+            RemoveEntities();
             ticks++;
+            finishedBy = checkTerminationConditions(ticks, startTime);
         }
-        System.out.println("done");
-
+        this.UUID = java.util.UUID.randomUUID().toString();
+        return new SimulationArtifactDTO(this.UUID, finishedBy);
     }
 
+    public String getUUID() {
+        return UUID;
+    }
 
-    private boolean checkTerminationConditions(Integer ticks, long startTime) {
+    private String checkTerminationConditions(Integer ticks, long startTime) {
+        String finishedBy = "";
         if (terminationByTicks != null && ticks >= terminationByTicks)
-            return true;
-        return terminationBySeconds != null && (System.currentTimeMillis() - startTime) / 1000 >= terminationBySeconds;
+            finishedBy += "ticks\n";
+        if (terminationBySeconds != null && (System.currentTimeMillis() - startTime) / 1000 >= terminationBySeconds)
+            finishedBy += " seconds\n";
+        return finishedBy;
+    }
+
+    public List<Property> getEnvironmentVariables() {
+        return environmentVariables;
+    }
+
+    public void setEnvironmentVariables(List<Property> environmentVariables) {
+        this.environmentVariables = environmentVariables;
+    }
+
+    public void setEnvironmentVariable(String name, Object value) throws WarnException {
+        for (Property property : environmentVariables) {
+            if (property.getName().equals(name)) {
+                property.setValue(value);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Environment variable " + name + " does not exist");
     }
 }

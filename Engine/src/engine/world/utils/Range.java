@@ -6,13 +6,6 @@ public class Range {
     private final Object to;
 
 
-    public boolean isInRange(Object value) {
-        if (type == PropertyType.DECIMAL)
-            return (Integer) value >= (Integer) from && (Integer) value <= (Integer) to;
-        else
-            return (Float) value >= (Float) from && (Float) value <= (Float) to;
-    }
-
     public Range(Object from, Object to, PropertyType type) {
         if (type == PropertyType.DECIMAL) {
             if ((Integer) from > (Integer) to) {
@@ -26,6 +19,13 @@ public class Range {
         this.from = from;
         this.to = to;
         this.type = type;
+    }
+
+    public boolean isInRange(Object value) {
+        if (type == PropertyType.DECIMAL)
+            return (Integer) value >= (Integer) from && (Integer) value <= (Integer) to;
+        else
+            return (Float) value >= (Float) from && (Float) value <= (Float) to;
     }
 
     public Object getFrom() {

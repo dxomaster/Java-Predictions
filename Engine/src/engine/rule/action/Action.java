@@ -12,11 +12,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Action implements Actionable {
-    protected CalculationOperator operator;
-    protected EntityDefinition entityDefinition;
-    protected ActionNames action;
-    protected Expression[] expressions;
-    protected String propertyNameInString;
+    private final EntityDefinition entityDefinition;
+    private final ActionNames action;
+    private final Expression[] expressions;
+    private final String propertyNameInString;
+    private CalculationOperator operator;
 
     public Action(EntityDefinition entityDefinition, String propertyNameInString, ActionNames action, Expression... expressions) {
         this.entityDefinition = entityDefinition;

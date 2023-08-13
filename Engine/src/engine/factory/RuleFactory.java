@@ -16,7 +16,7 @@ public class RuleFactory {
         return new Rule(prdRule.getName(), actions, ActivationFactory.createActivation(prdRule.getPRDActivation()));
     }
 
-    private static List<Actionable> createActions(World world,  PRDActions prdActions) {
+    private static List<Actionable> createActions(World world, PRDActions prdActions) {
         List<Actionable> actions = new ArrayList<>();
         for (PRDAction prdAction : prdActions.getPRDAction()) {
             actions.add(ActionableFactory.createAction(world, prdAction));

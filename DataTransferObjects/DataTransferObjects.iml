@@ -7,10 +7,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="DTO" />
-    <orderEntry type="module" module-name="DataTransferObjects" />
-  </component>
-  <component name="SonarLintModuleSettings">
-    <option name="uniqueId" value="ebf4ce27-f87f-4725-8739-dee9d70d3438" />
   </component>
 </module>

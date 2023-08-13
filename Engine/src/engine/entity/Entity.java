@@ -1,13 +1,13 @@
 package engine.entity;
 
+import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
-import engine.world.World;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
 
 import java.util.Map;
 
-public class Entity {// todo: population
+public class Entity {
     private final String name;
     private final Map<String, Property> entityProperties;
 
@@ -85,11 +85,15 @@ public class Entity {// todo: population
         return toKill;
     }
 
-    public void divideProperty(String propertyNameInString, Object evaluate, Object evaluate1) {
+    public void divideProperty(String propertyNameInString, Object evaluate, Object evaluate1) throws ErrorException {
         try {
             Property property = getPropertyByName(propertyNameInString);
-            if (property.getType() == PropertyType.DECIMAL)
+            if (property.getType() == PropertyType.DECIMAL) {
+                if ((Integer) evaluate1 == 0)
+                    throw new ErrorException("Division by zero while running");
                 property.setValue((Integer) evaluate / (Integer) evaluate1);
+            } else if ((Float) evaluate1 == 0)
+                throw new ErrorException("Division by zero while running");
             else
                 property.setValue((Float) evaluate / (Float) evaluate1);
         } catch (WarnException ignored) {

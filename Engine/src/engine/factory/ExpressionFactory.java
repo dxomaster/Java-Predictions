@@ -66,7 +66,7 @@ public class ExpressionFactory {
                 try {
                     return createValueExpression(world, entityName, expression, type);
                 } catch (RuntimeException e2) {
-                    throw new RuntimeException("Expression " + expression + " is invalid");
+                    throw new RuntimeException("Expression " + expression + " is not a valid property, function or value expression");
                 }
             }
         }

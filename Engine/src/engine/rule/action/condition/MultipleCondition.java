@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleCondition implements Satisfiable, Actionable {
-    List<Actionable> actionsToPreformIfConditionIsSatisfied;
-    List<Actionable> actionsToPreformIfConditionIsNotSatisfied;
+    private final List<Actionable> actionsToPreformIfConditionIsSatisfied;
+    private final List<Actionable> actionsToPreformIfConditionIsNotSatisfied;
     private final LogicalOperator operator;
-    List<Satisfiable> conditions;
+    private final List<Satisfiable> conditions;
 
     public MultipleCondition(LogicalOperator operator, List<Satisfiable> conditions, List<Actionable> actionsToPreformIfConditionIsSatisfied, List<Actionable> actionsToPreformIfConditionIsNotSatisfied) {
         this.operator = operator;
@@ -23,7 +23,7 @@ public class MultipleCondition implements Satisfiable, Actionable {
     }
 
     @Override
-    public boolean isSatisfied(World world,Entity entity) throws ErrorException {
+    public boolean isSatisfied(World world, Entity entity) throws ErrorException {
         switch (operator) {
             case AND:
                 for (Satisfiable condition : conditions) {

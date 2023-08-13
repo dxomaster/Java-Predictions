@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class FunctionExpression implements Expression {
-    functionEnum function;
+    private final functionEnum function;
     private final Object[] arguments;
 
     private final World world;

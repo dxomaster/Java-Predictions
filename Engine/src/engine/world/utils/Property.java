@@ -61,21 +61,6 @@ public class Property {
         this.isRandomlyGenerated = property.isRandomlyGenerated;
         this.range = property.range;
         this.value = property.value;
-//        switch(property.type)
-//        {
-//            case DECIMAL:
-//                this.value = new Integer((Integer) property.value);
-//                break;
-//            case FLOAT:
-//                this.value = new Float((Float) property.value) ;
-//                break;
-//            case BOOLEAN:
-//                this.value = new Boolean((Boolean) property.value) ;
-//                break;
-//            case STRING:
-//                this.value = new String((String) property.value);
-//                break;
-//        }
 
     }
 
@@ -93,6 +78,10 @@ public class Property {
                 '}';
     }
 
+    public Object getValue() {
+        return value;
+    }
+
     public void setValue(Object value) throws WarnException {
         if (value.getClass() != this.type.propertyClass) {
             throw new IllegalArgumentException("Error with Property " + this.name + " Value must be of type " + this.type.propertyClass.getSimpleName());
@@ -104,40 +93,7 @@ public class Property {
 
 
         }
-//        switch(this.type)
-//        {
-//            case DECIMAL:
-//                this.value = new Integer((Integer) value);
-//                break;
-//            case FLOAT:
-//                this.value = new Float((Float) value) ;
-//                break;
-//            case BOOLEAN:
-//                this.value = new Boolean((Boolean) value) ;
-//                break;
-//            case STRING:
-//                this.value = new String((String) value);
-//                break;
-//        }
         this.value = value;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    private void setRange(Range range) {
-        if (range == null) {
-            return;
-        } else {
-            if (this.type == PropertyType.STRING) {
-                throw new IllegalArgumentException("String properties cannot have a range");
-            }
-            if (this.type == PropertyType.BOOLEAN) {
-                throw new IllegalArgumentException("Boolean properties cannot have a range");
-            }
-        }
-        this.range = range;
     }
 
     private String generateRandomString() {
@@ -159,5 +115,19 @@ public class Property {
 
     public Range getRange() {
         return range;
+    }
+
+    private void setRange(Range range) {
+        if (range == null) {
+            return;
+        } else {
+            if (this.type == PropertyType.STRING) {
+                throw new IllegalArgumentException("String properties cannot have a range");
+            }
+            if (this.type == PropertyType.BOOLEAN) {
+                throw new IllegalArgumentException("Boolean properties cannot have a range");
+            }
+        }
+        this.range = range;
     }
 }

@@ -10,19 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Condition implements Satisfiable, Actionable {
-    List<Actionable> actionsToPreformIfConditionIsSatisfied;
-    List<Actionable> actionsToPreformIfConditionIsNotSatisfied;
-    SimpleCondition simpleCondition;
-
-    @Override
-    public boolean isSatisfied(World world, Entity entity) throws ErrorException {
-        return simpleCondition.isSatisfied(world, entity);
-    }
+    private final List<Actionable> actionsToPreformIfConditionIsSatisfied;
+    private final List<Actionable> actionsToPreformIfConditionIsNotSatisfied;
+    private final SimpleCondition simpleCondition;
 
     public Condition(SimpleCondition simpleCondition, List<Actionable> actionsToPreformIfConditionIsSatisfied, List<Actionable> actionsToPreformIfConditionIsNotSatisfied) {
         this.actionsToPreformIfConditionIsSatisfied = actionsToPreformIfConditionIsSatisfied;
         this.actionsToPreformIfConditionIsNotSatisfied = actionsToPreformIfConditionIsNotSatisfied;
         this.simpleCondition = simpleCondition;
+    }
+
+    @Override
+    public boolean isSatisfied(World world, Entity entity) throws ErrorException {
+        return simpleCondition.isSatisfied(world, entity);
     }
 
     @Override

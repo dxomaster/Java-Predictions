@@ -10,9 +10,9 @@ import engine.world.World;
 import java.util.List;
 
 public class Rule {
-    String name;
-    List<Actionable> actions;
-    Activation activation;
+    private final String name;
+    private final List<Actionable> actions;
+    private final Activation activation;
 
     public Rule(String name, List<Actionable> actions, Activation activation) {
         this.name = name;
@@ -33,11 +33,19 @@ public class Rule {
         if (activation.isActivated(ticks)) {
             for (Actionable action : actions) {
                 if (action.getEntities().contains(entity.getName()))
-                    action.performAction(world, entity);
+                    try {
+                        action.performAction(world, entity);
+                    } catch (WarnException ignored) {
+                        //these exceptions are OK, continue to next action
+                    } catch (ErrorException e) {
+                        throw new ErrorException("Error in rule: " + name + " in action: " + action.getName() + ": " + e.getMessage());
+                    }
+
             }
         }
 
     }
+
 
     public String getName() {
         return name;

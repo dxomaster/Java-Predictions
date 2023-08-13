@@ -3,8 +3,8 @@ package engine.rule.utils;
 import java.util.Random;
 
 public class Activation {
-    Integer ticks;
-    Double probability;
+    private Integer ticks;
+    private Double probability;
 
     public Activation() {
         this.ticks = 1;
