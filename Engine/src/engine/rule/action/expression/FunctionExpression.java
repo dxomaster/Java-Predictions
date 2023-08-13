@@ -1,6 +1,5 @@
 package engine.rule.action.expression;
 
-import Exception.ERROR.ErrorException;
 import engine.entity.Entity;
 import engine.world.World;
 import engine.world.utils.Property;
@@ -43,7 +42,7 @@ public class FunctionExpression implements Expression {
     }
 
     @Override
-    public Object evaluate(World world, Entity entity) throws {
+    public Object evaluate(World world, Entity entity) {
         switch (function) {
             case ENVIRONMENT:
                 Property envVariable = world.getEnvironmentVariableByName((String) arguments[0]);
