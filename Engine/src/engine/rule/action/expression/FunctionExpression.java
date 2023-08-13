@@ -43,7 +43,7 @@ public class FunctionExpression implements Expression {
     }
 
     @Override
-    public Object evaluate(World world, Entity entity) throws ErrorException {
+    public Object evaluate(World world, Entity entity) throws {
         switch (function) {
             case ENVIRONMENT:
                 Property envVariable = world.getEnvironmentVariableByName((String) arguments[0]);
