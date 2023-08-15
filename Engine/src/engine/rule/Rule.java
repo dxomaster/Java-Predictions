@@ -5,13 +5,14 @@ import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.rule.action.Actionable;
 import engine.rule.utils.Activation;
+import engine.world.World;
 
 import java.util.List;
 
-public class Rule {
-    String name;
-    List<Actionable> actions;
-    Activation activation;
+public class Rule  implements java.io.Serializable{
+    private final String name;
+    private final List<Actionable> actions;
+    private final Activation activation;
 
     public Rule(String name, List<Actionable> actions, Activation activation) {
         this.name = name;
@@ -21,29 +22,28 @@ public class Rule {
 
     @Override
     public String toString() {
-        return "Rule{" +
-                "name='" + name + '\'' +
-                ", actions=" + actions +
-                ", activation=" + activation +
-                '}';
+        return "Rule: " + name +
+                ", Amount of actions: " + actions.size() +
+                ", Activation: " + activation;
     }
 
-    public void applyRule(Entity entity, Integer ticks) throws WarnException, ErrorException {
+    public void applyRule(World world, Entity entity, Integer ticks) throws ErrorException {
         if (activation.isActivated(ticks)) {
             for (Actionable action : actions) {
                 if (action.getEntities().contains(entity.getName()))
-                    action.performAction(entity);
+                    try {
+                        action.performAction(world, entity);
+                    } catch (WarnException ignored) {
+                        //these exceptions are OK, continue to next action
+                    } catch (ErrorException e) {
+                        throw new ErrorException("Error in rule: " + name + " in action: " + action.getName() + ": " + e.getMessage());
+                    }
+
             }
         }
 
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public boolean checkActivation(Integer ticks) {
-        return activation.isActivated(ticks);
-    }
 }
 

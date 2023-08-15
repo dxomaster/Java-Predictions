@@ -1,9 +1,9 @@
 package engine.rule.action.expression;
 
-public enum functionEnum {
-    ENVIRONMENT("enviroment"),
+public enum functionEnum implements java.io.Serializable {
+    ENVIRONMENT("environment"),
     RANDOM("random");
-    public String functionInString;
+    public final String functionInString;
 
     functionEnum(String functionInString) {
         this.functionInString = functionInString;

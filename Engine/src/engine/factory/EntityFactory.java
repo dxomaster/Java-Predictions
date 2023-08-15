@@ -1,11 +1,13 @@
 package engine.factory;
 
+import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDEntity;
 import engine.world.utils.Property;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,16 +17,16 @@ public class EntityFactory {
         return new Entity(entityDefinition.getName(), entityProperties);
     }
 
-    public static EntityDefinition createEntityDefinition(PRDEntity prdEntity) {
+    public static EntityDefinition createEntityDefinition(PRDEntity prdEntity) throws WarnException {
 
         Map<String, Property> entityProperties = PropertyFactory.createPropertyList(prdEntity);
         return new EntityDefinition(prdEntity.getName(), entityProperties, prdEntity.getPRDPopulation());
     }
 
-    public static List<EntityDefinition> createEntityDefinitionList(List<PRDEntity> prdEntity) {
-        List<EntityDefinition> entityDefinitions = new ArrayList<>();
+    public static Map<String,EntityDefinition> createEntityDefinitionList(List<PRDEntity> prdEntity) throws WarnException {
+        Map<String,EntityDefinition> entityDefinitions = new HashMap<>();
         for (PRDEntity entity : prdEntity) {
-            entityDefinitions.add(createEntityDefinition(entity));
+            entityDefinitions.put(entity.getName(),createEntityDefinition(entity));
         }
         return entityDefinitions;
 

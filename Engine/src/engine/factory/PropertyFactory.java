@@ -1,5 +1,6 @@
 package engine.factory;
 
+import Exception.WARN.WarnException;
 import engine.entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDEntity;
 import engine.jaxb.schema.generated.PRDEnvProperty;
@@ -11,7 +12,7 @@ import engine.world.utils.Range;
 import java.util.*;
 
 public class PropertyFactory {
-    public static Property createEntityProperty(PRDProperty prdProperty) {
+    public static Property createEntityProperty(PRDProperty prdProperty) throws WarnException {
         if (prdProperty.getPRDRange() != null) {
             return createEntityPropertyWithRange(prdProperty);
         } else {
@@ -20,7 +21,7 @@ public class PropertyFactory {
 
     }
 
-    private static Property createEntityPropertyWithRange(PRDProperty prdProperty) {
+    private static Property createEntityPropertyWithRange(PRDProperty prdProperty) throws WarnException {
         Range range = RangeFactory.createRange(prdProperty.getPRDRange(), PropertyType.valueOf(prdProperty.getType().toUpperCase()));
         String type = prdProperty.getType();
         boolean randomInit = prdProperty.getPRDValue().isRandomInitialize();
@@ -47,7 +48,7 @@ public class PropertyFactory {
 
     }
 
-    private static Property createEntityPropertyWithoutRange(PRDProperty prdProperty) {
+    private static Property createEntityPropertyWithoutRange(PRDProperty prdProperty) throws WarnException {
         String type = prdProperty.getType();
         boolean randomInit = prdProperty.getPRDValue().isRandomInitialize();
         if (randomInit) {
@@ -73,10 +74,10 @@ public class PropertyFactory {
 
     }
 
-    public static Map<String, Property> createPropertyList(PRDEntity prdEntity) {
+    public static Map<String, Property> createPropertyList(PRDEntity prdEntity) throws WarnException {
         String duplicate = isEntityPropertyNameUnique(prdEntity.getPRDProperties().getPRDProperty());
         if (duplicate != null) {
-            throw new IllegalArgumentException("Problem with " + prdEntity.getName() + " Property name is not unique: " + duplicate);
+            throw new IllegalArgumentException(prdEntity.getName() + " Property name is not unique: " + duplicate);
         }
         List<PRDProperty> prdProperties = prdEntity.getPRDProperties().getPRDProperty();
         Map<String, Property> propertyList = new HashMap<>();
@@ -163,7 +164,6 @@ public class PropertyFactory {
             case "string":
                 return new Property(prdName, PropertyType.STRING, range);
             default:
-                System.out.println(prdName + range + type);
                 throw new IllegalArgumentException("Invalid property type: " + type);
         }
     }

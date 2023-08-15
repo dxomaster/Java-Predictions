@@ -1,20 +1,21 @@
 package engine.rule.action.expression;
 
 import engine.entity.Entity;
+import engine.world.World;
 import engine.world.utils.PropertyType;
 
-public class ValueExpression implements Expression {
+public class ValueExpression implements Expression, java.io.Serializable {
     private final PropertyType propertyType;
     private final Object value;
-
-    @Override
-    public Object evaluate(Entity entity) {
-        return value;
-    }
 
     public ValueExpression(Object value, PropertyType propertyType) {
         this.propertyType = propertyType;
         this.value = value;
+    }
+
+    @Override
+    public Object evaluate(World world, Entity entity) {
+        return value;
     }
 
     public PropertyType getType() {

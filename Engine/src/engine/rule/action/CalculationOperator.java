@@ -1,6 +1,6 @@
 package engine.rule.action;
 
-public enum CalculationOperator {
+public enum CalculationOperator implements java.io.Serializable {
     MULTIPLY,
     DIVIDE
 

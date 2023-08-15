@@ -1,15 +1,17 @@
 package engine.entity;
 
+import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
-import engine.world.World;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
 
 import java.util.Map;
 
-public class Entity {// todo: population
+public class Entity implements java.io.Serializable{
     private final String name;
     private final Map<String, Property> entityProperties;
+
+    boolean toKill = false;
 
     public Entity(String name, Map<String, Property> entityProperties) {
         this.name = name;
@@ -34,25 +36,36 @@ public class Entity {// todo: population
 
         Property property = getPropertyByName(propertyNameInString);
         Object currentValue = property.getValue();
+
         if (property.getType() == PropertyType.DECIMAL)
-            property.setValue((Integer) currentValue + (Integer) evaluate);
+            if((Integer) evaluate < 0)
+                throw new WarnException("Trying to decrease a decimal property");// todo : check and change to error if needed
+            else
+                property.setValue((Integer) currentValue + (Integer) evaluate);
         else
-            property.setValue((Float) currentValue + (Float) evaluate);
+            if((Float) evaluate < 0)
+                throw new WarnException("Trying to decrease a float property");// todo : check and change to error if needed
+            else
+                property.setValue((Float) currentValue + (Float) evaluate);
     }
 
 
-    public void decreaseProperty(String propertyNameInString, Object evaluate) {
-        try {
+    public void decreaseProperty(String propertyNameInString, Object evaluate) throws WarnException {
+
             Property property = getPropertyByName(propertyNameInString);
             Object currentValue = property.getValue();
             if (property.getType() == PropertyType.DECIMAL)
-                property.setValue((Integer) currentValue - (Integer) evaluate);
+                if((Integer) evaluate < 0)
+                    throw new WarnException("Trying to decrease a decimal property");// todo : check and change to error if needed
+                else
+                    property.setValue((Integer) currentValue - (Integer) evaluate);
             else
-                property.setValue((Float) currentValue - (Float) evaluate);
-        } catch (WarnException ignored) {
-
+                if((Float) evaluate < 0)
+                    throw new WarnException("Trying to decrease a float property");// todo : check and change to error if needed
+                else
+                    property.setValue((Float) currentValue - (Float) evaluate);
         }
-    }
+
 
     public void setProperty(String propertyNameInString, Object evaluate) {
         try {
@@ -76,18 +89,28 @@ public class Entity {// todo: population
     }
 
     public void kill() {
-        World.RemoveEntity(this);
+        toKill = true;
     }
 
-    public void divideProperty(String propertyNameInString, Object evaluate, Object evaluate1) {
-        try {
+    public boolean getToKill() {
+        return toKill;
+    }
+
+    public void divideProperty(String propertyNameInString, Object evaluate, Object evaluate1) throws ErrorException, WarnException {
+
             Property property = getPropertyByName(propertyNameInString);
-            if (property.getType() == PropertyType.DECIMAL)
+            if (property.getType() == PropertyType.DECIMAL) {
+                if ((Integer) evaluate1 == 0)
+                    throw new ErrorException("Division by zero while running");
                 property.setValue((Integer) evaluate / (Integer) evaluate1);
+            } else if ((Float) evaluate1 == 0)
+                throw new ErrorException("Division by zero while running");
             else
                 property.setValue((Float) evaluate / (Float) evaluate1);
-        } catch (WarnException ignored) {
 
-        }
+    }
+
+    public Property[] getProperties() {
+        return entityProperties.values().toArray(new Property[0]);
     }
 }

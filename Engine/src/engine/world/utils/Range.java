@@ -1,17 +1,10 @@
 package engine.world.utils;
 
-public class Range {
+public class Range  implements java.io.Serializable{
     private final PropertyType type;
     private final Object from;
     private final Object to;
 
-
-    public boolean isInRange(Object value) {
-        if (type == PropertyType.DECIMAL)
-            return (Integer) value >= (Integer) from && (Integer) value <= (Integer) to;
-        else
-            return (Float) value >= (Float) from && (Float) value <= (Float) to;
-    }
 
     public Range(Object from, Object to, PropertyType type) {
         if (type == PropertyType.DECIMAL) {
@@ -28,6 +21,13 @@ public class Range {
         this.type = type;
     }
 
+    public boolean isInRange(Object value) {
+        if (type == PropertyType.DECIMAL)
+            return (Integer) value >= (Integer) from && (Integer) value <= (Integer) to;
+        else
+            return (Float) value >= (Float) from && (Float) value <= (Float) to;
+    }
+
     public Object getFrom() {
         return from;
     }
@@ -38,9 +38,10 @@ public class Range {
 
     @Override
     public String toString() {
-        return "Range{" +
-                "from=" + from +
-                ", to=" + to +
-                '}';
+        if(from == null && to == null)
+            return "No range";
+
+        return "(" + from +
+                " - " + to+")";
     }
 }

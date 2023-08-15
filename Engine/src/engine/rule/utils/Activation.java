@@ -2,9 +2,9 @@ package engine.rule.utils;
 
 import java.util.Random;
 
-public class Activation {
-    Integer ticks;
-    Double probability;
+public class Activation implements java.io.Serializable{
+    private Integer ticks;
+    private Double probability;
 
     public Activation() {
         this.ticks = 1;
@@ -39,10 +39,8 @@ public class Activation {
 
     @Override
     public String toString() {
-        return "Activation{" +
-                "ticks=" + ticks +
-                ", probability=" + probability +
-                '}';
+        return "Ticks: " + ticks +
+                ", Probability: " + probability;
     }
 
     public boolean isActivated(Integer tick) {

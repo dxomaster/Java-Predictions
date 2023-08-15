@@ -5,23 +5,19 @@ import Exception.WARN.WarnException;
 
 import java.util.Random;
 
-public class Property {
+public class Property  implements java.io.Serializable{
     private boolean isRandomlyGenerated;
     private String name;
     private Range range;
     private PropertyType type;
     private Object value;
 
-    public Property(String name, PropertyType type, Range range, Object value) {
+    public Property(String name, PropertyType type, Range range, Object value) throws WarnException {
         this.type = type;
         this.name = name;
         this.isRandomlyGenerated = false;
         this.setRange(range);
-        try {
-            this.setValue(value);
-        } catch (WarnException ignored) {
-
-        }
+        this.setValue(value);
 
     }
 
@@ -61,21 +57,6 @@ public class Property {
         this.isRandomlyGenerated = property.isRandomlyGenerated;
         this.range = property.range;
         this.value = property.value;
-//        switch(property.type)
-//        {
-//            case DECIMAL:
-//                this.value = new Integer((Integer) property.value);
-//                break;
-//            case FLOAT:
-//                this.value = new Float((Float) property.value) ;
-//                break;
-//            case BOOLEAN:
-//                this.value = new Boolean((Boolean) property.value) ;
-//                break;
-//            case STRING:
-//                this.value = new String((String) property.value);
-//                break;
-//        }
 
     }
 
@@ -85,12 +66,14 @@ public class Property {
 
     @Override
     public String toString() {
-        return "Property{" +
-                ", name='" + name + '\'' +
-                ", type=" + type.propertyClass.getSimpleName() +
-                ", range=" + range +
-                "isRandomlyGenerated=" + isRandomlyGenerated +
-                '}';
+        return "Property Name: " + name +
+                ", Type: " + type.propertyClass.getSimpleName() +
+                ", Range: " + range +
+                ", Random initialization: " + isRandomlyGenerated;
+    }
+
+    public Object getValue() {
+        return value;
     }
 
     public void setValue(Object value) throws WarnException {
@@ -104,40 +87,7 @@ public class Property {
 
 
         }
-//        switch(this.type)
-//        {
-//            case DECIMAL:
-//                this.value = new Integer((Integer) value);
-//                break;
-//            case FLOAT:
-//                this.value = new Float((Float) value) ;
-//                break;
-//            case BOOLEAN:
-//                this.value = new Boolean((Boolean) value) ;
-//                break;
-//            case STRING:
-//                this.value = new String((String) value);
-//                break;
-//        }
         this.value = value;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    private void setRange(Range range) {
-        if (range == null) {
-            return;
-        } else {
-            if (this.type == PropertyType.STRING) {
-                throw new IllegalArgumentException("String properties cannot have a range");
-            }
-            if (this.type == PropertyType.BOOLEAN) {
-                throw new IllegalArgumentException("Boolean properties cannot have a range");
-            }
-        }
-        this.range = range;
     }
 
     private String generateRandomString() {
@@ -159,5 +109,19 @@ public class Property {
 
     public Range getRange() {
         return range;
+    }
+
+    private void setRange(Range range) {
+        if (range == null) {
+            return;
+        } else {
+            if (this.type == PropertyType.STRING) {
+                throw new IllegalArgumentException("String properties cannot have a range");
+            }
+            if (this.type == PropertyType.BOOLEAN) {
+                throw new IllegalArgumentException("Boolean properties cannot have a range");
+            }
+        }
+        this.range = range;
     }
 }

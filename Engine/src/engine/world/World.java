@@ -1,47 +1,67 @@
 package engine.world;
 
-import Exception.WARN.WarnException;
+import DTO.RunEndDTO;
+import Exception.ERROR.ErrorException;
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
+import engine.factory.EntityFactory;
+import engine.factory.PropertyFactory;
+import engine.factory.RuleFactory;
+import engine.jaxb.schema.generated.PRDBySecond;
+import engine.jaxb.schema.generated.PRDByTicks;
+import engine.jaxb.schema.generated.PRDWorld;
 import engine.rule.Rule;
 import engine.world.utils.Property;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class World {
-    private static List<Property> environmentVariables;
-    private static Map<String, List<Entity>> entityList;
-    private static List<EntityDefinition> entityDefinitionList;
+public class World  implements java.io.Serializable{
     private final List<Rule> rules;
-    private final Integer terminationByTicks;
-    private final Integer terminationBySeconds;
+    private List<Property> environmentVariables;//todo change this to map
+    private Map<String, List<Entity>> entityList;
+    private Map<String,EntityDefinition> entityDefinitionMap;
+    private Integer terminationByTicks;
+    private Integer terminationBySeconds;
+    private String UUID;
+    private String formattedDateTime;
 
-    public World(List<Property> environmentVariables, List<Rule> rules, Integer terminationByTicks, Integer terminationBySeconds, List<EntityDefinition> entityDefinitionList) {
-        if (terminationByTicks == null && terminationBySeconds == null)
-            throw new IllegalArgumentException("At least one termination condition must be specified");
-        World.entityDefinitionList = entityDefinitionList;
-        World.environmentVariables = environmentVariables;
-        this.rules = rules;
-        if (terminationByTicks != null && terminationByTicks < 1)
-            throw new IllegalArgumentException("Termination by ticks must be greater than 0");
-        if (terminationBySeconds != null && terminationBySeconds < 1)
-            throw new IllegalArgumentException("Termination by seconds must be greater than 0");
+    public World(PRDWorld prdWorld) throws ErrorException {
+        try {
+            Map<String,EntityDefinition> entityDefinitionList = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());
+            this.setEntityDefinitionMap(entityDefinitionList);
+            List<Property> environmentVariables = PropertyFactory.createPropertyList(prdWorld.getPRDEvironment().getPRDEnvProperty());
+            this.setEnvironmentVariables(environmentVariables);
+            List<Rule> rules = RuleFactory.createRuleList(this, prdWorld.getPRDRules().getPRDRule());
+            List<Object> termination = prdWorld.getPRDTermination().getPRDByTicksOrPRDBySecond();
 
-        this.terminationByTicks = terminationByTicks;
-        this.terminationBySeconds = terminationBySeconds;
+            for (Object object : termination) {
+                if (object instanceof PRDByTicks) {
+                    terminationByTicks = ((PRDByTicks) object).getCount();
+                } else if (object instanceof PRDBySecond) {
+                    terminationBySeconds = ((PRDBySecond) object).getCount();
+                }
+            }
+            if (terminationByTicks == null && terminationBySeconds == null)
+                throw new IllegalArgumentException("At least one termination condition must be specified");
+            this.entityDefinitionMap = entityDefinitionList;
+            this.environmentVariables = environmentVariables;
+            this.rules = rules;
+            if (terminationByTicks != null && terminationByTicks < 1)
+                throw new IllegalArgumentException("Termination by ticks must be greater than 0");
+            if (terminationBySeconds != null && terminationBySeconds < 1)
+                throw new IllegalArgumentException("Termination by seconds must be greater than 0");
+
+        } catch (Exception e) {
+            throw new ErrorException("Error in creating world: " + e.getMessage());
+        }
     }
 
-    public static void setEnvironmentVariables(List<Property> environmentVariables) {
-        World.environmentVariables = environmentVariables;
-    }
-
-    public static void setEntityDefinitionList(List<EntityDefinition> entityDefinitionList) {
-        World.entityDefinitionList = entityDefinitionList;
-    }
-
-    public static Property getEnvironmentVariableByName(String name) {
-        for (Property property : environmentVariables) {
+    public Property getEnvironmentVariableByName(String name) {
+        for (Property property : this.environmentVariables) {
             if (property.getName().equals(name)) {
                 return property;
             }
@@ -52,17 +72,17 @@ public class World {
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();
-        out.append("World:\n" +
-                "Environment Variables:\n");
-        for (Property environmentVariable : environmentVariables) {
-            out.append(environmentVariable.toString()).append("\n");
-
-        }
-        out.append("Entity Definitions:\n");
-        for (EntityDefinition entityDefinition : entityDefinitionList) {
+//        out.append("World:\n" +
+//                "Environment Variables:\n");
+//        for (Property environmentVariable : environmentVariables) {
+//            out.append(environmentVariable.toString()).append("\n");
+//
+//        }
+        out.append("\nEntities:\n");
+        for (EntityDefinition entityDefinition : entityDefinitionMap.values()) {
             out.append(entityDefinition.toString()).append("\n");
         }
-        out.append("Rules:\n");
+        out.append("\nRules:\n");
         for (Rule rule : rules) {
             out.append(rule.toString()).append("\n");
 
@@ -71,60 +91,89 @@ public class World {
 
     }
 
-    public static void RemoveEntity(Entity toRemove) {
-        List<Entity> listToSearchIn = entityList.get(toRemove.getName());
-        //listToSearchIn.removeIf(entity -> entity.equals(toRemove));
+    public void RemoveEntities() {
+        for (List<Entity> currentList : entityList.values()) {
+            List<Entity> mockList = new ArrayList<>(currentList);
+            for (Entity entity : mockList) {
+                if (entity.getToKill()) {
+                    entityDefinitionMap.get(entity.getName()).setFinalPopulation(entityDefinitionMap.get(entity.getName()).getFinalPopulation() - 1);
+                    currentList.remove(entity);
 
+                }
 
+            }
+        }
     }
 
     public void createEntities() {
         entityList = new java.util.HashMap<>();
-        if (entityDefinitionList == null)
+        if (entityDefinitionMap == null)
             throw new IllegalArgumentException("Entity definition list is empty");
-        for (EntityDefinition entityDefinition : entityDefinitionList) {
+        for (EntityDefinition entityDefinition : entityDefinitionMap.values()) {
             List<Entity> entityList = entityDefinition.createEntityList();
-            World.entityList.put(entityDefinition.getName(), entityList);
+            this.entityList.put(entityDefinition.getName(), entityList);
         }
     }
 
-    public static EntityDefinition getEntityDefinitionByName(String name) {
-        for (EntityDefinition entityDefinition : entityDefinitionList) {
-            if (entityDefinition.getName().equals(name)) {
-                return entityDefinition;
-            }
-        }
-        return null;
+    public EntityDefinition getEntityDefinitionByName(String name) {
+        return entityDefinitionMap.get(name);
     }
 
-    public void run() {
+    public RunEndDTO run() throws ErrorException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        this.formattedDateTime = currentDateTime.format(formatter);
+
         long startTime = System.currentTimeMillis();
         Integer ticks = 0;
         createEntities();
-        while (!checkTerminationConditions(ticks, startTime)) {
+        String finishedBy = checkTerminationConditions(ticks, startTime);
+        while (finishedBy.isEmpty()) {
             for (List<Entity> entities : entityList.values()) {
                 for (Entity entity : entities) {
                     for (Rule rule : rules) {
-                        try {
-                            rule.applyRule(entity, ticks);
-                        } catch (WarnException ignored) {
-
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
+                        rule.applyRule(this, entity, ticks);
                     }
                 }
             }
+            RemoveEntities();
             ticks++;
+            finishedBy = checkTerminationConditions(ticks, startTime);
         }
-        System.out.println("done");
-
+        this.UUID = java.util.UUID.randomUUID().toString();
+        return new RunEndDTO(this.UUID, finishedBy, this.formattedDateTime);
     }
 
-
-    private boolean checkTerminationConditions(Integer ticks, long startTime) {
+    private String checkTerminationConditions(Integer ticks, long startTime) {
+        String finishedBy = "";
         if (terminationByTicks != null && ticks >= terminationByTicks)
-            return true;
-        return terminationBySeconds != null && (System.currentTimeMillis() - startTime) / 1000 >= terminationBySeconds;
+            finishedBy += "ticks\n";
+        if (terminationBySeconds != null && (System.currentTimeMillis() - startTime) / 1000 >= terminationBySeconds)
+            finishedBy += " seconds\n";
+        return finishedBy;
+    }
+
+    public List<Property> getEnvironmentVariables() {
+        return environmentVariables;
+    }
+
+    public void setEnvironmentVariables(List<Property> environmentVariables) {
+        this.environmentVariables = environmentVariables;
+    }
+
+    public Map<String, List<Entity>> getEntities() {
+        return entityList;
+    }
+
+    public String getFormattedDate() {
+        return formattedDateTime;
+    }
+
+    public Map<String,EntityDefinition> getEntityDefinitionMap() {
+        return entityDefinitionMap;
+    }
+
+    public void setEntityDefinitionMap(Map<String,EntityDefinition> entityDefinitionMap) {
+        this.entityDefinitionMap = entityDefinitionMap;
     }
 }
