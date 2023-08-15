@@ -13,7 +13,7 @@ import engine.world.utils.PropertyType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleCondition implements Satisfiable {
+public class SimpleCondition implements Satisfiable, java.io.Serializable {
     private final String property;
     private final EntityDefinition entityDefinition;
     private final ConditionOperator operator;

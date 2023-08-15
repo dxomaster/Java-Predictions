@@ -1,11 +1,12 @@
 package DTO;
 
-public class EnvDTO {
+public class EnvDTO implements java.io.Serializable{
     private final String name;
     private final Class type;
-    private Object value;
     private final Object from;
     private final Object to;
+    private Object value;
+
     public EnvDTO(String name, Class type, Object value, Object from, Object to) {
         this.name = name;
         this.type = type;

@@ -6,7 +6,7 @@ import engine.world.World;
 import engine.world.utils.Property;
 import engine.world.utils.PropertyType;
 
-public class PropertyExpression implements Expression {
+public class PropertyExpression implements Expression, java.io.Serializable {
     private final Property property;
 
     public PropertyExpression(EntityDefinition entityDefinition, String propertyName) {

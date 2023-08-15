@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Action implements Actionable {
+public class Action implements Actionable, java.io.Serializable {
     private final EntityDefinition entityDefinition;
     private final ActionNames action;
     private final Expression[] expressions;

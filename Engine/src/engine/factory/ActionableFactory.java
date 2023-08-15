@@ -6,6 +6,7 @@ import engine.world.World;
 
 public class ActionableFactory {
     public static Actionable createAction(World world, PRDAction prdAction) {
+
         if (prdAction.getPRDCondition() != null) {
             return ConditionFactory.createCondition(world, prdAction);
         } else {

@@ -4,7 +4,7 @@ import engine.entity.Entity;
 import engine.world.World;
 import engine.world.utils.PropertyType;
 
-public class ValueExpression implements Expression {
+public class ValueExpression implements Expression, java.io.Serializable {
     private final PropertyType propertyType;
     private final Object value;
 

@@ -6,5 +6,5 @@ import engine.world.World;
 
 public interface Expression {
 
-    Object evaluate(World world, Entity entity) throws ErrorException;
+    Object evaluate(World world, Entity entity);
 }

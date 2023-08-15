@@ -1,38 +1,46 @@
-package menu;
+package Main;
 
-import DTO.EnvDTO;
-import DTO.SimulationArtifactDTO;
+import DTO.*;
 import Exception.ERROR.ErrorException;
 import engine.EngineImp;
+import menu.Menu;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     private static final EngineImp engine = new EngineImp();
 
+    public static EngineImp getEngine() {
+        return engine;
+    }
+
     public static void main(String[] args) {
         while (true) {
             try {
-                printMenu();
+                Menu.printMenu();
                 getUserInput();
             } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage() + "\n");
             }
         }
     }
 
-    public static void printMenu() {
-        System.out.println("1. Load simulation parameters from file");
-        System.out.println("2. View simulation parameters");
-        System.out.println("3. Run simulation");
-        System.out.println("4. View old simulation runs");
-        System.out.println("5. Exit");
+    public static void viewEntityCount(RunStatisticsDTO runStatisticsDTO) {
+        Scanner scanner = new Scanner(System.in);
+        for (EntityDTO entityDTO : runStatisticsDTO.getEntityDefinitionDTOList()) {
 
+            int population = entityDTO.getPopulation();
+            int finalPopulation = entityDTO.getFinalPopulation();
+            System.out.println("Entity name: " + entityDTO.getName());
+            System.out.println("Initial population: " + population);
+            System.out.println("Final population: " + finalPopulation + "\n");
+        }
     }
 
-    public static void getUserInput() throws ErrorException {
+    public static void getUserInput() throws ErrorException, IOException, ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
         int input = Integer.parseInt(scanner.nextLine());
         switch (input) {
@@ -43,28 +51,44 @@ public class Main {
                 if (!file.exists())
                     throw new IllegalArgumentException("File does not exist");
                 engine.loadSimulationParametersFromFile(filePath);
-                System.out.println("File loaded successfully");
+                System.out.println("\nFile loaded successfully\n");
                 break;
             case 2:
-                engine.viewSimulationParameters();
+                WorldPrintDTO worldToPrint = engine.getSimulationParameters();
+                System.out.println(worldToPrint);
                 break;
             case 3:
                 setEnvironmentVariables();
-                SimulationArtifactDTO run = engine.runSimulation();
+                System.out.println("\nStarting simulation...");
+                RunEndDTO run = engine.runSimulation();
                 System.out.println("Simulation finished successfully");
                 System.out.println("Run ID: " + run.getUUID());
                 System.out.println("Finished by: " + run.getFinishedReason());
                 break;
             case 4:
-                engine.viewOldSimulationRuns();
+                Menu.PrintOldSimulationMenu();
                 break;
             case 5:
+                System.out.println("Enter filename to save:");
+                String filename = scanner.nextLine();
+                engine.saveEngineToFile(filename);
+                System.out.println("Engine saved successfully");
+                break;
+            case 6:
+                System.out.println("Enter filename to load:");
+                String filenameToLoad = scanner.nextLine();
+                engine.loadEngineFromFile(filenameToLoad);
+                System.out.println("Engine loaded successfully");
+                break;
+            case 7:
+                System.out.println("Bye Bye");
                 System.exit(0);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid input");
 
         }
+
     }
 
     public static void setEnvironmentVariables() {
@@ -89,8 +113,15 @@ public class Main {
                 i--;//stay an iteration
                 System.out.println("Invalid input:");
                 System.out.println(e.getMessage());
+                requiredEnvDTO = engine.getRequiredEnvDTO();
+                requiredEnvDTOArr = requiredEnvDTO.toArray(new EnvDTO[0]);
             }
 
+        }
+
+        System.out.println("Environment Variables Values:");
+        for (EnvDTO envDTO : requiredEnvDTOArr) {
+            System.out.println(envDTO.getName() + ": " + envDTO.getValue());
         }
     }
 }

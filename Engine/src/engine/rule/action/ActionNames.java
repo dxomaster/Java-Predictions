@@ -1,6 +1,6 @@
 package engine.rule.action;
 
-public enum ActionNames {
+public enum ActionNames implements java.io.Serializable {
     INCREASE("increase"),
     DECREASE("decrease"),
     SET("set"),

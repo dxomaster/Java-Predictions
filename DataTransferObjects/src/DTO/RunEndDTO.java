@@ -1,13 +1,14 @@
 package DTO;
 
-public class SimulationArtifactDTO {
+public class RunEndDTO implements java.io.Serializable{
     private final String UUID;
     private final String finishedReason;
+    private final String formattedDate;
 
-    public SimulationArtifactDTO(String UUID, String finishedReason) {
+    public RunEndDTO(String UUID, String finishedReason, String formattedDate) {
         this.UUID = UUID;
         this.finishedReason = finishedReason;
-
+        this.formattedDate = formattedDate;
     }
 
     public String getUUID() {
@@ -16,5 +17,9 @@ public class SimulationArtifactDTO {
 
     public String getFinishedReason() {
         return finishedReason;
+    }
+
+    public String getFormattedDate() {
+        return formattedDate;
     }
 }

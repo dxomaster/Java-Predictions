@@ -1,6 +1,6 @@
 package engine.world.utils;
 
-public class Range {
+public class Range  implements java.io.Serializable{
     private final PropertyType type;
     private final Object from;
     private final Object to;
@@ -38,9 +38,10 @@ public class Range {
 
     @Override
     public String toString() {
-        return "Range{" +
-                "from=" + from +
-                ", to=" + to +
-                '}';
+        if(from == null && to == null)
+            return "No range";
+
+        return "(" + from +
+                " - " + to+")";
     }
 }

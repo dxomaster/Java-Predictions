@@ -8,7 +8,7 @@ import engine.world.utils.PropertyType;
 import java.util.Arrays;
 import java.util.Random;
 
-public class FunctionExpression implements Expression {
+public class FunctionExpression implements Expression, java.io.Serializable {
     private final functionEnum function;
     private final Object[] arguments;
 

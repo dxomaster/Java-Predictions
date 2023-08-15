@@ -6,15 +6,28 @@ import engine.world.utils.Property;
 import java.util.List;
 import java.util.Map;
 
-public class EntityDefinition {
+public class EntityDefinition implements java.io.Serializable{
     private final String name;
     private final int population;
     private final Map<String, Property> entityProperties;
+
+    public void setFinalPopulation(int finalPopulation) {
+        this.finalPopulation = finalPopulation;
+    }
+
+    private  int finalPopulation;
+
+    public int getFinalPopulation() {
+        return finalPopulation;
+    }
+
+
 
     public EntityDefinition(String name, Map<String, Property> entityProperties, int population) {
         this.name = name;
         this.entityProperties = entityProperties;
         this.population = population;
+        this.finalPopulation = population;
     }
 
     public String getName() {
@@ -27,11 +40,9 @@ public class EntityDefinition {
 
     @Override
     public String toString() {
-        return "EntityDefinition{" +
-                "name='" + name + '\'' +
-                ", population=" + population +
-                ", entityProperties=" + entityProperties +
-                '}';
+        return "Entity: " + name +
+                ", Population: " + population +
+                ", Properties: " + entityProperties.values();
     }
 
     public List<Entity> createEntityList() {

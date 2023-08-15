@@ -1,8 +1,7 @@
 package engine.world;
 
-import DTO.SimulationArtifactDTO;
+import DTO.RunEndDTO;
 import Exception.ERROR.ErrorException;
-import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
 import engine.factory.EntityFactory;
@@ -20,11 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class World {
+public class World  implements java.io.Serializable{
+    private final List<Rule> rules;
     private List<Property> environmentVariables;//todo change this to map
     private Map<String, List<Entity>> entityList;
-    private List<EntityDefinition> entityDefinitionList;//todo change this to map
-    private final List<Rule> rules;
+    private Map<String,EntityDefinition> entityDefinitionMap;
     private Integer terminationByTicks;
     private Integer terminationBySeconds;
     private String UUID;
@@ -32,8 +31,8 @@ public class World {
 
     public World(PRDWorld prdWorld) throws ErrorException {
         try {
-            List<EntityDefinition> entityDefinitionList = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());
-            this.setEntityDefinitionList(entityDefinitionList);
+            Map<String,EntityDefinition> entityDefinitionList = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());
+            this.setEntityDefinitionMap(entityDefinitionList);
             List<Property> environmentVariables = PropertyFactory.createPropertyList(prdWorld.getPRDEvironment().getPRDEnvProperty());
             this.setEnvironmentVariables(environmentVariables);
             List<Rule> rules = RuleFactory.createRuleList(this, prdWorld.getPRDRules().getPRDRule());
@@ -48,7 +47,7 @@ public class World {
             }
             if (terminationByTicks == null && terminationBySeconds == null)
                 throw new IllegalArgumentException("At least one termination condition must be specified");
-            this.entityDefinitionList = entityDefinitionList;
+            this.entityDefinitionMap = entityDefinitionList;
             this.environmentVariables = environmentVariables;
             this.rules = rules;
             if (terminationByTicks != null && terminationByTicks < 1)
@@ -59,10 +58,6 @@ public class World {
         } catch (Exception e) {
             throw new ErrorException("Error in creating world: " + e.getMessage());
         }
-    }
-
-    public void setEntityDefinitionList(List<EntityDefinition> entityDefinitionList) {
-        this.entityDefinitionList = entityDefinitionList;
     }
 
     public Property getEnvironmentVariableByName(String name) {
@@ -77,14 +72,14 @@ public class World {
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();
-        out.append("World:\n" +
-                "Environment Variables:\n");
-        for (Property environmentVariable : environmentVariables) {
-            out.append(environmentVariable.toString()).append("\n");
-
-        }
-        out.append("\nEntity Definitions:\n");
-        for (EntityDefinition entityDefinition : entityDefinitionList) {
+//        out.append("World:\n" +
+//                "Environment Variables:\n");
+//        for (Property environmentVariable : environmentVariables) {
+//            out.append(environmentVariable.toString()).append("\n");
+//
+//        }
+        out.append("\nEntities:\n");
+        for (EntityDefinition entityDefinition : entityDefinitionMap.values()) {
             out.append(entityDefinition.toString()).append("\n");
         }
         out.append("\nRules:\n");
@@ -100,32 +95,31 @@ public class World {
         for (List<Entity> currentList : entityList.values()) {
             List<Entity> mockList = new ArrayList<>(currentList);
             for (Entity entity : mockList) {
-                if (entity.getToKill())
+                if (entity.getToKill()) {
+                    entityDefinitionMap.get(entity.getName()).setFinalPopulation(entityDefinitionMap.get(entity.getName()).getFinalPopulation() - 1);
                     currentList.remove(entity);
+
+                }
+
             }
         }
     }
 
     public void createEntities() {
         entityList = new java.util.HashMap<>();
-        if (entityDefinitionList == null)
+        if (entityDefinitionMap == null)
             throw new IllegalArgumentException("Entity definition list is empty");
-        for (EntityDefinition entityDefinition : entityDefinitionList) {
+        for (EntityDefinition entityDefinition : entityDefinitionMap.values()) {
             List<Entity> entityList = entityDefinition.createEntityList();
             this.entityList.put(entityDefinition.getName(), entityList);
         }
     }
 
     public EntityDefinition getEntityDefinitionByName(String name) {
-        for (EntityDefinition entityDefinition : entityDefinitionList) {
-            if (entityDefinition.getName().equals(name)) {
-                return entityDefinition;
-            }
-        }
-        return null;
+        return entityDefinitionMap.get(name);
     }
 
-    public SimulationArtifactDTO run() throws ErrorException {
+    public RunEndDTO run() throws ErrorException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         this.formattedDateTime = currentDateTime.format(formatter);
@@ -134,16 +128,11 @@ public class World {
         Integer ticks = 0;
         createEntities();
         String finishedBy = checkTerminationConditions(ticks, startTime);
-        while (finishedBy.equals("")) {
+        while (finishedBy.isEmpty()) {
             for (List<Entity> entities : entityList.values()) {
                 for (Entity entity : entities) {
                     for (Rule rule : rules) {
-                        try {
-                            rule.applyRule(this, entity, ticks);
-                        } catch (WarnException ignored) {
-                            //these exceptions are OK, continue to next rule
-                        }
-
+                        rule.applyRule(this, entity, ticks);
                     }
                 }
             }
@@ -152,11 +141,7 @@ public class World {
             finishedBy = checkTerminationConditions(ticks, startTime);
         }
         this.UUID = java.util.UUID.randomUUID().toString();
-        return new SimulationArtifactDTO(this.UUID, finishedBy);
-    }
-
-    public String getUUID() {
-        return UUID;
+        return new RunEndDTO(this.UUID, finishedBy, this.formattedDateTime);
     }
 
     private String checkTerminationConditions(Integer ticks, long startTime) {
@@ -176,13 +161,19 @@ public class World {
         this.environmentVariables = environmentVariables;
     }
 
-    public void setEnvironmentVariable(String name, Object value) throws WarnException {
-        for (Property property : environmentVariables) {
-            if (property.getName().equals(name)) {
-                property.setValue(value);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Environment variable " + name + " does not exist");
+    public Map<String, List<Entity>> getEntities() {
+        return entityList;
+    }
+
+    public String getFormattedDate() {
+        return formattedDateTime;
+    }
+
+    public Map<String,EntityDefinition> getEntityDefinitionMap() {
+        return entityDefinitionMap;
+    }
+
+    public void setEntityDefinitionMap(Map<String,EntityDefinition> entityDefinitionMap) {
+        this.entityDefinitionMap = entityDefinitionMap;
     }
 }

@@ -5,23 +5,19 @@ import Exception.WARN.WarnException;
 
 import java.util.Random;
 
-public class Property {
+public class Property  implements java.io.Serializable{
     private boolean isRandomlyGenerated;
     private String name;
     private Range range;
     private PropertyType type;
     private Object value;
 
-    public Property(String name, PropertyType type, Range range, Object value) {
+    public Property(String name, PropertyType type, Range range, Object value) throws WarnException {
         this.type = type;
         this.name = name;
         this.isRandomlyGenerated = false;
         this.setRange(range);
-        try {
-            this.setValue(value);
-        } catch (WarnException ignored) {
-
-        }
+        this.setValue(value);
 
     }
 
@@ -70,12 +66,10 @@ public class Property {
 
     @Override
     public String toString() {
-        return "Property{" +
-                ", name='" + name + '\'' +
-                ", type=" + type.propertyClass.getSimpleName() +
-                ", range=" + range +
-                "isRandomlyGenerated=" + isRandomlyGenerated +
-                '}';
+        return "Property Name: " + name +
+                ", Type: " + type.propertyClass.getSimpleName() +
+                ", Range: " + range +
+                ", Random initialization: " + isRandomlyGenerated;
     }
 
     public Object getValue() {

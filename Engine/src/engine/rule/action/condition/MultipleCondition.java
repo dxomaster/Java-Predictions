@@ -9,7 +9,7 @@ import engine.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultipleCondition implements Satisfiable, Actionable {
+public class MultipleCondition implements Satisfiable, Actionable, java.io.Serializable {
     private final List<Actionable> actionsToPreformIfConditionIsSatisfied;
     private final List<Actionable> actionsToPreformIfConditionIsNotSatisfied;
     private final LogicalOperator operator;
