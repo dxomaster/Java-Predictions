@@ -2,7 +2,7 @@ package Main;
 
 import DTO.*;
 import Exception.ERROR.ErrorException;
-import engine.EngineImp;
+import engine.Engine;
 import menu.Menu;
 
 import java.io.File;
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static final EngineImp engine = new EngineImp();
+    private static final Engine engine = new Engine();
 
-    public static EngineImp getEngine() {
+    public static Engine getEngine() {
         return engine;
     }
 
