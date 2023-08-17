@@ -14,37 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="finished?">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Engine_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/UI_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exception/Exception.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UI/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EnvDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EnvDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunStatisticsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunStatisticsDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/WorldPrintDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/WorldPrintDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/Engine.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/Exception/ERROR/ErrorException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/Exception/ERROR/ErrorException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/Exception/WARN/WarnException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/Exception/WARN/WarnException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/EngineImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/EngineImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ConditionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ConditionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/RangeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/RangeFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/Expression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/utils/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/utils/Activation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/PropertyType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/PropertyType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/UI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/UI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/menu/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +269,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691916830511</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="finished?">
+      <option name="closed" value="true" />
+      <created>1692279012280</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1692279012280</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +304,8 @@
     <MESSAGE value="changed List&lt;Property&gt; to Map&lt;String,Property&gt; on Entity.java&#10;EntityDefinition.java" />
     <MESSAGE value="fix simulation run" />
     <MESSAGE value="UI done, need to implement command 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="UI done, need to implement command 4" />
+    <MESSAGE value="finished?" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished?" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

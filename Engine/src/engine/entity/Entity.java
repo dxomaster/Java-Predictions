@@ -49,12 +49,7 @@ public class Entity implements java.io.Serializable {
         Property property = getPropertyByName(propertyNameInString);
         Object currentValue = property.getValue();
         if (property.getType() == PropertyType.DECIMAL)
-            if ((Integer) evaluate < 0)
-                throw new WarnException("Trying to decrease a decimal property");// todo : check and change to error if needed
-            else
-                property.setValue((Integer) currentValue - (Integer) evaluate);
-        else if ((Float) evaluate < 0)
-            throw new WarnException("Trying to decrease a float property");// todo : check and change to error if needed
+            property.setValue((Integer) currentValue - (Integer) evaluate);
         else
             property.setValue((Float) currentValue - (Float) evaluate);
     }
