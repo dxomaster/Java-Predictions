@@ -19,19 +19,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class World  implements java.io.Serializable{
+public class World implements java.io.Serializable {
     private final List<Rule> rules;
     private List<Property> environmentVariables;//todo change this to map
     private Map<String, List<Entity>> entityList;
-    private Map<String,EntityDefinition> entityDefinitionMap;
+    private Map<String, EntityDefinition> entityDefinitionMap;
     private Integer terminationByTicks;
     private Integer terminationBySeconds;
-    private String UUID;
-    private String formattedDateTime;
 
     public World(PRDWorld prdWorld) throws ErrorException {
         try {
-            Map<String,EntityDefinition> entityDefinitionList = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());
+            Map<String, EntityDefinition> entityDefinitionList = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());
             this.setEntityDefinitionMap(entityDefinitionList);
             List<Property> environmentVariables = PropertyFactory.createPropertyList(prdWorld.getPRDEvironment().getPRDEnvProperty());
             this.setEnvironmentVariables(environmentVariables);
@@ -72,12 +70,6 @@ public class World  implements java.io.Serializable{
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();
-//        out.append("World:\n" +
-//                "Environment Variables:\n");
-//        for (Property environmentVariable : environmentVariables) {
-//            out.append(environmentVariable.toString()).append("\n");
-//
-//        }
         out.append("\nEntities:\n");
         for (EntityDefinition entityDefinition : entityDefinitionMap.values()) {
             out.append(entityDefinition.toString()).append("\n");
@@ -122,7 +114,7 @@ public class World  implements java.io.Serializable{
     public RunEndDTO run() throws ErrorException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
-        this.formattedDateTime = currentDateTime.format(formatter);
+        String formattedDateTime = currentDateTime.format(formatter);
 
         long startTime = System.currentTimeMillis();
         Integer ticks = 0;
@@ -140,8 +132,8 @@ public class World  implements java.io.Serializable{
             ticks++;
             finishedBy = checkTerminationConditions(ticks, startTime);
         }
-        this.UUID = java.util.UUID.randomUUID().toString();
-        return new RunEndDTO(this.UUID, finishedBy, this.formattedDateTime);
+        String UUID = java.util.UUID.randomUUID().toString();
+        return new RunEndDTO(UUID, finishedBy, formattedDateTime);
     }
 
     private String checkTerminationConditions(Integer ticks, long startTime) {
@@ -165,15 +157,11 @@ public class World  implements java.io.Serializable{
         return entityList;
     }
 
-    public String getFormattedDate() {
-        return formattedDateTime;
-    }
-
-    public Map<String,EntityDefinition> getEntityDefinitionMap() {
+    public Map<String, EntityDefinition> getEntityDefinitionMap() {
         return entityDefinitionMap;
     }
 
-    public void setEntityDefinitionMap(Map<String,EntityDefinition> entityDefinitionMap) {
+    public void setEntityDefinitionMap(Map<String, EntityDefinition> entityDefinitionMap) {
         this.entityDefinitionMap = entityDefinitionMap;
     }
 }

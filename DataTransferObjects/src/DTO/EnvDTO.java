@@ -1,6 +1,6 @@
 package DTO;
 
-public class EnvDTO implements java.io.Serializable{
+public class EnvDTO implements java.io.Serializable {
     private final String name;
     private final Class type;
     private final Object from;

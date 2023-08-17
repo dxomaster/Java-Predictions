@@ -6,7 +6,6 @@ import engine.EngineImp;
 import menu.Menu;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +19,7 @@ public class Main {
     public static void main(String[] args) {
         while (true) {
             try {
+
                 Menu.printMenu();
                 getUserInput();
             } catch (Exception e) {
@@ -29,7 +29,6 @@ public class Main {
     }
 
     public static void viewEntityCount(RunStatisticsDTO runStatisticsDTO) {
-        Scanner scanner = new Scanner(System.in);
         for (EntityDTO entityDTO : runStatisticsDTO.getEntityDefinitionDTOList()) {
 
             int population = entityDTO.getPopulation();
@@ -40,7 +39,7 @@ public class Main {
         }
     }
 
-    public static void getUserInput() throws ErrorException, IOException, ClassNotFoundException {
+    public static void getUserInput() throws ErrorException {
         Scanner scanner = new Scanner(System.in);
         int input = Integer.parseInt(scanner.nextLine());
         switch (input) {
@@ -72,10 +71,10 @@ public class Main {
                 System.out.println("Enter filename to save:");
                 String filename = scanner.nextLine();
                 engine.saveEngineToFile(filename);
-                System.out.println("Engine saved successfully");
+                System.out.println("Engine saved successfully to " + filename + ".save\n");
                 break;
             case 6:
-                System.out.println("Enter filename to load:");
+                System.out.println("Enter filename to load: (including the .save extension)");
                 String filenameToLoad = scanner.nextLine();
                 engine.loadEngineFromFile(filenameToLoad);
                 System.out.println("Engine loaded successfully");

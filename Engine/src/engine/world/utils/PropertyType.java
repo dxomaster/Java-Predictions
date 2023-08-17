@@ -1,6 +1,6 @@
 package engine.world.utils;
 
-public enum PropertyType  implements java.io.Serializable{
+public enum PropertyType implements java.io.Serializable {
     DECIMAL(Integer.class),
     FLOAT(Float.class),
     BOOLEAN(Boolean.class),

@@ -3,61 +3,53 @@
   <component name="AnalysisUIOptions">
     <option name="ANALYZE_INJECTED_CODE" value="false" />
   </component>
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Engine:jar" />
+      <artifact name="UI:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="UI done, need to implement command 4">
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EntityDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunStatisticsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/WorldPrintDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UI/src/Main/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UI/src/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="finished?">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Engine_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/UI_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exception/Exception.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EnvDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EnvDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/SimulationArtifactDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/Exception/ERROR/ErrorException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/Exception/ERROR/ErrorException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunStatisticsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunStatisticsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/WorldPrintDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/WorldPrintDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/Engine.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/Exception/ERROR/ErrorException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/Exception/ERROR/ErrorException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/Exception/WARN/WarnException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/Exception/WARN/WarnException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/EngineImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/EngineImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActionableFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ActionableFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ConditionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/ConditionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/ObjectFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/RangeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/RangeFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/ActionNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/ActionNames.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/CalculationOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/CalculationOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/ConditionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/ConditionOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/LogicalOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/LogicalOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/MultipleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/SimpleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/SimpleCondition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/Expression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/FunctionExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/PropertyExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/ValueExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/functionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/functionEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/utils/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/rule/utils/Activation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/World.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/PropertyType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/PropertyType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Predictions.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Predictions.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/menu/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/UI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/UI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/menu/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -88,32 +80,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;display__simulation__details&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;last_directory_selection&quot;: &quot;/Users/edenbar/Documents/repos/java-repo/Predictions/DataTransferObjects/src&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/97250/intellijU_projects/Java-Predictions/DTO/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "ToolWindowRun.ShowToolbar": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "1.8",
+    "last_directory_selection": "/Users/edenbar/Documents/repos/java-repo/Predictions/DataTransferObjects/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "onboarding.tips.debug.path": "C:/Users/97250/intellijU_projects/Java-Predictions/DTO/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.13247865",
+    "project.structure.side.proportion": "0.4324324",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "editor.preferences.import",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="engine.factory" />
@@ -133,6 +129,19 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main.Main" />
       <module name="UI" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="DataTransferObjects" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="DataTransferObjects" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -323,11 +332,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/DTO/src/Main.java</url>
           <line>13</line>
           <option name="timeStamp" value="40" />
@@ -344,7 +348,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/EngineImp.java</url>
-          <line>80</line>
+          <line>69</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -353,43 +357,24 @@
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/world/World.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/EngineImp.java</url>
-          <line>71</line>
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/EngineImp.java</url>
-          <line>204</line>
+          <line>179</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/EngineImp.java</url>
-          <line>203</line>
+          <line>178</line>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/EngineImp.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="81" />
+          <line>173</line>
+          <option name="timeStamp" value="82" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="10" />
         </breakpoint>
-        <line-breakpoint type="java-method">
-          <url>file://$PROJECT_DIR$/UI/src/Main/Main.java</url>
-          <line>133</line>
-          <properties class="Main.Main">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -409,6 +394,10 @@
         <watch expression="entityList" language="JAVA" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Predictions$Main.ic" NAME="Main Coverage Results" MODIFIED="1691241300561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -9,7 +9,7 @@ import engine.world.World;
 
 import java.util.List;
 
-public class Rule  implements java.io.Serializable{
+public class Rule implements java.io.Serializable {
     private final String name;
     private final List<Actionable> actions;
     private final Activation activation;

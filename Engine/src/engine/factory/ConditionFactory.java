@@ -13,7 +13,7 @@ import java.util.List;
 public class ConditionFactory {
     public static Actionable createCondition(World world, PRDAction prdAction) {
         PRDCondition prdCondition = prdAction.getPRDCondition();
-        if(world.getEntityDefinitionByName(prdAction.getEntity()) == null)
+        if (world.getEntityDefinitionByName(prdAction.getEntity()) == null)
             throw new IllegalArgumentException("Invalid entity: " + prdAction.getEntity());
         switch (prdCondition.getSingularity()) {
             case "single":

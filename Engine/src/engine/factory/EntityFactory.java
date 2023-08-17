@@ -23,10 +23,10 @@ public class EntityFactory {
         return new EntityDefinition(prdEntity.getName(), entityProperties, prdEntity.getPRDPopulation());
     }
 
-    public static Map<String,EntityDefinition> createEntityDefinitionList(List<PRDEntity> prdEntity) throws WarnException {
-        Map<String,EntityDefinition> entityDefinitions = new HashMap<>();
+    public static Map<String, EntityDefinition> createEntityDefinitionList(List<PRDEntity> prdEntity) throws WarnException {
+        Map<String, EntityDefinition> entityDefinitions = new HashMap<>();
         for (PRDEntity entity : prdEntity) {
-            entityDefinitions.put(entity.getName(),createEntityDefinition(entity));
+            entityDefinitions.put(entity.getName(), createEntityDefinition(entity));
         }
         return entityDefinitions;
 

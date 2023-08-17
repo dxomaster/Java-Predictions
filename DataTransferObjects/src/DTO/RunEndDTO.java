@@ -1,6 +1,6 @@
 package DTO;
 
-public class RunEndDTO implements java.io.Serializable{
+public class RunEndDTO implements java.io.Serializable {
     private final String UUID;
     private final String finishedReason;
     private final String formattedDate;

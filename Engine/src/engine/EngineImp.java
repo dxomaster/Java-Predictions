@@ -10,9 +10,11 @@ import engine.world.World;
 import engine.world.utils.Property;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import java.io.*;
+import java.io.File;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class EngineImp implements engine.Engine, Serializable {
             this.world = new World(jaxbWorld);
             this.simulationName = file.getName();
 
-        } catch (JAXBException e) {
+        } catch (Exception e) {
             throw new ErrorException("Error in loading file please make sure this is a valid XML file with the correct schema.");
         }
 
@@ -54,25 +56,12 @@ public class EngineImp implements engine.Engine, Serializable {
         return world != null;
     }
 
-//    private PropertyDTO createPropertyDTO(Property property) {
-//        return new PropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), property.getValue().toString());
-//    }
-
-//    private EntityDTO createEntityDTO(Entity entity) {
-//        List<PropertyDTO> propertyDTOList = new ArrayList<>();
-//        for (Property property : entity.getProperties()) {
-//            propertyDTOList.add(createPropertyDTO(property));
-//        }
-//        return new EntityDTO(propertyDTOList, entity.getName()
-//                , world.getEntityDefinitionByName(entity.getName()).getPopulation());
-//    }
-
     public RunStatisticsDTO getPastSimulationArtifactDTO(String uuid) throws ErrorException {
         if (pastSimulationWorlds.containsKey(uuid)) {
             World world = pastSimulationWorlds.get(uuid);
             //Map<String, List<EntityDTO>> entitiesDTO = createWorldEntitiesDTO(world.getEntities());
             List<EntityDTO> entityDefinitionDTO = createEntityDefinitionDTO(world);
-            return new RunStatisticsDTO(world.getFormattedDate(), uuid, entityDefinitionDTO);
+            return new RunStatisticsDTO(entityDefinitionDTO);
         }
         throw new ErrorException("No such simulation");
     }
@@ -84,42 +73,29 @@ public class EngineImp implements engine.Engine, Serializable {
             for (Property property : entityDefinition.getProperties().values()) {
 
                 List<Entity> entityList = world.getEntities().get(entityDefinition.getName());
-                PropertyDTO propertyDTO= createPropertyDTO(property,entityList);
+                PropertyDTO propertyDTO = createPropertyDTO(property, entityList);
                 propertyDTOList.add(propertyDTO);
             }
-            entityDTOList.add(new EntityDTO(propertyDTOList, entityDefinition.getName(), entityDefinition.getPopulation(),entityDefinition.getFinalPopulation()));
+            entityDTOList.add(new EntityDTO(propertyDTOList, entityDefinition.getName(), entityDefinition.getPopulation(), entityDefinition.getFinalPopulation()));
         }
         return entityDTOList;
     }
-    private PropertyDTO createPropertyDTO(Property property,List<Entity> entityList){
-        Map<String,Integer> frequencyMap = new HashMap<>();
-        for(Entity entity : entityList){
+
+    private PropertyDTO createPropertyDTO(Property property, List<Entity> entityList) {
+        Map<String, Integer> frequencyMap = new HashMap<>();
+        for (Entity entity : entityList) {
             Property prop = entity.getPropertyByName(property.getName());
-            if(frequencyMap.containsKey(prop.getValue().toString())){
+            if (frequencyMap.containsKey(prop.getValue().toString())) {
                 Integer value = frequencyMap.get(prop.getValue().toString());
 
-                frequencyMap.put(prop.getValue().toString(),value +1);
-            }
-            else
+                frequencyMap.put(prop.getValue().toString(), value + 1);
+            } else
                 frequencyMap.put(prop.getValue().toString(), 1);
         }
-        return new PropertyDTO(property.getName(),property.getType().propertyClass.getSimpleName(),frequencyMap);
+        return new PropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap);
 
     }
 
-
-//    private Map<String, List<EntityDTO>> createWorldEntitiesDTO(Map<String, List<Entity>> entities) {
-//        Map<String, List<EntityDTO>> entitiesDTO = new HashMap<>();
-//        for (String entityName : entities.keySet()) {
-//            List<Entity> entityList = entities.get(entityName);
-//            List<EntityDTO> entityDTOList = new ArrayList<>();
-//            for (Entity entity : entityList) {
-//                entityDTOList.add(createEntityDTO(entity));
-//            }
-//            entitiesDTO.put(entityName, entityDTOList);
-//        }
-//        return entitiesDTO;
-//    }
 
     public void setEnvVariableWithDTO(EnvDTO envDTO) throws WarnException {
         if (world == null)
@@ -165,7 +141,7 @@ public class EngineImp implements engine.Engine, Serializable {
             this.pastSimulationWorlds = new HashMap<>();
             this.simulationName = file.getName();
 
-        } catch (JAXBException e) {
+        } catch (Exception e) {
             throw new ErrorException("Error in loading file please make sure this is a valid XML file with the correct schema.");
         }
 
@@ -184,18 +160,17 @@ public class EngineImp implements engine.Engine, Serializable {
 
     public void saveEngineToFile(String filename) throws ErrorException {
         try (ObjectOutputStream out =
-                    new ObjectOutputStream(
-                            Files.newOutputStream(Paths.get(filename)))){
-                out.writeObject(this);
-                out.flush();
+                     new ObjectOutputStream(
+                             Files.newOutputStream(Paths.get(filename + ".save")))) {
+            out.writeObject(this);
+            out.flush();
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new ErrorException("Error in saving file.");
         }
     }
 
-    public void loadEngineFromFile(String filenameToLoad) throws IOException, ClassNotFoundException {
+    public void loadEngineFromFile(String filenameToLoad) throws ErrorException {
         try (ObjectInputStream in =
                      new ObjectInputStream(
                              Files.newInputStream(Paths.get(filenameToLoad)))) {
@@ -207,6 +182,8 @@ public class EngineImp implements engine.Engine, Serializable {
             this.world = engineImp.world;
 
 
+        } catch (Exception e) {
+            throw new ErrorException("Error in loading file, please make sure the file exists and has the correct format.");
         }
     }
 }

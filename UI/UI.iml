@@ -9,6 +9,16 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Engine" />
     <orderEntry type="module" module-name="DataTransferObjects" />
+    <orderEntry type="module" module-name="Exception" />
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/jre/lib/rt.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="e9bb274f-342c-4660-bb2e-c40e4eb777e7" />

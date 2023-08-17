@@ -5,7 +5,7 @@ import Exception.WARN.WarnException;
 
 import java.util.Random;
 
-public class Property  implements java.io.Serializable{
+public class Property implements java.io.Serializable {
     private boolean isRandomlyGenerated;
     private String name;
     private Range range;
@@ -66,9 +66,10 @@ public class Property  implements java.io.Serializable{
 
     @Override
     public String toString() {
+        String rangeString = range != null ? range.toString() : "None";
         return "Property Name: " + name +
                 ", Type: " + type.propertyClass.getSimpleName() +
-                ", Range: " + range +
+                ", Range: " + rangeString +
                 ", Random initialization: " + isRandomlyGenerated;
     }
 

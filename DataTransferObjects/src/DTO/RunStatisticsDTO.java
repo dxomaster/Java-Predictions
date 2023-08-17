@@ -2,15 +2,11 @@ package DTO;
 
 import java.util.List;
 
-public class RunStatisticsDTO implements java.io.Serializable{
-    private final String formattedDate;
-    private final String UUID;
+public class RunStatisticsDTO implements java.io.Serializable {
     //private final Map<String, List<EntityDTO>> entities;
     private final List<EntityDTO> EntityDefinitionDTOList;
 
-    public RunStatisticsDTO(String formattedDate, String UUID, List<EntityDTO> EntityDefinitionDTOList) {
-        this.formattedDate = formattedDate;
-        this.UUID = UUID;
+    public RunStatisticsDTO(List<EntityDTO> EntityDefinitionDTOList) {
 
         this.EntityDefinitionDTOList = EntityDefinitionDTOList;
 
@@ -19,8 +15,6 @@ public class RunStatisticsDTO implements java.io.Serializable{
     public List<EntityDTO> getEntityDefinitionDTOList() {
         return EntityDefinitionDTOList;
     }
-
-
 
 
 }

@@ -21,10 +21,11 @@ public class Menu {
         System.out.println("6. Load system state");
         System.out.println("7. Exit");
 
-        if ( Main.getEngine().isSimulationLoaded())
+        if (Main.getEngine().isSimulationLoaded())
             System.out.println("\nCurrent simulation loaded: " + Main.getEngine().getSimulationName());
 
     }
+
     public static void PrintOldSimulationMenu() throws ErrorException {
         Scanner scanner = new Scanner(System.in);
         int input = -1;
@@ -57,6 +58,7 @@ public class Menu {
         chooseViewMode(pastSimulationArtifactDTOMap.get(input - 1));
 
     }
+
     public static void chooseViewMode(RunEndDTO selectedRun) throws ErrorException {
         Scanner scanner = new Scanner(System.in);
         RunStatisticsDTO runStatisticsDTO = Main.getEngine().getPastSimulationArtifactDTO(selectedRun.getUUID());
@@ -64,14 +66,14 @@ public class Menu {
         do {
             System.out.println("\n1.View Entity count");
             System.out.println("2.View Entity properties histogram\n");
+            System.out.println("3.Go back");
             try {
                 input = Integer.parseInt(scanner.nextLine());
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
-                continue;
             }
         }
-        while (input < 1 || input > 2);
+        while (input < 1 || input > 3);
         switch (input) {
             case 1:
                 Main.viewEntityCount(runStatisticsDTO);
@@ -79,8 +81,10 @@ public class Menu {
             case 2:
                 viewEntityPropertiesHistogramMenu(runStatisticsDTO);
                 break;
+            case 3:
         }
     }
+
     private static void viewEntityPropertiesHistogramMenu(RunStatisticsDTO runStatisticsDTO) {
         Scanner scanner = new Scanner(System.in);
         int input = -1;
@@ -89,7 +93,7 @@ public class Menu {
             System.out.println("\nChoose Entity to view properties: ");
             counter = 1;
             for (EntityDTO entityDTO : runStatisticsDTO.getEntityDefinitionDTOList()) {
-                System.out.println(counter +". " + entityDTO.getName());
+                System.out.println(counter + ". " + entityDTO.getName());
 
 
                 try {
@@ -100,8 +104,8 @@ public class Menu {
                 }
             }
         }
-        while (input < 1 || input > counter+1);
-        EntityDTO entityDTO = runStatisticsDTO.getEntityDefinitionDTOList().get(input-1);
+        while (input < 1 || input > counter + 1);
+        EntityDTO entityDTO = runStatisticsDTO.getEntityDefinitionDTOList().get(input - 1);
         do {
             counter = 1;
             System.out.println("Entity properties: ");
@@ -116,17 +120,15 @@ public class Menu {
 
             }
 
-        } while (input < 1 || input > counter+1);
-        viewPropertyHistogram(entityDTO.getPropertyDTOList().get(input-1));
+        } while (input < 1 || input > counter + 1);
+        viewPropertyHistogram(entityDTO.getPropertyDTOList().get(input - 1));
     }
 
-    public static void viewPropertyHistogram(PropertyDTO propertyDTO)
-    {
+    public static void viewPropertyHistogram(PropertyDTO propertyDTO) {
         System.out.println("Property name: " + propertyDTO.getName());
         System.out.println("Property type: " + propertyDTO.getType());
         System.out.println("Property Histogram: (value: frequency)");
-        for (Map.Entry<String,Integer> entry : propertyDTO.getValueFrequency().entrySet())
-        {
+        for (Map.Entry<String, Integer> entry : propertyDTO.getValueFrequency().entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
     }

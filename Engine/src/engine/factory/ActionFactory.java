@@ -10,8 +10,8 @@ public class ActionFactory {
     public static Action createAction(World world, PRDAction prdAction) {
         if (world.getEntityDefinitionByName(prdAction.getEntity()) == null)
             throw new RuntimeException("Entity " + prdAction.getEntity() + " not found");
-        if(world.getEntityDefinitionByName(prdAction.getEntity()).getPropertyByName(prdAction.getProperty()) == null &&
-        world.getEntityDefinitionByName(prdAction.getEntity()).getPropertyByName(prdAction.getResultProp()) == null)
+        if (world.getEntityDefinitionByName(prdAction.getEntity()).getPropertyByName(prdAction.getProperty()) == null &&
+                world.getEntityDefinitionByName(prdAction.getEntity()).getPropertyByName(prdAction.getResultProp()) == null)
             throw new RuntimeException("Property " + prdAction.getProperty() + " not found");
         switch (prdAction.getType()) {
             case "increase":
