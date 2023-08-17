@@ -3,13 +3,14 @@ package engine.rule;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import engine.entity.Entity;
+import engine.factory.RuleFactory;
 import engine.rule.action.Actionable;
 import engine.rule.utils.Activation;
 import engine.world.World;
 
 import java.util.List;
 
-public class Rule implements java.io.Serializable {
+public class Rule extends RuleFactory implements java.io.Serializable {
     private final String name;
     private final List<Actionable> actions;
     private final Activation activation;

@@ -151,7 +151,7 @@ public class Engine implements Serializable {
     public WorldPrintDTO getSimulationParameters() {
         if (world == null)
             throw new IllegalArgumentException("No file is loaded");
-        return new WorldPrintDTO(world.toString());//todo change to WorldDTO
+        return new WorldPrintDTO(world.toString());
     }
 
     public List<RunEndDTO> getPastArtifacts() {
