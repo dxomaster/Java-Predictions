@@ -142,7 +142,7 @@ public class Engine implements Serializable {
             this.simulationName = file.getName();
 
         } catch (Exception e) {
-            throw new ErrorException("Error in loading file please make sure this is a valid XML file with the correct schema.");
+            throw new ErrorException("Error in loading file please make sure this is a valid XML file with the correct schema:\n" + e.getMessage());
         }
 
 
