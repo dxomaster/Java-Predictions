@@ -13,16 +13,17 @@ import java.util.Scanner;
 
 public class Menu {
     public static void printMenu() {
+        System.out.println("Simulation Control Center");
         System.out.println("1. Load simulation parameters from file");
         System.out.println("2. View simulation parameters");
         System.out.println("3. Run simulation");
         System.out.println("4. View old simulation runs");
         System.out.println("5. Save system state");
         System.out.println("6. Load system state");
-        System.out.println("7. Exit");
+        System.out.println("7. Exit\n");
 
         if (Main.getEngine().isSimulationLoaded())
-            System.out.println("\nCurrent simulation loaded: " + Main.getEngine().getSimulationName());
+            System.out.println("Current simulation loaded: " + Main.getEngine().getSimulationName());
 
     }
 
@@ -35,12 +36,11 @@ public class Menu {
             throw new ErrorException("No past simulation runs");
         }
 
-        do {
+        while (input != exit) {
             int counter = 1;
             System.out.println("Choose run to view: ");
             for (RunEndDTO entry : pastSimulationArtifactDTOMap) {
                 System.out.println(counter + ". Run ID: " + entry.getUUID() + " Run Date: " + entry.getFormattedDate());
-                System.out.println();
                 counter++;
             }
             System.out.println(exit + ". Go back");
@@ -48,41 +48,36 @@ public class Menu {
                 input = Integer.parseInt(scanner.nextLine());
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
-                continue;
             }
-            if (input == exit)
-                return;
+            chooseViewMode(pastSimulationArtifactDTOMap.get(input - 1));
         }
-        while ((input < 1 || input > exit));
-
-        chooseViewMode(pastSimulationArtifactDTOMap.get(input - 1));
-
     }
 
     public static void chooseViewMode(RunEndDTO selectedRun) throws ErrorException {
         Scanner scanner = new Scanner(System.in);
         RunStatisticsDTO runStatisticsDTO = Main.getEngine().getPastSimulationArtifactDTO(selectedRun.getUUID());
-        int input = -1;
-        do {
+        int input;
+        boolean continueLoop = true;
+        while (continueLoop) {
+            System.out.println("\nRun ID: " + selectedRun.getUUID());
             System.out.println("\n1.View Entity count");
-            System.out.println("2.View Entity properties histogram\n");
+            System.out.println("2.View Entity properties histogram");
             System.out.println("3.Go back");
-            try {
-                input = Integer.parseInt(scanner.nextLine());
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
+            // todo: do you have to try and catch the next line? as in the next method
+            input = Integer.parseInt(scanner.nextLine());
+
+            switch (input) {
+                case 1:
+                    Main.viewEntityCount(runStatisticsDTO);
+                    break;
+                case 2:
+                    viewEntityPropertiesHistogramMenu(runStatisticsDTO);
+                    break;
+                case 3:
+                    continueLoop = false;
             }
         }
-        while (input < 1 || input > 3);
-        switch (input) {
-            case 1:
-                Main.viewEntityCount(runStatisticsDTO);
-                break;
-            case 2:
-                viewEntityPropertiesHistogramMenu(runStatisticsDTO);
-                break;
-            case 3:
-        }
+
     }
 
     private static void viewEntityPropertiesHistogramMenu(RunStatisticsDTO runStatisticsDTO) {
@@ -90,18 +85,17 @@ public class Menu {
         int input = -1;
         int counter;
         do {
-            System.out.println("\nChoose Entity to view properties: ");
+            System.out.println("Choose Entity to view properties: ");
             counter = 1;
             for (EntityDTO entityDTO : runStatisticsDTO.getEntityDefinitionDTOList()) {
                 System.out.println(counter + ". " + entityDTO.getName());
-
-
-                try {
-                    input = Integer.parseInt(scanner.nextLine());
-                } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
-
-                }
+                counter++;
+            }
+            System.out.println(runStatisticsDTO.getEntityDefinitionDTOList().size() + 1 + ". Go back");
+            try {
+                input = Integer.parseInt(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
             }
         }
         while (input < 1 || input > counter + 1);

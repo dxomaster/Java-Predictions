@@ -26,8 +26,12 @@ public class RuleFactory {
 
     public static List<Rule> createRuleList(World world, List<PRDRule> prdRule) {
         List<Rule> rules = new ArrayList<>();
-        for (PRDRule rule : prdRule) {
-            rules.add(createRule(world, rule));
+        try {
+            for (PRDRule rule : prdRule)
+                rules.add(createRule(world, rule));
+        } catch (Exception e) {
+            // todo: can't load the xml file without catching the exception (java.lang.Exception)
+            System.out.println(e.getMessage());
         }
         return rules;
     }
