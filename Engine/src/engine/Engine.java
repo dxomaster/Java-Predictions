@@ -44,7 +44,7 @@ public class Engine implements Serializable {
             this.simulationName = file.getName();
 
         } catch (Exception e) {
-            throw new ErrorException("Error in loading file please make sure this is a valid XML file with the correct schema.");
+            throw new ErrorException("Error in running simulation:\n" + e.getMessage());
         }
 
         this.pastSimulationArtifactDTO.add(finishedArtifact);
