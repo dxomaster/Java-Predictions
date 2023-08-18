@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EntityFactory {
-    public static Entity createEntity(EntityDefinition entityDefinition) {
+    public static Entity createEntity(EntityDefinition entityDefinition) throws WarnException {
         Map<String, Property> entityProperties = PropertyFactory.createPropertyList(entityDefinition);
         return new Entity(entityDefinition.getName(), entityProperties);
     }
@@ -32,7 +32,7 @@ public class EntityFactory {
 
     }
 
-    public static List<Entity> createEntityList(EntityDefinition entityDefinition) {
+    public static List<Entity> createEntityList(EntityDefinition entityDefinition) throws WarnException {
         List<Entity> entities = new ArrayList<>();
         for (int i = 0; i < entityDefinition.getPopulation(); i++) {
             entities.add(createEntity(entityDefinition));

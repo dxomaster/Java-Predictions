@@ -2,6 +2,7 @@ package engine.world;
 
 import DTO.RunEndDTO;
 import Exception.ERROR.ErrorException;
+import Exception.WARN.WarnException;
 import engine.entity.Entity;
 import engine.entity.EntityDefinition;
 import engine.factory.EntityFactory;
@@ -97,7 +98,7 @@ public class World implements java.io.Serializable {
         }
     }
 
-    public void createEntities() {
+    public void createEntities() throws WarnException {
         entityList = new java.util.HashMap<>();
         if (entityDefinitionMap == null)
             throw new IllegalArgumentException("Entity definition list is empty");
@@ -111,7 +112,7 @@ public class World implements java.io.Serializable {
         return entityDefinitionMap.get(name);
     }
 
-    public RunEndDTO run() throws ErrorException {
+    public RunEndDTO run() throws ErrorException, WarnException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         String formattedDateTime = currentDateTime.format(formatter);

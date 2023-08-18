@@ -2,6 +2,7 @@ package Main;
 
 import DTO.*;
 import Exception.ERROR.ErrorException;
+import Exception.WARN.WarnException;
 import engine.Engine;
 import menu.Menu;
 
@@ -39,7 +40,7 @@ public class Main {
         }
     }
 
-    public static void getUserInput() throws ErrorException {
+    public static void getUserInput() throws ErrorException, WarnException {
         Scanner scanner = new Scanner(System.in);
         int input = Integer.parseInt(scanner.nextLine());
         switch (input) {

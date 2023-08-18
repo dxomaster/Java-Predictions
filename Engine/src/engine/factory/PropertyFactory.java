@@ -88,10 +88,18 @@ public class PropertyFactory {
         return propertyList;
     }
 
-    public static Map<String, Property> createPropertyList(EntityDefinition entityDefinition) {
+    public static Map<String, Property> createPropertyList(EntityDefinition entityDefinition) throws WarnException {
         Map<String, Property> propertyList = new HashMap<>();
         for (Property property : entityDefinition.getProperties().values()) {
-            Property propertyClone = new Property(property);
+            Property propertyClone;
+            if(property.isRandomInit()) {
+                String type = property.getType().propertyClass.getSimpleName().toLowerCase();
+                if(type.equals("integer"))
+                    type = "decimal";
+                propertyClone = createRandomInitEntityProperty(property.getName(), property.getRange(), type);
+            }
+            else
+                propertyClone = new Property(property.getName(), property.getType(), property.getRange(), property.getValue());
             propertyList.put(propertyClone.getName(), propertyClone);
         }
         return propertyList;

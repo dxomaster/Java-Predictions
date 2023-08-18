@@ -13,9 +13,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="more informative error messages">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="better condition on property check">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Main/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +139,7 @@
       <workItem from="1692282107885" duration="348000" />
       <workItem from="1692282458602" duration="138000" />
       <workItem from="1692282599057" duration="3537000" />
-      <workItem from="1692342725638" duration="1133000" />
+      <workItem from="1692342725638" duration="4029000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -311,7 +317,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692343663875</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="better condition on property check">
+      <option name="closed" value="true" />
+      <created>1692344145692</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1692344145692</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +356,8 @@
     <MESSAGE value="final fixes" />
     <MESSAGE value="fix issue with kill command" />
     <MESSAGE value="more informative error messages" />
-    <option name="LAST_COMMIT_MESSAGE" value="more informative error messages" />
+    <MESSAGE value="better condition on property check" />
+    <option name="LAST_COMMIT_MESSAGE" value="better condition on property check" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -389,8 +404,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/world/World.java</url>
-          <line>35</line>
+          <line>36</line>
           <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/world/World.java</url>
+          <line>121</line>
+          <option name="timeStamp" value="74" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
@@ -413,6 +433,7 @@
       <configuration name="Application">
         <watch expression="entity" language="JAVA" />
         <watch expression="entityList" language="JAVA" />
+        <watch expression="((HashMap.Node)((HashMap)((Entity)((ArrayList)((HashMap.Node)((HashMap)entityList).entrySet().toArray()[0]).getValue()).get(1)).entityProperties).entrySet().toArray()[3]).getValue()" custom="java.util.HashMap.Node,java.util.HashMap,engine.entity.Entity,java.util.ArrayList" />
       </configuration>
     </watches-manager>
   </component>

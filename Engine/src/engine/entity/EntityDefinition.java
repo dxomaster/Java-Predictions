@@ -1,5 +1,6 @@
 package engine.entity;
 
+import Exception.WARN.WarnException;
 import engine.factory.EntityFactory;
 import engine.world.utils.Property;
 
@@ -42,7 +43,7 @@ public class EntityDefinition implements java.io.Serializable {
                 ", Properties: " + entityProperties.values();
     }
 
-    public List<Entity> createEntityList() {
+    public List<Entity> createEntityList() throws WarnException {
         return EntityFactory.createEntityList(this);
     }
 
