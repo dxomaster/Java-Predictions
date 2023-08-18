@@ -11,7 +11,7 @@ public class ActionFactory {
         if (world.getEntityDefinitionByName(prdAction.getEntity()) == null)
             throw new RuntimeException("Entity " + prdAction.getEntity() + " not found");
         if (world.getEntityDefinitionByName(prdAction.getEntity()).getPropertyByName(prdAction.getProperty()) == null &&
-                world.getEntityDefinitionByName(prdAction.getEntity()).getPropertyByName(prdAction.getResultProp()) == null)
+                world.getEntityDefinitionByName(prdAction.getEntity()).getPropertyByName(prdAction.getResultProp()) == null && !prdAction.getType().equals("kill"))
             throw new RuntimeException("Property " + prdAction.getProperty() + " not found");
         switch (prdAction.getType()) {
             case "increase":
