@@ -12,8 +12,6 @@ import java.util.Scanner;
 public class Main {
     private static final Engine engine = new Engine();
 
-    public static final Scanner scanner = new Scanner(System.in);
-
     public static Engine getEngine() {
         return engine;
     }
@@ -42,7 +40,7 @@ public class Main {
     }
 
     public static void getUserInput() throws ErrorException {
-        // Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         int input = Integer.parseInt(scanner.nextLine());
         switch (input) {
             case 1:
@@ -97,12 +95,12 @@ public class Main {
         for (int i = 0; i < envDTOList.size(); i++) {
             System.out.println((i + 1) + ". " + envDTOList.get(i).getName() + " = " + envDTOList.get(i).getValue());
         }
-        System.out.println(envDTOList.size()+". Run simulation");
+        System.out.println(envDTOList.size() + 1 + ". Run simulation");
     }
 
     private static List<EnvDTO> modifyEnvironmentVariable(List<EnvDTO> envDTOList, int chosenIndex) {
         EnvDTO chosenDTO = envDTOList.get(chosenIndex - 1); // Adjust for 0-based index
-        // Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         try {
             System.out.println(chosenDTO.toString());
             System.out.println("Enter a new value: (Press Enter to go back)");
@@ -121,7 +119,7 @@ public class Main {
     public static void setEnvironmentVariables() {
 
         List<EnvDTO> requiredEnvDTO = engine.getRequiredEnvDTO();
-        // Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         boolean continueLoop = true;
         while (continueLoop) {
@@ -130,9 +128,9 @@ public class Main {
             int chosenIndex = scanner.nextInt();
             scanner.nextLine();
 
-            if (chosenIndex == requiredEnvDTO.size()) {
+            if (chosenIndex == requiredEnvDTO.size()+1) {
                 continueLoop = false;
-            } else if (chosenIndex >= 1 && chosenIndex < requiredEnvDTO.size()) {
+            } else if (chosenIndex >= 1 && chosenIndex <= requiredEnvDTO.size()) {
                 // Valid index chosen
                 requiredEnvDTO = modifyEnvironmentVariable(requiredEnvDTO, chosenIndex);
             } else {
