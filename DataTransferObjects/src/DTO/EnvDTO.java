@@ -51,12 +51,6 @@ public class EnvDTO implements java.io.Serializable {
         }
     }
 
-    public String getFrom() {
-        if (from == null)
-            return null;
-        return from.toString();
-    }
-
     public String getTo() {
         if (to == null)
             return null;

@@ -61,7 +61,7 @@ public class Menu {
 
     public static void PrintOldSimulationMenu() throws ErrorException {
         Scanner scanner = new Scanner(System.in);
-        int input = -1;
+        int input;
         List<RunEndDTO> pastSimulationArtifactDTOMap = Main.getEngine().getPastArtifacts();
         int goBack = pastSimulationArtifactDTOMap.size() + 1;
         boolean continueLoop = true;
@@ -123,7 +123,7 @@ public class Menu {
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
-        } ;
+        }
     }
 
     private static void viewEntityPropertiesHistogramMenu(RunStatisticsDTO runStatisticsDTO) {
