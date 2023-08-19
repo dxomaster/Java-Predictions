@@ -28,7 +28,7 @@ public class Engine implements Serializable {
     private Map<String, World> pastSimulationWorlds = new HashMap<>();
     private World world;
 
-    public RunEndDTO runSimulation() throws ErrorException {
+    public RunEndDTO runSimulation() throws ErrorException, WarnException {
 
         RunEndDTO finishedArtifact = world.run();
 

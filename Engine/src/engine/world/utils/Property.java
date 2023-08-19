@@ -13,12 +13,9 @@ public class Property implements java.io.Serializable {
     private Object value;
 
     public Property(String name, PropertyType type, Range range, Object value) throws WarnException {
-        this.type = type;
-        this.name = name;
-        this.isRandomlyGenerated = false;
-        this.setRange(range);
+        this(name,type,range);
         this.setValue(value);
-
+        this.isRandomlyGenerated = false;
     }
 
     public Property(String name, PropertyType type, Range range) {
@@ -124,5 +121,9 @@ public class Property implements java.io.Serializable {
             }
         }
         this.range = range;
+    }
+
+    public boolean isRandomInit() {
+        return isRandomlyGenerated;
     }
 }
