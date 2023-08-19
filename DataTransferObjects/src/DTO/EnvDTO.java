@@ -62,4 +62,13 @@ public class EnvDTO implements java.io.Serializable {
             return null;
         return to.toString();
     }
+
+    public String toString() {
+        return "name:'" + name + '\'' +
+                ", type:" + type.getSimpleName() +
+                ", value:" + value +
+                ", from:" + from +
+                ", to:" + to +
+                '}';
+    }
 }
