@@ -35,7 +35,7 @@ public class Menu {
         boolean continueLoop = true;
         while (continueLoop) {
             System.out.println("\nRun ID: " + selectedRun.getUUID());
-            System.out.println("\n1.View Entity count");
+            System.out.println("1.View Entity count");
             System.out.println("2.View Entity properties histogram");
             System.out.println("3.Go back");
 
@@ -50,6 +50,7 @@ public class Menu {
                         break;
                     case 3:
                         continueLoop = false;
+                        break;
                     default:
                         System.out.println("Invalid option. please choose from the following:");
                 }
@@ -71,7 +72,7 @@ public class Menu {
 
         while (continueLoop) {
             int counter = 1;
-            System.out.println("Choose run to view: ");
+            System.out.println("\nChoose run to view: ");
             for (RunEndDTO entry : pastSimulationArtifactDTOMap) {
                 System.out.println(counter + ". Run ID: " + entry.getUUID() + " Run Date: " + entry.getFormattedDate());
                 counter++;
@@ -81,7 +82,7 @@ public class Menu {
                 input = Integer.parseInt(scanner.nextLine());
                 if (input == goBack) {
                     continueLoop = false;
-                } else if (input > 0 && input <= pastSimulationArtifactDTOMap.size())
+                } else if (input >=1 && input <= pastSimulationArtifactDTOMap.size())
                     chooseViewMode(pastSimulationArtifactDTOMap.get(input - 1));
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
