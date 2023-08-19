@@ -5,6 +5,9 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
+      <artifact name="DataTransferObjects:jar" />
+      <artifact name="Engine" />
+      <artifact name="Exception:jar" />
       <artifact name="UI:jar" />
     </artifacts-to-build>
   </component>
@@ -12,8 +15,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="fixed random-init issue">
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/RuleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/factory/RuleFactory.java" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="remove stupid try catch">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EnvDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EnvDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/menu/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -326,7 +333,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692346795109</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="remove stupid try catch">
+      <option name="closed" value="true" />
+      <created>1692442351380</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1692442351380</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,7 +374,8 @@
     <MESSAGE value="more informative error messages" />
     <MESSAGE value="better condition on property check" />
     <MESSAGE value="fixed random-init issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed random-init issue" />
+    <MESSAGE value="remove stupid try catch" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove stupid try catch" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -383,11 +399,6 @@
           <url>file://$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java</url>
           <line>32</line>
           <option name="timeStamp" value="69" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>

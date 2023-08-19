@@ -64,11 +64,10 @@ public class EnvDTO implements java.io.Serializable {
     }
 
     public String toString() {
-        return "name:'" + name + '\'' +
-                ", type:" + type.getSimpleName() +
-                ", value:" + value +
-                ", from:" + from +
-                ", to:" + to +
-                '}';
+        return "Name: '" + name + '\'' +
+                ", Type: " + type.getSimpleName() +
+                ", Value: " + value +
+                ", Range: (" + from +
+                " - " + to+ ").";
     }
 }

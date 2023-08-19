@@ -39,8 +39,8 @@ public class EntityDefinition implements java.io.Serializable {
     @Override
     public String toString() {
         return "Entity: " + name +
-                ", Population: " + population +
-                ", Properties: " + entityProperties.values();
+                "\nPopulation: " + population +
+                "\nProperties: " + entityProperties.values();
     }
 
     public List<Entity> createEntityList() throws WarnException {

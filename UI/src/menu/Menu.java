@@ -63,22 +63,27 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         int input = -1;
         List<RunEndDTO> pastSimulationArtifactDTOMap = Main.getEngine().getPastArtifacts();
-        int exit = pastSimulationArtifactDTOMap.size() + 1;
+        int goBack = pastSimulationArtifactDTOMap.size() + 1;
+        boolean continueLoop = true;
         if (pastSimulationArtifactDTOMap.isEmpty()) {
             throw new ErrorException("No past simulation runs");
         }
 
-        while (input != exit) {
+        while (continueLoop) {
             int counter = 1;
             System.out.println("Choose run to view: ");
             for (RunEndDTO entry : pastSimulationArtifactDTOMap) {
                 System.out.println(counter + ". Run ID: " + entry.getUUID() + " Run Date: " + entry.getFormattedDate());
                 counter++;
             }
-            System.out.println(exit + ". Go back");
+            System.out.println(goBack + ". Go back");
             try {
                 input = Integer.parseInt(scanner.nextLine());
-                chooseViewMode(pastSimulationArtifactDTOMap.get(input - 1));
+                if (input == goBack) {
+                    continueLoop = false;
+                }
+                else if (input > 0 && input <= pastSimulationArtifactDTOMap.size())
+                 chooseViewMode(pastSimulationArtifactDTOMap.get(input - 1));
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
@@ -105,11 +110,14 @@ public class Menu {
                 System.out.println(counter + ". " + property);
                 counter++;
             }
+            System.out.println(counter + ". Go back");
             try {
                 input = Integer.parseInt(scanner.nextLine());
                 if (input >= 1 && input < counter) {
                     viewPropertyHistogram(entityDTO.getPropertyDTOList().get(input - 1));
                 }
+                else if (input == counter)
+                    continueLoop = false;
                 else
                     System.out.println("Invalid option. please choose from the following:");
             } catch (Exception e) {
