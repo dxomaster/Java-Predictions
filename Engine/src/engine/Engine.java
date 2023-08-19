@@ -139,7 +139,7 @@ public class Engine implements Serializable {
             PRDWorld jaxbWorld = (PRDWorld) jaxbUnmarshaller.unmarshal(file);
             this.world = new World(jaxbWorld);
             this.pastSimulationWorlds = new HashMap<>();
-            this.simulationName = file.getName();
+            this.simulationName = filename;
 
         } catch (Exception e) {
             throw new ErrorException("Error in loading file please make sure this is a valid XML file with the correct schema:\n" + e.getMessage());
