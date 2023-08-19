@@ -62,6 +62,6 @@ public class EnvDTO implements java.io.Serializable {
                 ", Type: " + type.getSimpleName() +
                 ", Value: " + value +
                 ", Range: (" + from +
-                " - " + to+ ").";
+                " - " + to + ").";
     }
 }

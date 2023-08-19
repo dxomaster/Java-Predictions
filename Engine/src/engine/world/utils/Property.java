@@ -13,7 +13,7 @@ public class Property implements java.io.Serializable {
     private Object value;
 
     public Property(String name, PropertyType type, Range range, Object value) throws WarnException {
-        this(name,type,range);
+        this(name, type, range);
         this.setValue(value);
         this.isRandomlyGenerated = false;
     }

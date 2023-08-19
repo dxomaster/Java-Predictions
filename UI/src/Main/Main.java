@@ -127,12 +127,11 @@ public class Main {
             displayEnvironmentVariables(requiredEnvDTO);
             try {
                 chosenIndex = Integer.parseInt(scanner.nextLine());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("Invalid input: " + e.getMessage());
                 continue;
             }
-            if (chosenIndex == requiredEnvDTO.size()+1) {
+            if (chosenIndex == requiredEnvDTO.size() + 1) {
                 continueLoop = false;
             } else if (chosenIndex >= 1 && chosenIndex <= requiredEnvDTO.size()) {
                 // Valid index chosen
@@ -143,38 +142,3 @@ public class Main {
         }
     }
 }
-
-//    public static void setEnvironmentVariables() {
-//        List<EnvDTO> requiredEnvDTO = engine.getRequiredEnvDTO();
-//        System.out.println("Required Environment Variables:");
-//        Scanner scanner = new Scanner(System.in);
-//        EnvDTO[] requiredEnvDTOArr = requiredEnvDTO.toArray(new EnvDTO[0]);
-//        for (int i = 0; i < requiredEnvDTOArr.length; i++) {
-//            EnvDTO envDTO = requiredEnvDTOArr[i];
-//            System.out.println( i+1 + ". " + envDTO.getName() + " (" + envDTO.getType().getSimpleName() + "):");
-//            if (envDTO.getFrom() != null && envDTO.getTo() != null)
-//                System.out.println("Range: " + envDTO.getFrom() + " - " + envDTO.getTo());
-//            System.out.println("Default value: " + envDTO.getValue());
-//            System.out.println("Press enter to use default value, or enter new value below:");
-//            try {
-//                String input = scanner.nextLine();
-//                if (!input.isEmpty())
-//                    envDTO.setValue(input);
-//                engine.setEnvVariableWithDTO(envDTO);
-//
-//            } catch (Exception e) {
-//                i--;//stay an iteration
-//                System.out.println("Invalid input:");
-//                System.out.println(e.getMessage());
-//                requiredEnvDTO = engine.getRequiredEnvDTO();
-//                requiredEnvDTOArr = requiredEnvDTO.toArray(new EnvDTO[0]);
-//            }
-//
-//        }
-//
-//        System.out.println("Environment Variables Values:");
-//        for (EnvDTO envDTO : requiredEnvDTOArr) {
-//            System.out.println(envDTO.getName() + ": " + envDTO.getValue());
-//        }
-//    }
-//}

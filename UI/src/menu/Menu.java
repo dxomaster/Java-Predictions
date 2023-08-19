@@ -81,9 +81,8 @@ public class Menu {
                 input = Integer.parseInt(scanner.nextLine());
                 if (input == goBack) {
                     continueLoop = false;
-                }
-                else if (input > 0 && input <= pastSimulationArtifactDTOMap.size())
-                 chooseViewMode(pastSimulationArtifactDTOMap.get(input - 1));
+                } else if (input > 0 && input <= pastSimulationArtifactDTOMap.size())
+                    chooseViewMode(pastSimulationArtifactDTOMap.get(input - 1));
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
@@ -115,8 +114,7 @@ public class Menu {
                 input = Integer.parseInt(scanner.nextLine());
                 if (input >= 1 && input < counter) {
                     viewPropertyHistogram(entityDTO.getPropertyDTOList().get(input - 1));
-                }
-                else if (input == counter)
+                } else if (input == counter)
                     continueLoop = false;
                 else
                     System.out.println("Invalid option. please choose from the following:");
@@ -144,8 +142,7 @@ public class Menu {
                 if (input >= 1 && input <= runStatisticsDTO.getEntityDefinitionDTOList().size()) {
                     EntityDTO entityDTO = runStatisticsDTO.getEntityDefinitionDTOList().get(input - 1);
                     viewEntityPropertiesMenu(entityDTO);
-                }
-                else if (input == runStatisticsDTO.getEntityDefinitionDTOList().size() + 1)
+                } else if (input == runStatisticsDTO.getEntityDefinitionDTOList().size() + 1)
                     continueLoop = false;
                 else
                     System.out.println("Invalid option. please choose from the following:");

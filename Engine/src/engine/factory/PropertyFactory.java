@@ -92,13 +92,12 @@ public class PropertyFactory {
         Map<String, Property> propertyList = new HashMap<>();
         for (Property property : entityDefinition.getProperties().values()) {
             Property propertyClone;
-            if(property.isRandomInit()) {
+            if (property.isRandomInit()) {
                 String type = property.getType().propertyClass.getSimpleName().toLowerCase();
-                if(type.equals("integer"))
+                if (type.equals("integer"))
                     type = "decimal";
                 propertyClone = createRandomInitEntityProperty(property.getName(), property.getRange(), type);
-            }
-            else
+            } else
                 propertyClone = new Property(property.getName(), property.getType(), property.getRange(), property.getValue());
             propertyList.put(propertyClone.getName(), propertyClone);
         }
