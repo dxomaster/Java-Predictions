@@ -127,10 +127,7 @@ public class Main {
             displayEnvironmentVariables(requiredEnvDTO);
             try {
                 chosenIndex = Integer.parseInt(scanner.nextLine());
-            } catch (Exception e) {
-                System.out.println("Invalid input: " + e.getMessage());
-                continue;
-            }
+
             if (chosenIndex == requiredEnvDTO.size() + 1) {
                 continueLoop = false;
             } else if (chosenIndex >= 1 && chosenIndex <= requiredEnvDTO.size()) {
@@ -138,6 +135,10 @@ public class Main {
                 requiredEnvDTO = modifyEnvironmentVariable(requiredEnvDTO, chosenIndex);
             } else {
                 System.out.println("Invalid choice. Please enter a valid option.");
+            }
+            }
+            catch (Exception e) {
+                System.out.println("Invalid input: " + e.getMessage());
             }
         }
     }

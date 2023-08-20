@@ -15,9 +15,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="set environment variable">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="fix very annoying bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Main/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,7 +339,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692442351380</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="fix very annoying bug">
+      <option name="closed" value="true" />
+      <created>1692453605948</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1692453605948</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -373,7 +381,8 @@
     <MESSAGE value="better condition on property check" />
     <MESSAGE value="fixed random-init issue" />
     <MESSAGE value="remove stupid try catch" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove stupid try catch" />
+    <MESSAGE value="fix very annoying bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix very annoying bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
