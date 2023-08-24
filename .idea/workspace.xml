@@ -15,9 +15,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="fix very annoying bug">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="fix null exception when changing env prop value">
+      <change afterPath="$PROJECT_DIR$/UI/src/PredictionsApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/entity/EntityDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ActionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActionableFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ActionableFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ActivationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ActivationFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ConditionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/EntityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/EntityFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/ExpressionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ExpressionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/PropertyFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/RangeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/RangeFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/factory/RuleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/RuleFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/ActionNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/ActionNames.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/Actionable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Actionable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/CalculationOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/CalculationOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/ConditionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/ConditionOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/LogicalOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/LogicalOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/MultipleCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/Satisfiable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/Satisfiable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/condition/SimpleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/action/expression/functionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/functionEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/rule/utils/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/utils/Activation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/PropertyType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/PropertyType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/world/utils/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/Range.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +129,7 @@
       <recent name="C:\Users\97250\intellijU_projects\Java-Predictions\DTO" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.PredictionsApplication">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -106,6 +139,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PredictionsApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="PredictionsApplication" />
+      <module name="UI" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PredictionsApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -138,6 +183,10 @@
       <workItem from="1692342725638" duration="5284000" />
       <workItem from="1692389039869" duration="4059000" />
       <workItem from="1692448420471" duration="2174000" />
+      <workItem from="1692707683760" duration="2989000" />
+      <workItem from="1692738888166" duration="1000" />
+      <workItem from="1692738891038" duration="602000" />
+      <workItem from="1692779418683" duration="8535000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -347,7 +396,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692453605948</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="fix null exception when changing env prop value">
+      <option name="closed" value="true" />
+      <created>1692490868921</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1692490868921</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,7 +439,8 @@
     <MESSAGE value="fixed random-init issue" />
     <MESSAGE value="remove stupid try catch" />
     <MESSAGE value="fix very annoying bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix very annoying bug" />
+    <MESSAGE value="fix null exception when changing env prop value" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix null exception when changing env prop value" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -393,17 +451,17 @@
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/factory/ConditionFactory.java</url>
+          <url>file://$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java</url>
           <line>56</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/factory/ConditionFactory.java</url>
+          <url>file://$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java</url>
           <line>97</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/factory/PropertyFactory.java</url>
+          <url>file://$PROJECT_DIR$/Engine/src/factory/PropertyFactory.java</url>
           <line>32</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
@@ -418,19 +476,9 @@
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/world/World.java</url>
+          <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
           <line>36</line>
           <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/world/World.java</url>
-          <line>121</line>
-          <option name="timeStamp" value="74" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/Main/Main.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="83" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

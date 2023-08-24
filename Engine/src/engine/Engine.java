@@ -3,11 +3,11 @@ package engine;
 import DTO.*;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
-import engine.entity.Entity;
-import engine.entity.EntityDefinition;
+import entity.Entity;
+import entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDWorld;
-import engine.world.World;
-import engine.world.utils.Property;
+import world.World;
+import world.utils.Property;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
