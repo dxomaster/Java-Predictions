@@ -1,6 +1,8 @@
 package world.utils;
 
 
+import DTO.PropertyDTO;
+import DTO.RangeDTO;
 import Exception.WARN.WarnException;
 
 import java.util.Random;
@@ -64,11 +66,14 @@ public class Property implements java.io.Serializable {
     @Override
     public String toString() {
         String rangeString = range != null ? range.toString() : "None";
+
+
         return "Property Name: " + name +
                 ", Type: " + type.propertyClass.getSimpleName() +
                 ", Range: " + rangeString +
                 ", Random initialization: " + isRandomlyGenerated;
     }
+
 
     public Object getValue() {
         return value;
@@ -125,5 +130,14 @@ public class Property implements java.io.Serializable {
 
     public boolean isRandomInit() {
         return isRandomlyGenerated;
+    }
+
+    public PropertyDTO getPropertyDTO() {
+        RangeDTO rangeDTO;
+        if(range !=null)
+             rangeDTO = range.getRangeDTO();
+        else
+            rangeDTO = null;
+        return new PropertyDTO(rangeDTO, this.name, this.type.propertyClass.getSimpleName(), this.value.toString());
     }
 }

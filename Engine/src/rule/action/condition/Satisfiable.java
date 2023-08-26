@@ -1,5 +1,6 @@
 package rule.action.condition;
 
+import DTO.SatisfiableDTO;
 import Exception.ERROR.ErrorException;
 import entity.Entity;
 import world.World;
@@ -10,4 +11,6 @@ public interface Satisfiable {
     boolean isSatisfied(World world, Entity entity) throws ErrorException;
 
     List<String> getEntities();
+
+    SatisfiableDTO getSatisfiableDTO();
 }

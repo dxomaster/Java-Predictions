@@ -1,5 +1,7 @@
 package rule.action;
 
+import DTO.ActionDTO;
+import DTO.ActionableDTO;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
@@ -68,6 +70,17 @@ public class Action implements Actionable, java.io.Serializable {
     @Override
     public String getName() {
         return action.actionInString;
+    }
+
+    @Override
+    public ActionableDTO getActionableDTO() {
+        String[] expressions = new String[this.expressions.length];
+        for (int i = 0; i < this.expressions.length; i++) {
+            expressions[i] = this.expressions[i].toString();
+        }
+        if(this.operator == null)
+            return new ActionDTO(entityDefinition.getName(),action.actionInString,expressions, propertyNameInString, "none");
+        return new ActionDTO(entityDefinition.getName(),action.actionInString,expressions, propertyNameInString, operator.name());
     }
 
 

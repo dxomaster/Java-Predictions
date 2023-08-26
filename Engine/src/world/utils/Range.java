@@ -1,5 +1,7 @@
 package world.utils;
 
+import DTO.RangeDTO;
+
 public class Range implements java.io.Serializable {
     private final PropertyType type;
     private final Object from;
@@ -41,5 +43,21 @@ public class Range implements java.io.Serializable {
 
         return "(" + from +
                 " - " + to + ")";
+    }
+
+    public RangeDTO getRangeDTO() {
+        if(from instanceof Integer && to instanceof Integer) {
+            int from = (Integer)this.from;
+            int to = (Integer)this.to;
+            return new RangeDTO(from, to);
+        }
+        else if(from instanceof Float && to instanceof Float) {
+            float from = (Float)this.from;
+            float to = (Float)this.to;
+            return new RangeDTO(from, to);
+        }
+        else {
+            throw new IllegalArgumentException("Range type not supported");
+        }
     }
 }

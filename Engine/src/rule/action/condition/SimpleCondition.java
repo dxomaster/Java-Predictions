@@ -1,5 +1,7 @@
 package rule.action.condition;
 
+import DTO.SatisfiableDTO;
+import DTO.SimpleConditionDTO;
 import Exception.ERROR.ErrorException;
 import entity.Entity;
 import entity.EntityDefinition;
@@ -14,6 +16,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleCondition implements Satisfiable, java.io.Serializable {
+    public String getProperty() {
+        return property;
+    }
+
+    public EntityDefinition getEntityDefinition() {
+        return entityDefinition;
+    }
+
+    public ConditionOperator getOperator() {
+        return operator;
+    }
+
+    public Expression getExpression() {
+        return expression;
+    }
+
     private final String property;
     private final EntityDefinition entityDefinition;
     private final ConditionOperator operator;
@@ -121,10 +139,18 @@ public class SimpleCondition implements Satisfiable, java.io.Serializable {
         return entities;
     }
 
+    @Override
+    public SatisfiableDTO getSatisfiableDTO() {
+        return new SimpleConditionDTO(property,entityDefinition.getName(), operator.toString(), expression.toString());
+    }
+
+
     public String getEntityName() {
         return entityDefinition.getName();
     }
-
+    public String getExpressionInString() {
+        return expression.toString();
+    }
     @Override
     public String toString() {
         return "SimpleCondition{" +
@@ -133,5 +159,9 @@ public class SimpleCondition implements Satisfiable, java.io.Serializable {
                 ", operator=" + operator +
                 ", expression=" + expression +
                 '}';
+    }
+
+    public SimpleConditionDTO getSimpleConditionDTO() {
+        return new SimpleConditionDTO(property, entityDefinition.getName(), operator.toString(), expression.toString());
     }
 }

@@ -1,5 +1,9 @@
 package rule.action.condition;
 
+import DTO.ActionableDTO;
+import DTO.ConditionDTO;
+import DTO.SatisfiableDTO;
+import DTO.SimpleConditionDTO;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
@@ -50,8 +54,35 @@ public class Condition implements Satisfiable, Actionable, java.io.Serializable 
     }
 
     @Override
+    public SatisfiableDTO getSatisfiableDTO() {
+        List<ActionableDTO> actionsToPreformIfConditionIsSatisfied = new ArrayList<>();
+        for (Actionable action : this.actionsToPreformIfConditionIsSatisfied) {
+            actionsToPreformIfConditionIsSatisfied.add(action.getActionableDTO());
+        }
+        List<ActionableDTO> actionsToPreformIfConditionIsNotSatisfied = new ArrayList<>();
+        for (Actionable action : this.actionsToPreformIfConditionIsNotSatisfied) {
+            actionsToPreformIfConditionIsNotSatisfied.add(action.getActionableDTO());
+        }
+        return new ConditionDTO(actionsToPreformIfConditionIsSatisfied, actionsToPreformIfConditionIsNotSatisfied, simpleCondition.getSimpleConditionDTO());
+    }
+
+    @Override
     public String getName() {
         return "condition";
+    }
+
+    @Override
+    public ActionableDTO getActionableDTO() {
+        List<ActionableDTO> actionsToPreformIfConditionIsSatisfied = new ArrayList<>();
+        for (Actionable action : this.actionsToPreformIfConditionIsSatisfied) {
+            actionsToPreformIfConditionIsSatisfied.add(action.getActionableDTO());
+        }
+        List<ActionableDTO> actionsToPreformIfConditionIsNotSatisfied = new ArrayList<>();
+        for (Actionable action : this.actionsToPreformIfConditionIsNotSatisfied) {
+            actionsToPreformIfConditionIsNotSatisfied.add(action.getActionableDTO());
+        }
+        SimpleConditionDTO simpleConditionDTO = new SimpleConditionDTO(simpleCondition.getProperty(), simpleCondition.getEntityName(), simpleCondition.getOperator().toString(), simpleCondition.getExpressionInString());
+        return new ConditionDTO(actionsToPreformIfConditionIsSatisfied, actionsToPreformIfConditionIsNotSatisfied, simpleConditionDTO);
     }
 
 

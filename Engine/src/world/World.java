@@ -1,6 +1,6 @@
 package world;
 
-import DTO.RunEndDTO;
+import DTO.*;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
@@ -28,6 +28,23 @@ public class World implements java.io.Serializable {
     private Integer terminationByTicks;
     private Integer terminationBySeconds;
 
+    public WorldDTO getWorldDTO() {
+        List<PropertyDTO> environmentVariables = new ArrayList<>();
+        for (Property property : this.environmentVariables) {
+            environmentVariables.add(property.getPropertyDTO());
+        }
+        List<EntityDTO> entityDTOList = new ArrayList<>();
+        for (EntityDefinition entityDefinition : entityDefinitionMap.values()) {
+            entityDTOList.add(entityDefinition.getEntityDTO());
+        }
+        List<RuleDTO> ruleDTOList = new ArrayList<>();
+        for (Rule rule : rules) {
+            ruleDTOList.add(rule.getRuleDTO());
+        }
+        terminationDTO termination = new terminationDTO(terminationByTicks, terminationBySeconds);
+
+        return new WorldDTO(environmentVariables, entityDTOList, ruleDTOList, termination);
+    }
     public World(PRDWorld prdWorld) throws ErrorException {
         try {
             Map<String, EntityDefinition> entityDefinitionList = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());

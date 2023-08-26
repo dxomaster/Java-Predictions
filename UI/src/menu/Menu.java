@@ -1,7 +1,7 @@
 package menu;
 
-import DTO.EntityDTO;
-import DTO.PropertyDTO;
+import DTO.StatisticEntityDTO;
+import DTO.StatisticPropertyDTO;
 import DTO.RunEndDTO;
 import DTO.RunStatisticsDTO;
 import Exception.ERROR.ErrorException;
@@ -90,16 +90,16 @@ public class Menu {
         }
     }
 
-    public static void viewPropertyHistogram(PropertyDTO propertyDTO) {
-        System.out.println("Property name: " + propertyDTO.getName());
-        System.out.println("Property type: " + propertyDTO.getType());
+    public static void viewPropertyHistogram(StatisticPropertyDTO statisticPropertyDTO) {
+        System.out.println("Property name: " + statisticPropertyDTO.getName());
+        System.out.println("Property type: " + statisticPropertyDTO.getType());
         System.out.println("Property Histogram: (value: frequency)");
-        for (Map.Entry<String, Integer> entry : propertyDTO.getValueFrequency().entrySet()) {
+        for (Map.Entry<String, Integer> entry : statisticPropertyDTO.getValueFrequency().entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
     }
 
-    public static void viewEntityPropertiesMenu(EntityDTO entityDTO) {
+    public static void viewEntityPropertiesMenu(StatisticEntityDTO entityDTO) {
         Scanner scanner = new Scanner(System.in);
         int counter, input;
         boolean continueLoop = true;
@@ -133,16 +133,16 @@ public class Menu {
         while (continueLoop) {
             System.out.println("Choose Entity to view properties: ");
             counter = 1;
-            for (EntityDTO entityDTO : runStatisticsDTO.getEntityDefinitionDTOList()) {
-                System.out.println(counter + ". " + entityDTO.getName());
+            for (StatisticEntityDTO statisticEntityDTO : runStatisticsDTO.getEntityDefinitionDTOList()) {
+                System.out.println(counter + ". " + statisticEntityDTO.getName());
                 counter++;
             }
             System.out.println(runStatisticsDTO.getEntityDefinitionDTOList().size() + 1 + ". Go back");
             try {
                 input = Integer.parseInt(scanner.nextLine());
                 if (input >= 1 && input <= runStatisticsDTO.getEntityDefinitionDTOList().size()) {
-                    EntityDTO entityDTO = runStatisticsDTO.getEntityDefinitionDTOList().get(input - 1);
-                    viewEntityPropertiesMenu(entityDTO);
+                    StatisticEntityDTO statisticEntityDTO = runStatisticsDTO.getEntityDefinitionDTOList().get(input - 1);
+                    viewEntityPropertiesMenu(statisticEntityDTO);
                 } else if (input == runStatisticsDTO.getEntityDefinitionDTOList().size() + 1)
                     continueLoop = false;
                 else

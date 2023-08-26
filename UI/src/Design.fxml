@@ -5,18 +5,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="init.PredictionsController">
    <top>
-      <FlowPane hgap="145.0" prefHeight="21.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <FlowPane hgap="20.0" prefHeight="21.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" text="Load File">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loadFile" text="Load File">
                <FlowPane.margin>
                   <Insets left="10.0" />
                </FlowPane.margin>
             </Button>
-            <Label alignment="CENTER" text="Label">
+            <Label fx:id="fileLoadedLabel" alignment="CENTER" text="No File Loaded">
                <FlowPane.margin>
                   <Insets />
                </FlowPane.margin>
@@ -28,12 +28,12 @@
             </FlowPane>
             <FlowPane hgap="185.0" prefHeight="37.0" prefWidth="599.0">
                <children>
-                  <Button mnemonicParsing="false" text="Details">
+                  <Button mnemonicParsing="false" onAction="#showSimulationDetails" text="Details">
                      <FlowPane.margin>
                         <Insets left="10.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="New execution">
+                  <Button mnemonicParsing="false" onAction="#newExecution" text="New execution">
                      <FlowPane.margin>
                         <Insets />
                      </FlowPane.margin>
@@ -57,4 +57,7 @@
          </opaqueInsets>
       </FlowPane>
    </top>
+   <center>
+      <StackPane fx:id="dynamicDisplay" prefHeight="317.0" prefWidth="193.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

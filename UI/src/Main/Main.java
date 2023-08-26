@@ -30,11 +30,11 @@ public class Main {
     }
 
     public static void viewEntityCount(RunStatisticsDTO runStatisticsDTO) {
-        for (EntityDTO entityDTO : runStatisticsDTO.getEntityDefinitionDTOList()) {
+        for (StatisticEntityDTO statisticEntityDTO : runStatisticsDTO.getEntityDefinitionDTOList()) {
 
-            int population = entityDTO.getPopulation();
-            int finalPopulation = entityDTO.getFinalPopulation();
-            System.out.println("Entity name: " + entityDTO.getName());
+            int population = statisticEntityDTO.getPopulation();
+            int finalPopulation = statisticEntityDTO.getFinalPopulation();
+            System.out.println("Entity name: " + statisticEntityDTO.getName());
             System.out.println("Initial population: " + population);
             System.out.println("Final population: " + finalPopulation + "\n");
         }
@@ -54,7 +54,7 @@ public class Main {
                 System.out.println("\nFile loaded successfully\n");
                 break;
             case 2:
-                WorldPrintDTO worldToPrint = engine.getSimulationParameters();
+                WorldDTO worldToPrint = engine.getSimulationParameters();
                 System.out.println(worldToPrint);
                 break;
             case 3:

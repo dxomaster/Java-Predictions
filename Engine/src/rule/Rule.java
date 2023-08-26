@@ -1,5 +1,7 @@
 package rule;
 
+import DTO.ActionableDTO;
+import DTO.RuleDTO;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
@@ -8,6 +10,7 @@ import rule.action.Actionable;
 import rule.utils.Activation;
 import world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rule extends RuleFactory implements java.io.Serializable {
@@ -46,5 +49,14 @@ public class Rule extends RuleFactory implements java.io.Serializable {
     }
 
 
+    public RuleDTO getRuleDTO() {
+        List<ActionableDTO> actions = new ArrayList<>();
+        for (Actionable action : this.actions) {
+            actions.add(action.getActionableDTO());
+        }
+
+        return new RuleDTO(name,this.activation.getProbability().floatValue(),this.activation.getTicks().floatValue(),
+                actions.size(), actions);
+    }
 }
 

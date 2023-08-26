@@ -1,9 +1,12 @@
 package entity;
 
+import DTO.EntityDTO;
+import DTO.PropertyDTO;
 import Exception.WARN.WarnException;
 import factory.EntityFactory;
 import world.utils.Property;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,5 +56,13 @@ public class EntityDefinition implements java.io.Serializable {
 
     public Map<String, Property> getProperties() {
         return entityProperties;
+    }
+
+    public EntityDTO getEntityDTO() {
+        List<PropertyDTO> entityProperties = new ArrayList<>();
+        for (Property property : this.entityProperties.values()) {
+            entityProperties.add(property.getPropertyDTO());
+        }
+        return new EntityDTO(name, entityProperties);
     }
 }

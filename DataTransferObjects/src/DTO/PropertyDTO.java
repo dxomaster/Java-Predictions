@@ -1,22 +1,14 @@
 package DTO;
 
-import java.util.Map;
+import org.w3c.dom.ranges.Range;
 
-public class PropertyDTO implements java.io.Serializable {
-    private final String name;
-    private final String type;
-    private final Map<String, Integer> valueFrequency;
+public class PropertyDTO {
+    private RangeDTO range;
+    private String name;
+    private String type;
 
-    public PropertyDTO(String name, String type, Map<String, Integer> valueFrequency) {
-        this.name = name;
-        this.type = type;
-        this.valueFrequency = valueFrequency;
-
-
-    }
-
-    public Map<String, Integer> getValueFrequency() {
-        return valueFrequency;
+    public RangeDTO getRange() {
+        return range;
     }
 
     public String getName() {
@@ -25,5 +17,18 @@ public class PropertyDTO implements java.io.Serializable {
 
     public String getType() {
         return type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    private String value;
+
+    public PropertyDTO(RangeDTO range, String name, String type, String value) {
+        this.range = range;
+        this.name = name;
+        this.type = type;
+        this.value = value;
     }
 }

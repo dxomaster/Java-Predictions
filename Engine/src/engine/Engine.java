@@ -60,28 +60,28 @@ public class Engine implements Serializable {
         if (pastSimulationWorlds.containsKey(uuid)) {
             World world = pastSimulationWorlds.get(uuid);
             //Map<String, List<EntityDTO>> entitiesDTO = createWorldEntitiesDTO(world.getEntities());
-            List<EntityDTO> entityDefinitionDTO = createEntityDefinitionDTO(world);
+            List<StatisticEntityDTO> entityDefinitionDTO = createEntityDefinitionDTO(world);
             return new RunStatisticsDTO(entityDefinitionDTO);
         }
         throw new ErrorException("No such simulation");
     }
 
-    private List<EntityDTO> createEntityDefinitionDTO(World world) {
-        List<EntityDTO> entityDTOList = new ArrayList<>();
+    private List<StatisticEntityDTO> createEntityDefinitionDTO(World world) {
+        List<StatisticEntityDTO> entityDTOList = new ArrayList<>();
         for (EntityDefinition entityDefinition : world.getEntityDefinitionMap().values()) {
-            List<PropertyDTO> propertyDTOList = new ArrayList<>();
+            List<StatisticPropertyDTO> propertyDTOList = new ArrayList<>();
             for (Property property : entityDefinition.getProperties().values()) {
 
                 List<Entity> entityList = world.getEntities().get(entityDefinition.getName());
-                PropertyDTO propertyDTO = createPropertyDTO(property, entityList);
-                propertyDTOList.add(propertyDTO);
+                StatisticPropertyDTO statisticPropertyDTO = createPropertyDTO(property, entityList);
+                propertyDTOList.add(statisticPropertyDTO);
             }
-            entityDTOList.add(new EntityDTO(propertyDTOList, entityDefinition.getName(), entityDefinition.getPopulation(), entityDefinition.getFinalPopulation()));
+            entityDTOList.add(new StatisticEntityDTO(propertyDTOList, entityDefinition.getName(), entityDefinition.getPopulation(), entityDefinition.getFinalPopulation()));
         }
         return entityDTOList;
     }
 
-    private PropertyDTO createPropertyDTO(Property property, List<Entity> entityList) {
+    private StatisticPropertyDTO createPropertyDTO(Property property, List<Entity> entityList) {
         Map<String, Integer> frequencyMap = new HashMap<>();
         for (Entity entity : entityList) {
             Property prop = entity.getPropertyByName(property.getName());
@@ -92,7 +92,7 @@ public class Engine implements Serializable {
             } else
                 frequencyMap.put(prop.getValue().toString(), 1);
         }
-        return new PropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap);
+        return new StatisticPropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap);
 
     }
 
@@ -148,10 +148,10 @@ public class Engine implements Serializable {
 
     }
 
-    public WorldPrintDTO getSimulationParameters() {
+    public WorldDTO getSimulationParameters() {
         if (world == null)
             throw new IllegalArgumentException("No file is loaded");
-        return new WorldPrintDTO(world.toString());
+        return world.getWorldDTO();
     }
 
     public List<RunEndDTO> getPastArtifacts() {

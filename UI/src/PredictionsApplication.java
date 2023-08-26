@@ -1,3 +1,5 @@
+import engine.Engine;
+import init.PredictionsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,9 +11,14 @@ public class PredictionsApplication extends Application {
         //load from fxml file
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("Design.fxml"));
+        Parent predictionsRoot = fxmlLoader.load();
+        PredictionsController predictionsController = fxmlLoader.getController();
+        predictionsController.setPrimaryStage(primaryStage);
+        predictionsController.setEngine(new Engine());
+
         //set scene
-        Parent p = fxmlLoader.load();
-        primaryStage.setScene(new javafx.scene.Scene(p));
+
+        primaryStage.setScene(new javafx.scene.Scene(predictionsRoot));
 
         //set title
         primaryStage.setTitle("Predictions");

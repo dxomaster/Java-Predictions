@@ -47,4 +47,12 @@ public class Activation implements java.io.Serializable {
         Random random = new Random();
         return tick % ticks == 0 && random.nextDouble() < probability;
     }
+
+    public Integer getTicks() {
+        return ticks;
+    }
+
+    public Double getProbability() {
+        return probability;
+    }
 }

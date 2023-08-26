@@ -1,5 +1,6 @@
 package rule.action;
 
+import DTO.ActionableDTO;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
@@ -13,4 +14,6 @@ public interface Actionable {
     List<String> getEntities();
 
     String getName();
+
+    ActionableDTO getActionableDTO();
 }

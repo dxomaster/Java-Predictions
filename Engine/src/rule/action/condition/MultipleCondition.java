@@ -1,5 +1,8 @@
 package rule.action.condition;
 
+import DTO.ActionableDTO;
+import DTO.MultipleConditionDTO;
+import DTO.SatisfiableDTO;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
@@ -67,8 +70,30 @@ public class MultipleCondition implements Satisfiable, Actionable, java.io.Seria
     }
 
     @Override
+    public SatisfiableDTO getSatisfiableDTO() {
+        return null;
+    }
+
+    @Override
     public String getName() {
         return "multiple condition";
+    }
+
+    @Override
+    public ActionableDTO getActionableDTO() {
+        List<SatisfiableDTO> conditions = new ArrayList<>();
+        for (Satisfiable condition : this.conditions) {
+            conditions.add(condition.getSatisfiableDTO());
+        }
+        List<ActionableDTO> actionsToPreformIfConditionIsSatisfied = new ArrayList<>();
+        for (Actionable action : this.actionsToPreformIfConditionIsSatisfied) {
+            actionsToPreformIfConditionIsSatisfied.add(action.getActionableDTO());
+        }
+        List<ActionableDTO> actionsToPreformIfConditionIsNotSatisfied = new ArrayList<>();
+        for (Actionable action : this.actionsToPreformIfConditionIsNotSatisfied) {
+            actionsToPreformIfConditionIsNotSatisfied.add(action.getActionableDTO());
+        }
+        return new MultipleConditionDTO(conditions, this.operator.toString(), actionsToPreformIfConditionIsSatisfied, actionsToPreformIfConditionIsNotSatisfied);
     }
 
     @Override
