@@ -7,6 +7,10 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="init.PredictionsController">
    <top>
       <FlowPane hgap="20.0" prefHeight="21.0" prefWidth="600.0" BorderPane.alignment="CENTER">
@@ -58,6 +62,19 @@
       </FlowPane>
    </top>
    <center>
-      <StackPane fx:id="dynamicDisplay" prefHeight="293.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <StackPane fx:id="dynamicDisplay" prefHeight="293.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <HBox fx:id="entityPopulationsContainer" spacing="20" visible="false">
+            <!-- Left side: Environment Variables ListView -->
+            <ListView fx:id="environmentVariablesListView"/>
+
+            <!-- Right side: Entity Populations TableView -->
+            <TableView fx:id="entityPopulationsTable">
+               <columns>
+                  <TableColumn text="Entity" fx:id="entityColumn" />
+                  <TableColumn text="Population" fx:id="populationColumn" />
+               </columns>
+            </TableView>
+         </HBox>
+      </StackPane>
    </center>
 </BorderPane>

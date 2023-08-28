@@ -182,4 +182,8 @@ public class World implements java.io.Serializable {
     public void setEntityDefinitionMap(Map<String, EntityDefinition> entityDefinitionMap) {
         this.entityDefinitionMap = entityDefinitionMap;
     }
+
+    public void updateEntityPopulation(String name, Integer newValue) {
+        entityDefinitionMap.get(name).setPopulation(newValue);
+    }
 }

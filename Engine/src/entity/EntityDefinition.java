@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class EntityDefinition implements java.io.Serializable {
     private final String name;
-    private final int population;
+    private int population;
     private final Map<String, Property> entityProperties;
     private int finalPopulation;
 
@@ -64,5 +64,9 @@ public class EntityDefinition implements java.io.Serializable {
             entityProperties.add(property.getPropertyDTO());
         }
         return new EntityDTO(name, entityProperties, population);
+    }
+
+    public void setPopulation(Integer newValue) {
+        this.population = newValue;
     }
 }

@@ -194,5 +194,11 @@ public class Engine implements Serializable {
             throw new ErrorException("Error in loading file, please make sure the file exists and has the correct format.");
         }
     }
+
+    public void updateEntityPopulation(String name, Integer newValue) {
+        if (world == null)
+            throw new IllegalArgumentException("No file is loaded");
+        world.updateEntityPopulation(name, newValue);
+    }
 }
 
