@@ -15,9 +15,19 @@ public class EntityDTO {
 
     private List<PropertyDTO> properties;
 
-    public EntityDTO(String name, List<PropertyDTO> properties) {
-        this.name = name;
-        this.properties = properties;
+    public int getPopulation() {
+        return population;
     }
 
+    private int population;
+
+    public EntityDTO(String name, List<PropertyDTO> properties, int population) {
+        this.name = name;
+        this.properties = properties;
+        this.population = population;
+    }
+
+    public void setPopulation(int newPopulation) {
+        this.population = newPopulation;
+    }
 }

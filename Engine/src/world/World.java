@@ -41,7 +41,7 @@ public class World implements java.io.Serializable {
         for (Rule rule : rules) {
             ruleDTOList.add(rule.getRuleDTO());
         }
-        terminationDTO termination = new terminationDTO(terminationByTicks, terminationBySeconds);
+        TerminationDTO termination = new TerminationDTO(this.terminationByTicks, this.terminationBySeconds);
 
         return new WorldDTO(environmentVariables, entityDTOList, ruleDTOList, termination);
     }
@@ -56,9 +56,9 @@ public class World implements java.io.Serializable {
 
             for (Object object : termination) {
                 if (object instanceof PRDByTicks) {
-                    terminationByTicks = ((PRDByTicks) object).getCount();
+                    this.terminationByTicks = ((PRDByTicks) object).getCount();
                 } else if (object instanceof PRDBySecond) {
-                    terminationBySeconds = ((PRDBySecond) object).getCount();
+                    this.terminationBySeconds = ((PRDBySecond) object).getCount();
                 }
             }
             if (terminationByTicks == null && terminationBySeconds == null)

@@ -63,6 +63,6 @@ public class EntityDefinition implements java.io.Serializable {
         for (Property property : this.entityProperties.values()) {
             entityProperties.add(property.getPropertyDTO());
         }
-        return new EntityDTO(name, entityProperties);
+        return new EntityDTO(name, entityProperties, population);
     }
 }

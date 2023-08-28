@@ -98,11 +98,19 @@ public class Engine implements Serializable {
 
 
     public void setEnvVariableWithDTO(EnvDTO envDTO) throws WarnException {
+        setEnvVariable(envDTO.getName(), envDTO.getValue());
+        return;
+    }
+    public void setEnvVariableWithDTO(PropertyDTO propertyDTO) throws WarnException {
+        setEnvVariable(propertyDTO.getName(), propertyDTO.getValue());
+    }
+
+    private void setEnvVariable(String name, Object value) throws WarnException {
         if (world == null)
             throw new IllegalArgumentException("No file is loaded");
         for (Property property : world.getEnvironmentVariables()) {
-            if (property.getName().equals(envDTO.getName())) {
-                property.setValue(envDTO.getValue());
+            if (property.getName().equals(name)) {
+                property.setValue(value);
                 return;
             }
         }

@@ -16,40 +16,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="started working on GUI">
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/ActionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/ActionableDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/ConditionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/MultipleConditionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RangeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RuleDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/SatisfiableDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/SimpleConditionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticEntityDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/terminationDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EntityDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EntityDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunStatisticsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunStatisticsDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/WorldPrintDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/WorldDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RangeDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RangeDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/WorldDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/WorldDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/terminationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/TerminationDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/entity/EntityDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Actionable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Actionable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/MultipleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/Satisfiable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/Satisfiable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/utils/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/utils/Activation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/world/utils/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/Range.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/Design.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Design.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/PredictionsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/PredictionsApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/menu/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +90,7 @@
     "project.structure.proportion": "0.13247865",
     "project.structure.side.proportion": "0.4324324",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -190,6 +169,9 @@
       <workItem from="1693040843643" duration="28000" />
       <workItem from="1693040885748" duration="4000" />
       <workItem from="1693042604664" duration="22563000" />
+      <workItem from="1693129814443" duration="19653000" />
+      <workItem from="1693165484636" duration="112000" />
+      <workItem from="1693165625172" duration="13141000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -485,13 +467,18 @@
           <line>32</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/init/PredictionsController.java</url>
+          <line>135</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="10" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>
-          <line>172</line>
+          <line>180</line>
           <properties class="engine.Engine" method="loadEngineFromFile">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

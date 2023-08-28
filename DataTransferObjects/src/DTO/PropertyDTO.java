@@ -7,6 +7,12 @@ public class PropertyDTO {
     private String name;
     private String type;
 
+    public boolean isRandomlyGenerated() {
+        return isRandomlyGenerated;
+    }
+
+    private boolean isRandomlyGenerated;
+
     public RangeDTO getRange() {
         return range;
     }
@@ -25,10 +31,15 @@ public class PropertyDTO {
 
     private String value;
 
-    public PropertyDTO(RangeDTO range, String name, String type, String value) {
+    public PropertyDTO(RangeDTO range, String name, String type, String value, boolean isRandomlyGenerated) {
         this.range = range;
         this.name = name;
         this.type = type;
         this.value = value;
+        this.isRandomlyGenerated = isRandomlyGenerated;
+    }
+
+    public void setValue(String newPropertyValue) {
+        this.value = newPropertyValue;
     }
 }

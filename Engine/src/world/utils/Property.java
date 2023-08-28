@@ -80,6 +80,20 @@ public class Property implements java.io.Serializable {
     }
 
     public void setValue(Object value) throws WarnException {
+        if (value instanceof String) {
+            String stringValue = (String) value;
+            try {
+                if (this.type == PropertyType.FLOAT)
+                    value = Float.parseFloat(stringValue);
+                else if (this.type == PropertyType.DECIMAL)
+                        value = Integer.parseInt(stringValue);
+                else if (this.type == PropertyType.BOOLEAN) {
+                    value = Boolean.parseBoolean((stringValue));
+                }
+            } catch (Exception e) {
+                throw new  IllegalArgumentException("Error with Property " + this.name + " Value must be of type " + this.type.propertyClass.getSimpleName());
+            }
+        }
         if (value.getClass() != this.type.propertyClass) {
             throw new IllegalArgumentException("Error with Property " + this.name + " Value must be of type " + this.type.propertyClass.getSimpleName());
         }
@@ -87,8 +101,6 @@ public class Property implements java.io.Serializable {
             if (range != null && !range.isInRange(value)) {
                 throw new WarnException("Error with Property " + this.name + " Value must be in range " + range.getFrom() + " to " + range.getTo());
             }
-
-
         }
         this.value = value;
     }
@@ -138,6 +150,6 @@ public class Property implements java.io.Serializable {
              rangeDTO = range.getRangeDTO();
         else
             rangeDTO = null;
-        return new PropertyDTO(rangeDTO, this.name, this.type.propertyClass.getSimpleName(), this.value.toString());
+        return new PropertyDTO(rangeDTO, this.name, this.type.propertyClass.getSimpleName(), this.value.toString(), isRandomlyGenerated);
     }
 }

@@ -6,10 +6,10 @@ public class WorldDTO implements java.io.Serializable {
     private List<PropertyDTO> environmentProperties;
     private List<EntityDTO> entities;
     private List<RuleDTO> rules;
-    private terminationDTO termination;
+    private TerminationDTO termination;
 
 
-    public WorldDTO(List<PropertyDTO> environmentProperties, List<EntityDTO> entities, List<RuleDTO> rules, terminationDTO termination) {
+    public WorldDTO(List<PropertyDTO> environmentProperties, List<EntityDTO> entities, List<RuleDTO> rules, TerminationDTO termination) {
         this.environmentProperties = environmentProperties;
         this.entities = entities;
         this.rules = rules;
@@ -33,7 +33,7 @@ public class WorldDTO implements java.io.Serializable {
         return rules;
     }
 
-    public terminationDTO getTermination() {
+    public TerminationDTO getTermination() {
         return termination;
     }
 }
