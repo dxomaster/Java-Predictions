@@ -2,28 +2,20 @@ package init;
 
 import DTO.*;
 import engine.Engine;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.converter.IntegerStringConverter;
-
 import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PredictionsController implements Initializable {
         private Stage primaryStage;
@@ -38,16 +30,8 @@ public class PredictionsController implements Initializable {
         @FXML
         private StackPane dynamicDisplay;
 
-        @FXML
-        private TableView<EntityDTO> entityPopulationsTable;
+        private HBox runSettingsContainer; // The layout container holding both ListView and TableView
 
-        @FXML
-        private TableColumn<EntityDTO, String> entityColumn;
-        @FXML
-        private TableColumn<EntityDTO, Integer> populationColumn;
-
-        @FXML
-        private HBox entityPopulationsContainer; // The layout container holding both ListView and TableView
 
         public void setEngine(Engine engine) {
                 this.engine = engine;
@@ -96,6 +80,16 @@ public class PredictionsController implements Initializable {
 
                 modifyProperty(propertyDTO, dialog.showAndWait());
         }
+        private void setPopulation(EntityDTO entityDTO) {
+
+                TextInputDialog dialog = new TextInputDialog(String.valueOf(entityDTO.getPopulation()));
+                dialog.setTitle("Edit Population");
+                dialog.setHeaderText("Editing population for " + entityDTO.getName());
+                String text = ("enter a new value: ");
+                dialog.setContentText(text);
+
+                modifyEntityDTO(entityDTO, dialog.showAndWait());
+        }
 
         // Show the dialog and wait for user input
         private void modifyProperty(PropertyDTO propertyDTO, Optional<String> s) {
@@ -104,6 +98,16 @@ public class PredictionsController implements Initializable {
                         try {
                                 PropertyDTO tmp = new PropertyDTO(propertyDTO.getRange(), propertyDTO.getName(), propertyDTO.getType(), newPropertyValue, propertyDTO.isRandomlyGenerated());
                                 engine.setEnvVariableWithDTO(tmp);
+                        } catch (Exception e) {
+                                showErrorAlert(e);
+                        }
+                });
+        }
+        private void modifyEntityDTO(EntityDTO entityDTO, Optional<String> s) {
+                Optional<String> result = s;
+                result.ifPresent(newPropertyValue -> {
+                        try {
+                                engine.updateEntityPopulation(entityDTO.getName(), Integer.parseInt(newPropertyValue));
                         } catch (Exception e) {
                                 showErrorAlert(e);
                         }
@@ -118,60 +122,70 @@ public class PredictionsController implements Initializable {
                 alert.showAndWait();
         }
 
-        private void populateEntitiesPopulations() {
-                WorldDTO dto = engine.getSimulationParameters();
+
+        private ListView<EntityDTO> setupEntityPopulationsListView() {
+                ListView<EntityDTO> entityPopulationListView = new ListView<>();
+                entityPopulationListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+                entityPopulationListView.setPrefWidth(250);
                 List<EntityDTO> entities = engine.getSimulationParameters().getEntities();
 
                 // Populate the List with entities and their populations
                 ObservableList<EntityDTO> observableEntities = FXCollections.observableArrayList(entities);
-                entityPopulationsTable.setItems(observableEntities);
-        }
-
-        private void setupEntityPopulationsTableView() {
-                entityColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-                populationColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPopulation()).asObject());
-
-                // Customize the population column to allow editing
-                populationColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-                populationColumn.setOnEditCommit(event -> {
-                        EntityDTO entity = event.getRowValue();
-                        entity.setPopulation(event.getNewValue());
-                        try { // Update in the engine
-                                // todo change population only if possible using rows and columns given in the xml file
-                                engine.updateEntityPopulation(entity.getName(), event.getNewValue());
-                        } catch (Exception e) {
-                                showErrorAlert(e);
+                entityPopulationListView.setItems(observableEntities);
+                entityPopulationListView.setCellFactory(param -> new ListCell<EntityDTO>() {
+                        @Override
+                        protected void updateItem(EntityDTO entity, boolean empty) {
+                                super.updateItem(entity, empty);
+                                if (empty || entity == null)
+                                        setText(null);
+                                else
+                                        setText(entity.getName() + " Population: (" + entity.getPopulation() + ")");
                         }
                 });
+                setupListViewSelectionListenerPopulation(entityPopulationListView);
 
-                entityPopulationsTable.setEditable(true);
-                populateEntitiesPopulations();
-
-                entityPopulationsTable.setPrefWidth(400);
+                return entityPopulationListView;
         }
-
+        private void setupListViewSelectionListenerPopulation(ListView<EntityDTO> listView) {
+                listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                        if (newValue != null) {
+                                        setPopulation(newValue);
+                                newExecution(null); //todo do we have to?
+                        }
+                });
+        }
         @FXML
         protected void newExecution(ActionEvent event) {
                 try {
                         dynamicDisplay.getChildren().clear();
-                        ListView<PropertyDTO> listView = setupPropertyListView();
-                        populateEnvPropertiesListView(listView);
-                        listView.setPrefWidth(650);
+                        ListView<PropertyDTO> envVariabesDisplay = setupPropertyListView();
 
+                        ListView<EntityDTO> entityPopulationostView = setupEntityPopulationsListView();
                         // Clear existing child nodes from entityPopulationsContainer
-                        entityPopulationsContainer.getChildren().clear();
+                        runSettingsContainer = new HBox();
 
                         // Setup and populate the entity populations TableView
-                        setupEntityPopulationsTableView();
+
 
                         // Show the container holding both ListView and TableView
-                        entityPopulationsContainer.setVisible(true);
+
 
                         // Add the ListView, TableView, and button to the entityPopulationsContainer
-                        entityPopulationsContainer.getChildren().addAll(listView, entityPopulationsTable);
+                        runSettingsContainer.getChildren().addAll(envVariabesDisplay, entityPopulationostView);
 
                         // Show the entityPopulationsContainer in the dynamicDisplay StackPane
-                        dynamicDisplay.getChildren().add(entityPopulationsContainer);
+                        Button runButton = new Button("Run");
+                        runButton.setOnAction(e -> {
+                                try {
+                                        engine.runSimulation();
+                                        newExecution(null);
+                                } catch (Exception ex) {
+                                        showErrorAlert(ex);
+                                }
+                        });
+                        runSettingsContainer.getChildren().add(runButton);
+                        dynamicDisplay.getChildren().add(runSettingsContainer);
+
                 }
                 catch (Exception e)
                 {
@@ -181,17 +195,16 @@ public class PredictionsController implements Initializable {
 
         private ListView<PropertyDTO> setupPropertyListView() {
                 ListView<PropertyDTO> listView = new ListView<>();
+                listView.setPrefWidth(650);
                 listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-                return listView;
-        }
-
-        private void populateEnvPropertiesListView(ListView<PropertyDTO> listView) {
                 WorldDTO dto = engine.getSimulationParameters();
                 ObservableList<PropertyDTO> environmentProperties = FXCollections.observableArrayList(dto.getEnvironmentProperties());
                 listView.setItems(environmentProperties);
                 setupListViewCellFactory(listView);
                 setupListViewSelectionListener(listView);
+                return listView;
         }
+
 
         private void setupListViewCellFactory(ListView<PropertyDTO> listView) {
                 listView.setCellFactory(param -> new ListCell<PropertyDTO>() {
@@ -207,6 +220,8 @@ public class PredictionsController implements Initializable {
                         }
                 });
         }
+
+
 
         private void setupListViewSelectionListener(ListView<PropertyDTO> listView) {
                 listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -317,6 +332,28 @@ public class PredictionsController implements Initializable {
                                 actionItem.getChildren().addAll(conditionAmount,ifActionAmount, ifNotActionAmount, logicOperator);
 
                         }
+                        else if (action instanceof ActionDTO)
+                        {
+                                ActionDTO actionDTO = (ActionDTO) action;
+                                TreeItem<String> entity = new TreeItem<>("Entity: "+actionDTO.getEntityName());
+                                if(actionDTO.getPropertyName() != null) {
+                                        TreeItem<String> property = new TreeItem<>("Property: " + actionDTO.getPropertyName());
+                                        actionItem.getChildren().add(property);
+                                }
+                                if(!actionDTO.getOperator().equals("none")) {
+                                        TreeItem<String> operator = new TreeItem<>("Operator: " + actionDTO.getOperator());
+                                        actionItem.getChildren().add(operator);
+                                }
+                                if(((ActionDTO) action).getExpressions().length != 0) {
+                                        TreeItem<String> arguments = new TreeItem<>("Arguments: " + Arrays.stream(actionDTO.getExpressions())
+                                                .collect(Collectors.joining(" ")));
+                                        actionItem.getChildren().add(arguments);
+                                }
+
+                                actionItem.getChildren().addAll(entity);
+                        }
+
+
                         parentItem.getChildren().add(actionItem);
                 }
         }
