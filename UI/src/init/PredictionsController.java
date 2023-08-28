@@ -55,7 +55,7 @@ public class PredictionsController implements Initializable {
                         this.engine.loadSimulationParametersFromFile(selectedFile.getAbsolutePath());
                         fileLoadedLabel.setText("Current File Loaded: " + selectedFile.getAbsolutePath());
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        showErrorAlert(e);
                 }
 
         }
@@ -71,13 +71,10 @@ public class PredictionsController implements Initializable {
                 Optional<String> result = dialog.showAndWait();
                 result.ifPresent(newPropertyValue -> {
                         try {
-                                PropertyDTO tmp = new PropertyDTO(propertyDTO.getRange(), propertyDTO.getName(), propertyDTO.getType(), result.toString(), propertyDTO.isRandomlyGenerated());
-                                engine.setEnvVariableWithDTO(propertyDTO);
+                                PropertyDTO tmp = new PropertyDTO(propertyDTO.getRange(), propertyDTO.getName(), propertyDTO.getType(), newPropertyValue, propertyDTO.isRandomlyGenerated());
+                                engine.setEnvVariableWithDTO(tmp);
                         } catch (Exception e) {
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setTitle("Error");
-                                alert.setHeaderText(e.toString());
-                                alert.showAndWait();
+                                showErrorAlert(e);
                         }
                 });
         }
@@ -97,13 +94,17 @@ public class PredictionsController implements Initializable {
                                 PropertyDTO tmp = new PropertyDTO(propertyDTO.getRange(), propertyDTO.getName(), propertyDTO.getType(), newPropertyValue, propertyDTO.isRandomlyGenerated());
                                 engine.setEnvVariableWithDTO(tmp);
                         } catch (Exception e) {
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setTitle("Error");
-                                alert.setHeaderText(e.toString());
-                                alert.showAndWait();
-                                // throw new RuntimeException(e); // todo handle exception
+                                showErrorAlert(e);
+
                         }
                 });
+        }
+        private void showErrorAlert(Exception e)
+        {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(e.getMessage());
+                alert.showAndWait();
         }
 
         private void populateEntitiesPopulations() {
@@ -133,15 +134,21 @@ public class PredictionsController implements Initializable {
 
         @FXML
         protected void newExecution(ActionEvent event) {
-                dynamicDisplay.getChildren().clear();
-                ListView<PropertyDTO> listView = setupPropertyListView();
-                dynamicDisplay.getChildren().add(listView);
-                populateEnvProperiesListView(listView);
+                try {
+                        dynamicDisplay.getChildren().clear();
+                        ListView<PropertyDTO> listView = setupPropertyListView();
+                        dynamicDisplay.getChildren().add(listView);
+                        populateEnvProperiesListView(listView);
 
-                // Add button to manage entity populations
-                Button manageEntityPopulationsButton = new Button("Manage Entity Populations");
-                manageEntityPopulationsButton.setOnAction(e -> populateEntitiesPopulations());
-                dynamicDisplay.getChildren().add(manageEntityPopulationsButton);
+                        // Add button to manage entity populations
+                        Button manageEntityPopulationsButton = new Button("Manage Entity Populations");
+                        manageEntityPopulationsButton.setOnAction(e -> populateEntitiesPopulations());
+                        dynamicDisplay.getChildren().add(manageEntityPopulationsButton);
+                }
+                catch (Exception e)
+                {
+                        showErrorAlert(e);
+                }
         }
 
         private ListView<PropertyDTO> setupPropertyListView() {
@@ -258,10 +265,16 @@ public class PredictionsController implements Initializable {
 
         @FXML
         protected void showSimulationDetails(ActionEvent event) {
-                dynamicDisplay.getChildren().clear();
-                TreeView<String> parametersTreeView = createAndSetupTreeView();
-                dynamicDisplay.getChildren().add(parametersTreeView);
-                populateTreeView(parametersTreeView);
+                try {
+
+                        dynamicDisplay.getChildren().clear();
+                        TreeView<String> parametersTreeView = createAndSetupTreeView();
+                        dynamicDisplay.getChildren().add(parametersTreeView);
+                        populateTreeView(parametersTreeView);
+                }
+                catch (Exception e) {
+                        showErrorAlert(e);
+                }
         }
 
         private void populateTreeView(TreeView<String> parametersTreeView) {
@@ -274,7 +287,7 @@ public class PredictionsController implements Initializable {
 
                 root.getChildren().addAll(enviromentVariables, rules, entities, termination);
 
-                populateEnvironmentProperties(dto.getEnvironmentProperties(), enviromentVariables);
+                populateProperties(dto.getEnvironmentProperties(), enviromentVariables);
                 populateEntities(dto.getEntities(), entities);
                 populateRules(dto.getRules(), rules);
                 populateTermination(dto.getTermination(), termination);
@@ -282,19 +295,25 @@ public class PredictionsController implements Initializable {
                 parametersTreeView.visibleProperty().set(true);
         }
 
-        private void populateEnvironmentProperties(List<PropertyDTO> properties, TreeItem<String> parentItem) {
+        private void populateProperties(List<PropertyDTO> properties, TreeItem<String> parentItem) {
                 for (PropertyDTO property : properties) {
                         TreeItem<String> propertyItem = new TreeItem<>(property.getName());
+                        TreeItem<String> valueItem = new TreeItem<>("Value: " + property.getValue());
+                        TreeItem<String> rangeItem = new TreeItem<>("Range: " + (property.getRange() != null ? property.getRange().toString() : "None"));
+                        TreeItem<String> typeItem = new TreeItem<>("Type: " + property.getType());
+                        TreeItem<String> randomInitItem = new TreeItem<>("Random Initialization: " + property.isRandomlyGenerated());
+                        propertyItem.getChildren().add(randomInitItem);
+                        propertyItem.getChildren().add(typeItem);
+                        propertyItem.getChildren().addAll(valueItem, rangeItem);
                         parentItem.getChildren().add(propertyItem);
                 }
         }
-
         private void populateEntities(List<EntityDTO> entities, TreeItem<String> parentItem) {
                 for (EntityDTO entity : entities) {
                         TreeItem<String> entityItem = new TreeItem<>(entity.getName());
                         TreeItem<String> populationItem = new TreeItem<>("Population: " + entity.getPopulation());
                         entityItem.getChildren().add(populationItem);
-                        // ... Populate entity properties ...
+                        populateProperties(entity.getProperties(), entityItem);
                         parentItem.getChildren().add(entityItem);
                 }
         }
@@ -302,11 +321,37 @@ public class PredictionsController implements Initializable {
         private void populateRules(List<RuleDTO> rules, TreeItem<String> parentItem) {
                 for (RuleDTO rule : rules) {
                         TreeItem<String> ruleItem = new TreeItem<>(rule.getName());
-                        // ... Populate rule actions ...
+                        populateActions(rule.getActions(), ruleItem);
                         parentItem.getChildren().add(ruleItem);
                 }
         }
+        private void populateActions(List<ActionableDTO> actions, TreeItem<String> parentItem) {
+                for (ActionableDTO action : actions) {
+                        TreeItem<String> actionItem = new TreeItem<>("Action type: " + action.getName());
+                        if (action instanceof ConditionDTO)
+                        {
+                                ConditionDTO condition = (ConditionDTO) action;
+                                TreeItem<String> ifActionAmount = new TreeItem<>("Number of actions to perform if satisfied: "+ condition.getActionsToPerformIfSatisfied().size());
+                                TreeItem<String> ifNotActionAmount = new TreeItem<>("Number of actions to perform if not satisfied: "+condition.getActionsToPerformIfNotSatisfied().size());
+                                TreeItem<String> property = new TreeItem<>("Property: "+condition.getSimpleCondition().getProperty());
+                                TreeItem<String> operator = new TreeItem<>("Operator: "+condition.getSimpleCondition().getOperator());
+                                TreeItem<String> value = new TreeItem<>("Value: "+condition.getSimpleCondition().getExpression());
+                                actionItem.getChildren().addAll(ifActionAmount, ifNotActionAmount, property, operator, value);
 
+                        }
+                        else if (action instanceof MultipleConditionDTO)
+                        {
+                                MultipleConditionDTO condition = (MultipleConditionDTO) action;
+                                TreeItem<String> conditionAmount = new TreeItem<>("Number of conditions: "+ condition.getConditions().size());
+                                TreeItem<String> ifActionAmount = new TreeItem<>("Number of actions to perform if satisfied: "+ condition.getActionsToPerformIfSatisfied().size());
+                                TreeItem<String> ifNotActionAmount = new TreeItem<>("Number of actions to perform if not satisfied: "+condition.getActionsToPerformIfNotSatisfied().size());
+                                TreeItem<String> logicOperator = new TreeItem<>("Logic Operator: "+condition.getOperator());
+                                actionItem.getChildren().addAll(conditionAmount,ifActionAmount, ifNotActionAmount, logicOperator);
+
+                        }
+                        parentItem.getChildren().add(actionItem);
+                }
+        }
         private void populateTermination(TerminationDTO termination, TreeItem<String> parentItem) {
                 if (termination.getTicks() != null) {
                         parentItem.getChildren().add(new TreeItem<>("Termination Ticks: " + termination.getTicks()));
@@ -316,10 +361,6 @@ public class PredictionsController implements Initializable {
                 }
         }
 
-        public void changeEnvVariables(ActionEvent actionEvent) {
-        }
 
-        public void manageEntityPopulations(ActionEvent actionEvent) {
-        }
 }
 

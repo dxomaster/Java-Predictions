@@ -26,7 +26,7 @@
                   <Label text="queue managment" />
                </children>
             </FlowPane>
-            <FlowPane hgap="185.0" prefHeight="37.0" prefWidth="599.0">
+            <FlowPane hgap="185.0" prefHeight="34.0" prefWidth="599.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#showSimulationDetails" text="Details">
                      <FlowPane.margin>
@@ -58,6 +58,6 @@
       </FlowPane>
    </top>
    <center>
-      <StackPane fx:id="dynamicDisplay" prefHeight="317.0" prefWidth="193.0" BorderPane.alignment="CENTER" />
+      <StackPane fx:id="dynamicDisplay" prefHeight="293.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
