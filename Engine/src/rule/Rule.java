@@ -36,7 +36,7 @@ public class Rule extends RuleFactory implements java.io.Serializable {
             for (Actionable action : actions) {
                 if (action.getEntities().contains(entity.getName()))
                     try {
-                        action.performAction(world, entity);
+                        action.performAction(world, entity,ticks);
                     } catch (WarnException ignored) {
                         //these exceptions are OK, continue to next action
                     } catch (ErrorException e) {

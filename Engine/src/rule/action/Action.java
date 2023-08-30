@@ -34,24 +34,24 @@ public class Action implements Actionable, java.io.Serializable {
 
     }
 
-    public void performAction(World world, Entity entity) throws WarnException, ErrorException {
+    public void performAction(World world, Entity entity, int ticks) throws WarnException, ErrorException {
         switch (action) {
             case INCREASE:
-                entity.increaseProperty(propertyNameInString, expressions[0].evaluate(world, entity));
+                entity.increaseProperty(propertyNameInString, expressions[0].evaluate(world, entity),ticks);
                 break;
             case DECREASE:
-                entity.decreaseProperty(propertyNameInString, expressions[0].evaluate(world, entity));
+                entity.decreaseProperty(propertyNameInString, expressions[0].evaluate(world, entity),ticks);
                 break;
             case SET:
-                entity.setProperty(propertyNameInString, expressions[0].evaluate(world, entity));
+                entity.setProperty(propertyNameInString, expressions[0].evaluate(world, entity),ticks);
                 break;
             case CALCULATION:
                 if (this.operator == CalculationOperator.MULTIPLY) {
-                    entity.multiplyProperty(propertyNameInString, expressions[0].evaluate(world, entity), expressions[1].evaluate(world, entity));
+                    entity.multiplyProperty(propertyNameInString, expressions[0].evaluate(world, entity), expressions[1].evaluate(world, entity),ticks);
                 } else if (this.operator == CalculationOperator.DIVIDE) {
-                    entity.divideProperty(propertyNameInString, expressions[0].evaluate(world, entity), expressions[1].evaluate(world, entity));
+                    entity.divideProperty(propertyNameInString, expressions[0].evaluate(world, entity), expressions[1].evaluate(world, entity),ticks);
                 }
-                entity.setProperty(propertyNameInString, expressions[0].evaluate(world, entity));
+                entity.setProperty(propertyNameInString, expressions[0].evaluate(world, entity),ticks);
                 break;
             case KILL:
                 entity.kill();

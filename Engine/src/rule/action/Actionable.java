@@ -9,7 +9,7 @@ import world.World;
 import java.util.List;
 
 public interface Actionable {
-    void performAction(World world, Entity entity) throws WarnException, ErrorException;
+    void performAction(World world, Entity entity, int tick) throws WarnException, ErrorException;
 
     List<String> getEntities();
 

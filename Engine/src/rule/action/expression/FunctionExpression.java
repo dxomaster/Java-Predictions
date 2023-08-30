@@ -1,6 +1,7 @@
 package rule.action.expression;
 
 import entity.Entity;
+import factory.ExpressionFactory;
 import world.World;
 import world.utils.Property;
 import world.utils.PropertyType;
@@ -14,9 +15,9 @@ public class FunctionExpression implements Expression, java.io.Serializable {
 
     private final World world;
 
-    public FunctionExpression(World world, String functionName, Object[] arguments) {
+    public FunctionExpression(World world, String functionName, Object[] arguments,String entityName,PropertyType type){
         this.world = world;
-        this.arguments = new Object[1];
+        this.arguments = new Object[2];
         if (arguments == null) throw new IllegalArgumentException("Arguments cannot be null");
         try {
             this.function = functionEnum.valueOf(functionName.toUpperCase());
@@ -36,11 +37,35 @@ public class FunctionExpression implements Expression, java.io.Serializable {
             case RANDOM:
                 this.arguments[0] = Integer.parseInt((String) arguments[0]);
                 break;
+            case EVALUATE:
+
+                break;
+            case PERCENT:
+                if(type != PropertyType.FLOAT) throw new RuntimeException("Percent function can only be used with float type");
+                Expression e1 = ExpressionFactory.createExpression(world,entityName,type,(String) arguments[0]);
+                Expression e2 = ExpressionFactory.createExpression(world,entityName,type,(String) arguments[1]);
+                this.arguments[0] = e1;
+                this.arguments[1] = e2;
+                break;
+            case TICKS:
+                String entity = getTicksEntity((String) arguments[0]);
+                String property = getTicksProperty((String) arguments[0]);
+                Property p = world.getEntityDefinitionByName(entity).getPropertyByName(property);
+                this.arguments[0] = p;
+                break;
+
             default:
                 throw new RuntimeException("Function " + function.functionInString + " not found");
         }
     }
-
+    private String getTicksEntity(String argument)
+    {
+        return argument.substring(0,argument.indexOf("."));
+    }
+    private String getTicksProperty(String argument)
+    {
+        return argument.substring(argument.indexOf(".")+1);
+    }
     @Override
     public Object evaluate(World world, Entity entity) {
         switch (function) {
@@ -51,6 +76,16 @@ public class FunctionExpression implements Expression, java.io.Serializable {
             case RANDOM:
                 Random random = new Random();
                 return random.nextInt((int) arguments[0]);
+            case EVALUATE:
+                return null;
+            case PERCENT:
+               float whole =  (float)((Expression) arguments[0]).evaluate(world,entity);
+                float part = (float)((Expression) arguments[1]).evaluate(world,entity);
+                return part/whole;
+            case TICKS:
+                Property p = (Property) arguments[0];
+                return world.getTicks() - p.getLastUpdatedTick();
+
             default:
                 return null;
         }

@@ -17,7 +17,7 @@ public class PredictionsApplication extends Application {
         predictionsController.setEngine(new Engine());
 
         //set scene
-        primaryStage.setScene(new javafx.scene.Scene(predictionsRoot));
+        primaryStage.setScene(new javafx.scene.Scene(predictionsRoot,1500,1000));
 
         //set title
         primaryStage.setTitle("Predictions");

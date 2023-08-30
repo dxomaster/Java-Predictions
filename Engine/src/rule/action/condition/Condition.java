@@ -30,14 +30,14 @@ public class Condition implements Satisfiable, Actionable, java.io.Serializable 
     }
 
     @Override
-    public void performAction(World world, Entity entity) throws WarnException, ErrorException {
+    public void performAction(World world, Entity entity, int ticks) throws WarnException, ErrorException {
         if (isSatisfied(world, entity)) {
             for (Actionable action : actionsToPreformIfConditionIsSatisfied) {
-                action.performAction(world, entity);
+                action.performAction(world, entity, ticks);
             }
         } else {
             for (Actionable action : actionsToPreformIfConditionIsNotSatisfied) {
-                action.performAction(world, entity);
+                action.performAction(world, entity, ticks);
             }
         }
     }

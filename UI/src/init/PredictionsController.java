@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -28,9 +29,9 @@ public class PredictionsController implements Initializable {
         private String simulationName;
 
         @FXML
-        private StackPane dynamicDisplay;
+        private HBox dynamicDisplay;
 
-        private HBox runSettingsContainer; // The layout container holding both ListView and TableView
+
 
 
         public void setEngine(Engine engine) {
@@ -39,7 +40,28 @@ public class PredictionsController implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle rb){
         }
+        @FXML
+        protected void viewResults(ActionEvent event)
+        {
+                try {
+                        List<RunEndDTO> runEndDTOS = engine.getPastArtifacts();
+                        ListView<String> listView = new ListView<>();
+                        ObservableList<String> items = FXCollections.observableArrayList();
+                        if (runEndDTOS.isEmpty()) {
+                                items.add("No runs have been completed yet.");
+                        }
+                        for (RunEndDTO runEndDTO : runEndDTOS) {
+                                items.add(runEndDTO.toString());
+                        }
+                        listView.setItems(items);
+                        dynamicDisplay.getChildren().clear();
+                        dynamicDisplay.getChildren().add(listView);
+                } catch (Exception e) {
+                        showErrorAlert(e);
+                }
 
+
+        }
         @FXML
         protected void loadFile(ActionEvent event){
                 FileChooser fileChooser = new FileChooser();
@@ -137,7 +159,7 @@ public class PredictionsController implements Initializable {
                         protected void updateItem(EntityDTO entity, boolean empty) {
                                 super.updateItem(entity, empty);
                                 if (empty || entity == null)
-                                        setText(null);
+                                        setGraphic(null);
                                 else
                                         setText(entity.getName() + " Population: (" + entity.getPopulation() + ")");
                         }
@@ -162,7 +184,7 @@ public class PredictionsController implements Initializable {
 
                         ListView<EntityDTO> entityPopulationostView = setupEntityPopulationsListView();
                         // Clear existing child nodes from entityPopulationsContainer
-                        runSettingsContainer = new HBox();
+
 
                         // Setup and populate the entity populations TableView
 
@@ -171,7 +193,7 @@ public class PredictionsController implements Initializable {
 
 
                         // Add the ListView, TableView, and button to the entityPopulationsContainer
-                        runSettingsContainer.getChildren().addAll(envVariabesDisplay, entityPopulationostView);
+                        dynamicDisplay.getChildren().addAll(envVariabesDisplay, entityPopulationostView);
 
                         // Show the entityPopulationsContainer in the dynamicDisplay StackPane
                         Button runButton = new Button("Run");
@@ -183,8 +205,8 @@ public class PredictionsController implements Initializable {
                                         showErrorAlert(ex);
                                 }
                         });
-                        runSettingsContainer.getChildren().add(runButton);
-                        dynamicDisplay.getChildren().add(runSettingsContainer);
+                        dynamicDisplay.getChildren().add(runButton);
+
 
                 }
                 catch (Exception e)
@@ -212,11 +234,13 @@ public class PredictionsController implements Initializable {
                         protected void updateItem(PropertyDTO property, boolean empty) {
                                 super.updateItem(property, empty);
                                 if (empty || property == null) {
-                                        setText(null);
+                                        setGraphic(null);
                                 } else {
                                         String range = (property.getRange() != null) ? property.getRange().toString() : "None";
                                         setText(property.getName() + " (" + property.getType() + ") Range: " + range + " Value: " + property.getValue());
                                 }
+                                double preferredHeight = listView.getItems().size() * 24 + 2;
+                                listView.setPrefHeight(preferredHeight);
                         }
                 });
         }
@@ -257,6 +281,7 @@ public class PredictionsController implements Initializable {
                 }
                 catch (Exception e) {
                         showErrorAlert(e);
+                        dynamicDisplay.getChildren().clear();
                 }
         }
 
@@ -304,6 +329,10 @@ public class PredictionsController implements Initializable {
         private void populateRules(List<RuleDTO> rules, TreeItem<String> parentItem) {
                 for (RuleDTO rule : rules) {
                         TreeItem<String> ruleItem = new TreeItem<>(rule.getName());
+                        TreeItem<String> activationItem = new TreeItem<>("Activation");
+                        activationItem.getChildren().add(new TreeItem<>("Ticks: " + rule.getTicks()));
+                        activationItem.getChildren().add(new TreeItem<>("Probability: " + rule.getProbability()));
+                        ruleItem.getChildren().add(activationItem);
                         populateActions(rule.getActions(), ruleItem);
                         parentItem.getChildren().add(ruleItem);
                 }

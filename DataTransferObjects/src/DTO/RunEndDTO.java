@@ -22,4 +22,10 @@ public class RunEndDTO implements java.io.Serializable {
     public String getFormattedDate() {
         return formattedDate;
     }
+
+    public String toString() {
+        return "Run ID: " + UUID + "\n" +
+                "Finished by: " + finishedReason + "\n" +
+                "Date: " + formattedDate + "\n";
+    }
 }

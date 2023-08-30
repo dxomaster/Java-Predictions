@@ -1,8 +1,8 @@
 package factory;
 
-import entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDAction;
 import engine.jaxb.schema.generated.PRDCondition;
+import entity.EntityDefinition;
 import rule.action.expression.Expression;
 import rule.action.expression.FunctionExpression;
 import rule.action.expression.PropertyExpression;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ExpressionFactory {
     public static Expression createExpression(World world, PRDCondition prdCondition) {
 
-        return createExpression(world, prdCondition.getEntity(), prdCondition.getProperty(), prdCondition.getValue());
+        return createExpression(world, prdCondition.getEntity(), getTypeByPropertyName(world,prdCondition.getProperty(), prdCondition.getEntity()), prdCondition.getValue());
     }
 
     private static PropertyType getTypeByPropertyName(World world, String propertyName, String entityName) {
@@ -28,13 +28,16 @@ public class ExpressionFactory {
         switch (prdAction.getType()) {
             case "increase":
             case "decrease":
-                expressions.add(createExpression(world, prdAction.getEntity(), prdAction.getProperty(), prdAction.getBy()));
+                expressions.add(createExpression(world, prdAction.getEntity(), getTypeByPropertyName(world,prdAction.getProperty(), prdAction.getEntity()), prdAction.getBy()));
                 break;
             case "set":
-                expressions.add(createExpression(world, prdAction.getEntity(), prdAction.getProperty(), prdAction.getValue()));
+                expressions.add(createExpression(world, prdAction.getEntity(), getTypeByPropertyName(world,prdAction.getProperty(), prdAction.getEntity()), prdAction.getValue()));
                 break;
             case "calculation":
                 return createExpressionArray(world, prdAction);
+            case "proximity":
+                expressions.add(createExpression(world, prdAction.getPRDBetween().getSourceEntity(), PropertyType.FLOAT, prdAction.getPRDEnvDepth().getOf()));
+                break;
             default:
                 throw new RuntimeException("Expression type " + prdAction.getType() + " not found");
         }
@@ -44,21 +47,25 @@ public class ExpressionFactory {
     public static Expression[] createExpressionArray(World world, PRDAction prdAction) {
         Expression[] expressions = new Expression[2];
         if (prdAction.getPRDMultiply() != null) {
-            expressions[0] = createExpression(world, prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDMultiply().getArg1());
-            expressions[1] = createExpression(world, prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDMultiply().getArg2());
+            expressions[0] = createExpression(world, prdAction.getEntity(),
+                    getTypeByPropertyName(world,prdAction.getResultProp(), prdAction.getEntity()), prdAction.getPRDMultiply().getArg1());
+            expressions[1] = createExpression(world, prdAction.getEntity(),
+                    getTypeByPropertyName(world,prdAction.getResultProp(), prdAction.getEntity()), prdAction.getPRDMultiply().getArg2());
         } else if (prdAction.getPRDDivide() != null) {
-            expressions[0] = createExpression(world, prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDDivide().getArg1());
-            expressions[1] = createExpression(world, prdAction.getEntity(), prdAction.getResultProp(), prdAction.getPRDDivide().getArg2());
+            expressions[0] = createExpression(world, prdAction.getEntity(),
+                    getTypeByPropertyName(world,prdAction.getResultProp(), prdAction.getEntity()), prdAction.getPRDDivide().getArg1());
+            expressions[1] = createExpression(world, prdAction.getEntity(),
+                    getTypeByPropertyName(world,prdAction.getResultProp(), prdAction.getEntity()), prdAction.getPRDDivide().getArg2());
         } else {
             throw new RuntimeException("Calculation type " + prdAction.getType() + " not found");
         }
         return expressions;
     }
 
-    public static Expression createExpression(World world, String entityName, String PropertyName, String expression) {
-        PropertyType type = getTypeByPropertyName(world, PropertyName, entityName);
+    public static Expression createExpression(World world, String entityName, PropertyType type, String expression) {
+        //PropertyType type = getTypeByPropertyName(world, PropertyName, entityName);
         try {
-            return createfunctionExpression(world, expression);
+            return createfunctionExpression(world, expression,entityName, type);
         } catch (RuntimeException e) {
             try {
                 return createPropertyExpression(world, entityName, expression);
@@ -72,10 +79,10 @@ public class ExpressionFactory {
         }
     }
 
-    public static Expression createfunctionExpression(World world, String expression) {
+    public static Expression createfunctionExpression(World world, String expression, String entityName, PropertyType type) {
         String functionName = getFunctionName(expression);
         Object[] arguments = getArguments(expression);
-        return new FunctionExpression(world, functionName, arguments);
+        return new FunctionExpression(world, functionName, arguments, entityName, type);
     }
 
     public static Expression createPropertyExpression(World world, String entityName, String propertyName) {

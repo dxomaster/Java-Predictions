@@ -110,7 +110,7 @@ public class Engine implements Serializable {
             throw new IllegalArgumentException("No file is loaded");
         for (Property property : world.getEnvironmentVariables()) {
             if (property.getName().equals(name)) {
-                property.setValue(value);
+                property.setValue(value,0);
                 return;
             }
         }

@@ -1,15 +1,19 @@
 package factory;
 
 import engine.jaxb.schema.generated.PRDAction;
-import rule.action.Action;
-import rule.action.ActionNames;
-import rule.action.CalculationOperator;
+import rule.action.*;
+import rule.action.expression.Expression;
+import rule.action.Proximity;
 import world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ActionFactory {
-    public static Action createAction(World world, PRDAction prdAction) {
-        if (world.getEntityDefinitionByName(prdAction.getEntity()) == null)
-            throw new RuntimeException("Entity " + prdAction.getEntity() + " not found");
+    public static Actionable createAction(World world, PRDAction prdAction) {
+        boolean isEntityAction = !prdAction.getType().equals("proximity") && !prdAction.getType().equals("replace");
+        if (world.getEntityDefinitionByName(prdAction.getEntity()) == null && isEntityAction)
+                throw new RuntimeException("Entity " + prdAction.getEntity() + " not found");
         if (prdAction.getResultProp() != null || prdAction.getProperty() != null)
             if (world.getEntityDefinitionByName(prdAction.getEntity()).getPropertyByName(prdAction.getProperty()) == null &&
                     world.getEntityDefinitionByName(prdAction.getEntity()).getPropertyByName(prdAction.getResultProp()) == null)
@@ -30,6 +34,19 @@ public class ActionFactory {
                     throw new RuntimeException("Calculation type not found");
             case "kill":
                 return new Action(world.getEntityDefinitionByName(prdAction.getEntity()), prdAction.getProperty(), ActionNames.KILL);
+            case "proximity":
+                PRDAction.PRDBetween prdBetween = prdAction.getPRDBetween();
+                if(world.getEntityDefinitionByName(prdBetween.getSourceEntity()) == null|| world.getEntityDefinitionByName(prdBetween.getTargetEntity()) == null)
+                    throw new RuntimeException("Entity " + prdBetween.getSourceEntity() + " not found");
+                Expression[] exp = ExpressionFactory.createExpression(world, prdAction);
+                List<Actionable> actions = new ArrayList<>();
+                for(PRDAction action: prdAction.getPRDActions().getPRDAction())
+                {
+                    actions.add(createAction(world,action));
+                }
+                return new Proximity(prdBetween.getSourceEntity(),prdBetween.getTargetEntity(),actions,exp);
+            case "replace":
+            return new Replace(prdAction.getKill(), prdAction.getCreate(), prdAction.getMode());
             default:
                 throw new RuntimeException("Action type " + prdAction.getType() + " not found");
         }

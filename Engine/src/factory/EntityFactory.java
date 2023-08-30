@@ -16,11 +16,19 @@ public class EntityFactory {
         Map<String, Property> entityProperties = PropertyFactory.createPropertyList(entityDefinition);
         return new Entity(entityDefinition.getName(), entityProperties);
     }
+    public static Entity createEntityDerived(EntityDefinition entityDefinition, Entity entity) throws WarnException {
+        Map<String, Property> entityProperties = PropertyFactory.createPropertyList(entityDefinition);
+        for (Property property : entityDefinition.getProperties().values()) {
+            if(entity.getPropertyByName(property.getName()) != null)
+                property.setValue(entity.getPropertyByName(property.getName()).getValue(),0);
+        }
+        return new Entity(entityDefinition.getName(), entityProperties);
+    }
 
     public static EntityDefinition createEntityDefinition(PRDEntity prdEntity) throws WarnException {
 
         Map<String, Property> entityProperties = PropertyFactory.createPropertyList(prdEntity);
-        return new EntityDefinition(prdEntity.getName(), entityProperties, prdEntity.getPRDPopulation());
+        return new EntityDefinition(prdEntity.getName(), entityProperties, 0);
     }
 
     public static Map<String, EntityDefinition> createEntityDefinitionList(List<PRDEntity> prdEntity) throws WarnException {

@@ -14,9 +14,15 @@ public class Property implements java.io.Serializable {
     private PropertyType type;
     private Object value;
 
+    public int getLastUpdatedTick() {
+        return lastUpdatedTick;
+    }
+
+    private int lastUpdatedTick;
+
     public Property(String name, PropertyType type, Range range, Object value) throws WarnException {
         this(name, type, range);
-        this.setValue(value);
+        this.setValue(value,0);
         this.isRandomlyGenerated = false;
     }
 
@@ -27,22 +33,22 @@ public class Property implements java.io.Serializable {
             this.type = type;
             this.isRandomlyGenerated = true;
             this.setRange(range);
-
+            this.lastUpdatedTick = 0;
             if (range != null) {
                 if (type == PropertyType.DECIMAL) {
-                    this.setValue((Integer) random.nextInt((Integer) range.getTo() - (Integer) range.getFrom()) + (Integer) range.getFrom());
+                    this.setValue((Integer) random.nextInt((Integer) range.getTo() - (Integer) range.getFrom()) + (Integer) range.getFrom(),0);
                 } else {
-                    this.setValue(random.nextFloat() * ((Float) range.getTo() - (Float) range.getFrom()) + (Float) range.getFrom());
+                    this.setValue(random.nextFloat() * ((Float) range.getTo() - (Float) range.getFrom()) + (Float) range.getFrom(),0);
                 }
             } else {
                 if (this.type == PropertyType.DECIMAL) {
-                    this.setValue(random.nextInt());
+                    this.setValue(random.nextInt(),0);
                 } else if (this.type == PropertyType.FLOAT) {
-                    this.setValue(random.nextFloat());
+                    this.setValue(random.nextFloat(),0);
                 } else if (this.type == PropertyType.BOOLEAN) {
-                    this.setValue(random.nextBoolean());
+                    this.setValue(random.nextBoolean(),0);
                 } else if (this.type == PropertyType.STRING) {
-                    this.setValue(generateRandomString());
+                    this.setValue(generateRandomString(),0);
                 }
             }
         } catch (WarnException ignored) {
@@ -79,7 +85,7 @@ public class Property implements java.io.Serializable {
         return value;
     }
 
-    public void setValue(Object value) throws WarnException {
+    public void setValue(Object value,int tick) throws WarnException {
         if (value instanceof String) {
             String stringValue = (String) value;
             try {
@@ -89,6 +95,7 @@ public class Property implements java.io.Serializable {
                         value = Integer.parseInt(stringValue);
                 else if (this.type == PropertyType.BOOLEAN) {
                     value = Boolean.parseBoolean((stringValue));
+                    this.lastUpdatedTick = tick;
                 }
             } catch (Exception e) {
                 throw new  IllegalArgumentException("Error with Property " + this.name + " Value must be of type " + this.type.propertyClass.getSimpleName());

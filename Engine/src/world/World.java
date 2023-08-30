@@ -25,6 +25,7 @@ public class World implements java.io.Serializable {
     private List<Property> environmentVariables;//todo change this to map
     private Map<String, List<Entity>> entityList;
     private Map<String, EntityDefinition> entityDefinitionMap;
+    private Integer ticks = 0;
     private Integer terminationByTicks;
     private Integer terminationBySeconds;
 
@@ -49,10 +50,10 @@ public class World implements java.io.Serializable {
         try {
             Map<String, EntityDefinition> entityDefinitionList = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());
             this.setEntityDefinitionMap(entityDefinitionList);
-            List<Property> environmentVariables = PropertyFactory.createPropertyList(prdWorld.getPRDEvironment().getPRDEnvProperty());
+            List<Property> environmentVariables = PropertyFactory.createPropertyList(prdWorld.getPRDEnvironment().getPRDEnvProperty());
             this.setEnvironmentVariables(environmentVariables);
             List<Rule> rules = RuleFactory.createRuleList(this, prdWorld.getPRDRules().getPRDRule());
-            List<Object> termination = prdWorld.getPRDTermination().getPRDByTicksOrPRDBySecond();
+            List<Object> termination = prdWorld.getPRDTermination().getPRDBySecondOrPRDByTicks();
 
             for (Object object : termination) {
                 if (object instanceof PRDByTicks) {
@@ -135,7 +136,7 @@ public class World implements java.io.Serializable {
         String formattedDateTime = currentDateTime.format(formatter);
 
         long startTime = System.currentTimeMillis();
-        Integer ticks = 0;
+
         createEntities();
         String finishedReason = checkTerminationConditions(ticks, startTime);
         while (finishedReason.isEmpty()) {
@@ -185,5 +186,20 @@ public class World implements java.io.Serializable {
 
     public void updateEntityPopulation(String name, Integer newValue) {
         entityDefinitionMap.get(name).setPopulation(newValue);
+    }
+
+    public void createEntityFromScratch(String entityToCreate) throws WarnException {
+        entityDefinitionMap.get(entityToCreate).setPopulation(entityDefinitionMap.get(entityToCreate).getPopulation() + 1);
+        entityList.get(entityToCreate).add(EntityFactory.createEntity(entityDefinitionMap.get(entityToCreate)));
+    }
+
+    public void createEntityDerived(String entityToCreate, Entity entity) throws WarnException {
+        entityDefinitionMap.get(entityToCreate).setPopulation(entityDefinitionMap.get(entityToCreate).getPopulation() + 1);
+        entityList.get(entityToCreate).add(EntityFactory.createEntityDerived(entityDefinitionMap.get(entityToCreate), entity));
+
+    }
+
+    public Integer getTicks() {
+        return this.ticks;
     }
 }
