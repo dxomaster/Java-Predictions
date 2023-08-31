@@ -10,6 +10,7 @@ import rule.action.condition.Satisfiable;
 import rule.action.expression.Expression;
 import world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Proximity implements Actionable, Satisfiable {
@@ -53,7 +54,9 @@ public class Proximity implements Actionable, Satisfiable {
 
     @Override
     public List<String> getEntities() {
-        return null;
+        List<String> entities = new ArrayList<>();
+        entities.add(sourceEntityName);
+        return entities;
     }
 
     @Override
@@ -63,7 +66,7 @@ public class Proximity implements Actionable, Satisfiable {
 
     @Override
     public String getName() {
-        return null;
+        return "Proximity";
     }
 
     @Override

@@ -17,7 +17,7 @@ public class ValueExpression implements Expression, java.io.Serializable {
     public Object evaluate(World world, Entity entity) {
         return value;
     }
-
+    @Override
     public PropertyType getType() {
         return propertyType;
     }

@@ -81,7 +81,7 @@ public class Condition implements Satisfiable, Actionable, java.io.Serializable 
         for (Actionable action : this.actionsToPreformIfConditionIsNotSatisfied) {
             actionsToPreformIfConditionIsNotSatisfied.add(action.getActionableDTO());
         }
-        SimpleConditionDTO simpleConditionDTO = new SimpleConditionDTO(simpleCondition.getProperty(), simpleCondition.getEntityName(), simpleCondition.getOperator().toString(), simpleCondition.getExpressionInString());
+        SimpleConditionDTO simpleConditionDTO = new SimpleConditionDTO(simpleCondition.getLeftExpression().toString(), simpleCondition.getEntityName(), simpleCondition.getOperator().toString(), simpleCondition.getRightExpression().toString());
         return new ConditionDTO(actionsToPreformIfConditionIsSatisfied, actionsToPreformIfConditionIsNotSatisfied, simpleConditionDTO);
     }
 

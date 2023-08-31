@@ -15,52 +15,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="mashu mashu">
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/ObjectFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/rule/action/Replace.java" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="done some work on engine">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDActivation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDActivation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDBySecond.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDBySecond.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDByTicks.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDByTicks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDDivide.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDDivide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDElse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDElse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEntities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEnvProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEnvProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEvironment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDEnvironment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDMultiply.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDMultiply.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRange.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRange.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRules.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDRules.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDTermination.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDTermination.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDThen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDThen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDValue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/jaxb/schema/generated/PRDWorld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/factory/ActionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ActionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/factory/EntityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/EntityFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/factory/ExpressionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ExpressionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/ActionNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/ActionNames.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Actionable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Actionable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/MultipleCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/functionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/functionEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/Design.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Design.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/PredictionsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/PredictionsApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +172,7 @@
       <workItem from="1693293042523" duration="8990000" />
       <workItem from="1693306777849" duration="6928000" />
       <workItem from="1693314478318" duration="103000" />
-      <workItem from="1693391278723" duration="3335000" />
+      <workItem from="1693391278723" duration="14878000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -449,7 +414,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693252912918</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="done some work on engine">
+      <option name="closed" value="true" />
+      <created>1693394697154</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1693394697154</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +460,8 @@
     <MESSAGE value="fix null exception when changing env prop value" />
     <MESSAGE value="started working on GUI" />
     <MESSAGE value="mashu mashu" />
-    <option name="LAST_COMMIT_MESSAGE" value="mashu mashu" />
+    <MESSAGE value="done some work on engine" />
+    <option name="LAST_COMMIT_MESSAGE" value="done some work on engine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -499,12 +473,12 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java</url>
-          <line>56</line>
+          <line>57</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java</url>
-          <line>97</line>
+          <line>100</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -513,9 +487,9 @@
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/init/PredictionsController.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="74" />
+          <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
+          <line>141</line>
+          <option name="timeStamp" value="83" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
@@ -525,6 +499,7 @@
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="rule.action.expression.FunctionExpression" memberName="arguments" />
         <PinnedItemInfo parentTag="engine.rule.action.condition.MultipleCondition" memberName="actionsToPreformIfConditionIsSatisfied" />
         <PinnedItemInfo parentTag="DTO.RunStatisticsDTO" memberName="EntityDefinitionDTOList" />
         <PinnedItemInfo parentTag="engine.rule.action.expression.PropertyExpression" memberName="property" />
@@ -534,16 +509,6 @@
         <PinnedItemInfo parentTag="engine.rule.Rule" memberName="actions" />
       </pinned-members>
     </pin-to-top-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="entity" language="JAVA" />
-        <watch expression="entityList" language="JAVA" />
-        <watch expression="((HashMap.Node)((HashMap)((Entity)((ArrayList)((HashMap.Node)((HashMap)entityList).entrySet().toArray()[0]).getValue()).get(1)).entityProperties).entrySet().toArray()[3]).getValue()" custom="java.util.HashMap.Node,java.util.HashMap,engine.entity.Entity,java.util.ArrayList" />
-        <watch expression="((ActionDTO)((java.util.ArrayList)((ConditionDTO)dto.rules.get(2).actions.get(0)).actionsToPerformIfSatisfied).get(0)).operator" custom="DTO.ConditionDTO,DTO.ActionDTO,java.util.ArrayList" />
-        <watch expression="((EntityDefinition)((HashMap.Node)((HashMap)entityDefinitionList).entrySet().toArray()[0]).getValue()).population" custom="java.util.HashMap.Node,java.util.HashMap,entity.EntityDefinition" />
-        <watch expression="((HashMap)((EntityDefinition)((HashMap.Node)((HashMap)entityDefinitionList).entrySet().toArray()[1]).getValue()).entityProperties).entrySet().toArray()[0]" custom="java.util.HashMap.Node,java.util.HashMap,entity.EntityDefinition" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

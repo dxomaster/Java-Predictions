@@ -20,7 +20,7 @@ public class PropertyExpression implements Expression, java.io.Serializable {
 
         return entity.getPropertyByName(property.getName()).getValue();
     }
-
+    @Override
     public PropertyType getType() {
         return property.getType();
     }

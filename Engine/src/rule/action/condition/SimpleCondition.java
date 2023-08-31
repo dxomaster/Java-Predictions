@@ -6,9 +6,6 @@ import Exception.ERROR.ErrorException;
 import entity.Entity;
 import entity.EntityDefinition;
 import rule.action.expression.Expression;
-import rule.action.expression.FunctionExpression;
-import rule.action.expression.PropertyExpression;
-import rule.action.expression.ValueExpression;
 import world.World;
 import world.utils.PropertyType;
 
@@ -16,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleCondition implements Satisfiable, java.io.Serializable {
-    public String getProperty() {
-        return property;
+    public Expression getLeftExpression() {
+        return leftExpression;
     }
 
     public EntityDefinition getEntityDefinition() {
@@ -28,29 +25,31 @@ public class SimpleCondition implements Satisfiable, java.io.Serializable {
         return operator;
     }
 
-    public Expression getExpression() {
-        return expression;
+    public Expression getRightExpression() {
+        return rightExpression;
     }
 
-    private final String property;
+    private final Expression leftExpression;
     private final EntityDefinition entityDefinition;
     private final ConditionOperator operator;
-    private final Expression expression;
+    private final Expression rightExpression;
 
-    public SimpleCondition(EntityDefinition entityDefinition, Expression expression, String property, ConditionOperator operator) {
-        this.expression = expression;
-        this.property = property;
+    public SimpleCondition(EntityDefinition entityDefinition, Expression leftExpression, Expression rightExpression, ConditionOperator operator) {
+        this.rightExpression = rightExpression;
+        this.leftExpression = leftExpression;
         this.entityDefinition = entityDefinition;
         this.operator = operator;
-        if (this.entityDefinition.getPropertyByName(property) == null) {
-            throw new IllegalArgumentException("Property " + property + " does not exist in " + entityDefinition);
-        }
 
+        PropertyType leftExpressionType = this.leftExpression.getType();
+        PropertyType rightExpressionType = this.rightExpression.getType();
+        if (leftExpressionType != rightExpressionType) {
+            throw new IllegalArgumentException("Left argument " + this.leftExpression + " and right argument " + this.rightExpression + " are not of the same type");
+        }
         if (operator == ConditionOperator.LESS_THAN || ConditionOperator.GREATER_THAN == operator) {
-            PropertyType entityType = this.entityDefinition.getPropertyByName(property).getType();
-            if (entityType != PropertyType.FLOAT && entityType != PropertyType.DECIMAL) {
-                throw new IllegalArgumentException("Property " + property + " is not a number");
+            if(leftExpressionType != PropertyType.FLOAT && leftExpressionType != PropertyType.DECIMAL) {
+                throw new IllegalArgumentException("Property " + leftExpression + " is not a number");
             }
+
         }
 
     }
@@ -58,27 +57,21 @@ public class SimpleCondition implements Satisfiable, java.io.Serializable {
     @Override
     public boolean isSatisfied(World world, Entity entity) throws ErrorException {
         try {
-            Object comparisonValue = expression.evaluate(world, entity);
-            Object entityValue = entity.getPropertyByName(property).getValue();
-            PropertyType type;
-            if (expression instanceof ValueExpression) {
-                type = ((ValueExpression) expression).getType();
-            } else if (expression instanceof PropertyExpression) {
-                type = ((PropertyExpression) expression).getType();
-            } else {
-                type = ((FunctionExpression) expression).getType();
-            }
+            Object comparisonValue = rightExpression.evaluate(world, entity);
+            Object antecedentValue = leftExpression.evaluate(world, entity);
+            PropertyType type = rightExpression.getType();
+
             if (type == PropertyType.FLOAT) {
-                return compareFloat((Float) entityValue, (Float) comparisonValue);
+                return compareFloat((Float) antecedentValue, (Float) comparisonValue);
             } else if (type == PropertyType.DECIMAL) {
-                return compareInteger((Integer) entityValue, (Integer) comparisonValue);
+                return compareInteger((Integer) antecedentValue, (Integer) comparisonValue);
             } else if (type == PropertyType.BOOLEAN) {
-                return compareBoolean((Boolean) entityValue, (Boolean) comparisonValue);
+                return compareBoolean((Boolean) antecedentValue, (Boolean) comparisonValue);
             } else {
-                return compareStrings((String) entityValue, (String) comparisonValue);
+                return compareStrings((String) antecedentValue, (String) comparisonValue);
             }
         } catch (ClassCastException e) {
-            throw new ErrorException("Cannot compare " + expression + " to " + entity.getPropertyByName(property).getValue());
+            throw new ErrorException("Cannot compare " + rightExpression + " to " + leftExpression);
         }
 
 
@@ -141,27 +134,25 @@ public class SimpleCondition implements Satisfiable, java.io.Serializable {
 
     @Override
     public SatisfiableDTO getSatisfiableDTO() {
-        return new SimpleConditionDTO(property,entityDefinition.getName(), operator.toString(), expression.toString());
+        return new SimpleConditionDTO(leftExpression.toString(),entityDefinition.getName(), operator.toString(), rightExpression.toString());
     }
 
 
     public String getEntityName() {
         return entityDefinition.getName();
     }
-    public String getExpressionInString() {
-        return expression.toString();
-    }
+
     @Override
     public String toString() {
         return "SimpleCondition{" +
-                "property='" + property + '\'' +
+                "property='" + leftExpression + '\'' +
                 ", entityDefinition=" + entityDefinition +
                 ", operator=" + operator +
-                ", expression=" + expression +
+                ", expression=" + rightExpression +
                 '}';
     }
 
     public SimpleConditionDTO getSimpleConditionDTO() {
-        return new SimpleConditionDTO(property, entityDefinition.getName(), operator.toString(), expression.toString());
+        return new SimpleConditionDTO(leftExpression.toString(), entityDefinition.getName(), operator.toString(), rightExpression.toString());
     }
 }

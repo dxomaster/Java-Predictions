@@ -4,6 +4,7 @@ import entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDAction;
 import engine.jaxb.schema.generated.PRDCondition;
 import rule.action.Actionable;
+import rule.action.expression.Expression;
 import world.World;
 import rule.action.condition.*;
 
@@ -83,17 +84,19 @@ public class ConditionFactory {
         EntityDefinition entityDefinition = world.getEntityDefinitionByName(prdCondition.getEntity());
         if (entityDefinition == null)
             throw new RuntimeException("Entity " + prdCondition.getEntity() + " not found");
-        if (entityDefinition.getPropertyByName(prdCondition.getProperty()) == null)
-            throw new RuntimeException("Property " + prdCondition.getProperty() + " not found");
+//        if (entityDefinition.getPropertyByName(prdCondition.getProperty()) == null)
+//            throw new RuntimeException("Property " + prdCondition.getProperty() + " not found");
+        Expression leftExpression = ExpressionFactory.createExpression(world, prdCondition,prdCondition.getProperty());
+        Expression rightExpression = ExpressionFactory.createExpression(world, prdCondition,prdCondition.getValue());
         switch (prdCondition.getOperator()) {
             case "bt":
-                return new SimpleCondition(world.getEntityDefinitionByName(prdCondition.getEntity()), ExpressionFactory.createExpression(world, prdCondition), prdCondition.getProperty(), ConditionOperator.GREATER_THAN);
+                return new SimpleCondition(world.getEntityDefinitionByName(prdCondition.getEntity()), leftExpression, rightExpression, ConditionOperator.GREATER_THAN);
             case "lt":
-                return new SimpleCondition(world.getEntityDefinitionByName(prdCondition.getEntity()), ExpressionFactory.createExpression(world, prdCondition), prdCondition.getProperty(), ConditionOperator.LESS_THAN);
+                return new SimpleCondition(world.getEntityDefinitionByName(prdCondition.getEntity()), leftExpression, rightExpression, ConditionOperator.LESS_THAN);
             case "=":
-                return new SimpleCondition(world.getEntityDefinitionByName(prdCondition.getEntity()), ExpressionFactory.createExpression(world, prdCondition), prdCondition.getProperty(), ConditionOperator.EQUALS);
+                return new SimpleCondition(world.getEntityDefinitionByName(prdCondition.getEntity()), leftExpression, rightExpression, ConditionOperator.EQUALS);
             case "!=":
-                return new SimpleCondition(world.getEntityDefinitionByName(prdCondition.getEntity()), ExpressionFactory.createExpression(world, prdCondition), prdCondition.getProperty(), ConditionOperator.NOT_EQUALS);
+                return new SimpleCondition(world.getEntityDefinitionByName(prdCondition.getEntity()), leftExpression, rightExpression, ConditionOperator.NOT_EQUALS);
             default:
                 throw new IllegalArgumentException("Invalid condition operator: " + prdCondition.getOperator());
         }
