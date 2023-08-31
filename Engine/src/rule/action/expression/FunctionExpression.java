@@ -49,7 +49,7 @@ public class FunctionExpression implements Expression, java.io.Serializable {
                 Expression e1 = ExpressionFactory.createExpression(world,entityName,(String) arguments[0]);
                 Expression e2 = ExpressionFactory.createExpression(world,entityName,(String) arguments[1]);
                 if (e1.getType() != PropertyType.FLOAT && e1.getType() != PropertyType.DECIMAL
-                        && e2.getType() != PropertyType.FLOAT && e2.getType() != PropertyType.DECIMAL)
+                        && e2.getType() != PropertyType.FLOAT && e2.getType() != PropertyType.DECIMAL) // todo wtf
                     throw new RuntimeException("Expression " + arguments[0] + " is not a valid property, function or value expression");
                 this.arguments[0] = e1;
                 this.arguments[1] = e2;

@@ -17,15 +17,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="done some work on engine">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/factory/ExpressionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ExpressionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

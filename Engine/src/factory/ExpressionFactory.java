@@ -103,21 +103,18 @@ public class ExpressionFactory {
             throw new RuntimeException("Entity " + entityName + " not found");
         }
 
-               try {
-                   value = Float.parseFloat((String) value);
-                   type = PropertyType.FLOAT;
-                } catch (RuntimeException e1) {
-                    try {
-                        if (!(value.equals("true") || value.equals("false")))
-                            throw new RuntimeException();
-                        value = Boolean.parseBoolean((String) value);
-                        type = PropertyType.BOOLEAN;
-                    } catch (RuntimeException e2) {
-                        value = (String) value;
-                        type = PropertyType.STRING;
-                    }
-                }
-
+       try {
+           value = Float.parseFloat((String) value);
+           type = PropertyType.FLOAT;
+        } catch (RuntimeException e1) {
+               if ((value.equals("true") || value.equals("false"))) {
+                   value = Boolean.parseBoolean((String) value);
+                   type = PropertyType.BOOLEAN;
+               } else {
+                   value = (String) value;
+                   type = PropertyType.STRING;
+               }
+       }
 
         return new ValueExpression(value, type);
     }
