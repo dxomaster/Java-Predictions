@@ -180,20 +180,12 @@ public class PredictionsController implements Initializable {
         protected void newExecution(ActionEvent event) {
                 try {
                         dynamicDisplay.getChildren().clear();
-                        ListView<PropertyDTO> envVariabesDisplay = setupPropertyListView();
+                        ListView<PropertyDTO> envVariablesDisplay = setupPropertyListView();
 
-                        ListView<EntityDTO> entityPopulationostView = setupEntityPopulationsListView();
-                        // Clear existing child nodes from entityPopulationsContainer
-
-
-                        // Setup and populate the entity populations TableView
-
-
-                        // Show the container holding both ListView and TableView
-
+                        ListView<EntityDTO> entityPopulationView = setupEntityPopulationsListView();
 
                         // Add the ListView, TableView, and button to the entityPopulationsContainer
-                        dynamicDisplay.getChildren().addAll(envVariabesDisplay, entityPopulationostView);
+                        dynamicDisplay.getChildren().addAll(envVariablesDisplay, entityPopulationView);
 
                         // Show the entityPopulationsContainer in the dynamicDisplay StackPane
                         Button runButton = new Button("Run");

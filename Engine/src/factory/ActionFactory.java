@@ -46,7 +46,15 @@ public class ActionFactory {
                 }
                 return new Proximity(prdBetween.getSourceEntity(),prdBetween.getTargetEntity(),actions,exp);
             case "replace":
-            return new Replace(prdAction.getKill(), prdAction.getCreate(), prdAction.getMode());
+                if (world.getEntityDefinitionByName(prdAction.getKill()) == null)
+                    throw new RuntimeException("Entity " + prdAction.getKill() + " not found");
+                if (world.getEntityDefinitionByName(prdAction.getCreate()) == null)
+                    throw new RuntimeException("Entity " + prdAction.getCreate() + " not found");
+                try {
+                    return new Replace(prdAction.getKill(), prdAction.getCreate(), prdAction.getMode());
+                } catch (Exception e) {
+                    throw new RuntimeException(e.getMessage());
+                }
             default:
                 throw new RuntimeException("Action type " + prdAction.getType() + " not found");
         }

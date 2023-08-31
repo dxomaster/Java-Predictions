@@ -25,11 +25,14 @@ public class Replace implements Actionable{
         {
             world.createEntityFromScratch(entityToCreate);
         }
-    else
+    else if (mode.equals("derived"))
         {
             world.createEntityDerived(entityToCreate, entity);
         }
-
+    else
+        {
+            throw new ErrorException(mode + " is not a valid mode. Please use either scratch or derived");
+        }
     }
 
     @Override
