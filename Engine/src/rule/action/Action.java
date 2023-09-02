@@ -14,44 +14,47 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Action implements Actionable, java.io.Serializable {
-    private final EntityDefinition entityDefinition;
+    //private final EntityDefinition secondaryEntityDefinition;
+    private final SecondaryEntitySelection secondaryEntitySelection;
+    private final EntityDefinition mainEntityDefinition;
     private final ActionNames action;
     private final Expression[] expressions;
     private final String propertyNameInString;
     private CalculationOperator operator;
 
-    public Action(EntityDefinition entityDefinition, String propertyNameInString, ActionNames action, Expression... expressions) {
-        this.entityDefinition = entityDefinition;
+    public Action(EntityDefinition mainEntityDefinition, String propertyNameInString, ActionNames action, SecondaryEntitySelection secondaryEntitySelection, Expression... expressions) {
+        this.mainEntityDefinition = mainEntityDefinition;
         this.action = action;
+        this.secondaryEntitySelection = secondaryEntitySelection;
         this.expressions = expressions;
         this.propertyNameInString = propertyNameInString;
 
     }
 
-    public Action(EntityDefinition entityDefinition, String propertyNameInString, CalculationOperator operator, ActionNames action, Expression... expressions) {
-        this(entityDefinition, propertyNameInString, action, expressions);
+    public Action(EntityDefinition mainEntityDefinition, String propertyNameInString, CalculationOperator operator, ActionNames action, SecondaryEntitySelection secondaryEntitySelection, Expression... expressions) {
+        this(mainEntityDefinition, propertyNameInString, action, secondaryEntitySelection, expressions);
         this.operator = operator;
 
     }
 
-    public void performAction(World world, Entity entity, int ticks) throws WarnException, ErrorException {
+    public void performAction(World world, Entity entity, int ticks,Entity secondaryEntity) throws WarnException, ErrorException {
         switch (action) {
             case INCREASE:
-                entity.increaseProperty(propertyNameInString, expressions[0].evaluate(world, entity),ticks);
+                entity.increaseProperty(propertyNameInString, expressions[0].evaluate(world, entity,secondaryEntity),ticks);
                 break;
             case DECREASE:
-                entity.decreaseProperty(propertyNameInString, expressions[0].evaluate(world, entity),ticks);
+                entity.decreaseProperty(propertyNameInString, expressions[0].evaluate(world, entity,secondaryEntity),ticks);
                 break;
             case SET:
-                entity.setProperty(propertyNameInString, expressions[0].evaluate(world, entity),ticks);
+                entity.setProperty(propertyNameInString, expressions[0].evaluate(world, entity,secondaryEntity),ticks);
                 break;
             case CALCULATION:
                 if (this.operator == CalculationOperator.MULTIPLY) {
-                    entity.multiplyProperty(propertyNameInString, expressions[0].evaluate(world, entity), expressions[1].evaluate(world, entity),ticks);
+                    entity.multiplyProperty(propertyNameInString, expressions[0].evaluate(world, entity,secondaryEntity), expressions[1].evaluate(world, entity,secondaryEntity),ticks);
                 } else if (this.operator == CalculationOperator.DIVIDE) {
-                    entity.divideProperty(propertyNameInString, expressions[0].evaluate(world, entity), expressions[1].evaluate(world, entity),ticks);
+                    entity.divideProperty(propertyNameInString, expressions[0].evaluate(world, entity,secondaryEntity), expressions[1].evaluate(world, entity,secondaryEntity),ticks);
                 }
-                entity.setProperty(propertyNameInString, expressions[0].evaluate(world, entity),ticks);
+                entity.setProperty(propertyNameInString, expressions[0].evaluate(world, entity,secondaryEntity),ticks);
                 break;
             case KILL:
                 entity.kill();
@@ -61,9 +64,14 @@ public class Action implements Actionable, java.io.Serializable {
     }
 
     @Override
+    public SecondaryEntitySelection getSecondaryEntitySelection() {
+        return secondaryEntitySelection;
+    }
+
+    @Override
     public List<String> getEntities() {
         List<String> entities = new ArrayList<>();
-        entities.add(entityDefinition.getName());
+        entities.add(mainEntityDefinition.getName());
         return entities;
     }
 
@@ -79,8 +87,8 @@ public class Action implements Actionable, java.io.Serializable {
             expressions[i] = this.expressions[i].toString();
         }
         if(this.operator == null)
-            return new ActionDTO(entityDefinition.getName(),action.actionInString,expressions, propertyNameInString, "none");
-        return new ActionDTO(entityDefinition.getName(),action.actionInString,expressions, propertyNameInString, operator.name());
+            return new ActionDTO(mainEntityDefinition.getName(),action.actionInString,expressions, propertyNameInString, "none");
+        return new ActionDTO(mainEntityDefinition.getName(),action.actionInString,expressions, propertyNameInString, operator.name());
     }
 
 
@@ -88,7 +96,7 @@ public class Action implements Actionable, java.io.Serializable {
     public String toString() {
         return "Action{" +
                 "operator=" + operator +
-                ", entityName=" + entityDefinition.getName() +
+                ", entityName=" + mainEntityDefinition.getName() +
                 ", action=" + action +
                 ", expressions=" + Arrays.toString(expressions) +
                 ", propertyNameInString='" + propertyNameInString + '\'' +

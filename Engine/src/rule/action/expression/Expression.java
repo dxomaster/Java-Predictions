@@ -5,7 +5,7 @@ import world.World;
 import world.utils.PropertyType;
 
 public interface Expression {
-
-    Object evaluate(World world, Entity entity);
+    boolean isNotNumber();
+    Object evaluate(World world, Entity entity,Entity secondaryEntity);
     PropertyType getType();
 }

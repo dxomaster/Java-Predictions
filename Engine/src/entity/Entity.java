@@ -2,6 +2,7 @@ package entity;
 
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
+import world.utils.Grid;
 import world.utils.Property;
 import world.utils.PropertyType;
 
@@ -10,6 +11,7 @@ import java.util.Map;
 public class Entity implements java.io.Serializable {
     private final String name;
     private final Map<String, Property> entityProperties;
+    private Grid.Location location;
 
     boolean toKill = false;
 
@@ -98,4 +100,11 @@ public class Entity implements java.io.Serializable {
 
     }
 
+    public void setLocation(Grid.Location locationToSet) {
+        this.location = locationToSet;
+    }
+
+    public Grid.Location getLocation() {
+        return location;
+    }
 }

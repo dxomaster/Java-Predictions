@@ -55,10 +55,10 @@ public class SimpleCondition implements Satisfiable, java.io.Serializable {
     }
 
     @Override
-    public boolean isSatisfied(World world, Entity entity) throws ErrorException {
+    public boolean isSatisfied(World world, Entity entity,Entity secondaryEntity) throws ErrorException {
         try {
-            Object comparisonValue = rightExpression.evaluate(world, entity);
-            Object antecedentValue = leftExpression.evaluate(world, entity);
+            Object comparisonValue = rightExpression.evaluate(world, entity,secondaryEntity);
+            Object antecedentValue = leftExpression.evaluate(world, entity,secondaryEntity);
             PropertyType type = rightExpression.getType();
 
             if (type == PropertyType.FLOAT) {
@@ -105,6 +105,10 @@ public class SimpleCondition implements Satisfiable, java.io.Serializable {
                 return entityValue.equals(comparisonValue);
             case NOT_EQUALS:
                 return !entityValue.equals(comparisonValue);
+            case LESS_THAN:
+                return entityValue < comparisonValue;
+            case GREATER_THAN:
+                return entityValue > comparisonValue;
             default:
                 return false;
         }

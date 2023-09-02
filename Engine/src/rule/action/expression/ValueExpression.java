@@ -14,7 +14,12 @@ public class ValueExpression implements Expression, java.io.Serializable {
     }
 
     @Override
-    public Object evaluate(World world, Entity entity) {
+    public boolean isNotNumber() {
+        return propertyType != PropertyType.FLOAT && propertyType != PropertyType.DECIMAL;
+    }
+
+    @Override
+    public Object evaluate(World world, Entity entity,Entity secondaryEntity){
         return value;
     }
     @Override

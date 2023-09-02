@@ -8,6 +8,7 @@ import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
 import rule.action.Actionable;
+import rule.action.SecondaryEntitySelection;
 import world.World;
 
 import java.util.ArrayList;
@@ -17,29 +18,36 @@ public class Condition implements Satisfiable, Actionable, java.io.Serializable 
     private final List<Actionable> actionsToPreformIfConditionIsSatisfied;
     private final List<Actionable> actionsToPreformIfConditionIsNotSatisfied;
     private final SimpleCondition simpleCondition;
+    private final SecondaryEntitySelection secondaryEntitySelection;
 
-    public Condition(SimpleCondition simpleCondition, List<Actionable> actionsToPreformIfConditionIsSatisfied, List<Actionable> actionsToPreformIfConditionIsNotSatisfied) {
+    public Condition(SimpleCondition simpleCondition, List<Actionable> actionsToPreformIfConditionIsSatisfied, List<Actionable> actionsToPreformIfConditionIsNotSatisfied, SecondaryEntitySelection secondaryEntitySelection) {
         this.actionsToPreformIfConditionIsSatisfied = actionsToPreformIfConditionIsSatisfied;
         this.actionsToPreformIfConditionIsNotSatisfied = actionsToPreformIfConditionIsNotSatisfied;
         this.simpleCondition = simpleCondition;
+        this.secondaryEntitySelection = secondaryEntitySelection;
     }
 
     @Override
-    public boolean isSatisfied(World world, Entity entity) throws ErrorException {
-        return simpleCondition.isSatisfied(world, entity);
+    public boolean isSatisfied(World world, Entity entity,Entity secondaryEntity) throws ErrorException {
+        return simpleCondition.isSatisfied(world, entity,secondaryEntity);
     }
 
     @Override
-    public void performAction(World world, Entity entity, int ticks) throws WarnException, ErrorException {
-        if (isSatisfied(world, entity)) {
+    public void performAction(World world, Entity entity, int ticks,Entity secondaryEntity) throws WarnException, ErrorException {
+        if (isSatisfied(world, entity,secondaryEntity)) {
             for (Actionable action : actionsToPreformIfConditionIsSatisfied) {
-                action.performAction(world, entity, ticks);
+                action.performAction(world, entity, ticks,secondaryEntity);
             }
         } else {
             for (Actionable action : actionsToPreformIfConditionIsNotSatisfied) {
-                action.performAction(world, entity, ticks);
+                action.performAction(world, entity, ticks,secondaryEntity);
             }
         }
+    }
+
+    @Override
+    public SecondaryEntitySelection getSecondaryEntitySelection() {
+        return secondaryEntitySelection;
     }
 
     public String toString() {

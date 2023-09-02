@@ -22,34 +22,38 @@ public class Proximity implements Actionable, Satisfiable {
         return targetEntityName;
     }
 
-    public Expression[] getOf() {
+    public Expression getOf() {
         return of;
     }
     private final List<Actionable> actionsToPreformIfProximityIsSatisfied;
 
     private final String sourceEntityName;
     private final String targetEntityName;
-    private final Expression[] of;
+    private final Expression of;
 
-    public Proximity(String sourceEntityName, String targetEntityName,List<Actionable>actionsToPreformIfProximityIsSatisfied, Expression... of) {
+    public Proximity(String sourceEntityName, String targetEntityName,List<Actionable>actionsToPreformIfProximityIsSatisfied, Expression of) {
         this.sourceEntityName = sourceEntityName;
         this.targetEntityName = targetEntityName;
         this.of = of;
         this.actionsToPreformIfProximityIsSatisfied = actionsToPreformIfProximityIsSatisfied;
     }
     @Override
-    public void performAction(World world, Entity entity, int ticks) throws WarnException, ErrorException {
-        if(isSatisfied(world, entity)){
+    public void performAction(World world, Entity entity, int ticks,Entity secondaryEntity) throws WarnException, ErrorException {
+        if(isSatisfied(world, entity,secondaryEntity)){
             for(Actionable action : actionsToPreformIfProximityIsSatisfied){
-                action.performAction(world, entity, ticks);
+                action.performAction(world, entity, ticks, secondaryEntity);
             }
         }
     }
 
     @Override
-    public boolean isSatisfied(World world, Entity entity) throws ErrorException {
-        //todo implelment proximity logic
-        return false;
+    public SecondaryEntitySelection getSecondaryEntitySelection() {
+        return null;
+    }
+
+    @Override
+    public boolean isSatisfied(World world, Entity entity,Entity secondaryEntity) throws ErrorException {
+       return  world.getGrid().isEntityNear(entity, targetEntityName, ((Float)of.evaluate(world, entity,secondaryEntity)).intValue());
     }
 
     @Override

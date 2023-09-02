@@ -4,6 +4,7 @@ import entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDAction;
 import engine.jaxb.schema.generated.PRDCondition;
 import rule.action.Actionable;
+import rule.action.SecondaryEntitySelection;
 import rule.action.expression.Expression;
 import world.World;
 import rule.action.condition.*;
@@ -25,7 +26,21 @@ public class ConditionFactory {
                 throw new IllegalArgumentException("Invalid singularity: " + prdCondition.getSingularity());
         }
     }
-
+    public static Satisfiable createCondition(World world, PRDCondition prdCondition) {
+        if (world.getEntityDefinitionByName(prdCondition.getEntity()) == null)
+            throw new IllegalArgumentException("Invalid entity: " + prdCondition.getEntity());
+        switch (prdCondition.getSingularity()) {
+            case "single":
+                return createSingleConditionWithoutActions(world, prdCondition, createSimpleCondition(world, prdCondition));
+            case "multiple":
+                return createMultipleCondition(world, prdCondition);
+            default:
+                throw new IllegalArgumentException("Invalid singularity: " + prdCondition.getSingularity());
+        }
+    }
+    public static Condition createSingleConditionWithoutActions(World world,PRDCondition prdCondition,SimpleCondition simpleCondition){
+        return new Condition(simpleCondition,null,null,null);
+    }
     private static MultipleCondition createMultipleCondition(World world, PRDAction prdAction) {
         List<Actionable> thenActions = new ArrayList<>();
         List<Actionable> elseActions = new ArrayList<>();
@@ -47,13 +62,17 @@ public class ConditionFactory {
             else
                 conditions.add(createMultipleCondition(world, condition));
         }
-
+        SecondaryEntitySelection secondaryEntitySelection = null;
+        if(prdAction.getPRDSecondaryEntity()!=null)
+        {
+            secondaryEntitySelection = ActionFactory.createSecondaryEntity(world,prdAction.getPRDSecondaryEntity());
+        }
 
         switch (prdAction.getPRDCondition().getLogical()) {
             case "and":
-                return new MultipleCondition(LogicalOperator.AND, conditions, thenActions, elseActions);
+                return new MultipleCondition(LogicalOperator.AND, conditions, thenActions, elseActions,secondaryEntitySelection);
             case "or":
-                return new MultipleCondition(LogicalOperator.OR, conditions, thenActions, elseActions);
+                return new MultipleCondition(LogicalOperator.OR, conditions, thenActions, elseActions,secondaryEntitySelection);
             default:
                 throw new IllegalArgumentException("Invalid logical operator: " + prdAction.getPRDCondition().getLogical());
         }
@@ -69,11 +88,12 @@ public class ConditionFactory {
             else
                 conditions.add(createMultipleCondition(world, condition));
         }
+
         switch (prdCondition.getLogical()) {
             case "and":
-                return new MultipleCondition(LogicalOperator.AND, conditions, null, null);
+                return new MultipleCondition(LogicalOperator.AND, conditions, null, null,null);
             case "or":
-                return new MultipleCondition(LogicalOperator.OR, conditions, null, null);
+                return new MultipleCondition(LogicalOperator.OR, conditions, null, null,null);
             default:
                 throw new IllegalArgumentException("Invalid logical operator: " + prdCondition.getLogical());
         }
@@ -106,6 +126,9 @@ public class ConditionFactory {
 
         List<Actionable> thenActions = new ArrayList<>();
         List<Actionable> elseActions = new ArrayList<>();
+        SecondaryEntitySelection secondaryEntitySelection = null;
+        if(prdAction.getPRDSecondaryEntity() != null)
+            secondaryEntitySelection = ActionFactory.createSecondaryEntity(world,prdAction.getPRDSecondaryEntity());
         if (prdAction.getPRDThen() != null) {
             for (PRDAction action : prdAction.getPRDThen().getPRDAction()) {
                 thenActions.add(ActionableFactory.createAction(world, action));
@@ -116,6 +139,6 @@ public class ConditionFactory {
                 elseActions.add(ActionFactory.createAction(world, action));
             }
         }
-        return new Condition(simpleCondition, thenActions, elseActions);
+        return new Condition(simpleCondition, thenActions, elseActions,secondaryEntitySelection);
     }
 }

@@ -86,7 +86,7 @@ public class Property implements java.io.Serializable {
     }
 
     public void setValue(Object value,int tick) throws WarnException {
-        if (value instanceof String) {
+        if (value instanceof String) {// todo figure out why
             String stringValue = (String) value;
             try {
                 if (this.type == PropertyType.FLOAT)
@@ -95,8 +95,9 @@ public class Property implements java.io.Serializable {
                         value = Integer.parseInt(stringValue);
                 else if (this.type == PropertyType.BOOLEAN) {
                     value = Boolean.parseBoolean((stringValue));
-                    this.lastUpdatedTick = tick;
+
                 }
+
             } catch (Exception e) {
                 throw new  IllegalArgumentException("Error with Property " + this.name + " Value must be of type " + this.type.propertyClass.getSimpleName());
             }
@@ -110,6 +111,7 @@ public class Property implements java.io.Serializable {
             }
         }
         this.value = value;
+        this.lastUpdatedTick = tick;
     }
 
     private String generateRandomString() {

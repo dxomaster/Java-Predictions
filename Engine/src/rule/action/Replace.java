@@ -19,7 +19,7 @@ public class Replace implements Actionable{
         this.mode = mode;
     }
     @Override
-    public void performAction(World world, Entity entity, int ticks) throws WarnException, ErrorException {
+    public void performAction(World world, Entity entity, int ticks,Entity secondaryEntity) throws WarnException, ErrorException {
     entity.kill();
     if (mode.equals("scratch"))
         {
@@ -33,6 +33,11 @@ public class Replace implements Actionable{
         {
             throw new ErrorException(mode + " is not a valid mode. Please use either scratch or derived");
         }
+    }
+
+    @Override
+    public SecondaryEntitySelection getSecondaryEntitySelection() {
+        return null;
     }
 
     @Override

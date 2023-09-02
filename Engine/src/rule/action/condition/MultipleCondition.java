@@ -6,38 +6,42 @@ import DTO.SatisfiableDTO;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
+import entity.EntityDefinition;
 import rule.action.Actionable;
+import rule.action.SecondaryEntitySelection;
 import world.World;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleCondition implements Satisfiable, Actionable, java.io.Serializable {
+    private final SecondaryEntitySelection secondaryEntitySelection;
     private final List<Actionable> actionsToPreformIfConditionIsSatisfied;
     private final List<Actionable> actionsToPreformIfConditionIsNotSatisfied;
     private final LogicalOperator operator;
     private final List<Satisfiable> conditions;
 
-    public MultipleCondition(LogicalOperator operator, List<Satisfiable> conditions, List<Actionable> actionsToPreformIfConditionIsSatisfied, List<Actionable> actionsToPreformIfConditionIsNotSatisfied) {
+    public MultipleCondition(LogicalOperator operator, List<Satisfiable> conditions, List<Actionable> actionsToPreformIfConditionIsSatisfied, List<Actionable> actionsToPreformIfConditionIsNotSatisfied, SecondaryEntitySelection secondaryEntitySelection) {
         this.operator = operator;
         this.conditions = conditions;
         this.actionsToPreformIfConditionIsSatisfied = actionsToPreformIfConditionIsSatisfied;
         this.actionsToPreformIfConditionIsNotSatisfied = actionsToPreformIfConditionIsNotSatisfied;
+        this.secondaryEntitySelection = secondaryEntitySelection;
     }
 
     @Override
-    public boolean isSatisfied(World world, Entity entity) throws ErrorException {
+    public boolean isSatisfied(World world, Entity entity,Entity secondaryEntity) throws ErrorException {
         switch (operator) {
             case AND:
                 for (Satisfiable condition : conditions) {
-                    if (!condition.isSatisfied(world, entity)) {
+                    if (!condition.isSatisfied(world, entity,secondaryEntity)) {
                         return false;
                     }
                 }
                 return true;
             case OR:
                 for (Satisfiable condition : conditions) {
-                    if (condition.isSatisfied(world, entity)) {
+                    if (condition.isSatisfied(world, entity,secondaryEntity)) {
                         return true;
                     }
                 }
@@ -48,16 +52,21 @@ public class MultipleCondition implements Satisfiable, Actionable, java.io.Seria
     }
 
     @Override
-    public void performAction(World world, Entity entity, int ticks) throws WarnException, ErrorException {
-        if (isSatisfied(world, entity)) {
+    public void performAction(World world, Entity entity, int ticks,Entity secondaryEntity) throws WarnException, ErrorException {
+        if (isSatisfied(world, entity,secondaryEntity)) {
             for (Actionable action : actionsToPreformIfConditionIsSatisfied) {
-                action.performAction(world, entity, ticks);
+                action.performAction(world, entity, ticks,secondaryEntity);
             }
         } else {
             for (Actionable action : actionsToPreformIfConditionIsNotSatisfied) {
-                action.performAction(world, entity, ticks);
+                action.performAction(world, entity, ticks,secondaryEntity);
             }
         }
+    }
+
+    @Override
+    public SecondaryEntitySelection getSecondaryEntitySelection() {
+        return secondaryEntitySelection;
     }
 
     @Override

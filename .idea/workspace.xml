@@ -15,11 +15,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="changed to if else inside catch in createValueExpression function in ExpressionFactory.java">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="done some work on engine">
+      <change afterPath="$PROJECT_DIR$/Engine/src/rule/action/SecondaryEntitySelection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Engine/src/world/utils/Grid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/entity/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/factory/ActionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ActionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Actionable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Actionable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Replace.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Replace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/MultipleCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/Satisfiable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/Satisfiable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +60,20 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;dxomaster&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="d019ca1d-c2b7-419f-811e-e370cc2e7f8d" />
+        <option name="url" value="https://github.com/dxomaster/Java-Predictions.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -168,6 +199,7 @@
       <workItem from="1693306777849" duration="6928000" />
       <workItem from="1693314478318" duration="103000" />
       <workItem from="1693391278723" duration="14878000" />
+      <workItem from="1693573062152" duration="42544000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -477,12 +509,12 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java</url>
-          <line>57</line>
+          <line>76</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java</url>
-          <line>100</line>
+          <line>120</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -491,9 +523,14 @@
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/world/utils/Grid.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
-          <line>141</line>
-          <option name="timeStamp" value="83" />
+          <line>166</line>
+          <option name="timeStamp" value="82" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
@@ -507,12 +544,21 @@
         <PinnedItemInfo parentTag="engine.rule.action.condition.MultipleCondition" memberName="actionsToPreformIfConditionIsSatisfied" />
         <PinnedItemInfo parentTag="DTO.RunStatisticsDTO" memberName="EntityDefinitionDTOList" />
         <PinnedItemInfo parentTag="engine.rule.action.expression.PropertyExpression" memberName="property" />
+        <PinnedItemInfo parentTag="rule.action.SecondaryEntitySelection" memberName="entityDefinition" />
         <PinnedItemInfo parentTag="engine.EngineImp" memberName="pastSimulationWorlds" />
         <PinnedItemInfo parentTag="engine.world.World" memberName="terminationByTicks" />
         <PinnedItemInfo parentTag="DTO.PropertyDTO" memberName="valueFrequency" />
         <PinnedItemInfo parentTag="engine.rule.Rule" memberName="actions" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="secondary.prdSelection.count" />
+        <watch expression="prdWorld" />
+        <watch expression="entity" />
+        <watch expression="leftExpression" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

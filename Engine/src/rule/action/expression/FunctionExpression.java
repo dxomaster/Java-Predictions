@@ -1,6 +1,7 @@
 package rule.action.expression;
 
 import entity.Entity;
+import entity.EntityDefinition;
 import factory.ExpressionFactory;
 import world.World;
 import world.utils.Property;
@@ -12,12 +13,14 @@ import java.util.Random;
 public class FunctionExpression implements Expression, java.io.Serializable {
     private final functionEnum function;
     private final Object[] arguments;
+    private final String entityName;
 
     private final World world;
 
     public FunctionExpression(World world, String functionName, Object[] arguments,String entityName){
         this.world = world;
         String entity, property;
+        this.entityName = entityName;
         Property p;
         this.arguments = new Object[2];
         if (arguments == null) throw new IllegalArgumentException("Arguments cannot be null");
@@ -48,9 +51,9 @@ public class FunctionExpression implements Expression, java.io.Serializable {
             case PERCENT:
                 Expression e1 = ExpressionFactory.createExpression(world,entityName,(String) arguments[0]);
                 Expression e2 = ExpressionFactory.createExpression(world,entityName,(String) arguments[1]);
-                if (e1.getType() != PropertyType.FLOAT && e1.getType() != PropertyType.DECIMAL
-                        && e2.getType() != PropertyType.FLOAT && e2.getType() != PropertyType.DECIMAL) // todo wtf
-                    throw new RuntimeException("Expression " + arguments[0] + " is not a valid property, function or value expression");
+                if (e1.isNotNumber() || e2.isNotNumber())
+                    throw new RuntimeException("Expression " + arguments[0] + " or " + arguments[1] + " is not a number," +
+                            " and is defined inside percent function.");
                 this.arguments[0] = e1;
                 this.arguments[1] = e2;
                 break;
@@ -74,8 +77,19 @@ public class FunctionExpression implements Expression, java.io.Serializable {
     {
         return argument.substring(argument.indexOf(".")+1);
     }
+
     @Override
-    public Object evaluate(World world, Entity entity) {
+    public boolean isNotNumber() {
+        EntityDefinition entityDefinition = world.getEntityDefinitionByName(entityName);
+        Entity mockEntity = new Entity(entityDefinition.getName(), entityDefinition.getProperties());
+        Object value = evaluate(world, mockEntity,null);
+        return !(value instanceof Integer) && !(value instanceof Float);
+
+    }
+
+    @Override
+    public Object evaluate(World world, Entity entity,Entity secondaryEntity) {
+
         switch (function) {
             case ENVIRONMENT:
                 Property envVariable = world.getEnvironmentVariableByName((String) arguments[0]);
@@ -87,8 +101,8 @@ public class FunctionExpression implements Expression, java.io.Serializable {
             case EVALUATE:
                 return ((Property) arguments[0]).getValue();
             case PERCENT:
-               float whole =  (float)((Expression) arguments[0]).evaluate(world,entity);
-                float part = (float)((Expression) arguments[1]).evaluate(world,entity);
+               float whole =  (float)((Expression) arguments[0]).evaluate(world,entity,secondaryEntity);
+                float part = (float)((Expression) arguments[1]).evaluate(world,entity,secondaryEntity);
                 return part/whole;
             case TICKS:
                 Property p = (Property) arguments[0];

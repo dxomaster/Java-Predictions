@@ -9,8 +9,8 @@ import world.World;
 import java.util.List;
 
 public interface Actionable {
-    void performAction(World world, Entity entity, int tick) throws WarnException, ErrorException;
-
+    void performAction(World world, Entity entity, int tick, Entity secondaryEntity) throws WarnException, ErrorException;
+    SecondaryEntitySelection getSecondaryEntitySelection();
     List<String> getEntities();
 
     String getName();

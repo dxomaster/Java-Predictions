@@ -8,7 +8,7 @@ import world.World;
 import java.util.List;
 
 public interface Satisfiable {
-    boolean isSatisfied(World world, Entity entity) throws ErrorException;
+    boolean isSatisfied(World world, Entity entity,Entity secondaryEntity) throws ErrorException;
 
     List<String> getEntities();
 

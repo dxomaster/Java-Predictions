@@ -12,6 +12,7 @@ import engine.jaxb.schema.generated.PRDBySecond;
 import engine.jaxb.schema.generated.PRDByTicks;
 import engine.jaxb.schema.generated.PRDWorld;
 import rule.Rule;
+import world.utils.Grid;
 import world.utils.Property;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class World implements java.io.Serializable {
     private final List<Rule> rules;
@@ -28,6 +30,14 @@ public class World implements java.io.Serializable {
     private Integer ticks = 0;
     private Integer terminationByTicks;
     private Integer terminationBySeconds;
+    private final int row;
+    private final int column;
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    private Grid grid;
 
     public WorldDTO getWorldDTO() {
         List<PropertyDTO> environmentVariables = new ArrayList<>();
@@ -71,7 +81,10 @@ public class World implements java.io.Serializable {
                 throw new IllegalArgumentException("Termination by ticks must be greater than 0");
             if (terminationBySeconds != null && terminationBySeconds < 1)
                 throw new IllegalArgumentException("Termination by seconds must be greater than 0");
-
+            row = prdWorld.getPRDGrid().getRows();
+            column = prdWorld.getPRDGrid().getColumns();
+            if (row < 1 || column < 1)
+                throw new IllegalArgumentException("Grid size must be greater than 0");
         } catch (Exception e) {
             throw new ErrorException("Error in creating world: " + e.getMessage());
         }
@@ -107,8 +120,10 @@ public class World implements java.io.Serializable {
             List<Entity> mockList = new ArrayList<>(currentList);
             for (Entity entity : mockList) {
                 if (entity.getToKill()) {
+                    grid.removeEntity(entity);
                     entityDefinitionMap.get(entity.getName()).setFinalPopulation(entityDefinitionMap.get(entity.getName()).getFinalPopulation() - 1);
                     currentList.remove(entity);
+
 
                 }
 
@@ -131,6 +146,7 @@ public class World implements java.io.Serializable {
     }
 
     public RunEndDTO run() throws ErrorException, WarnException {
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         String formattedDateTime = currentDateTime.format(formatter);
@@ -138,9 +154,14 @@ public class World implements java.io.Serializable {
         long startTime = System.currentTimeMillis();
 
         createEntities();
+        grid = new Grid(row, column, entityList);
         String finishedReason = checkTerminationConditions(ticks, startTime);
         while (finishedReason.isEmpty()) {
             for (List<Entity> entities : entityList.values()) {
+                for (Entity entity : entities) {
+
+                    this.grid.moveEntity(entity);
+                }
                 for (Entity entity : entities) {
                     for (Rule rule : rules) {
                         rule.applyRule(this, entity, ticks);
@@ -190,16 +211,31 @@ public class World implements java.io.Serializable {
 
     public void createEntityFromScratch(String entityToCreate) throws WarnException {
         entityDefinitionMap.get(entityToCreate).setPopulation(entityDefinitionMap.get(entityToCreate).getPopulation() + 1);
-        entityList.get(entityToCreate).add(EntityFactory.createEntity(entityDefinitionMap.get(entityToCreate)));
+        Entity newEntity = EntityFactory.createEntity(entityDefinitionMap.get(entityToCreate));
+        entityList.get(entityToCreate).add(newEntity);
+        newEntity.setLocation(grid.getRandomUnoccupiedLocation());
+
     }
 
     public void createEntityDerived(String entityToCreate, Entity entity) throws WarnException {
+
         entityDefinitionMap.get(entityToCreate).setPopulation(entityDefinitionMap.get(entityToCreate).getPopulation() + 1);
-        entityList.get(entityToCreate).add(EntityFactory.createEntityDerived(entityDefinitionMap.get(entityToCreate), entity));
+        Entity newEntity = EntityFactory.createEntityDerived(entityDefinitionMap.get(entityToCreate), entity);
+        newEntity.setLocation(entity.getLocation());
+        entityList.get(entityToCreate).add(newEntity);
 
     }
 
     public Integer getTicks() {
         return this.ticks;
+    }
+
+    public List<Entity> getRandomEntities(String name, int count) {
+        List<Entity> entities = new ArrayList<>();
+        List<Entity> entityList = this.entityList.get(name);
+        for (int i = 0; i < count; i++) {
+            entities.add(entityList.get(new Random().nextInt(entityList.size())));
+        }
+        return entities;
     }
 }

@@ -34,9 +34,17 @@ public class Rule extends RuleFactory implements java.io.Serializable {
     public void applyRule(World world, Entity entity, Integer ticks) throws ErrorException {
         if (activation.isActivated(ticks)) {
             for (Actionable action : actions) {
-                if (action.getEntities().contains(entity.getName()))
+                if (action.getEntities().get(0).equals(entity.getName()))
                     try {
-                        action.performAction(world, entity,ticks);
+                        if(action.getSecondaryEntitySelection() == null)
+                            action.performAction(world, entity,ticks,null);
+                        else
+                        {
+                            List<Entity> entities = action.getSecondaryEntitySelection().selectFromWorld(world);
+                            for (Entity e : entities) {//todo maybe change the way this works so that perform action will get 2 entities
+                               action.performAction(world, entity,ticks,e);
+                            }
+                        }
                     } catch (WarnException ignored) {
                         //these exceptions are OK, continue to next action
                     } catch (ErrorException e) {
