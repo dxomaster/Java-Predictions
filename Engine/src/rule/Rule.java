@@ -41,7 +41,7 @@ public class Rule extends RuleFactory implements java.io.Serializable {
                         else
                         {
                             List<Entity> entities = action.getSecondaryEntitySelection().selectFromWorld(world);
-                            for (Entity e : entities) {//todo maybe change the way this works so that perform action will get 2 entities
+                            for (Entity e : entities) {
                                action.performAction(world, entity,ticks,e);
                             }
                         }

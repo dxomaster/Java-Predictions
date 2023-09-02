@@ -97,7 +97,7 @@ public class FunctionExpression implements Expression, java.io.Serializable {
                 return envVariable.getValue();
             case RANDOM:
                 Random random = new Random();
-                return random.nextInt((int) arguments[0]);
+                return (float)random.nextInt((int) arguments[0]);
             case EVALUATE:
                 return ((Property) arguments[0]).getValue();
             case PERCENT:

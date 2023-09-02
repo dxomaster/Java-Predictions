@@ -162,6 +162,10 @@ public class World implements java.io.Serializable {
 
                     this.grid.moveEntity(entity);
                 }
+            }
+
+            for (List<Entity> entities : entityList.values()) {
+
                 for (Entity entity : entities) {
                     for (Rule rule : rules) {
                         rule.applyRule(this, entity, ticks);

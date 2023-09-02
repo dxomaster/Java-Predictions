@@ -15,29 +15,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="done some work on engine">
-      <change afterPath="$PROJECT_DIR$/Engine/src/rule/action/SecondaryEntitySelection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/world/utils/Grid.java" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="secondary entity - need to fix issue with float/integer in random(3)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/factory/ActionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ActionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ConditionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Actionable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Actionable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Replace.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Replace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/MultipleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/Satisfiable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/Satisfiable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/condition/SimpleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +181,7 @@
       <workItem from="1693306777849" duration="6928000" />
       <workItem from="1693314478318" duration="103000" />
       <workItem from="1693391278723" duration="14878000" />
-      <workItem from="1693573062152" duration="42544000" />
+      <workItem from="1693573062152" duration="44108000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -457,7 +439,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693488815091</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="secondary entity - need to fix issue with float/integer in random(3)">
+      <option name="closed" value="true" />
+      <created>1693675119462</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1693675119462</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,7 +487,8 @@
     <MESSAGE value="mashu mashu" />
     <MESSAGE value="done some work on engine" />
     <MESSAGE value="changed to if else inside catch in createValueExpression function in ExpressionFactory.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed to if else inside catch in createValueExpression function in ExpressionFactory.java" />
+    <MESSAGE value="secondary entity - need to fix issue with float/integer in random(3)" />
+    <option name="LAST_COMMIT_MESSAGE" value="secondary entity - need to fix issue with float/integer in random(3)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -528,9 +519,19 @@
           <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
-          <line>166</line>
-          <option name="timeStamp" value="82" />
+          <url>file://$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/world/utils/Property.java</url>
+          <line>104</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/world/utils/Property.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="86" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
