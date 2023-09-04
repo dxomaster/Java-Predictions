@@ -21,35 +21,39 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Engine implements Serializable {
     String simulationName;
     private List<RunEndDTO> pastSimulationArtifactDTO = new ArrayList<>();
     private Map<String, World> pastSimulationWorlds = new HashMap<>();
+    ExecutorService executorService;
+    private PRDWorld template;
     private World world;
+    List<World> worlds = new ArrayList<>();
 
-    public RunEndDTO runSimulation() throws ErrorException, WarnException {
+    public void runSimulation() throws ErrorException, WarnException {
+        World worldToRun = new World(this.template);
+        worldToRun.setEnvironmentVariables(this.world.getEnvironmentVariables());
+        this.world.getWorldDTO().getEntities().forEach(entityDTO -> {
+            EntityDefinition entityDefinition = worldToRun.getEntityDefinitionMap().get(entityDTO.getName());
+            entityDefinition.setPopulation(entityDTO.getPopulation());
+        });
+        worlds.add(worldToRun);
+        this.executorService.submit(worldToRun);
+        /* try {
 
-        RunEndDTO finishedArtifact = world.run();
-
-        pastSimulationWorlds.put(finishedArtifact.getUUID(), world);
-        world = null;
-
-        try {
-            File file = new File(this.simulationName);
-            JAXBContext jaxbContext = JAXBContext.newInstance(PRDWorld.class);
-            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            PRDWorld jaxbWorld = (PRDWorld) jaxbUnmarshaller.unmarshal(file);
-            this.world = new World(jaxbWorld);
-            this.simulationName = file.getName();
-
-        } catch (Exception e) {
+            result = finishedArtifact.get();
+            pastSimulationWorlds.put(result.getUUID(), world);
+            this.pastSimulationArtifactDTO.add(result);
+        }
+        catch (Exception e)
+        {
             throw new ErrorException("Error in running simulation:\n" + e.getMessage());
         }
-
-        this.pastSimulationArtifactDTO.add(finishedArtifact);
-        //this.pastSimulationArtifactDTO.put(finishedArtifact.getUUID(),pastSimulationArtifactDTO);
-        return finishedArtifact;
+        return result;*/
     }
 
     public boolean isSimulationLoaded() {
@@ -144,8 +148,16 @@ public class Engine implements Serializable {
             JAXBContext jaxbContext = JAXBContext.newInstance(PRDWorld.class);
 
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            PRDWorld jaxbWorld = (PRDWorld) jaxbUnmarshaller.unmarshal(file);
-            this.world = new World(jaxbWorld);
+            this.template = (PRDWorld) jaxbUnmarshaller.unmarshal(file);
+            try {
+                int threadAmount = this.template.getPRDThreadCount();
+                this.executorService = Executors.newFixedThreadPool(threadAmount);
+            }
+            catch (Exception e){
+                throw new ErrorException("Error in parsing number of threads, make sure it is a positive integer.");
+            }
+
+            this.world = new World(template);
             this.pastSimulationWorlds = new HashMap<>();
             this.simulationName = filename;
 

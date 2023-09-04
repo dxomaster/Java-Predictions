@@ -22,7 +22,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class World implements java.io.Serializable {
+public class World implements java.io.Serializable, Runnable {
+    private  String UUID;
+    private  String formattedDateTime;
+    private String finishedReason;
+
     private final List<Rule> rules;
     private List<Property> environmentVariables;//todo change this to map
     private Map<String, List<Entity>> entityList;
@@ -56,6 +60,7 @@ public class World implements java.io.Serializable {
 
         return new WorldDTO(environmentVariables, entityDTOList, ruleDTOList, termination);
     }
+
     public World(PRDWorld prdWorld) throws ErrorException {
         try {
             Map<String, EntityDefinition> entityDefinitionList = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());
@@ -123,8 +128,6 @@ public class World implements java.io.Serializable {
                     grid.removeEntity(entity);
                     entityDefinitionMap.get(entity.getName()).setFinalPopulation(entityDefinitionMap.get(entity.getName()).getFinalPopulation() - 1);
                     currentList.remove(entity);
-
-
                 }
 
             }
@@ -145,39 +148,43 @@ public class World implements java.io.Serializable {
         return entityDefinitionMap.get(name);
     }
 
-    public RunEndDTO run() throws ErrorException, WarnException {
+    public void run() {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
-        String formattedDateTime = currentDateTime.format(formatter);
-
+        this.formattedDateTime = currentDateTime.format(formatter);
+        this.UUID = java.util.UUID.randomUUID().toString();
         long startTime = System.currentTimeMillis();
 
-        createEntities();
-        grid = new Grid(row, column, entityList);
-        String finishedReason = checkTerminationConditions(ticks, startTime);
-        while (finishedReason.isEmpty()) {
-            for (List<Entity> entities : entityList.values()) {
-                for (Entity entity : entities) {
+        try {
+            createEntities();
+            grid = new Grid(row, column, entityList);
+            String finishedReason = checkTerminationConditions(ticks, startTime);
+            while (finishedReason.isEmpty()) {
+                for (List<Entity> entities : entityList.values()) {
+                    for (Entity entity : entities) {
 
-                    this.grid.moveEntity(entity);
-                }
-            }
-
-            for (List<Entity> entities : entityList.values()) {
-
-                for (Entity entity : entities) {
-                    for (Rule rule : rules) {
-                        rule.applyRule(this, entity, ticks);
+                        this.grid.moveEntity(entity);
                     }
                 }
+
+                for (List<Entity> entities : entityList.values()) {
+
+                    for (Entity entity : entities) {
+                        for (Rule rule : rules) {
+                            rule.applyRule(this, entity, ticks);
+                        }
+                    }
+                }
+                RemoveEntities();
+                ticks++;
+                this.finishedReason = checkTerminationConditions(ticks, startTime);
             }
-            RemoveEntities();
-            ticks++;
-            finishedReason = checkTerminationConditions(ticks, startTime);
+
+            //return new RunEndDTO(UUID, finishedReason, formattedDateTime);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        String UUID = java.util.UUID.randomUUID().toString();
-        return new RunEndDTO(UUID, finishedReason, formattedDateTime);
     }
 
     private String checkTerminationConditions(Integer ticks, long startTime) {
