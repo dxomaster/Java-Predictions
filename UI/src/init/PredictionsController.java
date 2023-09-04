@@ -151,7 +151,6 @@ public class PredictionsController implements Initializable {
                 entityPopulationListView.setPrefWidth(250);
                 List<EntityDTO> entities = engine.getSimulationParameters().getEntities();
 
-                // Populate the List with entities and their populations
                 ObservableList<EntityDTO> observableEntities = FXCollections.observableArrayList(entities);
                 entityPopulationListView.setItems(observableEntities);
                 entityPopulationListView.setCellFactory(param -> new ListCell<EntityDTO>() {
@@ -171,8 +170,8 @@ public class PredictionsController implements Initializable {
         private void setupListViewSelectionListenerPopulation(ListView<EntityDTO> listView) {
                 listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                         if (newValue != null) {
-                                        setPopulation(newValue);
-                                newExecution(null); //todo do we have to?
+                                setPopulation(newValue);
+                                newExecution(null);
                         }
                 });
         }
@@ -180,14 +179,12 @@ public class PredictionsController implements Initializable {
         protected void newExecution(ActionEvent event) {
                 try {
                         dynamicDisplay.getChildren().clear();
-                        ListView<PropertyDTO> envVariablesDisplay = setupPropertyListView();
 
+                        ListView<PropertyDTO> envVariablesDisplay = setupPropertyListView();
                         ListView<EntityDTO> entityPopulationView = setupEntityPopulationsListView();
 
-                        // Add the ListView, TableView, and button to the entityPopulationsContainer
                         dynamicDisplay.getChildren().addAll(envVariablesDisplay, entityPopulationView);
 
-                        // Show the entityPopulationsContainer in the dynamicDisplay StackPane
                         Button runButton = new Button("Run Simulation");
                         runButton.setOnAction(e -> {
                                 try {
@@ -245,7 +242,7 @@ public class PredictionsController implements Initializable {
                                 } else {
                                         setEnvProperty(newValue);
                                 }
-                                newExecution(null); //todo do we have to?
+                                newExecution(null);
                         }
                 });
         }
@@ -329,53 +326,60 @@ public class PredictionsController implements Initializable {
         }
         private void populateActions(List<ActionableDTO> actions, TreeItem<String> parentItem) {
                 for (ActionableDTO action : actions) {
-                        TreeItem<String> actionItem = new TreeItem<>("Action type: " + action.getName());
-                        if (action instanceof ConditionDTO)
-                        {
-                                ConditionDTO condition = (ConditionDTO) action;
-                                TreeItem<String> ifActionAmount = new TreeItem<>("Number of actions to perform if satisfied: "+ condition.getActionsToPerformIfSatisfied().size());
-                                TreeItem<String> ifNotActionAmount = new TreeItem<>("Number of actions to perform if not satisfied: "+condition.getActionsToPerformIfNotSatisfied().size());
-                                TreeItem<String> property = new TreeItem<>("Property: "+condition.getSimpleCondition().getProperty());
-                                TreeItem<String> operator = new TreeItem<>("Operator: "+condition.getSimpleCondition().getOperator());
-                                TreeItem<String> value = new TreeItem<>("Value: "+condition.getSimpleCondition().getExpression());
-                                actionItem.getChildren().addAll(ifActionAmount, ifNotActionAmount, property, operator, value);
-
-                        }
-                        else if (action instanceof MultipleConditionDTO)
-                        {
-                                MultipleConditionDTO condition = (MultipleConditionDTO) action;
-                                TreeItem<String> conditionAmount = new TreeItem<>("Number of conditions: "+ condition.getConditions().size());
-                                TreeItem<String> ifActionAmount = new TreeItem<>("Number of actions to perform if satisfied: "+ condition.getActionsToPerformIfSatisfied().size());
-                                TreeItem<String> ifNotActionAmount = new TreeItem<>("Number of actions to perform if not satisfied: "+condition.getActionsToPerformIfNotSatisfied().size());
-                                TreeItem<String> logicOperator = new TreeItem<>("Logic Operator: "+condition.getOperator());
-                                actionItem.getChildren().addAll(conditionAmount,ifActionAmount, ifNotActionAmount, logicOperator);
-
-                        }
-                        else if (action instanceof ActionDTO)
-                        {
-                                ActionDTO actionDTO = (ActionDTO) action;
-                                TreeItem<String> entity = new TreeItem<>("Entity: "+actionDTO.getEntityName());
-                                if(actionDTO.getPropertyName() != null) {
-                                        TreeItem<String> property = new TreeItem<>("Property: " + actionDTO.getPropertyName());
-                                        actionItem.getChildren().add(property);
-                                }
-                                if(!actionDTO.getOperator().equals("none")) {
-                                        TreeItem<String> operator = new TreeItem<>("Operator: " + actionDTO.getOperator());
-                                        actionItem.getChildren().add(operator);
-                                }
-                                if(((ActionDTO) action).getExpressions().length != 0) {
-                                        TreeItem<String> arguments = new TreeItem<>("Arguments: " + Arrays.stream(actionDTO.getExpressions())
-                                                .collect(Collectors.joining(" ")));
-                                        actionItem.getChildren().add(arguments);
-                                }
-
-                                actionItem.getChildren().addAll(entity);
-                        }
-
-
+                        TreeItem<String> actionItem = createActionItem(action);
                         parentItem.getChildren().add(actionItem);
                 }
         }
+
+        private TreeItem<String> createActionItem(ActionableDTO action) {
+                TreeItem<String> actionItem = new TreeItem<>("Action type: " + action.getName());
+
+                if (action instanceof ConditionDTO) {
+                        populateConditionAction((ConditionDTO) action, actionItem);
+                } else if (action instanceof MultipleConditionDTO) {
+                        populateMultipleConditionAction((MultipleConditionDTO) action, actionItem);
+                } else if (action instanceof ActionDTO) {
+                        populateActionDTO((ActionDTO) action, actionItem);
+                }
+
+                return actionItem;
+        }
+
+        private void populateMultipleConditionAction(MultipleConditionDTO condition, TreeItem<String> actionItem) {
+                TreeItem<String> conditionAmount = new TreeItem<>("Number of conditions: "+ condition.getConditions().size());
+                TreeItem<String> ifActionAmount = new TreeItem<>("Number of actions to perform if satisfied: "+ condition.getActionsToPerformIfSatisfied().size());
+                TreeItem<String> ifNotActionAmount = new TreeItem<>("Number of actions to perform if not satisfied: "+condition.getActionsToPerformIfNotSatisfied().size());
+                TreeItem<String> logicOperator = new TreeItem<>("Logic Operator: "+condition.getOperator());
+                actionItem.getChildren().addAll(conditionAmount,ifActionAmount, ifNotActionAmount, logicOperator);
+        }
+
+        private void populateConditionAction(ConditionDTO condition, TreeItem<String> actionItem) {
+                TreeItem<String> ifActionAmount = new TreeItem<>("Number of actions to perform if satisfied: "+ condition.getActionsToPerformIfSatisfied().size());
+                TreeItem<String> ifNotActionAmount = new TreeItem<>("Number of actions to perform if not satisfied: "+condition.getActionsToPerformIfNotSatisfied().size());
+                TreeItem<String> property = new TreeItem<>("Property: "+condition.getSimpleCondition().getProperty());
+                TreeItem<String> operator = new TreeItem<>("Operator: "+condition.getSimpleCondition().getOperator());
+                TreeItem<String> value = new TreeItem<>("Value: "+condition.getSimpleCondition().getExpression());
+                actionItem.getChildren().addAll(ifActionAmount, ifNotActionAmount, property, operator, value);
+        }
+
+        private void populateActionDTO(ActionDTO action, TreeItem<String> actionItem) {
+                TreeItem<String> entity = new TreeItem<>("Entity: "+ action.getEntityName());
+                if(action.getPropertyName() != null) {
+                        TreeItem<String> property = new TreeItem<>("Property: " + action.getPropertyName());
+                        actionItem.getChildren().add(property);
+                }
+                if(!action.getOperator().equals("none")) {
+                        TreeItem<String> operator = new TreeItem<>("Operator: " + action.getOperator());
+                        actionItem.getChildren().add(operator);
+                }
+                if(((ActionDTO) action).getExpressions().length != 0) {
+                        TreeItem<String> arguments = new TreeItem<>("Arguments: " + String.join(" ", action.getExpressions()));
+                        actionItem.getChildren().add(arguments);
+                }
+
+                actionItem.getChildren().addAll(entity);
+        }
+
         private void populateTermination(TerminationDTO termination, TreeItem<String> parentItem) {
                 if (termination.getTicks() != null) {
                         parentItem.getChildren().add(new TreeItem<>("Termination Ticks: " + termination.getTicks()));

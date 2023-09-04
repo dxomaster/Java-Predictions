@@ -17,10 +17,7 @@ import world.utils.Property;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class World implements java.io.Serializable, Runnable {
     private  String formattedDateTime;
@@ -29,6 +26,7 @@ public class World implements java.io.Serializable, Runnable {
     private List<Property> environmentVariables;//todo change this to map
     private Map<String, List<Entity>> entityList;
     private Map<String, EntityDefinition> entityDefinitionMap;
+    private Map<String, List<Integer>> entityPopulationOverTime;
     private Integer ticks = 0;
     private Integer terminationByTicks;
     private Integer terminationBySeconds;
@@ -73,6 +71,11 @@ public class World implements java.io.Serializable, Runnable {
             this.rules.add(new Rule(rule));
         }
 
+        this.entityPopulationOverTime = new HashMap<>();
+        for (String entityName : world.entityPopulationOverTime.keySet()) {
+            this.entityPopulationOverTime.put(entityName, new ArrayList<>(world.entityPopulationOverTime.get(entityName)));
+        }
+
         this.terminationByTicks = world.terminationByTicks;
         this.terminationBySeconds = world.terminationBySeconds;
         this.row = world.row;
@@ -83,6 +86,10 @@ public class World implements java.io.Serializable, Runnable {
         try {
             Map<String, EntityDefinition> entityDefinitionList = EntityFactory.createEntityDefinitionList(prdWorld.getPRDEntities().getPRDEntity());
             this.setEntityDefinitionMap(entityDefinitionList);
+            entityPopulationOverTime = new HashMap<>();
+            for (EntityDefinition entityDefinition : entityDefinitionMap.values()) {
+                entityPopulationOverTime.put(entityDefinition.getName(), new ArrayList<>());
+            }
             List<Property> environmentVariables = PropertyFactory.createPropertyList(prdWorld.getPRDEnvironment().getPRDEnvProperty());
             this.setEnvironmentVariables(environmentVariables);
             List<Rule> rules = RuleFactory.createRuleList(this, prdWorld.getPRDRules().getPRDRule());
@@ -193,9 +200,15 @@ public class World implements java.io.Serializable, Runnable {
                         }
                     }
                 }
+                for (String entityType : entityPopulationOverTime.keySet()) {
+                    int population = entityList.get(entityType).size();
+                    entityPopulationOverTime.get(entityType).add(population);
+                }
                 RemoveEntities();
                 ticks++;
                 this.finishedReason = checkTerminationConditions(ticks, startTime);
+                // todo notify user when simulation is finished
+                // handle termination prd-by-user
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

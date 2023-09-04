@@ -15,9 +15,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="world ctor from world">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="changed isEntityNear to address the infinity of the board">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/world/utils/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/Grid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -461,7 +463,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693844263961</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="changed isEntityNear to address the infinity of the board">
+      <option name="closed" value="true" />
+      <created>1693847167596</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1693847167596</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -479,7 +489,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="first commit" />
     <MESSAGE value="did stuff" />
     <MESSAGE value="did more stuff" />
     <MESSAGE value="guess what &#10;did even more stuff" />
@@ -504,7 +513,8 @@
     <MESSAGE value="secondary entity - need to fix issue with float/integer in random(3)" />
     <MESSAGE value="fix random returning integer" />
     <MESSAGE value="world ctor from world" />
-    <option name="LAST_COMMIT_MESSAGE" value="world ctor from world" />
+    <MESSAGE value="changed isEntityNear to address the infinity of the board" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed isEntityNear to address the infinity of the board" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -538,11 +548,6 @@
           <url>file://$PROJECT_DIR$/Engine/src/rule/Rule.java</url>
           <line>40</line>
           <option name="timeStamp" value="87" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>
-          <line>126</line>
-          <option name="timeStamp" value="92" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

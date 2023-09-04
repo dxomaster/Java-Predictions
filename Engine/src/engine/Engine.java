@@ -123,8 +123,6 @@ public class Engine implements Serializable {
 
     public void loadSimulationParametersFromFile(String filename) throws ErrorException {
         try {
-            if(++counter > 1)
-                counter = 3;
             this.pastSimulationArtifactDTO = new ArrayList<>();
 
             File file = new File(filename);
