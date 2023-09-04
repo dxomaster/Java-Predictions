@@ -69,7 +69,16 @@ public class ActionFactory {
 
     public static SecondaryEntitySelection createSecondaryEntity(World world, PRDAction.PRDSecondaryEntity secondary) {
         EntityDefinition definition = world.getEntityDefinitionByName(secondary.getEntity());
-        int count = Integer.parseInt(secondary.getPRDSelection().getCount());
+        int count;
+        if (secondary.getPRDSelection().getCount().equalsIgnoreCase("all"))
+            count = world.getEntities().get(definition.getName()).size();
+        else
+            try {
+                count = Integer.parseInt(secondary.getPRDSelection().getCount());
+            } catch (NumberFormatException e) {
+                throw new RuntimeException("Count of secondary entity selection must be a number or 'all'");
+            }
+
         List<Satisfiable> conditions = new ArrayList<>();
         if (Objects.equals(secondary.getPRDSelection().getPRDCondition().getSingularity(), "single")) {
             conditions.add(ConditionFactory.createCondition(world, secondary.getPRDSelection().getPRDCondition()));

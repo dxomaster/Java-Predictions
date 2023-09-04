@@ -61,8 +61,16 @@ public class Property implements java.io.Serializable {
         this.type = property.type;
         this.isRandomlyGenerated = property.isRandomlyGenerated;
         this.range = property.range;
-        this.value = property.value;
 
+        if (this.type == PropertyType.DECIMAL) {
+            this.value = new Integer((Integer) property.value);
+        } else if (this.type == PropertyType.FLOAT) {
+            this.value = new Float((Float) property.value);
+        } else if (this.type == PropertyType.BOOLEAN) {
+            this.value = new Boolean((Boolean) property.value);
+        } else if (this.type == PropertyType.STRING) {
+            this.value = new String((String) property.value);
+        }
     }
 
     public String getName() {
@@ -86,7 +94,7 @@ public class Property implements java.io.Serializable {
     }
 
     public void setValue(Object value,int tick) throws WarnException {
-        if (value instanceof String) {// todo figure out why
+        if (value instanceof String) {
             String stringValue = (String) value;
             try {
                 if (this.type == PropertyType.FLOAT)
@@ -97,7 +105,6 @@ public class Property implements java.io.Serializable {
                     value = Boolean.parseBoolean((stringValue));
 
                 }
-
             } catch (Exception e) {
                 throw new  IllegalArgumentException("Error with Property " + this.name + " Value must be of type " + this.type.propertyClass.getSimpleName());
             }
@@ -155,7 +162,7 @@ public class Property implements java.io.Serializable {
 
     public PropertyDTO getPropertyDTO() {
         RangeDTO rangeDTO;
-        if(range !=null)
+        if(range != null)
              rangeDTO = range.getRangeDTO();
         else
             rangeDTO = null;

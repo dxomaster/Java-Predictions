@@ -24,6 +24,12 @@ public class Rule extends RuleFactory implements java.io.Serializable {
         this.activation = activation;
     }
 
+    public Rule(Rule rule) {
+        this.name = rule.name;
+        this.actions = rule.actions;
+        this.activation = rule.activation;
+    }
+
     @Override
     public String toString() {
         return "Rule: " + name +

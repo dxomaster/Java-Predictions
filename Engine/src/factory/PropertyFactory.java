@@ -26,7 +26,6 @@ public class PropertyFactory {
         String type = prdProperty.getType();
         boolean randomInit = prdProperty.getPRDValue().isRandomInitialize();
         if (randomInit) {
-
             return createRandomInitEntityProperty(prdProperty.getPRDName(), range, type);
         } else {
             if (isInvalid(prdProperty.getPRDValue().getInit(), type)) {

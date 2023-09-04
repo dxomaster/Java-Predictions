@@ -26,34 +26,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class Engine implements Serializable {
+    int counter = 0;
     String simulationName;
     private List<RunEndDTO> pastSimulationArtifactDTO = new ArrayList<>();
     private Map<String, World> pastSimulationWorlds = new HashMap<>();
     ExecutorService executorService;
     private PRDWorld template;
     private World world;
-    List<World> worlds = new ArrayList<>();
+    Map<String, World> worlds = new HashMap<>();
 
     public void runSimulation() throws ErrorException, WarnException {
-        World worldToRun = new World(this.template);
-        worldToRun.setEnvironmentVariables(this.world.getEnvironmentVariables());
-        this.world.getWorldDTO().getEntities().forEach(entityDTO -> {
-            EntityDefinition entityDefinition = worldToRun.getEntityDefinitionMap().get(entityDTO.getName());
-            entityDefinition.setPopulation(entityDTO.getPopulation());
-        });
-        worlds.add(worldToRun);
+        World worldToRun = new World(this.world);
+        String UUID = java.util.UUID.randomUUID().toString();
+        this.worlds.put(UUID, worldToRun);
         this.executorService.submit(worldToRun);
-        /* try {
-
-            result = finishedArtifact.get();
-            pastSimulationWorlds.put(result.getUUID(), world);
-            this.pastSimulationArtifactDTO.add(result);
-        }
-        catch (Exception e)
-        {
-            throw new ErrorException("Error in running simulation:\n" + e.getMessage());
-        }
-        return result;*/
     }
 
     public boolean isSimulationLoaded() {
@@ -100,17 +86,12 @@ public class Engine implements Serializable {
 
     }
 
-
-    public void setEnvVariableWithDTO(EnvDTO envDTO) throws WarnException {
-        setEnvVariable(envDTO.getName(), envDTO.getValue());
-        return;
-    }
     public void setEnvVariableWithDTO(PropertyDTO propertyDTO) throws WarnException {
         setEnvVariable(propertyDTO.getName(), propertyDTO.getValue());
     }
 
     private void setEnvVariable(String name, Object value) throws WarnException {
-        if (world == null)
+        if (!isSimulationLoaded())
             throw new IllegalArgumentException("No file is loaded");
         for (Property property : world.getEnvironmentVariables()) {
             if (property.getName().equals(name)) {
@@ -122,7 +103,7 @@ public class Engine implements Serializable {
     }
 
     public List<EnvDTO> getRequiredEnvDTO() {
-        if (world == null)
+        if (!isSimulationLoaded())
             throw new IllegalArgumentException("No file is loaded");
         List<EnvDTO> requiredEnvDTO = new ArrayList<>();
         for (Property property : world.getEnvironmentVariables()) {
@@ -142,6 +123,8 @@ public class Engine implements Serializable {
 
     public void loadSimulationParametersFromFile(String filename) throws ErrorException {
         try {
+            if(++counter > 1)
+                counter = 3;
             this.pastSimulationArtifactDTO = new ArrayList<>();
 
             File file = new File(filename);
@@ -158,18 +141,15 @@ public class Engine implements Serializable {
             }
 
             this.world = new World(template);
-            this.pastSimulationWorlds = new HashMap<>();
             this.simulationName = filename;
 
         } catch (Exception e) {
             throw new ErrorException("Error in loading file please make sure this is a valid XML file with the correct schema:\n" + e.getMessage());
         }
-
-
     }
 
     public WorldDTO getSimulationParameters() {
-        if (world == null)
+        if (!isSimulationLoaded())
             throw new IllegalArgumentException("No file is loaded");
         return world.getWorldDTO();
     }
@@ -212,7 +192,5 @@ public class Engine implements Serializable {
             throw new IllegalArgumentException("No file is loaded");
         world.updateEntityPopulation(name, newValue);
     }
-
-
 }
 

@@ -23,10 +23,8 @@ import java.util.Map;
 import java.util.Random;
 
 public class World implements java.io.Serializable, Runnable {
-    private  String UUID;
     private  String formattedDateTime;
     private String finishedReason;
-
     private final List<Rule> rules;
     private List<Property> environmentVariables;//todo change this to map
     private Map<String, List<Entity>> entityList;
@@ -37,11 +35,11 @@ public class World implements java.io.Serializable, Runnable {
     private final int row;
     private final int column;
 
+    private Grid grid;
+
     public Grid getGrid() {
         return grid;
     }
-
-    private Grid grid;
 
     public WorldDTO getWorldDTO() {
         List<PropertyDTO> environmentVariables = new ArrayList<>();
@@ -59,6 +57,26 @@ public class World implements java.io.Serializable, Runnable {
         TerminationDTO termination = new TerminationDTO(this.terminationByTicks, this.terminationBySeconds);
 
         return new WorldDTO(environmentVariables, entityDTOList, ruleDTOList, termination);
+    }
+
+    public World(World world) {
+        entityDefinitionMap = new java.util.HashMap<>();
+        for (EntityDefinition entityDefinition : world.entityDefinitionMap.values()) {
+            this.entityDefinitionMap.put(entityDefinition.getName(), new EntityDefinition(entityDefinition));
+        }
+        this.environmentVariables = new ArrayList<>();
+        for (Property property : world.environmentVariables) {
+            this.environmentVariables.add(new Property(property));
+        }
+        this.rules = new ArrayList<>();
+        for (Rule rule : world.rules) {
+            this.rules.add(new Rule(rule));
+        }
+
+        this.terminationByTicks = world.terminationByTicks;
+        this.terminationBySeconds = world.terminationBySeconds;
+        this.row = world.row;
+        this.column = world.column;
     }
 
     public World(PRDWorld prdWorld) throws ErrorException {
@@ -153,7 +171,6 @@ public class World implements java.io.Serializable, Runnable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         this.formattedDateTime = currentDateTime.format(formatter);
-        this.UUID = java.util.UUID.randomUUID().toString();
         long startTime = System.currentTimeMillis();
 
         try {
@@ -180,8 +197,6 @@ public class World implements java.io.Serializable, Runnable {
                 ticks++;
                 this.finishedReason = checkTerminationConditions(ticks, startTime);
             }
-
-            //return new RunEndDTO(UUID, finishedReason, formattedDateTime);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

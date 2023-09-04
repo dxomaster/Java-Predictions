@@ -78,7 +78,6 @@ public class PredictionsController implements Initializable {
                 } catch (Exception e) {
                         showErrorAlert(e);
                 }
-
         }
 
         private void setBooleanEnvProperty(PropertyDTO propertyDTO) {
@@ -189,18 +188,16 @@ public class PredictionsController implements Initializable {
                         dynamicDisplay.getChildren().addAll(envVariablesDisplay, entityPopulationView);
 
                         // Show the entityPopulationsContainer in the dynamicDisplay StackPane
-                        Button runButton = new Button("Run");
+                        Button runButton = new Button("Run Simulation");
                         runButton.setOnAction(e -> {
                                 try {
                                         engine.runSimulation();
-                                        newExecution(null);
+                                        // TODO: move to result screen
                                 } catch (Exception ex) {
                                         showErrorAlert(ex);
                                 }
                         });
                         dynamicDisplay.getChildren().add(runButton);
-
-
                 }
                 catch (Exception e)
                 {

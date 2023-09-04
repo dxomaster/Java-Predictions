@@ -19,10 +19,6 @@ public class ExpressionFactory {
         return createExpression(world, prdCondition.getEntity(),expression);
     }
 
-    private static PropertyType getTypeByPropertyName(World world, String propertyName, String entityName) {
-        return world.getEntityDefinitionByName(entityName).getPropertyByName(propertyName).getType();
-    }
-
     public static Expression[] createExpression(World world, PRDAction prdAction) {
         List<Expression> expressions = new ArrayList<>();
         switch (prdAction.getType()) {
