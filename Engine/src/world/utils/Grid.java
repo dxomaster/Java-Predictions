@@ -55,59 +55,27 @@ public class Grid {
         Location mainEntityLocation = mainEntity.getLocation();
         int mainEntityRow = mainEntityLocation.getRow();
         int mainEntityColumn = mainEntityLocation.getColumn();
-        for (int i = mainEntityRow - depth; i <= mainEntityRow + depth; i++)
-        {
-            for (int j = mainEntityColumn - depth; j <= mainEntityColumn + depth; j++)
-            {
-                if(i != mainEntityRow || j != mainEntityColumn) {
-                    if (i >= 0 && i < row && j >= 0 && j < column) {
-                        if (grid[i][j] != null && grid[i][j].getName().equals(secondaryEntity)) {
+
+        for (int i = mainEntityRow - depth; i <= mainEntityRow + depth; i++) {
+            for (int j = mainEntityColumn - depth; j <= mainEntityColumn + depth; j++) {
+                int currentRow = (i + row) % row;
+                int currentColumn = (j + column) % column;
+
+                if(currentRow != mainEntityRow || currentColumn != mainEntityColumn) {
+                    if (grid[currentRow][currentColumn] != null && grid[currentRow][currentColumn].getName().equals(secondaryEntity)) {
                             return true;
                         }
-                    }
-//                else { todo should we do this?
-//                    int fixedRow = i, fixedColumn = j;
-//                    int rowMultiplier = Math.abs(i / row);
-//                    int columnMultiplier = Math.abs(j / column);
-//                    if(i<0)
-//                    {
-//                        fixedRow = i + row * (rowMultiplier + 1);
-//                    }
-//                    if(i >= row)
-//                    {
-//                        fixedRow  = i - row * rowMultiplier;
-//                    }
-//                    if(j < 0)
-//                    {
-//                        fixedColumn = j + column * (columnMultiplier + 1);
-//                    }
-//                    if(j >= column)
-//                    {
-//                        fixedColumn =  j - column * columnMultiplier;
-//                    }
-//                    if(grid[fixedRow][fixedColumn] != null && grid[fixedRow][fixedColumn].getName().equals(secondaryEntity))
-//                    {
-//                        return true;
-//                    }
-//
-//                }
                 }
             }
         }
         return false;
-
-
     }
     public void moveEntity(Entity entityToMove) {
-    //search for entity and get x,y
-
-
-
     Location loc = entityToMove.getLocation();
     grid[loc.getRow()][loc.getColumn()] = null;
     loc.generateRandomMove();
     grid[loc.getRow()][loc.getColumn()] = entityToMove;
-
+    entityToMove.setLocation(loc);
     }
     private boolean isOccupied(Location location)
     {
@@ -154,19 +122,18 @@ public class Grid {
                 for (int i = 0; i < 4; i++) {
                     int newDirection = (randInt + i) % 4;
                     Direction directionEnum = Direction.fromValue(newDirection);
-                    int newRow = this.row + directionEnum.dx;
-                    int newColumn = this.column + directionEnum.dy;
+                    int newRow = (this.row + directionEnum.dx + Grid.this.row) % Grid.this.row;
+                    int newColumn = (this.column + directionEnum.dy + Grid.this.column) % Grid.this.column;
                     Location newLocation = new Location(newRow, newColumn);
-                    newLocation.fixOutOfBounds(directionEnum);
+                    //newLocation.fixOutOfBounds(directionEnum); //TODO: check if this is needed
 
                     if (!isOccupied(newLocation)){
                         this.column = newLocation.column;
                         this.row = newLocation.row;
                     }
                 }
-
-
         }
+
         private void fixOutOfBounds(Direction direction)
         {
 
@@ -206,8 +173,6 @@ public class Grid {
         RIGHT(0, 1),
         UP(-1, 0),
         DOWN(1, 0);
-
-
 
         private final int dx;
         private final int dy;
