@@ -27,7 +27,6 @@ import java.util.concurrent.Executors;
 
 public class Engine implements Serializable {
     String simulationName;
-
     private Map<String, World> pastSimulationWorlds = new HashMap<>();
     ExecutorService executorService;
     private PRDWorld template;
@@ -39,6 +38,32 @@ public class Engine implements Serializable {
         String UUID = java.util.UUID.randomUUID().toString();
         this.worlds.put(UUID, worldToRun);
         this.executorService.submit(worldToRun);
+    }
+
+    public void pause(String uuid)  {
+        if (worlds.containsKey(uuid)) {
+            World world = worlds.get(uuid);
+            world.setPaused(true);
+        }
+    }
+
+    public void stop(String uuid) {
+        if (worlds.containsKey(uuid)) {
+            World world = worlds.get(uuid);
+            world.setStopped(true);
+        }
+    }
+
+    public void resume(String uuid) {
+        if (worlds.containsKey(uuid)) {
+            World world = worlds.get(uuid);
+            world.setPaused(false);
+            notifyAll();
+        }
+    }
+
+    public void clearExecution() throws ErrorException {
+        this.world = new World(template);
     }
 
     public boolean isSimulationLoaded() {
@@ -60,9 +85,9 @@ public class Engine implements Serializable {
 
         for (EntityDefinition entityDefinition : world.getEntityDefinitionMap().values()) {
             List<Integer> populationOverTime = world.getPopulationOverTime(entityDefinition.getName());
+
             List<StatisticPropertyDTO> propertyDTOList = new ArrayList<>();
             for (Property property : entityDefinition.getProperties().values()) {
-
                 List<Entity> entityList = world.getEntities().get(entityDefinition.getName());
                 StatisticPropertyDTO statisticPropertyDTO = createPropertyDTO(property, entityList);
                 propertyDTOList.add(statisticPropertyDTO);
@@ -76,6 +101,7 @@ public class Engine implements Serializable {
         Map<String, Integer> frequencyMap = new HashMap<>();
         Float avgSum = 0f;
         Float consistencySum = 0f;
+
         for (Entity entity : entityList) {
             Property prop = entity.getPropertyByName(property.getName());
             if (prop.getType() == PropertyType.FLOAT)
@@ -88,9 +114,11 @@ public class Engine implements Serializable {
             } else
                 frequencyMap.put(prop.getValue().toString(), 1);
         }
+
         if (property.getType() == PropertyType.FLOAT)
             avgSum /= entityList.size();
         consistencySum /= entityList.size();
+
         return new StatisticPropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap, avgSum, consistencySum);
 
     }
@@ -166,10 +194,21 @@ public class Engine implements Serializable {
         for (Map.Entry entry : worlds.entrySet()) {
             World world = (World) entry.getValue();
             String UUID = (String) entry.getKey();
-            if(world.isRunning() == false) {
-                RunEndDTO runEndDTO = new RunEndDTO(UUID, world.getFinishedReason(), world.getFinishedTime());
-                pastSimulationArtifactDTO.add(runEndDTO);
+
+            String finishedReason;
+            String date = "";
+            if (world.isRunning())
+                finishedReason = "Running";
+            else if (world.isPaused())
+                finishedReason = "Paused";
+            else {
+                finishedReason = world.getFinishedReason();
+                date = world.getFinishedTime();
             }
+
+            RunEndDTO runEndDTO = new RunEndDTO(UUID, finishedReason, date);
+            pastSimulationArtifactDTO.add(runEndDTO);
+
         }
         return pastSimulationArtifactDTO;
     }

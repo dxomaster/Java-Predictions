@@ -15,9 +15,6 @@ public class StatisticPropertyDTO implements java.io.Serializable {
         this.valueFrequency = valueFrequency;
         this.consistency = consistency;
         this.average = average;
-
-
-
     }
 
     public Map<String, Integer> getValueFrequency() {

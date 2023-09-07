@@ -20,17 +20,14 @@ public class Replace implements Actionable{
     }
     @Override
     public void performAction(World world, Entity entity, int ticks,Entity secondaryEntity) throws WarnException, ErrorException {
-        if(!entity.getToKill()) {//todo change if Aviad changes the way to kill
-            entity.kill();
-            if (mode.equals("scratch")) {
-                world.createEntityFromScratch(entityToCreate);
-            } else if (mode.equals("derived")) {
-                world.createEntityDerived(entityToCreate, entity);
-            } else {
-                throw new ErrorException(mode + " is not a valid mode. Please use either scratch or derived");
-            }
+        entity.kill();
+        if (mode.equals("scratch")) {
+            world.createEntityFromScratch(entityToCreate);
+        } else if (mode.equals("derived")) {
+            world.createEntityDerived(entityToCreate, entity);
+        } else {
+            throw new ErrorException(mode + " is not a valid mode. Please use either scratch or derived");
         }
-
     }
 
     @Override

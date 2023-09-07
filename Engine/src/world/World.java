@@ -22,6 +22,19 @@ import java.util.*;
 public class World implements java.io.Serializable, Runnable {
     private  String formattedDateTime;
     private boolean isRunning = false;
+
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public void setStopped(boolean stopped) {
+        isStopped = stopped;
+    }
+
+    private boolean isStopped = false;
+
+    private boolean isPaused = false;
+
     private String finishedReason;
     private final List<Rule> rules;
     private List<Property> environmentVariables;//todo change this to map
@@ -114,8 +127,8 @@ public class World implements java.io.Serializable, Runnable {
                 throw new IllegalArgumentException("Termination by seconds must be greater than 0");
             row = prdWorld.getPRDGrid().getRows();
             column = prdWorld.getPRDGrid().getColumns();
-            if (row < 1 || column < 1)
-                throw new IllegalArgumentException("Grid size must be greater than 0");
+            if (row < 10 || column < 10 || row > 100 || column > 100)
+                throw new IllegalArgumentException("Grid size must be between 10 and 100");
         } catch (Exception e) {
             throw new ErrorException("Error in creating world: " + e.getMessage());
         }
@@ -214,6 +227,10 @@ public class World implements java.io.Serializable, Runnable {
                 this.finishedReason = checkTerminationConditions(ticks, startTime);
                 // todo notify user when simulation is finished
                 // handle termination prd-by-user
+
+                while (isPaused) {
+                    wait();
+                }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -253,6 +270,8 @@ public class World implements java.io.Serializable, Runnable {
             finishedBy += "ticks\n";
         if (terminationBySeconds != null && (System.currentTimeMillis() - startTime) / 1000 >= terminationBySeconds)
             finishedBy += " seconds\n";
+        if (isStopped)
+            finishedBy += "user\n";
         return finishedBy;
     }
 
@@ -267,8 +286,10 @@ public class World implements java.io.Serializable, Runnable {
     {
         for(Entity entity : creationBuffer)
         {
-            grid.addEntity(entity);
-            entityList.get(entity.getName()).add(entity);
+            if (grid.getOccupiedSize() + 1 <= grid.getTotalSize()) {
+                grid.addEntity(entity);
+                entityList.get(entity.getName()).add(entity);
+            } //todo ask aviad
         }
         creationBuffer.clear();
     }
@@ -331,4 +352,7 @@ public class World implements java.io.Serializable, Runnable {
     public List<Integer> getPopulationOverTime(String name) {
         return entityPopulationOverTime.get(name);
     }
+
+    public void setPaused(boolean b) { this.isPaused = b; }
+
 }

@@ -18,7 +18,6 @@ public class StatisticEntityDTO implements java.io.Serializable {
         this.name = name;
         this.population = population;
         this.populationOverTime = populationOverTime;
-
     }
 
 

@@ -53,7 +53,6 @@ public class PredictionsController implements Initializable {
                         for (RunEndDTO runEndDTO : runEndDTOS) {
                                 items.add(runEndDTO.toString());
                                 RunStatisticsDTO stat = engine.getPastSimulationStatisticsDTO(runEndDTO.getUUID());
-                                System.out.println(stat.toString());
                         }
                         listView.setItems(items);
                         dynamicDisplay.getChildren().clear();
@@ -61,8 +60,6 @@ public class PredictionsController implements Initializable {
                 } catch (Exception e) {
                         showErrorAlert(e);
                 }
-
-
         }
         @FXML
         protected void loadFile(ActionEvent event){
@@ -191,7 +188,7 @@ public class PredictionsController implements Initializable {
                         runButton.setOnAction(e -> {
                                 try {
                                         engine.runSimulation();
-                                        // TODO: move to result screen
+                                        viewResults(null);
                                 } catch (Exception ex) {
                                         showErrorAlert(ex);
                                 }

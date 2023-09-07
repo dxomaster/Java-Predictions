@@ -37,6 +37,27 @@ public class Grid {
 
     }
 
+    public int getTotalSize()
+    {
+        return column * row;
+    }
+
+    public int getOccupiedSize()
+    {
+        int occupiedSize = 0;
+        for (Entity[] entities : grid)
+        {
+            for (Entity entity : entities)
+            {
+                if(entity != null)
+                {
+                    occupiedSize++;
+                }
+            }
+        }
+        return occupiedSize;
+    }
+
     public Location getRandomUnoccupiedLocation()
     {
         Location randomLocation = new Location();
