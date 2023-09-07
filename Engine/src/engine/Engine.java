@@ -8,6 +8,7 @@ import entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDWorld;
 import world.World;
 import world.utils.Property;
+import world.utils.PropertyType;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
@@ -23,12 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class Engine implements Serializable {
-    int counter = 0;
     String simulationName;
-    private List<RunEndDTO> pastSimulationArtifactDTO = new ArrayList<>();
+
     private Map<String, World> pastSimulationWorlds = new HashMap<>();
     ExecutorService executorService;
     private PRDWorld template;
@@ -46,9 +45,9 @@ public class Engine implements Serializable {
         return world != null;
     }
 
-    public RunStatisticsDTO getPastSimulationArtifactDTO(String uuid) throws ErrorException {
-        if (pastSimulationWorlds.containsKey(uuid)) {
-            World world = pastSimulationWorlds.get(uuid);
+    public RunStatisticsDTO getPastSimulationStatisticsDTO(String uuid) throws ErrorException {
+        if (worlds.containsKey(uuid)) {
+            World world = worlds.get(uuid);
             //Map<String, List<EntityDTO>> entitiesDTO = createWorldEntitiesDTO(world.getEntities());
             List<StatisticEntityDTO> entityDefinitionDTO = createEntityDefinitionDTO(world);
             return new RunStatisticsDTO(entityDefinitionDTO);
@@ -58,7 +57,9 @@ public class Engine implements Serializable {
 
     private List<StatisticEntityDTO> createEntityDefinitionDTO(World world) {
         List<StatisticEntityDTO> entityDTOList = new ArrayList<>();
+
         for (EntityDefinition entityDefinition : world.getEntityDefinitionMap().values()) {
+            List<Integer> populationOverTime = world.getPopulationOverTime(entityDefinition.getName());
             List<StatisticPropertyDTO> propertyDTOList = new ArrayList<>();
             for (Property property : entityDefinition.getProperties().values()) {
 
@@ -66,15 +67,20 @@ public class Engine implements Serializable {
                 StatisticPropertyDTO statisticPropertyDTO = createPropertyDTO(property, entityList);
                 propertyDTOList.add(statisticPropertyDTO);
             }
-            entityDTOList.add(new StatisticEntityDTO(propertyDTOList, entityDefinition.getName(), entityDefinition.getPopulation(), entityDefinition.getFinalPopulation()));
+            entityDTOList.add(new StatisticEntityDTO(propertyDTOList, entityDefinition.getName(), entityDefinition.getPopulation(), populationOverTime));
         }
         return entityDTOList;
     }
 
     private StatisticPropertyDTO createPropertyDTO(Property property, List<Entity> entityList) {
         Map<String, Integer> frequencyMap = new HashMap<>();
+        Float avgSum = 0f;
+        Float consistencySum = 0f;
         for (Entity entity : entityList) {
             Property prop = entity.getPropertyByName(property.getName());
+            if (prop.getType() == PropertyType.FLOAT)
+                avgSum+= (Float) prop.getValue();
+            consistencySum += prop.getPropertyConsistency();
             if (frequencyMap.containsKey(prop.getValue().toString())) {
                 Integer value = frequencyMap.get(prop.getValue().toString());
 
@@ -82,7 +88,10 @@ public class Engine implements Serializable {
             } else
                 frequencyMap.put(prop.getValue().toString(), 1);
         }
-        return new StatisticPropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap);
+        if (property.getType() == PropertyType.FLOAT)
+            avgSum /= entityList.size();
+        consistencySum /= entityList.size();
+        return new StatisticPropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap, avgSum, consistencySum);
 
     }
 
@@ -123,7 +132,7 @@ public class Engine implements Serializable {
 
     public void loadSimulationParametersFromFile(String filename) throws ErrorException {
         try {
-            this.pastSimulationArtifactDTO = new ArrayList<>();
+            //this.pastSimulationArtifactDTO = new ArrayList<>();
 
             File file = new File(filename);
             JAXBContext jaxbContext = JAXBContext.newInstance(PRDWorld.class);
@@ -153,6 +162,15 @@ public class Engine implements Serializable {
     }
 
     public List<RunEndDTO> getPastArtifacts() {
+        List<RunEndDTO> pastSimulationArtifactDTO = new ArrayList<>();
+        for (Map.Entry entry : worlds.entrySet()) {
+            World world = (World) entry.getValue();
+            String UUID = (String) entry.getKey();
+            if(world.isRunning() == false) {
+                RunEndDTO runEndDTO = new RunEndDTO(UUID, world.getFinishedReason(), world.getFinishedTime());
+                pastSimulationArtifactDTO.add(runEndDTO);
+            }
+        }
         return pastSimulationArtifactDTO;
     }
 
@@ -174,7 +192,7 @@ public class Engine implements Serializable {
                              Files.newInputStream(Paths.get(filenameToLoad)))) {
             // we know that we read array list of Persons
             Engine engine = (Engine) in.readObject();
-            this.pastSimulationArtifactDTO = engine.pastSimulationArtifactDTO;
+            //this.pastSimulationArtifactDTO = engine.pastSimulationArtifactDTO;
             this.pastSimulationWorlds = engine.pastSimulationWorlds;
             this.simulationName = engine.simulationName;
             this.world = engine.world;

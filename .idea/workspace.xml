@@ -17,8 +17,19 @@
   <component name="ChangeListManager">
     <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="changed isEntityNear to address the infinity of the board">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/DataTransferObjects.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/DataTransferObjects.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticEntityDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticEntityDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/entity/EntityDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Proximity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/Replace.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/Replace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/utils/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/utils/Activation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/world/utils/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/Grid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/utils/Property.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -535,19 +546,19 @@
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/factory/PropertyFactory.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="69" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java</url>
           <line>97</line>
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/rule/Rule.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="87" />
+          <url>file://$PROJECT_DIR$/UI/src/init/PredictionsController.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
+          <line>196</line>
+          <option name="timeStamp" value="121" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
@@ -574,6 +585,8 @@
         <watch expression="prdWorld" />
         <watch expression="entity" />
         <watch expression="leftExpression" language="JAVA" />
+        <watch expression="((HashMap)((World)this).entityPopulationOverTime).entrySet().toArray()[0]" custom="java.util.HashMap,world.World" />
+        <watch expression="((World)this).entityPopulationOverTime" custom="world.World" />
       </configuration>
     </watches-manager>
   </component>

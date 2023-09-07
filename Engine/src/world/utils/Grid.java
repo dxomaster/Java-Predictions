@@ -36,6 +36,7 @@ public class Grid {
         }
 
     }
+
     public Location getRandomUnoccupiedLocation()
     {
         Location randomLocation = new Location();
@@ -50,7 +51,7 @@ public class Grid {
         Location loc = entityToRemove.getLocation();
         grid[loc.getRow()][loc.getColumn()] = null;
     }
-    public boolean isEntityNear(Entity mainEntity,String secondaryEntity,int depth)
+    public Entity getEntityNear(Entity mainEntity, String secondaryEntity, int depth)
     {
         Location mainEntityLocation = mainEntity.getLocation();
         int mainEntityRow = mainEntityLocation.getRow();
@@ -58,17 +59,17 @@ public class Grid {
 
         for (int i = mainEntityRow - depth; i <= mainEntityRow + depth; i++) {
             for (int j = mainEntityColumn - depth; j <= mainEntityColumn + depth; j++) {
-                int currentRow = (i + row) % row;
-                int currentColumn = (j + column) % column;
+                int currentRow = Math.floorMod((i + row) , row);
+                int currentColumn = Math.floorMod((j + column) , column);
 
                 if(currentRow != mainEntityRow || currentColumn != mainEntityColumn) {
                     if (grid[currentRow][currentColumn] != null && grid[currentRow][currentColumn].getName().equals(secondaryEntity)) {
-                            return true;
+                           return grid[currentRow][currentColumn];
                         }
                 }
             }
         }
-        return false;
+        return null;
     }
     public void moveEntity(Entity entityToMove) {
     Location loc = entityToMove.getLocation();
@@ -80,6 +81,15 @@ public class Grid {
     private boolean isOccupied(Location location)
     {
         return grid[location.getRow()][location.getColumn()] != null;
+    }
+
+    public void addEntity(Entity entity) {
+        if(isOccupied(entity.getLocation()))
+        {
+            throw new RuntimeException("Location is occupied");
+        }
+        Location loc = entity.getLocation();
+        grid[loc.getRow()][loc.getColumn()] = entity;
     }
 
     public class Location
@@ -122,10 +132,9 @@ public class Grid {
                 for (int i = 0; i < 4; i++) {
                     int newDirection = (randInt + i) % 4;
                     Direction directionEnum = Direction.fromValue(newDirection);
-                    int newRow = (this.row + directionEnum.dx + Grid.this.row) % Grid.this.row;
-                    int newColumn = (this.column + directionEnum.dy + Grid.this.column) % Grid.this.column;
+                    int newRow = Math.floorMod((this.row + directionEnum.dx + Grid.this.row) , Grid.this.row);
+                    int newColumn = Math.floorMod((this.column + directionEnum.dy + Grid.this.column) , Grid.this.column);
                     Location newLocation = new Location(newRow, newColumn);
-                    //newLocation.fixOutOfBounds(directionEnum); //TODO: check if this is needed
 
                     if (!isOccupied(newLocation)){
                         this.column = newLocation.column;
@@ -133,40 +142,6 @@ public class Grid {
                     }
                 }
         }
-
-        private void fixOutOfBounds(Direction direction)
-        {
-
-           switch (direction)
-              {
-                case UP:
-                     if(row < 0)
-                     {
-                          this.row = Grid.this.row - 1;
-                     }
-                     break;
-                case DOWN:
-                     if(row >= Grid.this.row)
-                     {
-                         this.row = 0;
-                     }
-                     break;
-                case RIGHT:
-                     if(column >= Grid.this.column)
-                     {
-                            this.column = 0;
-                     }
-                     break;
-                case LEFT:
-                     if(column < 0)
-                     {
-                            this.column = Grid.this.column - 1;
-                     }
-                     break;
-              }
-        }
-
-
     }
     public enum Direction{
         LEFT(0, -1),

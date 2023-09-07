@@ -5,6 +5,8 @@ import DTO.PropertyDTO;
 import DTO.RangeDTO;
 import Exception.WARN.WarnException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Property implements java.io.Serializable {
@@ -13,7 +15,15 @@ public class Property implements java.io.Serializable {
     private Range range;
     private PropertyType type;
     private Object value;
+    List<Integer> valueConsistency = new ArrayList<>();
 
+    public float getPropertyConsistency() {
+        int sum = 0;
+        for (Integer integer : valueConsistency) {
+            sum += integer;
+        }
+        return (float) sum / valueConsistency.size();
+    }
     public int getLastUpdatedTick() {
         return lastUpdatedTick;
     }
@@ -118,6 +128,7 @@ public class Property implements java.io.Serializable {
             }
         }
         this.value = value;
+        this.valueConsistency.add(tick - lastUpdatedTick);
         this.lastUpdatedTick = tick;
     }
 

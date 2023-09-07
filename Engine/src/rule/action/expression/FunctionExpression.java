@@ -89,7 +89,7 @@ public class FunctionExpression implements Expression, java.io.Serializable {
 
     @Override
     public Object evaluate(World world, Entity entity,Entity secondaryEntity) {
-
+        Property p;
         switch (function) {
             case ENVIRONMENT:
                 Property envVariable = world.getEnvironmentVariableByName((String) arguments[0]);
@@ -99,13 +99,16 @@ public class FunctionExpression implements Expression, java.io.Serializable {
                 Random random = new Random();
                 return (float)random.nextInt((int) arguments[0]);
             case EVALUATE:
-                return ((Property) arguments[0]).getValue();
+                p = (Property) arguments[0];
+                p = entity.getPropertyByName(p.getName());
+                return p.getValue();
             case PERCENT:
                float whole =  (float)((Expression) arguments[0]).evaluate(world,entity,secondaryEntity);
                 float part = (float)((Expression) arguments[1]).evaluate(world,entity,secondaryEntity);
                 return part/whole;
             case TICKS:
-                Property p = (Property) arguments[0];
+                p = (Property) arguments[0];
+                p = entity.getPropertyByName(p.getName());
                 return (float)world.getTicks() - p.getLastUpdatedTick();
 
             default:

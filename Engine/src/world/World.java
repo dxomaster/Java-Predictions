@@ -21,18 +21,19 @@ import java.util.*;
 
 public class World implements java.io.Serializable, Runnable {
     private  String formattedDateTime;
+    private boolean isRunning = false;
     private String finishedReason;
     private final List<Rule> rules;
     private List<Property> environmentVariables;//todo change this to map
     private Map<String, List<Entity>> entityList;
     private Map<String, EntityDefinition> entityDefinitionMap;
-    private Map<String, List<Integer>> entityPopulationOverTime;
+    private final List<Entity> creationBuffer = new ArrayList<>();
+    private final Map<String, List<Integer>> entityPopulationOverTime;
     private Integer ticks = 0;
     private Integer terminationByTicks;
     private Integer terminationBySeconds;
     private final int row;
     private final int column;
-
     private Grid grid;
 
     public Grid getGrid() {
@@ -151,7 +152,6 @@ public class World implements java.io.Serializable, Runnable {
             for (Entity entity : mockList) {
                 if (entity.getToKill()) {
                     grid.removeEntity(entity);
-                    entityDefinitionMap.get(entity.getName()).setFinalPopulation(entityDefinitionMap.get(entity.getName()).getFinalPopulation() - 1);
                     currentList.remove(entity);
                 }
 
@@ -172,9 +172,15 @@ public class World implements java.io.Serializable, Runnable {
     public EntityDefinition getEntityDefinitionByName(String name) {
         return entityDefinitionMap.get(name);
     }
+    public RunEndDTO getRunEndDTO(String UUID)
+    {
+        if(this.isRunning)
+            return null;
 
+        return new RunEndDTO(UUID, this.finishedReason, this.formattedDateTime);
+    }
     public void run() {
-
+        this.isRunning = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         this.formattedDateTime = currentDateTime.format(formatter);
@@ -183,28 +189,27 @@ public class World implements java.io.Serializable, Runnable {
         try {
             createEntities();
             grid = new Grid(row, column, entityList);
-            String finishedReason = checkTerminationConditions(ticks, startTime);
+            this.finishedReason = checkTerminationConditions(ticks, startTime);
             while (finishedReason.isEmpty()) {
-                for (List<Entity> entities : entityList.values()) {
-                    for (Entity entity : entities) {
 
-                        this.grid.moveEntity(entity);
-                    }
-                }
+                moveEntities();
+
+                List<Rule> activatedRules = getActivatedRules();
 
                 for (List<Entity> entities : entityList.values()) {
-
                     for (Entity entity : entities) {
-                        for (Rule rule : rules) {
+                        for (Rule rule : activatedRules) {
                             rule.applyRule(this, entity, ticks);
                         }
                     }
                 }
-                for (String entityType : entityPopulationOverTime.keySet()) {
-                    int population = entityList.get(entityType).size();
-                    entityPopulationOverTime.get(entityType).add(population);
-                }
+
                 RemoveEntities();
+
+                createReplacedEntities();
+
+                updatePopulationOverTime();
+
                 ticks++;
                 this.finishedReason = checkTerminationConditions(ticks, startTime);
                 // todo notify user when simulation is finished
@@ -213,8 +218,35 @@ public class World implements java.io.Serializable, Runnable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        this.isRunning = false;
+        System.out.println(this);
+        System.out.println("Finished by: " + finishedReason);
+        System.out.println(Thread.currentThread().getName());
     }
+    private List<Rule> getActivatedRules()
+    {
+        List<Rule> activatedRules = new ArrayList<>();
+        for (Rule rule : rules) {
+            if (rule.getActivation().isActivated(ticks))
+                activatedRules.add(rule);
+        }
+        return activatedRules;
+    }
+    private void moveEntities()
+    {
+        for (List<Entity> entities : entityList.values()) {
+            for (Entity entity : entities) {
 
+                this.grid.moveEntity(entity);
+            }
+        }
+    }
+    private void updatePopulationOverTime() {
+        for (String entityType : entityPopulationOverTime.keySet()) {
+            int population = entityList.get(entityType).size();
+            entityPopulationOverTime.get(entityType).add(population);
+        }
+    }
     private String checkTerminationConditions(Integer ticks, long startTime) {
         String finishedBy = "";
         if (terminationByTicks != null && ticks >= terminationByTicks)
@@ -231,7 +263,15 @@ public class World implements java.io.Serializable, Runnable {
     public void setEnvironmentVariables(List<Property> environmentVariables) {
         this.environmentVariables = environmentVariables;
     }
-
+    public void createReplacedEntities()
+    {
+        for(Entity entity : creationBuffer)
+        {
+            grid.addEntity(entity);
+            entityList.get(entity.getName()).add(entity);
+        }
+        creationBuffer.clear();
+    }
     public Map<String, List<Entity>> getEntities() {
         return entityList;
     }
@@ -249,19 +289,17 @@ public class World implements java.io.Serializable, Runnable {
     }
 
     public void createEntityFromScratch(String entityToCreate) throws WarnException {
-        entityDefinitionMap.get(entityToCreate).setPopulation(entityDefinitionMap.get(entityToCreate).getPopulation() + 1);
+
         Entity newEntity = EntityFactory.createEntity(entityDefinitionMap.get(entityToCreate));
-        entityList.get(entityToCreate).add(newEntity);
+        creationBuffer.add(newEntity);
         newEntity.setLocation(grid.getRandomUnoccupiedLocation());
 
     }
 
     public void createEntityDerived(String entityToCreate, Entity entity) throws WarnException {
-
-        entityDefinitionMap.get(entityToCreate).setPopulation(entityDefinitionMap.get(entityToCreate).getPopulation() + 1);
         Entity newEntity = EntityFactory.createEntityDerived(entityDefinitionMap.get(entityToCreate), entity);
         newEntity.setLocation(entity.getLocation());
-        entityList.get(entityToCreate).add(newEntity);
+        creationBuffer.add(newEntity);
 
     }
 
@@ -276,5 +314,21 @@ public class World implements java.io.Serializable, Runnable {
             entities.add(entityList.get(new Random().nextInt(entityList.size())));
         }
         return entities;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    public String getFinishedReason() {
+        return finishedReason;
+    }
+
+    public String getFinishedTime() {
+        return formattedDateTime;
+    }
+
+    public List<Integer> getPopulationOverTime(String name) {
+        return entityPopulationOverTime.get(name);
     }
 }

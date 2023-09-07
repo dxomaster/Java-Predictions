@@ -16,6 +16,11 @@ import java.util.List;
 public class Rule extends RuleFactory implements java.io.Serializable {
     private final String name;
     private final List<Actionable> actions;
+
+    public Activation getActivation() {
+        return activation;
+    }
+
     private final Activation activation;
 
     public Rule(String name, List<Actionable> actions, Activation activation) {
@@ -38,7 +43,6 @@ public class Rule extends RuleFactory implements java.io.Serializable {
     }
 
     public void applyRule(World world, Entity entity, Integer ticks) throws ErrorException {
-        if (activation.isActivated(ticks)) {
             for (Actionable action : actions) {
                 if (action.getEntities().get(0).equals(entity.getName()))
                     try {
@@ -59,8 +63,6 @@ public class Rule extends RuleFactory implements java.io.Serializable {
 
             }
         }
-
-    }
 
 
     public RuleDTO getRuleDTO() {

@@ -5,7 +5,6 @@ import DTO.SatisfiableDTO;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
-import rule.action.Actionable;
 import rule.action.condition.Satisfiable;
 import rule.action.expression.Expression;
 import world.World;
@@ -39,9 +38,12 @@ public class Proximity implements Actionable, Satisfiable {
     }
     @Override
     public void performAction(World world, Entity entity, int ticks,Entity secondaryEntity) throws WarnException, ErrorException {
-        if(isSatisfied(world, entity,secondaryEntity)){
+        Entity targetEntity = world.getGrid().getEntityNear(entity, targetEntityName, ((Float)of.evaluate(world, entity,secondaryEntity)).intValue());
+
+        if(targetEntity != null){
             for(Actionable action : actionsToPreformIfProximityIsSatisfied){
-                action.performAction(world, entity, ticks, secondaryEntity);
+
+                action.performAction(world, entity, ticks, targetEntity);
             }
         }
     }
@@ -53,7 +55,7 @@ public class Proximity implements Actionable, Satisfiable {
 
     @Override
     public boolean isSatisfied(World world, Entity entity,Entity secondaryEntity) throws ErrorException {
-       return  world.getGrid().isEntityNear(entity, targetEntityName, ((Float)of.evaluate(world, entity,secondaryEntity)).intValue());
+       return  world.getGrid().getEntityNear(entity, targetEntityName, ((Float)of.evaluate(world, entity,secondaryEntity)).intValue()) != null;
     }
 
     @Override

@@ -5,14 +5,19 @@ import java.util.List;
 public class StatisticEntityDTO implements java.io.Serializable {
     private final List<StatisticPropertyDTO> properties;
     private final String name;
-    private final int population;
-    private final int finalPopulation;
 
-    public StatisticEntityDTO(List<StatisticPropertyDTO> properties, String name, int population, int finalPopulation) {
+    public List<Integer> getPopulationOverTime() {
+        return populationOverTime;
+    }
+
+    private final List<Integer> populationOverTime;
+    private final int population;
+
+    public StatisticEntityDTO(List<StatisticPropertyDTO> properties, String name, int population, List<Integer> populationOverTime) {
         this.properties = properties;
         this.name = name;
         this.population = population;
-        this.finalPopulation = finalPopulation;
+        this.populationOverTime = populationOverTime;
 
     }
 
@@ -34,7 +39,7 @@ public class StatisticEntityDTO implements java.io.Serializable {
     }
 
     public int getFinalPopulation() {
-        return finalPopulation;
+        return this.populationOverTime.get(this.populationOverTime.size() - 1);
     }
 
     public List<StatisticPropertyDTO> getPropertyDTOList() {

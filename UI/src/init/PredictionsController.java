@@ -52,6 +52,8 @@ public class PredictionsController implements Initializable {
                         }
                         for (RunEndDTO runEndDTO : runEndDTOS) {
                                 items.add(runEndDTO.toString());
+                                RunStatisticsDTO stat = engine.getPastSimulationStatisticsDTO(runEndDTO.getUUID());
+                                System.out.println(stat.toString());
                         }
                         listView.setItems(items);
                         dynamicDisplay.getChildren().clear();

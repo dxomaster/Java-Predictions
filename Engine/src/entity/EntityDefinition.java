@@ -14,13 +14,12 @@ public class EntityDefinition implements java.io.Serializable {
     private final String name;
     private int population;
     private Map<String, Property> entityProperties = new java.util.HashMap<>();
-    private int finalPopulation;
+
 
     public EntityDefinition(String name, Map<String, Property> entityProperties, int population) {
         this.name = name;
         this.entityProperties = entityProperties;
         this.population = population;
-        this.finalPopulation = population;
     }
 
     public EntityDefinition(EntityDefinition entityDefinition) {
@@ -29,16 +28,8 @@ public class EntityDefinition implements java.io.Serializable {
         }
         this.name = entityDefinition.name;
         this.population = new Integer(entityDefinition.population);
-        this.finalPopulation = new Integer(entityDefinition.finalPopulation);
     }
 
-    public int getFinalPopulation() {
-        return finalPopulation;
-    }
-
-    public void setFinalPopulation(int finalPopulation) {
-        this.finalPopulation = finalPopulation;
-    }
 
     public String getName() {
         return name;
