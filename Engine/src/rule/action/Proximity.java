@@ -1,6 +1,7 @@
 package rule.action;
 
 import DTO.ActionableDTO;
+import DTO.ProximityDTO;
 import DTO.SatisfiableDTO;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
@@ -25,16 +26,17 @@ public class Proximity implements Actionable, Satisfiable {
         return of;
     }
     private final List<Actionable> actionsToPreformIfProximityIsSatisfied;
-
     private final String sourceEntityName;
     private final String targetEntityName;
     private final Expression of;
+    private final ActionNames action;
 
-    public Proximity(String sourceEntityName, String targetEntityName,List<Actionable>actionsToPreformIfProximityIsSatisfied, Expression of) {
+    public Proximity(String sourceEntityName, String targetEntityName, List<Actionable>actionsToPreformIfProximityIsSatisfied, Expression of, ActionNames action) {
         this.sourceEntityName = sourceEntityName;
         this.targetEntityName = targetEntityName;
         this.of = of;
         this.actionsToPreformIfProximityIsSatisfied = actionsToPreformIfProximityIsSatisfied;
+        this.action = action;
     }
     @Override
     public void performAction(World world, Entity entity, int ticks,Entity secondaryEntity) throws WarnException, ErrorException {
@@ -77,6 +79,6 @@ public class Proximity implements Actionable, Satisfiable {
 
     @Override
     public ActionableDTO getActionableDTO() {
-        return null;
+        return new ProximityDTO(sourceEntityName, targetEntityName, of.toString(), action.actionInString, String.valueOf(actionsToPreformIfProximityIsSatisfied.size()));
     }
 }

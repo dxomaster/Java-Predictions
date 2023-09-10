@@ -339,9 +339,21 @@ public class PredictionsController implements Initializable {
                         populateMultipleConditionAction((MultipleConditionDTO) action, actionItem);
                 } else if (action instanceof ActionDTO) {
                         populateActionDTO((ActionDTO) action, actionItem);
+                } else if (action instanceof ProximityDTO) {
+                        populateProximityDTO((ProximityDTO) action, actionItem);
+                } else if (action instanceof ReplaceDTO) {
+                        populateReplaceDTO((ReplaceDTO) action, actionItem);
                 }
 
                 return actionItem;
+        }
+
+        private void populateReplaceDTO(ReplaceDTO action, TreeItem<String> actionItem) {
+                //todo imeplement
+        }
+
+        private void populateProximityDTO(ProximityDTO action, TreeItem<String> actionItem) {
+                //todo imeplement
         }
 
         private void populateMultipleConditionAction(MultipleConditionDTO condition, TreeItem<String> actionItem) {

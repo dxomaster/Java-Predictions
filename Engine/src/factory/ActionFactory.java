@@ -50,14 +50,14 @@ public class ActionFactory {
                 for (PRDAction action : prdAction.getPRDActions().getPRDAction()) {
                     actions.add(createAction(world, action));
                 }
-                return new Proximity(prdBetween.getSourceEntity(), prdBetween.getTargetEntity(), actions, exp[0]);
+                return new Proximity(prdBetween.getSourceEntity(), prdBetween.getTargetEntity(), actions, exp[0], ActionNames.PROXIMITY);
             case "replace":
                 if (world.getEntityDefinitionByName(prdAction.getKill()) == null)
                     throw new RuntimeException("Entity " + prdAction.getKill() + " not found");
                 if (world.getEntityDefinitionByName(prdAction.getCreate()) == null)
                     throw new RuntimeException("Entity " + prdAction.getCreate() + " not found");
                 try {
-                    return new Replace(prdAction.getKill(), prdAction.getCreate(), prdAction.getMode());
+                    return new Replace(prdAction.getKill(), prdAction.getCreate(), prdAction.getMode(), ActionNames.REPLACE);
                 } catch (Exception e) {
                     throw new RuntimeException(e.getMessage());
                 }

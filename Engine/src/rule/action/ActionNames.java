@@ -6,7 +6,9 @@ public enum ActionNames implements java.io.Serializable {
     SET("set"),
     CALCULATION("calculation"),
     KILL("kill"),
-    REPLACE("replace");
+    REPLACE("replace"),
+    PROXIMITY("proximity");
+
     public final String actionInString;
 
     ActionNames(String actionInString) {

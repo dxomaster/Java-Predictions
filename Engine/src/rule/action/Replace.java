@@ -1,6 +1,7 @@
 package rule.action;
 
 import DTO.ActionableDTO;
+import DTO.ReplaceDTO;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
@@ -13,10 +14,13 @@ public class Replace implements Actionable{
     private String entityToKill;
     private String entityToCreate;
     private String mode;
-    public Replace(String entityToKill, String entityToCreate, String mode) {
+    private ActionNames action;
+
+    public Replace(String entityToKill, String entityToCreate, String mode, ActionNames action) {
         this.entityToKill = entityToKill;
         this.entityToCreate = entityToCreate;
         this.mode = mode;
+        this.action = action;
     }
     @Override
     public void performAction(World world, Entity entity, int ticks,Entity secondaryEntity) throws WarnException, ErrorException {
@@ -49,6 +53,6 @@ public class Replace implements Actionable{
 
     @Override
     public ActionableDTO getActionableDTO() {
-        return null;
+        return new ReplaceDTO(entityToKill, entityToCreate, mode, action.actionInString);
     }
 }

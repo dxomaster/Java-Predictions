@@ -226,7 +226,6 @@ public class World implements java.io.Serializable, Runnable {
                 ticks++;
                 this.finishedReason = checkTerminationConditions(ticks, startTime);
                 // todo notify user when simulation is finished
-                // handle termination prd-by-user
 
                 while (isPaused) {
                     wait();
