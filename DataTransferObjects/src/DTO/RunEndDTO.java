@@ -2,13 +2,27 @@ package DTO;
 
 public class RunEndDTO implements java.io.Serializable {
     private final String UUID;
+    private String errorMessage = "";
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
     private final String finishedReason;
     private final String formattedDate;
 
-    public RunEndDTO(String UUID, String finishedReason, String formattedDate) {
+    public String getStatus() {
+        return status;
+    }
+
+    private final String status;
+
+    public RunEndDTO(String UUID, String finishedReason, String formattedDate, String errorMessage, String status) {
         this.UUID = UUID;
         this.finishedReason = finishedReason;
         this.formattedDate = formattedDate;
+        this.errorMessage = errorMessage;
+        this.status = status;
     }
 
     public String getUUID() {
@@ -24,8 +38,8 @@ public class RunEndDTO implements java.io.Serializable {
     }
 
     public String toString() {
-        return "Run ID: " + UUID + "\n" +
-                "Finished by: " + finishedReason + "\n" +
+        return "Run ID: " + UUID + "\n"
+                + (this.errorMessage.isEmpty() ? "Finished by: " + finishedReason + "\n" : "Simulation stopped because of an error!") + "\n" +
                 "Date: " + formattedDate + "\n";
     }
 }

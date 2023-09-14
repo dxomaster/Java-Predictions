@@ -54,6 +54,17 @@ public class Rule extends RuleFactory implements java.io.Serializable {
                             for (Entity e : entities) {
                                action.performAction(world, entity,ticks,e);
                             }
+
+                            //if no entities were selected, try to perform action without secondary entity and catch exception if it fails
+                            try {
+                                if (entities.isEmpty()) {
+                                    action.performAction(world, entity, ticks, null);
+                                }
+                            }
+                            catch (Exception e) {
+                                if(e instanceof ErrorException)
+                                    throw e;
+                            }
                         }
                     } catch (WarnException ignored) {
                         //these exceptions are OK, continue to next action

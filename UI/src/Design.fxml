@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <ScrollPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="init.PredictionsController">
    <content>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="719.0">
@@ -43,9 +42,9 @@
                </children>
             </GridPane>
          </top>
-         <center>
+         <left>
             <HBox fx:id="dynamicDisplay" prefHeight="180.0" prefWidth="694.0" BorderPane.alignment="CENTER" />
-         </center>
+         </left>
       </BorderPane>
    </content>
 </ScrollPane>

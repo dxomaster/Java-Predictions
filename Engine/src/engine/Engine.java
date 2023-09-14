@@ -34,12 +34,25 @@ public class Engine implements Serializable {
     Map<String, World> worlds = new HashMap<>();
 
     public void runSimulation() throws ErrorException, WarnException {
+        int rows = this.template.getPRDGrid().getRows();
+        int columns = this.template.getPRDGrid().getColumns();
+        int maxEntities = rows * columns;
+        if (getTotalPopulationOfEntities() > maxEntities)
+            throw new ErrorException("Total population of entities is greater than the grid size");
+
         World worldToRun = new World(this.world);
         String UUID = java.util.UUID.randomUUID().toString();
         this.worlds.put(UUID, worldToRun);
         this.executorService.submit(worldToRun);
     }
-
+    private int getTotalPopulationOfEntities()
+    {
+        int sum = 0;
+        for (EntityDefinition entityDefinition : world.getEntityDefinitionMap().values()) {
+            sum += entityDefinition.getPopulation();
+        }
+        return sum;
+    }
     public void pause(String uuid)  {
         if (worlds.containsKey(uuid)) {
             World world = worlds.get(uuid);
@@ -81,8 +94,11 @@ public class Engine implements Serializable {
     }
 
     private List<StatisticEntityDTO> createEntityDefinitionDTO(World world) {
-        List<StatisticEntityDTO> entityDTOList = new ArrayList<>();
+        // wait for world to initialize
+        waitForWorldToInitialize(world);
 
+        // create the entity DTOs
+        List<StatisticEntityDTO> entityDTOList = new ArrayList<>();
         for (EntityDefinition entityDefinition : world.getEntityDefinitionMap().values()) {
             List<Integer> populationOverTime = world.getPopulationOverTime(entityDefinition.getName());
 
@@ -188,25 +204,24 @@ public class Engine implements Serializable {
             throw new IllegalArgumentException("No file is loaded");
         return world.getWorldDTO();
     }
-
+    private void waitForWorldToInitialize(World world){
+        while(!world.isInitialized())//todo is this ok?
+        {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public List<RunEndDTO> getPastArtifacts() {
         List<RunEndDTO> pastSimulationArtifactDTO = new ArrayList<>();
         for (Map.Entry entry : worlds.entrySet()) {
+
             World world = (World) entry.getValue();
+            waitForWorldToInitialize(world);
             String UUID = (String) entry.getKey();
-
-            String finishedReason;
-            String date = "";
-            if (world.isRunning())
-                finishedReason = "Running";
-            else if (world.isPaused())
-                finishedReason = "Paused";
-            else {
-                finishedReason = world.getFinishedReason();
-                date = world.getFinishedTime();
-            }
-
-            RunEndDTO runEndDTO = new RunEndDTO(UUID, finishedReason, date);
+            RunEndDTO runEndDTO = world.getRunEndDTO(UUID);
             pastSimulationArtifactDTO.add(runEndDTO);
 
         }

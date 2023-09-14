@@ -35,7 +35,7 @@ public class World implements java.io.Serializable, Runnable {
 
     private boolean isPaused = false;
 
-    private String finishedReason;
+    private String finishedReason = "Did not finish";
     private final List<Rule> rules;
     private List<Property> environmentVariables;//todo change this to map
     private Map<String, List<Entity>> entityList;
@@ -43,11 +43,23 @@ public class World implements java.io.Serializable, Runnable {
     private final List<Entity> creationBuffer = new ArrayList<>();
     private final Map<String, List<Integer>> entityPopulationOverTime;
     private Integer ticks = 0;
+
+    public boolean isInitialized() {
+        return isInitialized;
+    }
+
+    private boolean isInitialized = false;
     private Integer terminationByTicks;
     private Integer terminationBySeconds;
     private final int row;
     private final int column;
     private Grid grid;
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    private String errorMessage = "";
 
     public Grid getGrid() {
         return grid;
@@ -187,10 +199,24 @@ public class World implements java.io.Serializable, Runnable {
     }
     public RunEndDTO getRunEndDTO(String UUID)
     {
-        if(this.isRunning)
-            return null;
-
-        return new RunEndDTO(UUID, this.finishedReason, this.formattedDateTime);
+        String finishedReason = this.finishedReason;
+        String status;
+        if(this.getErrorMessage().isEmpty()) {
+            if (this.isRunning())
+                status = "Running";
+            else if (this.isPaused()) {
+                status = "Paused";
+            }
+            else {
+                status = "Completed";
+            }
+        }
+        else {
+            status = "Completed";
+        }
+        if(this.finishedReason.isEmpty())
+            finishedReason = "Did not finish";
+        return new RunEndDTO(UUID, finishedReason, this.formattedDateTime, this.errorMessage, status);
     }
     public void run() {
         this.isRunning = true;
@@ -202,8 +228,10 @@ public class World implements java.io.Serializable, Runnable {
         try {
             createEntities();
             grid = new Grid(row, column, entityList);
-            this.finishedReason = checkTerminationConditions(ticks, startTime);
+            checkTerminationConditions(ticks, startTime);
+            this.isInitialized = true;
             while (finishedReason.isEmpty()) {
+
 
                 moveEntities();
 
@@ -224,7 +252,7 @@ public class World implements java.io.Serializable, Runnable {
                 updatePopulationOverTime();
 
                 ticks++;
-                this.finishedReason = checkTerminationConditions(ticks, startTime);
+                checkTerminationConditions(ticks, startTime);
                 // todo notify user when simulation is finished
 
                 while (isPaused) {
@@ -232,7 +260,7 @@ public class World implements java.io.Serializable, Runnable {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            this.errorMessage = e.getMessage();
         }
         this.isRunning = false;
         System.out.println(this);
@@ -263,15 +291,15 @@ public class World implements java.io.Serializable, Runnable {
             entityPopulationOverTime.get(entityType).add(population);
         }
     }
-    private String checkTerminationConditions(Integer ticks, long startTime) {
-        String finishedBy = "";
+    private void checkTerminationConditions(Integer ticks, long startTime) {
+        this.finishedReason = "";
+
         if (terminationByTicks != null && ticks >= terminationByTicks)
-            finishedBy += "ticks\n";
+            this.finishedReason += "ticks\n";
         if (terminationBySeconds != null && (System.currentTimeMillis() - startTime) / 1000 >= terminationBySeconds)
-            finishedBy += " seconds\n";
+            this.finishedReason += " seconds\n";
         if (isStopped)
-            finishedBy += "user\n";
-        return finishedBy;
+            this.finishedReason += "user\n";
     }
 
     public List<Property> getEnvironmentVariables() {
@@ -344,7 +372,7 @@ public class World implements java.io.Serializable, Runnable {
         return finishedReason;
     }
 
-    public String getFinishedTime() {
+    public String getStartingTime() {
         return formattedDateTime;
     }
 

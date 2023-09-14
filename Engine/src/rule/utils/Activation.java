@@ -46,7 +46,6 @@ public class Activation implements java.io.Serializable {
     public boolean isActivated(Integer tick) {
         Random random = new Random();
         double d = random.nextDouble();
-        System.out.println(d);
         return tick % ticks == 0 && d < probability;
     }
 
