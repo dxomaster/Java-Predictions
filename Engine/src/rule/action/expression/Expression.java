@@ -8,4 +8,5 @@ public interface Expression {
     boolean isNotNumber();
     Object evaluate(World world, Entity entity,Entity secondaryEntity);
     PropertyType getType();
+    String toString();
 }

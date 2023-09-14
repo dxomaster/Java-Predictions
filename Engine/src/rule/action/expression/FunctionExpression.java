@@ -137,9 +137,18 @@ public class FunctionExpression implements Expression, java.io.Serializable {
 
     @Override
     public String toString() {
-        return "FunctionExpression{" +
-                "function=" + function +
-                ", arguments=" + Arrays.toString(arguments) +
-                '}';
+        String arguments[];
+        int length = 0;
+        for (Object argument : this.arguments) {
+            if (argument != null)
+                length++;
+        }
+        arguments = new String[length];
+        for (int i = 0; i < length; i++) {
+            arguments[i] = this.arguments[i].toString();
+        }
+
+        return "Function Expression: " + function +
+                ", Arguments: " + Arrays.toString(arguments);
     }
 }

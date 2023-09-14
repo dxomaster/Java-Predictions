@@ -28,4 +28,8 @@ public class SimpleConditionDTO implements SatisfiableDTO{
     public String getExpression() {
         return expression;
     }
+
+    public String getPropertyName() {
+        return property;
+    }
 }

@@ -1,6 +1,26 @@
 package DTO;
 
 public class ProximityDTO implements ActionableDTO {
+    public String getSourceEntityName() {
+        return sourceEntityName;
+    }
+
+    public String getTargetEntityName() {
+        return targetEntityName;
+    }
+
+    public String getDepth() {
+        return depth;
+    }
+
+    public String getActionName() {
+        return actionName;
+    }
+
+    public String getNumberOfActions() {
+        return numberOfActions;
+    }
+
     private final String sourceEntityName;
     private final String targetEntityName;
     private final String depth;

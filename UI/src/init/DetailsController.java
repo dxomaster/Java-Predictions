@@ -14,6 +14,7 @@ import rule.Rule;
 import world.World;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,10 +31,13 @@ public class DetailsController implements Initializable {
         detailsGrid.getChildren().clear();
         this.parametersTreeView = createAndSetupTreeView();
         parametersTreeView.setOnMouseClicked(event ->{
+            //todo fix the annoying exception here
             TreeItem<String> selectedItem = parametersTreeView.getSelectionModel().getSelectedItem();
             if(!selectedItem.getValue().equals("Environment Variables") && !selectedItem.getValue().equals("Rules")
-                && !selectedItem.getValue().equals( "Entities") && !selectedItem.getValue().equals("Termination"))
+                && !selectedItem.getValue().equals( "Entities") && !selectedItem.getValue().equals("Termination")
+                && !selectedItem.getValue().contains(".xml"))
             {
+
                 switch(selectedItem.getParent().getValue())
                 {
                     case "Environment Variables":
@@ -47,8 +51,9 @@ public class DetailsController implements Initializable {
                         showExpandedRuleDetails(selectedItem.getValue());
                         break;
                     case "Entities":
-                        //detailsGrid.getChildren().clear();
-                       // showExpandedEntityDetails(selectedItem.getValue());
+                        detailsGrid.getChildren().clear();
+                        detailsGrid.add(parametersTreeView, 0, 0);
+                        showExpandedEntityDetails(selectedItem.getValue());
                         break;
                     case "Termination":
                         //detailsGrid.getChildren().clear();
@@ -60,6 +65,56 @@ public class DetailsController implements Initializable {
         });
         detailsGrid.getChildren().add(parametersTreeView);
         populateTreeView(parametersTreeView);
+    }
+
+    private void showExpandedEntityDetails(String value) {
+        WorldDTO dto = engine.getSimulationParameters();
+        ListView<String> tableView = new ListView<>();
+        tableView.setOnMouseClicked(event -> {
+            String selectedItem = tableView.getSelectionModel().getSelectedItem();
+            if (selectedItem.contains("Property")) {
+                String propertyName = selectedItem.split(":")[1].trim();
+                String entityName = tableView.getItems().get(0).split(":")[1].trim();
+                showExpandedPropertyDetails(entityName,propertyName);
+            }
+        });
+        for (EntityDTO entity : dto.getEntities()) {
+            if (entity.getName().equals(value)) {
+                tableView.getItems().add("Name: " + entity.getName());
+                for (PropertyDTO property : entity.getProperties()) {
+                    tableView.getItems().add("Property Name: " + property.getName());
+                }
+
+            }
+
+        }
+        detailsGrid.add(tableView, 1, 0);
+    }
+
+    private void showExpandedPropertyDetails(String entityName, String propertyName) {
+        WorldDTO dto = engine.getSimulationParameters();
+        List<PropertyDTO> properties = null;
+        ListView<String> tableView = new ListView<>();
+        for (EntityDTO entityDTO : dto.getEntities())
+        {
+            if(entityDTO.getName().equals(entityName))
+            {
+                properties = entityDTO.getProperties();
+            }
+        }
+        for(PropertyDTO propertyDTO : properties)
+        {
+            if(propertyDTO.getName().equals(propertyName))
+            {
+                tableView.getItems().add("Type: " + propertyDTO.getType());
+                tableView.getItems().add("Is randomly initialized: " + propertyDTO.isRandomlyGenerated());
+                if(propertyDTO.getRange() != null)
+                {
+                    tableView.getItems().add("Range: " + propertyDTO.getRange());
+                }
+            }
+        }
+        detailsGrid.add(tableView, 2, 0);
     }
 
     private void showExpandedRuleDetails(String value) {
@@ -75,9 +130,7 @@ public class DetailsController implements Initializable {
                 tableView.setOnMouseClicked(event -> {
                     String selectedItem = tableView.getSelectionModel().getSelectedItem();
                     if (selectedItem.contains("Action")) {
-                        int selectedActionIndex = tableView.getSelectionModel().getSelectedIndex() - 3;
-                        System.out.println("Selected action index: " + selectedActionIndex);
-                        System.out.println("Selected item: " + selectedItem);
+                        int selectedActionIndex = tableView.getSelectionModel().getSelectedIndex() - 3;// -3 because of the 3 first items
                         showExpandedActionDetails(rule.getActions().get(selectedActionIndex));
 
 
@@ -95,15 +148,59 @@ public class DetailsController implements Initializable {
 
     private void showExpandedActionDetails(ActionableDTO actionableDTO) {
         ListView<String> tableView = new ListView<>();
-        switch(actionableDTO.getName())
+        switch(actionableDTO.getName().toLowerCase())
         {
+            case "calculation":
+                ActionDTO calc = (ActionDTO) actionableDTO;
+                tableView.getItems().add("Operator: " + calc.getOperator());
+            case "decrease":
             case "increase":
+            case "set":
                 ActionDTO action = (ActionDTO) actionableDTO;
-                tableView.getItems().add("Name: " + action.getName());
                 tableView.getItems().add("Entity Name: " + action.getEntityName());
+                tableView.getItems().add(Arrays.toString(action.getExpressions()));
+                tableView.getItems().add("Property Name: " + action.getPropertyName());
+                break;
+            case "condition":
+                ConditionDTO condition = (ConditionDTO) actionableDTO;
+                SimpleConditionDTO simpleCondition = (SimpleConditionDTO) condition.getSimpleCondition();
+                tableView.getItems().add("Entity Name: " + simpleCondition.getEntityName());
+                tableView.getItems().add("Left Expression: " + simpleCondition.getPropertyName());
+                tableView.getItems().add("Operator: " + simpleCondition.getOperator());
+                tableView.getItems().add("Right Expression: " + simpleCondition.getExpression());
+                tableView.getItems().add("Number of actions to perform if satisfied: " + condition.getActionsToPerformIfSatisfied().size());
+                tableView.getItems().add("Number of actions to perform if not satisfied: " + condition.getActionsToPerformIfNotSatisfied().size());
+                break;
+            case "multiple condition":
+                MultipleConditionDTO multipleCondition = (MultipleConditionDTO) actionableDTO;
+                tableView.getItems().add("Operator: " + multipleCondition.getOperator());
+                tableView.getItems().add("Number of conditions: " + multipleCondition.getConditions().size());
+                tableView.getItems().add("Number of actions to perform if satisfied: " + multipleCondition.getActionsToPerformIfSatisfied().size());
+                tableView.getItems().add("Number of actions to perform if not satisfied: " + multipleCondition.getActionsToPerformIfNotSatisfied().size());
+                break;
+            case "proximity":
+                ProximityDTO proximity = (ProximityDTO) actionableDTO;
+                tableView.getItems().add("Source Entity Name: " + proximity.getSourceEntityName());
+                tableView.getItems().add("Target Entity Name: " + proximity.getTargetEntityName());
+                tableView.getItems().add("Depth: " + proximity.getDepth());
+                tableView.getItems().add("Number of actions to perform if near: " + proximity.getNumberOfActions());
+                break;
+            case "replace":
+                ReplaceDTO replace = (ReplaceDTO) actionableDTO;
+                tableView.getItems().add("Entity to kill: " + replace.getEntityToKill());
+                tableView.getItems().add("Entity to create: " + replace.getEntityToCreate());
+                tableView.getItems().add("Mode: " + replace.getMode());
+                break;
+            case "kill":
+                ActionDTO kill = (ActionDTO) actionableDTO;
+                tableView.getItems().add("Entity to kill: " + kill.getEntityName());
+                break;
                // todo continue here
 
+
+
         }
+        detailsGrid.add(tableView, 2, 0);
 
 
     }
@@ -153,22 +250,12 @@ public class DetailsController implements Initializable {
     private void populateProperties(List<PropertyDTO> properties, TreeItem<String> parentItem) {
         for (PropertyDTO property : properties) {
             TreeItem<String> propertyItem = new TreeItem<>(property.getName());
-            TreeItem<String> valueItem = new TreeItem<>("Value: " + property.getValue());
-            TreeItem<String> rangeItem = new TreeItem<>("Range: " + (property.getRange() != null ? property.getRange().toString() : "None"));
-            TreeItem<String> typeItem = new TreeItem<>("Type: " + property.getType());
-            TreeItem<String> randomInitItem = new TreeItem<>("Random Initialization: " + property.isRandomlyGenerated());
-            propertyItem.getChildren().add(randomInitItem);
-            propertyItem.getChildren().add(typeItem);
-            propertyItem.getChildren().addAll(valueItem, rangeItem);
             parentItem.getChildren().add(propertyItem);
         }
     }
     private void populateEntities(List<EntityDTO> entities, TreeItem<String> parentItem) {
         for (EntityDTO entity : entities) {
             TreeItem<String> entityItem = new TreeItem<>(entity.getName());
-            TreeItem<String> populationItem = new TreeItem<>("Population: " + entity.getPopulation());
-            entityItem.getChildren().add(populationItem);
-            populateProperties(entity.getProperties(), entityItem);
             parentItem.getChildren().add(entityItem);
         }
     }
@@ -176,81 +263,10 @@ public class DetailsController implements Initializable {
     private void populateRules(List<RuleDTO> rules, TreeItem<String> parentItem) {
         for (RuleDTO rule : rules) {
             TreeItem<String> ruleItem = new TreeItem<>(rule.getName());
-            TreeItem<String> activationItem = new TreeItem<>("Activation");
-            activationItem.getChildren().add(new TreeItem<>("Ticks: " + rule.getTicks()));
-            activationItem.getChildren().add(new TreeItem<>("Probability: " + rule.getProbability()));
-            ruleItem.getChildren().add(activationItem);
-            populateActions(rule.getActions(), ruleItem);
             parentItem.getChildren().add(ruleItem);
         }
     }
-    private void populateActions(List<ActionableDTO> actions, TreeItem<String> parentItem) {
-        for (ActionableDTO action : actions) {
-            TreeItem<String> actionItem = createActionItem(action);
-            parentItem.getChildren().add(actionItem);
-        }
-    }
 
-    private TreeItem<String> createActionItem(ActionableDTO action) {
-        TreeItem<String> actionItem = new TreeItem<>("Action type: " + action.getName());
-
-        if (action instanceof ConditionDTO) {
-            populateConditionAction((ConditionDTO) action, actionItem);
-        } else if (action instanceof MultipleConditionDTO) {
-            populateMultipleConditionAction((MultipleConditionDTO) action, actionItem);
-        } else if (action instanceof ActionDTO) {
-            populateActionDTO((ActionDTO) action, actionItem);
-        } else if (action instanceof ProximityDTO) {
-            populateProximityDTO((ProximityDTO) action, actionItem);
-        } else if (action instanceof ReplaceDTO) {
-            populateReplaceDTO((ReplaceDTO) action, actionItem);
-        }
-
-        return actionItem;
-    }
-
-    private void populateReplaceDTO(ReplaceDTO action, TreeItem<String> actionItem) {
-        //todo imeplement
-    }
-
-    private void populateProximityDTO(ProximityDTO action, TreeItem<String> actionItem) {
-        //todo imeplement
-    }
-
-    private void populateMultipleConditionAction(MultipleConditionDTO condition, TreeItem<String> actionItem) {
-        TreeItem<String> conditionAmount = new TreeItem<>("Number of conditions: "+ condition.getConditions().size());
-        TreeItem<String> ifActionAmount = new TreeItem<>("Number of actions to perform if satisfied: "+ condition.getActionsToPerformIfSatisfied().size());
-        TreeItem<String> ifNotActionAmount = new TreeItem<>("Number of actions to perform if not satisfied: "+condition.getActionsToPerformIfNotSatisfied().size());
-        TreeItem<String> logicOperator = new TreeItem<>("Logic Operator: "+condition.getOperator());
-        actionItem.getChildren().addAll(conditionAmount,ifActionAmount, ifNotActionAmount, logicOperator);
-    }
-
-    private void populateConditionAction(ConditionDTO condition, TreeItem<String> actionItem) {
-        TreeItem<String> ifActionAmount = new TreeItem<>("Number of actions to perform if satisfied: "+ condition.getActionsToPerformIfSatisfied().size());
-        TreeItem<String> ifNotActionAmount = new TreeItem<>("Number of actions to perform if not satisfied: "+condition.getActionsToPerformIfNotSatisfied().size());
-        TreeItem<String> property = new TreeItem<>("Property: "+condition.getSimpleCondition().getProperty());
-        TreeItem<String> operator = new TreeItem<>("Operator: "+condition.getSimpleCondition().getOperator());
-        TreeItem<String> value = new TreeItem<>("Value: "+condition.getSimpleCondition().getExpression());
-        actionItem.getChildren().addAll(ifActionAmount, ifNotActionAmount, property, operator, value);
-    }
-
-    private void populateActionDTO(ActionDTO action, TreeItem<String> actionItem) {
-        TreeItem<String> entity = new TreeItem<>("Entity: "+ action.getEntityName());
-        if(action.getPropertyName() != null) {
-            TreeItem<String> property = new TreeItem<>("Property: " + action.getPropertyName());
-            actionItem.getChildren().add(property);
-        }
-        if(!action.getOperator().equals("none")) {
-            TreeItem<String> operator = new TreeItem<>("Operator: " + action.getOperator());
-            actionItem.getChildren().add(operator);
-        }
-        if(((ActionDTO) action).getExpressions().length != 0) {
-            TreeItem<String> arguments = new TreeItem<>("Arguments: " + String.join(" ", action.getExpressions()));
-            actionItem.getChildren().add(arguments);
-        }
-
-        actionItem.getChildren().addAll(entity);
-    }
 
     private void populateTermination(TerminationDTO termination, TreeItem<String> parentItem) {
         if (termination.getTicks() != null) {

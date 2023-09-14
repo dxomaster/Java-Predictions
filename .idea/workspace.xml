@@ -15,17 +15,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="results">
-      <change afterPath="$PROJECT_DIR$/UI/src/init/DetailsController.java" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="divide to controllers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/Engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/Engine.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/rule/utils/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/utils/Activation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/Design.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Design.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/ActionableDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/ActionableDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/ProximityDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/ProximityDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/ReplaceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/ReplaceDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/SimpleConditionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/SimpleConditionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/Expression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/PropertyExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/rule/action/expression/ValueExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/DetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/DetailsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -487,7 +487,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694101133596</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="divide to controllers">
+      <option name="closed" value="true" />
+      <created>1694691774313</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1694691774313</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -505,7 +513,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="did more stuff" />
     <MESSAGE value="guess what &#10;did even more stuff" />
     <MESSAGE value="surprise&#10;did a lot more stuff" />
     <MESSAGE value="fixes + split creation of Entity from loading world" />
@@ -530,7 +537,8 @@
     <MESSAGE value="world ctor from world" />
     <MESSAGE value="changed isEntityNear to address the infinity of the board" />
     <MESSAGE value="results" />
-    <option name="LAST_COMMIT_MESSAGE" value="results" />
+    <MESSAGE value="divide to controllers" />
+    <option name="LAST_COMMIT_MESSAGE" value="divide to controllers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -566,19 +574,9 @@
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/init/PredictionsController.java</url>
-          <line>258</line>
-          <option name="timeStamp" value="129" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/init/DetailsController.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="130" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/init/PredictionsController.java</url>
-          <line>262</line>
-          <option name="timeStamp" value="131" />
+          <url>file://$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java</url>
+          <line>140</line>
+          <option name="timeStamp" value="137" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

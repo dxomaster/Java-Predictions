@@ -29,8 +29,7 @@ public class ValueExpression implements Expression, java.io.Serializable {
 
     @Override
     public String toString() {
-        return "ValueExpression{" +
-                "value=" + value +
-                '}';
+        return "Value Expression:" +
+                " Value:" + value;
     }
 }

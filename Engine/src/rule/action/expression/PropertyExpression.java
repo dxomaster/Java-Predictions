@@ -34,8 +34,7 @@ public class PropertyExpression implements Expression, java.io.Serializable {
 
     @Override
     public String toString() {
-        return "PropertyExpression{" +
-                "property=" + property +
-                '}';
+        return "Property Expression: " +
+                "Property: " + property.getName();
     }
 }

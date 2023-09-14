@@ -4,4 +4,5 @@ public interface ActionableDTO {
 
     String getName();
 
+
 }
