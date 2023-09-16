@@ -276,12 +276,16 @@ public class Engine implements Serializable {
         return worlds.get(runUUID).isRunning();
     }
 
-    public int getMaxTickByUUID(String uuid) {
+    public Integer getMaxTickByUUID(String uuid) {
         return worlds.get(uuid).getTerminationByTicks();
     }
 
-    public int getCurrentSecondByUUID(String uuid) {
+    public Integer getCurrentSecondByUUID(String uuid) {
         return worlds.get(uuid).getSeconds();
+    }
+
+    public Integer getMaxSecondsByUUID(String uuid) {
+        return worlds.get(uuid).getTerminationBySeconds();
     }
 }
 

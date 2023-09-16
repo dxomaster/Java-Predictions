@@ -15,12 +15,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="forgot todo">
-      <change afterPath="$PROJECT_DIR$/UI/src/init/UpdateProgressTask.java" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="did some tasks">
+      <change afterPath="$PROJECT_DIR$/UI/src/init/ProgressViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ResultsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/UpdateProgressTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/UpdateProgressTask.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -522,7 +523,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694860846806</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="did some tasks">
+      <option name="closed" value="true" />
+      <created>1694883324871</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1694883324871</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +549,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix simulation run" />
     <MESSAGE value="UI done, need to implement command 4" />
     <MESSAGE value="finished?" />
     <MESSAGE value="final fixes" />
@@ -565,7 +573,8 @@
     <MESSAGE value="everything is a drum" />
     <MESSAGE value="started biniding things" />
     <MESSAGE value="forgot todo" />
-    <option name="LAST_COMMIT_MESSAGE" value="forgot todo" />
+    <MESSAGE value="did some tasks" />
+    <option name="LAST_COMMIT_MESSAGE" value="did some tasks" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -596,14 +605,14 @@
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>
-          <line>224</line>
-          <option name="timeStamp" value="127" />
+          <url>file://$PROJECT_DIR$/UI/src/init/ResultsController.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="138" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/rule/action/expression/FunctionExpression.java</url>
-          <line>140</line>
-          <option name="timeStamp" value="137" />
+          <url>file://$PROJECT_DIR$/UI/src/init/ProgressViewController.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="139" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

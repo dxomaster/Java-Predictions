@@ -396,4 +396,8 @@ public class World implements java.io.Serializable, Runnable {
     public Integer getSeconds() {
         return ((Long)((System.currentTimeMillis() - startTime) / 1000)).intValue();
     }
+
+    public Integer getTerminationBySeconds() {
+        return terminationBySeconds;
+    }
 }

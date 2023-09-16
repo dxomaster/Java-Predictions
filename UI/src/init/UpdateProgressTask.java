@@ -11,18 +11,20 @@ public class UpdateProgressTask extends javafx.concurrent.Task<Void> {
 
     IntegerProperty currentTicksProperty;
     IntegerProperty secondsProperty;
-    Integer maxTicks;
-    Integer maxSeconds;
+    IntegerProperty maxTicks;
+    IntegerProperty maxSeconds;
 
 
     UpdateProgressTask(Engine engine, String UUID, IntegerProperty currentTicksProperty,
-                       IntegerProperty secondsProperty, Integer maxTicks, Integer maxSeconds) {
+                       IntegerProperty secondsProperty, IntegerProperty maxTicks, IntegerProperty maxSeconds) {
         this.engine = engine;
         this.UUID = UUID;
         this.currentTicksProperty = currentTicksProperty;
         this.secondsProperty = secondsProperty;
         this.maxTicks = maxTicks;
         this.maxSeconds = maxSeconds;
+
+
 
 
     }
@@ -43,5 +45,22 @@ public class UpdateProgressTask extends javafx.concurrent.Task<Void> {
             Thread.sleep(200);
         }
         return null;
+    }
+
+    public IntegerProperty getCurrentTicksProperty() {
+        return currentTicksProperty;
+    }
+
+    public IntegerProperty getMaxTicksProperty() {
+        return maxTicks;
+    }
+
+    public IntegerProperty getCurrentSecondsProperty() {
+        return secondsProperty;
+
+    }
+
+    public IntegerProperty getMaxSecondsProperty() {
+        return maxSeconds;
     }
 }
