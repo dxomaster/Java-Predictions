@@ -6,6 +6,7 @@ import Exception.WARN.WarnException;
 import entity.Entity;
 import entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDWorld;
+import javafx.beans.property.IntegerProperty;
 import world.World;
 import world.utils.Property;
 import world.utils.PropertyType;
@@ -32,7 +33,12 @@ public class Engine implements Serializable {
     private PRDWorld template;
     private World world;
     Map<String, World> worlds = new HashMap<>();
-
+    public void clearPastSimulations() {
+        worlds.clear();
+    }
+    public WorldDTO getWorldDTOByUUID(String uuid) {
+        return worlds.get(uuid).getWorldDTO();
+    }
     public void runSimulation() throws ErrorException, WarnException {
         int rows = this.template.getPRDGrid().getRows();
         int columns = this.template.getPRDGrid().getColumns();
@@ -261,6 +267,10 @@ public class Engine implements Serializable {
         if (world == null)
             throw new IllegalArgumentException("No file is loaded");
         world.updateEntityPopulation(name, newValue);
+    }
+
+    public IntegerProperty getCurrentTickPropertyByUUID(String runUUID) {
+        return worlds.get(runUUID).getCurrentTickProperty();
     }
 }
 

@@ -11,6 +11,8 @@ import factory.RuleFactory;
 import engine.jaxb.schema.generated.PRDBySecond;
 import engine.jaxb.schema.generated.PRDByTicks;
 import engine.jaxb.schema.generated.PRDWorld;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import rule.Rule;
 import world.utils.Grid;
 import world.utils.Property;
@@ -42,7 +44,7 @@ public class World implements java.io.Serializable, Runnable {
     private Map<String, EntityDefinition> entityDefinitionMap;
     private final List<Entity> creationBuffer = new ArrayList<>();
     private final Map<String, List<Integer>> entityPopulationOverTime;
-    private Integer ticks = 0;
+    private IntegerProperty ticks = new SimpleIntegerProperty(0);
 
     public boolean isInitialized() {
         return isInitialized;
@@ -228,7 +230,7 @@ public class World implements java.io.Serializable, Runnable {
         try {
             createEntities();
             grid = new Grid(row, column, entityList);
-            checkTerminationConditions(ticks, startTime);
+            checkTerminationConditions(ticks.intValue(), startTime);
             this.isInitialized = true;
             while (finishedReason.isEmpty()) {
 
@@ -240,7 +242,7 @@ public class World implements java.io.Serializable, Runnable {
                 for (List<Entity> entities : entityList.values()) {
                     for (Entity entity : entities) {
                         for (Rule rule : activatedRules) {
-                            rule.applyRule(this, entity, ticks);
+                            rule.applyRule(this, entity, ticks.intValue());
                         }
                     }
                 }
@@ -251,8 +253,8 @@ public class World implements java.io.Serializable, Runnable {
 
                 updatePopulationOverTime();
 
-                ticks++;
-                checkTerminationConditions(ticks, startTime);
+                ticks.add(1);
+                checkTerminationConditions(ticks.intValue(), startTime);
                 // todo notify user when simulation is finished
 
                 while (isPaused) {
@@ -271,7 +273,7 @@ public class World implements java.io.Serializable, Runnable {
     {
         List<Rule> activatedRules = new ArrayList<>();
         for (Rule rule : rules) {
-            if (rule.getActivation().isActivated(ticks))
+            if (rule.getActivation().isActivated(ticks.intValue()))
                 activatedRules.add(rule);
         }
         return activatedRules;
@@ -352,7 +354,7 @@ public class World implements java.io.Serializable, Runnable {
     }
 
     public Integer getTicks() {
-        return this.ticks;
+        return this.ticks.intValue();
     }
 
     public List<Entity> getRandomEntities(String name, int count) {
@@ -382,4 +384,7 @@ public class World implements java.io.Serializable, Runnable {
 
     public void setPaused(boolean b) { this.isPaused = b; }
 
+    public IntegerProperty getCurrentTickProperty() {
+        return ticks;
+    }
 }

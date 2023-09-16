@@ -194,7 +194,6 @@ public class ExecutionController implements Initializable {
         ListView<EntityDTO> entityPopulationView = setupEntityPopulationsListView();
         gridPane.add(envVariablesDisplay,0,0);
         gridPane.add(entityPopulationView,1,0);
-        //gridPane.getChildren().addAll(envVariablesDisplay, entityPopulationView);
 
         this.runButton = new Button("Run Simulation");
         runButton.setOnAction(e -> {

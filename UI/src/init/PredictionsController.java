@@ -40,6 +40,7 @@ public class PredictionsController extends ResourceBundle implements Initializab
         protected void viewResults(ActionEvent event)
         {
                 try {
+                        checkIfFileLoaded();
                         FXMLLoader loader = new FXMLLoader();
                         URL mainFXML = getClass().getResource("Results.fxml");
                         loader.setLocation(mainFXML);
@@ -65,8 +66,10 @@ public class PredictionsController extends ResourceBundle implements Initializab
                 }
                 this.simulationName = selectedFile.getName();
                 try {
+
                         this.engine.loadSimulationParametersFromFile(selectedFile.getAbsolutePath());
                         fileLoadedLabel.setText("Current File Loaded: " + selectedFile.getAbsolutePath());
+                        this.engine.clearPastSimulations();
                 } catch (Exception e) {
                         showErrorAlert(e);
                 }
@@ -89,10 +92,16 @@ public class PredictionsController extends ResourceBundle implements Initializab
         }
 
 
-
+        private void checkIfFileLoaded() throws Exception {
+                if(this.simulationName == null)
+                {
+                        throw new Exception("Please load a file first");
+                }
+        }
         @FXML
         protected void showSimulationDetails(ActionEvent event) {
                 try {
+                        checkIfFileLoaded();
                         FXMLLoader loader = new FXMLLoader();
                         URL mainFXML = getClass().getResource("SimulationDetails.fxml");
                         loader.setLocation(mainFXML);
@@ -111,6 +120,7 @@ public class PredictionsController extends ResourceBundle implements Initializab
         @FXML
         protected void newExecution(ActionEvent event) {
                 try {
+                        checkIfFileLoaded();
                         FXMLLoader loader = new FXMLLoader();
                         URL mainFXML = getClass().getResource("Execution.fxml");
                         loader.setLocation(mainFXML);
