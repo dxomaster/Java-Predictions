@@ -44,7 +44,7 @@ public class World implements java.io.Serializable, Runnable {
     private Map<String, EntityDefinition> entityDefinitionMap;
     private final List<Entity> creationBuffer = new ArrayList<>();
     private final Map<String, List<Integer>> entityPopulationOverTime;
-    private IntegerProperty ticks = new SimpleIntegerProperty(0);
+    private Integer ticks = 0;
 
     public boolean isInitialized() {
         return isInitialized;
@@ -56,6 +56,7 @@ public class World implements java.io.Serializable, Runnable {
     private final int row;
     private final int column;
     private Grid grid;
+    private long startTime;
 
     public String getErrorMessage() {
         return errorMessage;
@@ -225,12 +226,12 @@ public class World implements java.io.Serializable, Runnable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
         this.formattedDateTime = currentDateTime.format(formatter);
-        long startTime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
 
         try {
             createEntities();
             grid = new Grid(row, column, entityList);
-            checkTerminationConditions(ticks.intValue(), startTime);
+            checkTerminationConditions(ticks.intValue());
             this.isInitialized = true;
             while (finishedReason.isEmpty()) {
 
@@ -253,8 +254,8 @@ public class World implements java.io.Serializable, Runnable {
 
                 updatePopulationOverTime();
 
-                ticks.add(1);
-                checkTerminationConditions(ticks.intValue(), startTime);
+                ticks++;
+                checkTerminationConditions(ticks.intValue());
                 // todo notify user when simulation is finished
 
                 while (isPaused) {
@@ -293,7 +294,7 @@ public class World implements java.io.Serializable, Runnable {
             entityPopulationOverTime.get(entityType).add(population);
         }
     }
-    private void checkTerminationConditions(Integer ticks, long startTime) {
+    private void checkTerminationConditions(Integer ticks) {
         this.finishedReason = "";
 
         if (terminationByTicks != null && ticks >= terminationByTicks)
@@ -384,7 +385,15 @@ public class World implements java.io.Serializable, Runnable {
 
     public void setPaused(boolean b) { this.isPaused = b; }
 
-    public IntegerProperty getCurrentTickProperty() {
+    public Integer getCurrentTickProperty() {
         return ticks;
+    }
+
+    public int getTerminationByTicks() {
+        return terminationByTicks;
+    }
+
+    public Integer getSeconds() {
+        return ((Long)((System.currentTimeMillis() - startTime) / 1000)).intValue();
     }
 }

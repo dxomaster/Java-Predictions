@@ -15,17 +15,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="everything is a drum">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="forgot todo">
+      <change afterPath="$PROJECT_DIR$/UI/src/init/UpdateProgressTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/Design.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Design.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/Execution.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Execution.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/ExecutionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ExecutionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/Results.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Results.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ResultsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/SimulationDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/SimulationDetails.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -511,7 +506,23 @@
       <option name="project" value="LOCAL" />
       <updated>1694842744939</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="started biniding things">
+      <option name="closed" value="true" />
+      <created>1694860820439</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1694860820439</updated>
+    </task>
+    <task id="LOCAL-00042" summary="forgot todo">
+      <option name="closed" value="true" />
+      <created>1694860846806</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1694860846806</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,8 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixes + split creation of Entity from loading world" />
-    <MESSAGE value="changed List&lt;Property&gt; to Map&lt;String,Property&gt; on Entity.java&#10;EntityDefinition.java" />
     <MESSAGE value="fix simulation run" />
     <MESSAGE value="UI done, need to implement command 4" />
     <MESSAGE value="finished?" />
@@ -554,7 +563,9 @@
     <MESSAGE value="divide to controllers" />
     <MESSAGE value="finished details controller" />
     <MESSAGE value="everything is a drum" />
-    <option name="LAST_COMMIT_MESSAGE" value="everything is a drum" />
+    <MESSAGE value="started biniding things" />
+    <MESSAGE value="forgot todo" />
+    <option name="LAST_COMMIT_MESSAGE" value="forgot todo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -581,7 +592,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
-          <line>264</line>
+          <line>265</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

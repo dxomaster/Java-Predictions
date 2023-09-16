@@ -269,8 +269,19 @@ public class Engine implements Serializable {
         world.updateEntityPopulation(name, newValue);
     }
 
-    public IntegerProperty getCurrentTickPropertyByUUID(String runUUID) {
-        return worlds.get(runUUID).getCurrentTickProperty();
+    public Integer getCurrentTickByUUID(String runUUID)  {
+        return worlds.get(runUUID).getTicks();
+    }
+    public boolean isSimulationRunning(String runUUID) {
+        return worlds.get(runUUID).isRunning();
+    }
+
+    public int getMaxTickByUUID(String uuid) {
+        return worlds.get(uuid).getTerminationByTicks();
+    }
+
+    public int getCurrentSecondByUUID(String uuid) {
+        return worlds.get(uuid).getSeconds();
     }
 }
 
