@@ -62,7 +62,7 @@ public class ResultsController implements Initializable {
             showErrorAlert(e);
         }
     }
-    private void viewRunProgress(String runUUID){
+    private void viewRunProgress(String runUUID){//todo here
         WorldDTO dto = engine.getWorldDTOByUUID(runUUID);
         IntegerProperty currentTick = engine.getCurrentTickPropertyByUUID(runUUID);
         while(true)
