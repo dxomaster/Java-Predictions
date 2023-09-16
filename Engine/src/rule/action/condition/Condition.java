@@ -71,7 +71,7 @@ public class Condition implements Satisfiable, Actionable, java.io.Serializable 
         for (Actionable action : this.actionsToPreformIfConditionIsNotSatisfied) {
             actionsToPreformIfConditionIsNotSatisfied.add(action.getActionableDTO());
         }
-        return new ConditionDTO(actionsToPreformIfConditionIsSatisfied, actionsToPreformIfConditionIsNotSatisfied, simpleCondition.getSimpleConditionDTO());
+        return new ConditionDTO(actionsToPreformIfConditionIsSatisfied, actionsToPreformIfConditionIsNotSatisfied, simpleCondition.getSimpleConditionDTO(), secondaryEntitySelection.getSecondaryEntityName());
     }
 
     @Override
@@ -90,7 +90,10 @@ public class Condition implements Satisfiable, Actionable, java.io.Serializable 
             actionsToPreformIfConditionIsNotSatisfied.add(action.getActionableDTO());
         }
         SimpleConditionDTO simpleConditionDTO = new SimpleConditionDTO(simpleCondition.getLeftExpression().toString(), simpleCondition.getEntityName(), simpleCondition.getOperator().toString(), simpleCondition.getRightExpression().toString());
-        return new ConditionDTO(actionsToPreformIfConditionIsSatisfied, actionsToPreformIfConditionIsNotSatisfied, simpleConditionDTO);
+        String secondaryEntityName = "none";
+        if(secondaryEntitySelection != null)
+             secondaryEntityName = secondaryEntitySelection.getSecondaryEntityName();
+        return new ConditionDTO(actionsToPreformIfConditionIsSatisfied, actionsToPreformIfConditionIsNotSatisfied, simpleConditionDTO, secondaryEntityName);
     }
 
 

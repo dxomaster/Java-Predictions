@@ -35,6 +35,9 @@ public class SecondaryEntitySelection {
         }
         return randomEntities;
     }
-
+    public String getSecondaryEntityName()
+    {
+        return this.entityDefinition.getName();
+    }
 
 }

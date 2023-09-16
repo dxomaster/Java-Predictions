@@ -23,7 +23,7 @@ public class ReplaceDTO implements ActionableDTO {
     private final String mode;
     private final String actionName;
 
-    public ReplaceDTO(String entityToKill, String entityToCreate, String mode, String actionName) {
+    public ReplaceDTO(String entityToKill, String entityToCreate, String mode, String actionName){
         this.entityToKill = entityToKill;
         this.entityToCreate = entityToCreate;
         this.mode = mode;
@@ -33,5 +33,10 @@ public class ReplaceDTO implements ActionableDTO {
     @Override
     public String getName() {
         return actionName;
+    }
+
+    @Override
+    public String getSecondaryEntityName() {
+        return "none";
     }
 }

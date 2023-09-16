@@ -7,6 +7,7 @@ public class MultipleConditionDTO implements ActionableDTO, SatisfiableDTO{
     String operator;
     List<ActionableDTO> actionsToPerformIfSatisfied;
     List<ActionableDTO> actionsToPerformIfNotSatisfied;
+    private final String secondaryEntityName;
 
     public List<SatisfiableDTO> getConditions() {
         return conditions;
@@ -23,15 +24,21 @@ public class MultipleConditionDTO implements ActionableDTO, SatisfiableDTO{
     public List<ActionableDTO> getActionsToPerformIfNotSatisfied() {
         return actionsToPerformIfNotSatisfied;
     }
-    public MultipleConditionDTO(List<SatisfiableDTO> conditions, String operator, List<ActionableDTO> actionsToPerformIfSatisfied, List<ActionableDTO> actionsToPerformIfNotSatisfied) {
+    public MultipleConditionDTO(List<SatisfiableDTO> conditions, String operator, List<ActionableDTO> actionsToPerformIfSatisfied, List<ActionableDTO> actionsToPerformIfNotSatisfied, String secondaryEntityName) {
         this.conditions = conditions;
         this.operator = operator;
         this.actionsToPerformIfSatisfied = actionsToPerformIfSatisfied;
         this.actionsToPerformIfNotSatisfied = actionsToPerformIfNotSatisfied;
+        this.secondaryEntityName = secondaryEntityName;
     }
 
     @Override
     public String getName() {
         return "Multiple Condition";
+    }
+
+    @Override
+    public String getSecondaryEntityName() {
+        return secondaryEntityName;
     }
 }

@@ -86,9 +86,16 @@ public class Action implements Actionable, java.io.Serializable {
         for (int i = 0; i < this.expressions.length; i++) {
             expressions[i] = this.expressions[i].toString();
         }
+        String operator, secondaryEntityName;
         if(this.operator == null)
-            return new ActionDTO(mainEntityDefinition.getName(),action.actionInString,expressions, propertyNameInString, "none");
-        return new ActionDTO(mainEntityDefinition.getName(),action.actionInString,expressions, propertyNameInString, operator.name());
+            operator = "none";
+        else
+            operator = this.operator.name();
+        if (this.secondaryEntitySelection == null)
+            secondaryEntityName = "none";
+        else
+            secondaryEntityName = this.secondaryEntitySelection.getSecondaryEntityName();
+        return new ActionDTO(mainEntityDefinition.getName(),action.actionInString,expressions, propertyNameInString, operator, secondaryEntityName);
     }
 
 

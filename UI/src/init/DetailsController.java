@@ -32,39 +32,59 @@ public class DetailsController implements Initializable {
         this.parametersTreeView = createAndSetupTreeView();
         parametersTreeView.setOnMouseClicked(event ->{
             //todo fix the annoying exception here
-            TreeItem<String> selectedItem = parametersTreeView.getSelectionModel().getSelectedItem();
-            if(!selectedItem.getValue().equals("Environment Variables") && !selectedItem.getValue().equals("Rules")
-                && !selectedItem.getValue().equals( "Entities") && !selectedItem.getValue().equals("Termination")
-                && !selectedItem.getValue().contains(".xml"))
+            try {
+                TreeItem<String> selectedItem = parametersTreeView.getSelectionModel().getSelectedItem();
+                if (!selectedItem.getValue().equals("Environment Variables") && !selectedItem.getValue().equals("Rules")
+                        && !selectedItem.getValue().equals("Entities") && !selectedItem.getValue().contains(".xml")) {
+                    if(selectedItem.getValue().equals("Termination"))
+                    {
+                        detailsGrid.getChildren().clear();
+                        detailsGrid.add(parametersTreeView, 0, 0);
+                        showExpandedTerminationDetails(selectedItem.getValue());
+                        return;
+                    }
+
+                    switch (selectedItem.getParent().getValue()) {
+                        case "Environment Variables":
+                            detailsGrid.getChildren().clear();
+                            detailsGrid.add(parametersTreeView, 0, 0);
+                            showExpandedEnvironmentVariableDetails(selectedItem.getValue());
+                            break;
+                        case "Rules":
+                            detailsGrid.getChildren().clear();
+                            detailsGrid.add(parametersTreeView, 0, 0);
+                            showExpandedRuleDetails(selectedItem.getValue());
+                            break;
+                        case "Entities":
+                            detailsGrid.getChildren().clear();
+                            detailsGrid.add(parametersTreeView, 0, 0);
+                            showExpandedEntityDetails(selectedItem.getValue());
+                            break;
+                    }
+                }
+            }
+            catch (Exception ignored)
             {
 
-                switch(selectedItem.getParent().getValue())
-                {
-                    case "Environment Variables":
-                        detailsGrid.getChildren().clear();
-                        detailsGrid.add(parametersTreeView, 0, 0);
-                        showExpandedEnvironmentVariableDetails(selectedItem.getValue());
-                        break;
-                    case "Rules":
-                        detailsGrid.getChildren().clear();
-                        detailsGrid.add(parametersTreeView, 0, 0);
-                        showExpandedRuleDetails(selectedItem.getValue());
-                        break;
-                    case "Entities":
-                        detailsGrid.getChildren().clear();
-                        detailsGrid.add(parametersTreeView, 0, 0);
-                        showExpandedEntityDetails(selectedItem.getValue());
-                        break;
-                    case "Termination":
-                        //detailsGrid.getChildren().clear();
-                     //   showExpandedTerminationDetails(selectedItem.getValue());
-                        break;
-                }
             }
 
         });
         detailsGrid.getChildren().add(parametersTreeView);
         populateTreeView(parametersTreeView);
+    }
+
+    private void showExpandedTerminationDetails(String value) {
+        WorldDTO dto = engine.getSimulationParameters();
+        TerminationDTO termination = dto.getTermination();
+        ListView<String> listView = new ListView<>();
+        if (termination.getTicks() != null) {
+            listView.getItems().add("Termination by ticks: " + termination.getTicks());
+
+        }
+        if (termination.getSeconds() != null) {
+            listView.getItems().add("Termination by seconds: " + termination.getSeconds());
+        }
+        detailsGrid.add(listView, 1, 0);
     }
 
     private void showExpandedEntityDetails(String value) {
@@ -199,7 +219,9 @@ public class DetailsController implements Initializable {
 
 
 
+
         }
+        tableView.getItems().add("Secondary Entity Name: " + actionableDTO.getSecondaryEntityName());
         detailsGrid.add(tableView, 2, 0);
 
 
@@ -236,14 +258,10 @@ public class DetailsController implements Initializable {
         TreeItem<String> rules = new TreeItem<>("Rules");
         TreeItem<String> entities = new TreeItem<>("Entities");
         TreeItem<String> termination = new TreeItem<>("Termination");
-
         root.getChildren().addAll(enviromentVariables, rules, entities, termination);
-
         populateProperties(dto.getEnvironmentProperties(), enviromentVariables);
         populateEntities(dto.getEntities(), entities);
         populateRules(dto.getRules(), rules);
-        populateTermination(dto.getTermination(), termination);
-
         parametersTreeView.visibleProperty().set(true);
     }
 
@@ -267,15 +285,6 @@ public class DetailsController implements Initializable {
         }
     }
 
-
-    private void populateTermination(TerminationDTO termination, TreeItem<String> parentItem) {
-        if (termination.getTicks() != null) {
-            parentItem.getChildren().add(new TreeItem<>("Termination Ticks: " + termination.getTicks()));
-        }
-        if (termination.getSeconds() != null) {
-            parentItem.getChildren().add(new TreeItem<>("Termination Seconds: " + termination.getSeconds()));
-        }
-    }
 
 
 

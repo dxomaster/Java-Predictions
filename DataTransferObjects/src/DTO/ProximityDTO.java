@@ -39,4 +39,9 @@ public class ProximityDTO implements ActionableDTO {
     public String getName() {
         return actionName;
     }
+
+    @Override
+    public String getSecondaryEntityName() {
+        return "none";
+    }
 }

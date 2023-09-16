@@ -26,17 +26,24 @@ public class ActionDTO implements ActionableDTO{
     private final String[] expressions;
     private final String propertyName;
     private final String operator;
+    private final String secondaryEntityName;
 
-    public ActionDTO(String entityName, String actionName, String[] expressions, String propertyName, String operator) {
+    public ActionDTO(String entityName, String actionName, String[] expressions, String propertyName, String operator, String secondaryEntityName) {
         this.entityName = entityName;
         this.actionName = actionName;
         this.expressions = expressions;
         this.propertyName = propertyName;
         this.operator = operator;
+        this.secondaryEntityName = secondaryEntityName;
     }
 
     @Override
     public String getName() {
         return actionName;
+    }
+
+    @Override
+    public String getSecondaryEntityName() {
+        return secondaryEntityName;
     }
 }

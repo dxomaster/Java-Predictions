@@ -6,7 +6,6 @@ import DTO.SatisfiableDTO;
 import Exception.ERROR.ErrorException;
 import Exception.WARN.WarnException;
 import entity.Entity;
-import entity.EntityDefinition;
 import rule.action.Actionable;
 import rule.action.SecondaryEntitySelection;
 import world.World;
@@ -102,7 +101,11 @@ public class MultipleCondition implements Satisfiable, Actionable, java.io.Seria
         for (Actionable action : this.actionsToPreformIfConditionIsNotSatisfied) {
             actionsToPreformIfConditionIsNotSatisfied.add(action.getActionableDTO());
         }
-        return new MultipleConditionDTO(conditions, this.operator.toString(), actionsToPreformIfConditionIsSatisfied, actionsToPreformIfConditionIsNotSatisfied);
+        String secondaryEntityName = "none";
+        if (secondaryEntitySelection != null) {
+            secondaryEntityName = secondaryEntitySelection.getSecondaryEntityName();
+        }
+        return new MultipleConditionDTO(conditions, this.operator.toString(), actionsToPreformIfConditionIsSatisfied, actionsToPreformIfConditionIsNotSatisfied, secondaryEntityName);
     }
 
     @Override
