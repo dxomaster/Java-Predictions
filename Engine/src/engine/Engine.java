@@ -59,25 +59,35 @@ public class Engine implements Serializable {
         }
         return sum;
     }
-    public void pause(String uuid)  {
+    public synchronized void pause(String uuid)  {
         if (worlds.containsKey(uuid)) {
+
             World world = worlds.get(uuid);
+            if(!world.isRunning())
+                throw new RuntimeException("Simulation is not running");
             world.setPaused(true);
         }
     }
 
-    public void stop(String uuid) {
+    public synchronized void stop(String uuid) {
         if (worlds.containsKey(uuid)) {
+
             World world = worlds.get(uuid);
+            if(!world.isRunning())
+                throw new RuntimeException("Simulation is not running");
+            world.setPaused(false);
             world.setStopped(true);
         }
     }
 
-    public void resume(String uuid) {
+    public synchronized void resume(String uuid) {
         if (worlds.containsKey(uuid)) {
+
             World world = worlds.get(uuid);
+            if(!world.isRunning())
+                throw new RuntimeException("Simulation is not running");
             world.setPaused(false);
-            notifyAll();
+           // notifyAll();
         }
     }
 
@@ -287,5 +297,6 @@ public class Engine implements Serializable {
     public Integer getMaxSecondsByUUID(String uuid) {
         return worlds.get(uuid).getTerminationBySeconds();
     }
+
 }
 

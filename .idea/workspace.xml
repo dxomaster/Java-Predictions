@@ -15,13 +15,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="did some tasks">
-      <change afterPath="$PROJECT_DIR$/UI/src/init/ProgressViewController.java" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="prob finished progress screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/ProgressViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ProgressViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ResultsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/UpdateProgressTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/UpdateProgressTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/ViewProgress.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ViewProgress.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -531,7 +531,23 @@
       <option name="project" value="LOCAL" />
       <updated>1694883324871</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="prob finished progress screen">
+      <option name="closed" value="true" />
+      <created>1694906026085</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1694906026085</updated>
+    </task>
+    <task id="LOCAL-00045" summary="prob finished progress screen">
+      <option name="closed" value="true" />
+      <created>1694906036137</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1694906036137</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,7 +565,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="UI done, need to implement command 4" />
     <MESSAGE value="finished?" />
     <MESSAGE value="final fixes" />
     <MESSAGE value="fix issue with kill command" />
@@ -574,7 +589,8 @@
     <MESSAGE value="started biniding things" />
     <MESSAGE value="forgot todo" />
     <MESSAGE value="did some tasks" />
-    <option name="LAST_COMMIT_MESSAGE" value="did some tasks" />
+    <MESSAGE value="prob finished progress screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="prob finished progress screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -600,19 +616,34 @@
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
-          <line>265</line>
-          <option name="timeStamp" value="126" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/init/ResultsController.java</url>
-          <line>86</line>
+          <line>87</line>
           <option name="timeStamp" value="138" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/init/ProgressViewController.java</url>
-          <line>36</line>
+          <line>42</line>
           <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
+          <line>264</line>
+          <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/init/ProgressViewController.java</url>
+          <line>123</line>
+          <option name="timeStamp" value="147" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/init/ProgressViewController.java</url>
+          <line>114</line>
+          <option name="timeStamp" value="148" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
+          <line>374</line>
+          <option name="timeStamp" value="150" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

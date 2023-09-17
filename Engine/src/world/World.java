@@ -29,8 +29,9 @@ public class World implements java.io.Serializable, Runnable {
         return isPaused;
     }
 
-    public void setStopped(boolean stopped) {
+    public synchronized void setStopped(boolean stopped) {
         isStopped = stopped;
+        notifyAll();
     }
 
     private boolean isStopped = false;
@@ -57,6 +58,7 @@ public class World implements java.io.Serializable, Runnable {
     private final int column;
     private Grid grid;
     private long startTime;
+    private long currentTime;
 
     public String getErrorMessage() {
         return errorMessage;
@@ -255,11 +257,13 @@ public class World implements java.io.Serializable, Runnable {
                 updatePopulationOverTime();
 
                 ticks++;
+                currentTime = System.currentTimeMillis();
                 checkTerminationConditions(ticks.intValue());
                 // todo notify user when simulation is finished
-
-                while (isPaused) {
-                    wait();
+                synchronized (this) {
+                    while (isPaused) {
+                        wait();
+                    }
                 }
             }
         } catch (Exception e) {
@@ -383,7 +387,8 @@ public class World implements java.io.Serializable, Runnable {
         return entityPopulationOverTime.get(name);
     }
 
-    public void setPaused(boolean b) { this.isPaused = b; }
+    public synchronized void setPaused(boolean b) { this.isPaused = b;
+    notifyAll();}
 
     public Integer getCurrentTickProperty() {
         return ticks;

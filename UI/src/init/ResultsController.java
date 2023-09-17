@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -92,6 +93,11 @@ public class ResultsController extends ResourceBundle implements Initializable {
             ProgressViewController progressViewController = loader.getController();
             //progressViewController.setUUID(runUUID);
             //gridPane.getChildren().clear();
+            try {
+                gridPane.getChildren().remove(3);
+            }
+            catch (Exception ignored){
+            }
             gridPane.add(root, 1, 1);
         }
         catch (Exception e)
