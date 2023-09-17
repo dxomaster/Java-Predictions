@@ -44,6 +44,15 @@ public class UpdateProgressTask extends javafx.concurrent.Task<Void> {
             });
             Thread.sleep(200);
         }
+        currentTicks = engine.getCurrentTickByUUID(UUID);
+        currentSeconds = engine.getCurrentSecondByUUID(UUID);
+        int finalCurrentTicks = currentTicks;
+        int finalCurrentSeconds1 = currentSeconds;
+        Platform.runLater(() ->
+        {
+            currentTicksProperty.setValue(finalCurrentTicks);
+            secondsProperty.setValue(finalCurrentSeconds1);
+        });
         return null;
     }
 

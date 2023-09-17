@@ -258,6 +258,7 @@ public class World implements java.io.Serializable, Runnable {
 
                 ticks++;
                 currentTime = System.currentTimeMillis();
+                //Thread.sleep(1000);
                 checkTerminationConditions(ticks.intValue());
                 // todo notify user when simulation is finished
                 synchronized (this) {
@@ -296,6 +297,7 @@ public class World implements java.io.Serializable, Runnable {
         for (String entityType : entityPopulationOverTime.keySet()) {
             int population = entityList.get(entityType).size();
             entityPopulationOverTime.get(entityType).add(population);
+            entityDefinitionMap.get(entityType).setPopulation(population);//todo is this ok?
         }
     }
     private void checkTerminationConditions(Integer ticks) {

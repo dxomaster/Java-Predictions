@@ -44,7 +44,7 @@
             </GridPane>
          </top>
          <center>
-            <HBox fx:id="dynamicDisplay" prefHeight="483.0" prefWidth="1108.0" BorderPane.alignment="CENTER" />
+            <HBox fx:id="dynamicDisplay" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="1052.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </content>
