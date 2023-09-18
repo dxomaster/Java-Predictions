@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="CENTER" prefHeight="243.0" prefWidth="154.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="init.EntityInformationController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <TableView fx:id="entityInformationTable" prefHeight="261.0" prefWidth="170.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="Entity Name" />
+            <TableColumn prefWidth="75.0" text="Population" />
+         </columns>
+      </TableView>
+   </children>
+</GridPane>

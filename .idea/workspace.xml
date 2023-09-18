@@ -15,16 +15,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="finished run progress view">
-      <change afterPath="$PROJECT_DIR$/UI/src/init/EntityInformationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UI/src/init/StatisticsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UI/src/init/UpdateEntityInformationTask.java" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="finished entity information, started StatisticsController">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/Design.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/Design.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/Results.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Results.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ResultsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/UpdateProgressTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/UpdateProgressTask.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +182,7 @@
       <workItem from="1693573062152" duration="58295000" />
       <workItem from="1694274492662" duration="7253000" />
       <workItem from="1694957373281" duration="589000" />
-      <workItem from="1694957970281" duration="8728000" />
+      <workItem from="1694957970281" duration="12158000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -560,7 +552,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694947405616</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="finished entity information, started StatisticsController">
+      <option name="closed" value="true" />
+      <created>1694978555585</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1694978555585</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -578,7 +578,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="final fixes" />
     <MESSAGE value="fix issue with kill command" />
     <MESSAGE value="more informative error messages" />
     <MESSAGE value="better condition on property check" />
@@ -603,7 +602,8 @@
     <MESSAGE value="did some tasks" />
     <MESSAGE value="prob finished progress screen" />
     <MESSAGE value="finished run progress view" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished run progress view" />
+    <MESSAGE value="finished entity information, started StatisticsController" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished entity information, started StatisticsController" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
