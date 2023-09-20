@@ -13,6 +13,7 @@ import java.util.Map;
 public class EntityDefinition implements java.io.Serializable {
     private final String name;
     private int population;
+    private int currentPopulation;
     private Map<String, Property> entityProperties = new java.util.HashMap<>();
 
 
@@ -20,6 +21,7 @@ public class EntityDefinition implements java.io.Serializable {
         this.name = name;
         this.entityProperties = entityProperties;
         this.population = population;
+        this.currentPopulation = population;
     }
 
     public EntityDefinition(EntityDefinition entityDefinition) {
@@ -63,10 +65,13 @@ public class EntityDefinition implements java.io.Serializable {
         for (Property property : this.entityProperties.values()) {
             entityProperties.add(property.getPropertyDTO());
         }
-        return new EntityDTO(name, entityProperties, population);
+        return new EntityDTO(name, entityProperties, population, currentPopulation);
     }
 
     public void setPopulation(Integer newValue) {
         this.population = newValue;
+    }
+    public void setCurrentPopulation(Integer newValue) {
+        this.currentPopulation = newValue;
     }
 }

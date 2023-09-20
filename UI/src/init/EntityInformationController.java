@@ -38,7 +38,8 @@ public class EntityInformationController implements Initializable {
         WorldDTO worldDTO = engine.getWorldDTOByUUID(UUID);
         ObservableList<EntityDTO> entityDTOObservableList = FXCollections.observableArrayList();
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        populationColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getPopulation())));
+
+        populationColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getCurrentPopulation())));
         entityDTOObservableList.addAll(worldDTO.getEntities());
         entityInformationTable.setItems(entityDTOObservableList);
         if(!tasks.containsKey(UUID)){

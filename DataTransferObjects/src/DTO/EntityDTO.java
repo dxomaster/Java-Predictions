@@ -9,6 +9,12 @@ public class EntityDTO {
 
     private String name;
 
+    public int getCurrentPopulation() {
+        return currentPopulation;
+    }
+
+    private int currentPopulation;
+
     public List<PropertyDTO> getProperties() {
         return properties;
     }
@@ -21,10 +27,11 @@ public class EntityDTO {
 
     private int population;
 
-    public EntityDTO(String name, List<PropertyDTO> properties, int population) {
+    public EntityDTO(String name, List<PropertyDTO> properties, int population, int currentPopulation) {
         this.name = name;
         this.properties = properties;
         this.population = population;
+        this.currentPopulation = currentPopulation;
     }
 
     public void setPopulation(int newPopulation) {

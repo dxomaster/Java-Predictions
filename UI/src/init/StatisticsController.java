@@ -38,7 +38,7 @@ public class StatisticsController implements javafx.fxml.Initializable{
         this.engine = (Engine) resources.getObject("Engine");
         this.UUID = (String) resources.getObject("UUID");
         if(engine.isSimulationRunning(UUID)){
-            showErrorAlert(new ErrorException("Simulation is still running"));
+            //showErrorAlert(new ErrorException("Simulation is still running"));
             return;
         }
         RunStatisticsDTO worldDTO = null;
@@ -107,7 +107,7 @@ public class StatisticsController implements javafx.fxml.Initializable{
         int stepSize = 10;
         // add population over time every stepSize ticks
         for (int i = 0; i < statisticEntityDTO.getPopulationOverTime().size(); i += stepSize) {
-            series.getData().add(new XYChart.Data<>(Integer.toString(i), statisticEntityDTO.getPopulationOverTime().get(i)));
+            series.getData().add(new XYChart.Data<>(Integer.toString(i), populationOverTime.get(i)));
         }
 
         populationOverTimeChart.getData().add(series);
