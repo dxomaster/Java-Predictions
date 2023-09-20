@@ -17,6 +17,13 @@
   <component name="ChangeListManager">
     <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="finished entity information, started StatisticsController">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/DetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/DetailsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ResultsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/Statistics.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Statistics.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/StatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/StatisticsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/ViewProgress.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ViewProgress.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -645,18 +652,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/init/StatisticsController.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="155" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/init/StatisticsController.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="156" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/init/StatisticsController.java</url>
-          <line>56</line>
-          <option name="timeStamp" value="157" />
+          <line>85</line>
+          <option name="timeStamp" value="167" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

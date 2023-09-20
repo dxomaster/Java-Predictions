@@ -62,6 +62,10 @@ public class DetailsController implements Initializable {
                             break;
                     }
                 }
+                else {
+                    detailsGrid.getChildren().clear();
+                    detailsGrid.add(parametersTreeView, 0, 0);
+                }
             }
             catch (Exception ignored)
             {
