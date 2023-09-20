@@ -15,7 +15,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="finished entity information, started StatisticsController">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="forgot statistics lol">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
@@ -189,7 +189,7 @@
       <workItem from="1693573062152" duration="58295000" />
       <workItem from="1694274492662" duration="7253000" />
       <workItem from="1694957373281" duration="589000" />
-      <workItem from="1694957970281" duration="12158000" />
+      <workItem from="1694957970281" duration="13801000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -567,7 +567,23 @@
       <option name="project" value="LOCAL" />
       <updated>1694978555585</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="finished entity information, started StatisticsController">
+      <option name="closed" value="true" />
+      <created>1695040554450</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1695040554450</updated>
+    </task>
+    <task id="LOCAL-00049" summary="forgot statistics lol">
+      <option name="closed" value="true" />
+      <created>1695040966278</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1695040966278</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -585,7 +601,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix issue with kill command" />
     <MESSAGE value="more informative error messages" />
     <MESSAGE value="better condition on property check" />
     <MESSAGE value="fixed random-init issue" />
@@ -610,7 +625,8 @@
     <MESSAGE value="prob finished progress screen" />
     <MESSAGE value="finished run progress view" />
     <MESSAGE value="finished entity information, started StatisticsController" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished entity information, started StatisticsController" />
+    <MESSAGE value="forgot statistics lol" />
+    <option name="LAST_COMMIT_MESSAGE" value="forgot statistics lol" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
