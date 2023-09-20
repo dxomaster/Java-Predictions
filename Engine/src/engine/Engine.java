@@ -139,6 +139,7 @@ public class Engine implements Serializable {
     private StatisticPropertyDTO createPropertyDTO(Property property, List<Entity> entityList) {
         Map<String, Integer> frequencyMap = new HashMap<>();
         Float avgSum = 0f;
+        String avg="";
         Float consistencySum = 0f;
 
         for (Entity entity : entityList) {
@@ -158,7 +159,9 @@ public class Engine implements Serializable {
             avgSum /= entityList.size();
         consistencySum /= entityList.size();
 
-        return new StatisticPropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap, avgSum, consistencySum);
+       avg = (property.getType() != PropertyType.FLOAT) ? "N/A" : avgSum.toString();
+
+        return new StatisticPropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap, consistencySum, avg);
 
     }
 

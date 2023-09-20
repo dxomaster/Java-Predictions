@@ -57,7 +57,6 @@ public class ResultsController extends ResourceBundle implements Initializable {
             ObservableList<String> items = FXCollections.observableArrayList();
 
 
-            //GridPane.setConstraints(listView, 0, 0,1,3);
             gridPane.add(listView, 0, 1);
             listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {

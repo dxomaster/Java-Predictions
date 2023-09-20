@@ -22,18 +22,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/Exception_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/UI_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/UI_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/factory/ExpressionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/factory/ExpressionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/UI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/UI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/Design.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Design.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/PredictionsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/ExecutionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ExecutionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/DetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/DetailsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ResultsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/Statistics.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Statistics.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/StatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/StatisticsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/ViewProgress.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ViewProgress.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -681,18 +676,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/init/StatisticsController.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="155" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/init/StatisticsController.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="156" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/init/StatisticsController.java</url>
-          <line>56</line>
-          <option name="timeStamp" value="157" />
+          <line>85</line>
+          <option name="timeStamp" value="167" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="NONE" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>
