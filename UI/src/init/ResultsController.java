@@ -55,23 +55,24 @@ public class ResultsController extends ResourceBundle implements Initializable {
             List<RunEndDTO> runEndDTOS = engine.getPastArtifacts();
             listView = new ListView<>();
             ObservableList<String> items = FXCollections.observableArrayList();
-            if (runEndDTOS.isEmpty()) {
-                items.add("No runs have been completed yet.");
-            }
-            for (RunEndDTO runEndDTO : runEndDTOS) {
-                items.add(runEndDTO.toString());
-            }
-            listView.setItems(items);
+
 
             //GridPane.setConstraints(listView, 0, 0,1,3);
             gridPane.add(listView, 0, 1);
             listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     String runUUID = listView.getSelectionModel().getSelectedItem().split("\n")[0].split(":")[1].trim();
-                    selectRun(runUUID);
-                    changeView();
+                    if(!runUUID.equals(currentUUID)) {
+                        selectRun(runUUID);
+                        changeView();
+                    }
                 }
             });
+            UpdateRunListTask updateRunListTask = new UpdateRunListTask(engine, listView, runEndDTOS);
+            Thread thread = new Thread(updateRunListTask);
+            thread.setDaemon(true);
+            thread.start();
+
 
 
         } catch (Exception e) {

@@ -25,11 +25,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Engine implements Serializable {
     String simulationName;
     private Map<String, World> pastSimulationWorlds = new HashMap<>();
-    ExecutorService executorService;
+    private ThreadPoolExecutor executorService;
     private PRDWorld template;
     private World world;
     Map<String, World> worlds = new HashMap<>();
@@ -50,6 +51,7 @@ public class Engine implements Serializable {
         String UUID = java.util.UUID.randomUUID().toString();
         this.worlds.put(UUID, worldToRun);
         this.executorService.submit(worldToRun);
+        System.out.println("Simulation is running");
     }
     private int getTotalPopulationOfEntities()
     {
@@ -68,7 +70,12 @@ public class Engine implements Serializable {
             world.setPaused(true);
         }
     }
-
+    public int getAmountOfIdleThreads() {
+        return ((ThreadPoolExecutor) executorService).getQueue().size();
+    }
+    public int getAmountOfRunningThreads() {
+        return ((ThreadPoolExecutor) executorService).getActiveCount();
+    }
     public synchronized void stop(String uuid) {
         if (worlds.containsKey(uuid)) {
 
@@ -201,7 +208,7 @@ public class Engine implements Serializable {
             this.template = (PRDWorld) jaxbUnmarshaller.unmarshal(file);
             try {
                 int threadAmount = this.template.getPRDThreadCount();
-                this.executorService = Executors.newFixedThreadPool(threadAmount);
+                this.executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(threadAmount);
             }
             catch (Exception e){
                 throw new ErrorException("Error in parsing number of threads, make sure it is a positive integer.");
@@ -233,12 +240,14 @@ public class Engine implements Serializable {
     public List<RunEndDTO> getPastArtifacts() {
         List<RunEndDTO> pastSimulationArtifactDTO = new ArrayList<>();
         for (Map.Entry entry : worlds.entrySet()) {
-
             World world = (World) entry.getValue();
-            waitForWorldToInitialize(world);
             String UUID = (String) entry.getKey();
-            RunEndDTO runEndDTO = world.getRunEndDTO(UUID);
-            pastSimulationArtifactDTO.add(runEndDTO);
+            boolean exists = false;
+            if(world.isHasThreadStarted()) {
+                    waitForWorldToInitialize(world);
+                    RunEndDTO newRunEndDTO = world.getRunEndDTO(UUID);
+                    pastSimulationArtifactDTO.add(newRunEndDTO);
+            }
 
         }
         return pastSimulationArtifactDTO;
@@ -298,5 +307,15 @@ public class Engine implements Serializable {
         return worlds.get(uuid).getTerminationBySeconds();
     }
 
+    public void shutdownExecutorService() {
+        if(executorService!=null) {
+            executorService.getQueue().clear();
+            executorService.shutdownNow();
+        }
+    }
+
+    public String getThreadPoolSize() {
+        return String.valueOf(this.executorService.getMaximumPoolSize());
+    }
 }
 

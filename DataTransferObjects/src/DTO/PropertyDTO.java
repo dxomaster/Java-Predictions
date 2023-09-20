@@ -42,4 +42,5 @@ public class PropertyDTO {
     public void setValue(String newPropertyValue) {
         this.value = newPropertyValue;
     }
+
 }
