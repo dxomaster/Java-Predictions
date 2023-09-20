@@ -8,14 +8,14 @@ public class RunEndDTO implements java.io.Serializable {
         return errorMessage;
     }
 
-    private final String finishedReason;
+    private String finishedReason;
     private final String formattedDate;
 
     public String getStatus() {
         return status;
     }
 
-    private final String status;
+    private String status;
 
     public RunEndDTO(String UUID, String finishedReason, String formattedDate, String errorMessage, String status) {
         this.UUID = UUID;
@@ -41,5 +41,10 @@ public class RunEndDTO implements java.io.Serializable {
         return "Run ID: " + UUID + "\n"
                 + (this.errorMessage.isEmpty() ? "Finished by: " + finishedReason + "\n" : "Simulation stopped because of an error!") + "\n" +
                 "Date: " + formattedDate + "\n";
+    }
+
+
+    public void setFinishedReason(String finishedReason) {
+        this.finishedReason = finishedReason;
     }
 }

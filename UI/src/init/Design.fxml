@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="708.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="init.PredictionsController">
    <content>
       <BorderPane prefHeight="680.0" prefWidth="1065.0">
@@ -36,7 +35,7 @@
                      <children>
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#loadFile" text="Load File" textAlignment="CENTER" />
                         <Label fx:id="fileLoadedLabel" alignment="CENTER" text="No File Loaded" />
-                        <Label prefHeight="17.0" prefWidth="107.0" text="queue managment" />
+                        <Label fx:id="queueInfoLabel" prefHeight="103.0" prefWidth="116.0" text="queue managment" />
                      </children>
                   </HBox>
                   <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="719.0" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />

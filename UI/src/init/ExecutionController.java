@@ -85,7 +85,7 @@ public class ExecutionController implements Initializable {
                     setGraphic(null);
                 } else {
                     String range = (property.getRange() != null) ? property.getRange().toString() : "None";
-                    setText(property.getName() + " (" + property.getType() + ") Range: " + range + " Value: " + property.getValue());
+                    setText(property.getName() + " (" + property.getType() + ")\nRange: " + range + "\nValue: " + property.getValue());
                 }
                 double preferredHeight = listView.getItems().size() * 24 + 2;
                 listView.setPrefHeight(preferredHeight);

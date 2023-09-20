@@ -1,5 +1,6 @@
+package init;
+
 import engine.Engine;
-import init.PredictionsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,13 +16,13 @@ public class PredictionsApplication extends Application {
         PredictionsController predictionsController = fxmlLoader.getController();
         predictionsController.setPrimaryStage(primaryStage);
         predictionsController.setEngine(new Engine());
-
         //set scene
         primaryStage.setScene(new javafx.scene.Scene(predictionsRoot,1500,1000));
 
         //set title
         primaryStage.setTitle("Predictions");
-
+        primaryStage.setOnCloseRequest(event -> predictionsController.shutdownExecutorService()); // Add a close request handler
+        primaryStage.show();
         primaryStage.show();
     }
 }

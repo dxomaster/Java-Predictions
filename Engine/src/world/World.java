@@ -22,6 +22,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class World implements java.io.Serializable, Runnable {
+    public boolean isHasThreadStarted() {
+        return hasThreadStarted;
+    }
+
+    private boolean hasThreadStarted = false;
     private  String formattedDateTime;
     private boolean isRunning = false;
 
@@ -224,6 +229,7 @@ public class World implements java.io.Serializable, Runnable {
         return new RunEndDTO(UUID, finishedReason, this.formattedDateTime, this.errorMessage, status);
     }
     public void run() {
+        hasThreadStarted = true;
         this.isRunning = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH.mm.ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
@@ -268,6 +274,8 @@ public class World implements java.io.Serializable, Runnable {
                 }
             }
         } catch (Exception e) {
+            System.out.println(this.ticks);
+            e.printStackTrace();
             this.errorMessage = e.getMessage();
         }
         this.isRunning = false;
@@ -323,6 +331,7 @@ public class World implements java.io.Serializable, Runnable {
         for(Entity entity : creationBuffer)
         {
             if (grid.getOccupiedSize() + 1 <= grid.getTotalSize()) {
+                entity.setLocation(grid.getRandomUnoccupiedLocation());
                 grid.addEntity(entity);
                 entityList.get(entity.getName()).add(entity);
             } //todo ask aviad
@@ -349,7 +358,7 @@ public class World implements java.io.Serializable, Runnable {
 
         Entity newEntity = EntityFactory.createEntity(entityDefinitionMap.get(entityToCreate));
         creationBuffer.add(newEntity);
-        newEntity.setLocation(grid.getRandomUnoccupiedLocation());
+        //newEntity.setLocation(grid.getRandomUnoccupiedLocation()); not good here
 
     }
 

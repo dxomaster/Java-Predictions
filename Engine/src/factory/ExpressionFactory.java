@@ -119,8 +119,8 @@ public class ExpressionFactory {
         return expression.substring(0, expression.indexOf("("));
     }
 
-    private static Object[] getArguments(String expression) {
-        String[] arguments = expression.substring(expression.indexOf("(") + 1, expression.indexOf(")")).split(",");
+    private static Object[] getArguments(String expression) {// todo there's a bug here
+        String[] arguments = expression.substring(expression.indexOf("(") + 1, expression.lastIndexOf(")")).split(",");
         Object[] argumentsObject = new Object[arguments.length];
         System.arraycopy(arguments, 0, argumentsObject, 0, arguments.length);
         return argumentsObject;

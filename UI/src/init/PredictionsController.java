@@ -1,9 +1,6 @@
 package init;
 
-import DTO.*;
 import engine.Engine;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,12 +26,30 @@ public class PredictionsController extends ResourceBundle implements Initializab
 
         @FXML
         private HBox dynamicDisplay;
+        @FXML
+        private Label queueInfoLabel;
 
         public void setEngine(Engine engine) {
                 this.engine = engine;
         }
         @Override
         public void initialize(URL url, ResourceBundle rb){
+
+        }
+        public static void showInfoMessage(String message)
+        {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText(null);
+                alert.setContentText(message);
+                alert.showAndWait();
+        }
+        public void startUpdateQueueInfoLabelTask()
+        {
+                UpdateQueuePoolTask updateQueuePoolTask = new UpdateQueuePoolTask(queueInfoLabel,engine);
+                Thread thread = new Thread(updateQueuePoolTask);
+                thread.setDaemon(true);
+                thread.start();
         }
         @FXML
         protected void viewResults(ActionEvent event)
@@ -73,6 +88,7 @@ public class PredictionsController extends ResourceBundle implements Initializab
                 } catch (Exception e) {
                         showErrorAlert(e);
                 }
+                startUpdateQueueInfoLabelTask();
         }
 
 
@@ -156,6 +172,10 @@ public class PredictionsController extends ResourceBundle implements Initializab
         @Override
         public Enumeration<String> getKeys() {
                 return null;
+        }
+
+        public void shutdownExecutorService() {
+                this.engine.shutdownExecutorService();
         }
 }
 

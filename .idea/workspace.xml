@@ -5,17 +5,22 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="DataTransferObjects:jar" />
-      <artifact name="Engine" />
-      <artifact name="Exception:jar" />
-      <artifact name="UI:jar" />
+      <artifact name="Predictions:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="forgot statistics lol">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="removed the change graph ticks from fxml">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Predictions_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jfxrt.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/init/UpdateQueuePoolTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/init/UpdateRunListTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/DataTransferObjects_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Engine.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Exception_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/UI_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/UI_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
@@ -42,7 +47,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="ex2_gui" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,7 +101,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/97250/intellijU_projects/Java-Predictions/DTO/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.13247865&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.4324324&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
@@ -128,7 +133,7 @@
       </method>
     </configuration>
     <configuration name="PredictionsApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="PredictionsApplication" />
+      <option name="MAIN_CLASS_NAME" value="init.PredictionsApplication" />
       <module name="UI" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -189,15 +194,10 @@
       <workItem from="1693573062152" duration="58295000" />
       <workItem from="1694274492662" duration="7253000" />
       <workItem from="1694957373281" duration="589000" />
-      <workItem from="1694957970281" duration="13801000" />
-    </task>
-    <task id="LOCAL-00001" summary="first commit">
-      <option name="closed" value="true" />
-      <created>1690793643391</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1690793643391</updated>
+      <workItem from="1694957970281" duration="25963000" />
+      <workItem from="1695191383485" duration="716000" />
+      <workItem from="1695192112903" duration="28000" />
+      <workItem from="1695192337899" duration="14217000" />
     </task>
     <task id="LOCAL-00002" summary="did stuff">
       <option name="closed" value="true" />
@@ -583,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695040966278</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="removed the change graph ticks from fxml">
+      <option name="closed" value="true" />
+      <created>1695123165524</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1695123165525</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,7 +609,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="more informative error messages" />
     <MESSAGE value="better condition on property check" />
     <MESSAGE value="fixed random-init issue" />
     <MESSAGE value="remove stupid try catch" />
@@ -626,7 +633,8 @@
     <MESSAGE value="finished run progress view" />
     <MESSAGE value="finished entity information, started StatisticsController" />
     <MESSAGE value="forgot statistics lol" />
-    <option name="LAST_COMMIT_MESSAGE" value="forgot statistics lol" />
+    <MESSAGE value="removed the change graph ticks from fxml" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed the change graph ticks from fxml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -653,7 +661,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
-          <line>265</line>
+          <line>271</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -671,6 +679,21 @@
           <line>85</line>
           <option name="timeStamp" value="167" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="NONE" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>
+          <line>241</line>
+          <option name="timeStamp" value="165" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/world/World.java</url>
+          <line>258</line>
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/world/utils/Grid.java</url>
+          <line>109</line>
+          <option name="timeStamp" value="183" />
+        </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="10" />
@@ -680,6 +703,7 @@
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="rule.action.expression.FunctionExpression" memberName="arguments" />
+        <PinnedItemInfo parentTag="java.lang.Integer" memberName="value" />
         <PinnedItemInfo parentTag="engine.rule.action.condition.MultipleCondition" memberName="actionsToPreformIfConditionIsSatisfied" />
         <PinnedItemInfo parentTag="DTO.RunStatisticsDTO" memberName="EntityDefinitionDTOList" />
         <PinnedItemInfo parentTag="engine.rule.action.expression.PropertyExpression" memberName="property" />
