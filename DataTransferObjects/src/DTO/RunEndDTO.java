@@ -2,7 +2,7 @@ package DTO;
 
 public class RunEndDTO implements java.io.Serializable {
     private final String UUID;
-    private String errorMessage;
+    private final String errorMessage;
 
     public String getErrorMessage() {
         return errorMessage;

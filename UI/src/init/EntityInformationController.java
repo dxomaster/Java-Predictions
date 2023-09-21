@@ -39,6 +39,8 @@ public class EntityInformationController implements Initializable {
             UpdateEntityInformationTask updateEntityInformationTask = new UpdateEntityInformationTask(engine, UUID, entityDTOObservableList);
             Thread thread = new Thread(updateEntityInformationTask);
             thread.start();
+            tasks.put(UUID, updateEntityInformationTask); //todo check if it works
+
         }
 
 

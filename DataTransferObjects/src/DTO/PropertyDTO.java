@@ -1,7 +1,5 @@
 package DTO;
 
-import org.w3c.dom.ranges.Range;
-
 public class PropertyDTO {
     private final RangeDTO range;
     private final String name;

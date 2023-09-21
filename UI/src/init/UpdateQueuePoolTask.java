@@ -16,14 +16,12 @@ public class UpdateQueuePoolTask extends javafx.concurrent.Task<Void>{
 
     @Override
     protected Void call() throws Exception {
-        int finishedThreads = engine.getAmountOfFinishedThreads();
-        int idleThreads = engine.getAmountOfIdleThreads();
-        int runningThreads = engine.getAmountOfRunningThreads();
+
         while(true)
         {
-            finishedThreads = engine.getAmountOfFinishedThreads();
-            idleThreads = engine.getAmountOfIdleThreads();
-            runningThreads = engine.getAmountOfRunningThreads();
+            int finishedThreads = engine.getAmountOfFinishedThreads();
+            int idleThreads = engine.getAmountOfIdleThreads();
+            int runningThreads = engine.getAmountOfRunningThreads();
             String queuePool = "Idle Threads: " + idleThreads + "\nRunning Threads: " + runningThreads +
                     "\nFinished Threads: " + finishedThreads + "\nThread Pool Size: " + engine.getThreadPoolSize();
 
