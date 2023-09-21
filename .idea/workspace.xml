@@ -14,11 +14,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="removed the change graph ticks from fxml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EntityDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/EntityDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/entity/EntityDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/EntityInformationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/EntityInformationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/Design.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Design.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/ExecutionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ExecutionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/Results.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Results.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ResultsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/Statistics.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Statistics.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/StatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/StatisticsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/UpdateRunListTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/UpdateRunListTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/ViewProgress.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ViewProgress.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,10 +47,10 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -662,7 +667,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="NONE" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>
-          <line>241</line>
+          <line>239</line>
           <option name="timeStamp" value="165" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -672,8 +677,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/init/StatisticsController.java</url>
-          <line>103</line>
+          <line>87</line>
           <option name="timeStamp" value="186" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/init/StatisticsController.java</url>
+          <line>100</line>
+          <option name="timeStamp" value="188" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

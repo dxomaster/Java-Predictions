@@ -55,7 +55,6 @@ public class PredictionsController extends ResourceBundle implements Initializab
         protected void viewResults(ActionEvent event)
         {
                 try {
-                        checkIfFileLoaded();
                         FXMLLoader loader = new FXMLLoader();
                         URL mainFXML = getClass().getResource("Results.fxml");
                         loader.setLocation(mainFXML);

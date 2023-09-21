@@ -12,19 +12,18 @@ import java.util.List;
 public class UpdateRunListTask extends javafx.concurrent.Task<Void> {
     Engine engine;
     ListView<String> listView;
-    List<RunEndDTO> runs;
 
-    UpdateRunListTask(Engine engine, ListView<String> listView, List<RunEndDTO> runs) {
+    UpdateRunListTask(Engine engine, ListView<String> listView) {
         this.engine = engine;
         this.listView = listView;
     }
 
     @Override
     protected Void call() throws Exception {
-        int uuid;
         while (true) {
             List<RunEndDTO> newRuns = engine.getPastArtifacts();
             sortRunsByDate(newRuns);
+
             Platform.runLater(() -> {
                 int selectedIndex = listView.getSelectionModel().getSelectedIndex();
                 if (selectedIndex == -1)
@@ -35,10 +34,12 @@ public class UpdateRunListTask extends javafx.concurrent.Task<Void> {
                 }
                 listView.getSelectionModel().select(selectedIndex);
                 listView.getFocusModel().focus(selectedIndex);
+
+                if (listView.getItems().isEmpty()) {
+                    listView.getItems().add("No runs to display");
+                }
             });
-
             Thread.sleep(1000);
-
         }
     }
 

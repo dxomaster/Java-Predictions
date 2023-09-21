@@ -3,15 +3,14 @@ package init;
 import DTO.RunStatisticsDTO;
 import DTO.StatisticEntityDTO;
 import DTO.StatisticPropertyDTO;
-import DTO.WorldDTO;
 import Exception.ERROR.ErrorException;
 import engine.Engine;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -25,13 +24,13 @@ public class StatisticsController implements javafx.fxml.Initializable{
     private Engine engine;
     private String UUID;
     @FXML
-    private ListView<String> entityListView;
-    @FXML
     private TableView<StatisticPropertyDTO> propertyTable;
     @FXML
     private Button showPopulationButton;
     @FXML
     private Label properties;
+    @FXML
+    ComboBox<String> entitySelection;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -55,25 +54,8 @@ public class StatisticsController implements javafx.fxml.Initializable{
 
         // populate entity list
         for (StatisticEntityDTO statisticEntityDTO : worldDTO.getEntityDefinitionDTOList()) {
-            entityListView.getItems().add(statisticEntityDTO.getName());
+            entitySelection.getItems().add(statisticEntityDTO.getName());
         }
-
-        // entity selection listener
-        entityListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                for (StatisticEntityDTO statisticEntityDTO : finalWorldDTO.getEntityDefinitionDTOList()) {
-                    if (statisticEntityDTO.getName().equals(newValue)) {
-                        propertyTable.getItems().clear();
-                        for (StatisticPropertyDTO statisticPropertyDTO : statisticEntityDTO.getPropertyDTOList()) {
-                            propertyTable.getItems().add(statisticPropertyDTO);
-                        }
-                    }
-                }
-                properties.setVisible(true);
-                propertyTable.setVisible(true);
-            }
-        });
-
     }
 
     private void showPopulationGraph(List<StatisticEntityDTO> entityDefinitionDTOList) {
@@ -111,5 +93,21 @@ public class StatisticsController implements javafx.fxml.Initializable{
         }
 
         populationOverTimeChart.getData().add(series);
+    }
+
+    public void entitySelection(ActionEvent actionEvent) throws ErrorException {
+        String selected = entitySelection.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            for (StatisticEntityDTO statisticEntityDTO : engine.getPastSimulationStatisticsDTO(UUID).getEntityDefinitionDTOList()) {
+                if (statisticEntityDTO.getName().equals(selected)) {
+                    propertyTable.getItems().clear();
+                    for (StatisticPropertyDTO statisticPropertyDTO : statisticEntityDTO.getPropertyDTOList()) {
+                        propertyTable.getItems().add(statisticPropertyDTO);
+                    }
+                }
+            }
+            properties.setVisible(true);
+            propertyTable.setVisible(true);
+        }
     }
 }

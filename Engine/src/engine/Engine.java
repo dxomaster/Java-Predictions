@@ -89,12 +89,10 @@ public class Engine implements Serializable {
 
     public synchronized void resume(String uuid) {
         if (worlds.containsKey(uuid)) {
-
             World world = worlds.get(uuid);
             if(!world.isRunning())
                 throw new RuntimeException("Simulation is not running");
             world.setPaused(false);
-           // notifyAll();
         }
     }
 

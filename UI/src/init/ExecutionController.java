@@ -204,7 +204,7 @@ public class ExecutionController implements Initializable {
                 showErrorAlert(ex);
             }
         });
-        gridPane.add(runButton,3,0);
+        gridPane.add(runButton,2,0);
 
     }
 }

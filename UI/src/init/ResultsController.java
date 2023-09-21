@@ -35,13 +35,14 @@ public class ResultsController extends ResourceBundle implements Initializable {
     GridPane gridPane;
     @FXML
     ComboBox<String> viewSelection;
-    ListView<String> listView;
     @FXML
     Label currentTicks;
     @FXML
     Label maxTicks;
     @FXML
     ProgressBar ticksProgressBar;
+    @FXML
+    private ListView simulations;
     ResourceBundle resources;
     private String currentUUID;
 
@@ -52,28 +53,20 @@ public class ResultsController extends ResourceBundle implements Initializable {
         viewSelection.getItems().addAll("Run Progress","Entity Information", "Statistics");
 
         try {
-            List<RunEndDTO> runEndDTOS = engine.getPastArtifacts();
-            listView = new ListView<>();
-            ObservableList<String> items = FXCollections.observableArrayList();
-
-
-            gridPane.add(listView, 0, 1);
-            listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            simulations.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
-                    String runUUID = listView.getSelectionModel().getSelectedItem().split("\n")[0].split(":")[1].trim();
+                    String runUUID = simulations.getSelectionModel().getSelectedItem().toString().split("\n")[0].split(":")[1].trim();
                     if(!runUUID.equals(currentUUID)) {
                         selectRun(runUUID);
                         changeView();
                     }
                 }
             });
-            UpdateRunListTask updateRunListTask = new UpdateRunListTask(engine, listView, runEndDTOS);
+
+            UpdateRunListTask updateRunListTask = new UpdateRunListTask(engine, simulations);
             Thread thread = new Thread(updateRunListTask);
             thread.setDaemon(true);
             thread.start();
-
-
-
         } catch (Exception e) {
             showErrorAlert(e);
         }
@@ -110,6 +103,10 @@ public class ResultsController extends ResourceBundle implements Initializable {
     }
 
     private void viewStatistics(String currentUUID) {
+        if (engine.isSimulationRunning(currentUUID)) {
+            showErrorAlert(new Exception("Simulation is still running"));
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader();
             URL mainFXML = getClass().getResource("Statistics.fxml");
@@ -117,7 +114,7 @@ public class ResultsController extends ResourceBundle implements Initializable {
             loader.setResources(this);
             Parent root = loader.load();
             StatisticsController statisticsController = loader.getController();
-            gridPane.add(root, 1, 1);
+            gridPane.add(root, 1, 0);
         }
         catch (Exception e)
         {
@@ -134,7 +131,7 @@ public class ResultsController extends ResourceBundle implements Initializable {
             Parent root = loader.load();
             EntityInformationController entityInformationController = loader.getController();
 
-            gridPane.add(root, 1, 1);
+            gridPane.add(root, 1, 0);
         }
         catch (Exception e)
         {
@@ -151,7 +148,7 @@ public class ResultsController extends ResourceBundle implements Initializable {
             loader.setResources(this);
             Parent root = loader.load();
             ProgressViewController progressViewController = loader.getController();
-            gridPane.add(root, 1, 1);
+            gridPane.add(root, 1, 0);
         }
         catch (Exception e)
         {
