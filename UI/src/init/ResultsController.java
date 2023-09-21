@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.Enumeration;
@@ -45,11 +46,13 @@ public class ResultsController extends ResourceBundle implements Initializable {
     private ListView simulations;
     ResourceBundle resources;
     private String currentUUID;
+    private HBox dynamicDisplay;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         this.engine = (Engine) resources.getObject("Engine");
+        this.dynamicDisplay = (HBox) resources.getObject("dynamicDisplay");
         viewSelection.getItems().addAll("Run Progress","Entity Information", "Statistics");
 
         try {
@@ -74,8 +77,21 @@ public class ResultsController extends ResourceBundle implements Initializable {
     @FXML
     private void runSimulationAgain() throws InterruptedException {
         this.engine.runSimulationAgain(currentUUID);
-        Thread.sleep(500); //wait for tasks to populate the list
-        this.simulations.getSelectionModel().select(0);
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            URL mainFXML = getClass().getResource("Execution.fxml");
+            loader.setLocation(mainFXML);
+            loader.setResources(this);
+            Parent root = loader.load();
+            ExecutionController executionController = loader.getController();
+            dynamicDisplay.getChildren().clear();
+            dynamicDisplay.getChildren().add(root);
+
+        }
+        catch (Exception e)
+        {
+            showErrorAlert(e);
+        }
     }
     private void selectRun(String runUUID){
         this.currentUUID = runUUID;
@@ -170,6 +186,8 @@ public class ResultsController extends ResourceBundle implements Initializable {
                 return this.engine;
             case "UUID":
                 return this.currentUUID;
+            case "dynamicDisplay":
+                return this.dynamicDisplay;
             default:
                 return null;
         }

@@ -17,7 +17,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
     <children>
-        <ListView fx:id="simulations" prefHeight="300.0" prefWidth="300.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <ListView fx:id="simulations" prefHeight="300.0" prefWidth="300.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP" />
         <ComboBox fx:id="viewSelection" onAction="#changeView" prefWidth="150.0" promptText="Select View" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
       <Button mnemonicParsing="false" onAction="#runSimulationAgain" text="Run Simulation again" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
    </children>

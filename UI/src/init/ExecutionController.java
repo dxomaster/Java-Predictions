@@ -30,8 +30,9 @@ public class ExecutionController implements Initializable {
     ListView<PropertyDTO> envVariablesDisplay;
     ListView<EntityDTO> entityPopulationListView;
     Button runButton;
+    Button clear;
     ResourceBundle resources;
-
+    HBox simulaionButtons;
 
 
     private void setupListViewSelectionListenerPopulation(ListView<EntityDTO> listView) {
@@ -184,7 +185,7 @@ public class ExecutionController implements Initializable {
         this.envVariablesDisplay = setupPropertyListView();
         this.gridPane.add(envVariablesDisplay,0,0);
         this.gridPane.add(entityPopulationListView,1,0);
-        gridPane.add(runButton,3,0);
+        gridPane.add(this.simulaionButtons,2,0);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -195,7 +196,10 @@ public class ExecutionController implements Initializable {
         gridPane.add(envVariablesDisplay,0,0);
         gridPane.add(entityPopulationView,1,0);
 
+        this.simulaionButtons = new HBox();
         this.runButton = new Button("Run Simulation");
+        this.clear = new Button("Clear");
+
         runButton.setOnAction(e -> {
             try {
                 engine.runSimulation();
@@ -204,7 +208,14 @@ public class ExecutionController implements Initializable {
                 showErrorAlert(ex);
             }
         });
-        gridPane.add(runButton,2,0);
 
+        clear.setOnAction(e -> {
+            engine.reloadWorldFromXML();
+            refreshScreen();
+        });
+
+        simulaionButtons.getChildren().add(runButton);
+        simulaionButtons.getChildren().add(clear);
+        gridPane.add(simulaionButtons, 2, 0);
     }
 }

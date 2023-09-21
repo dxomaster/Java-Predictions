@@ -57,6 +57,7 @@ public class Engine implements Serializable {
         this.executorService.submit(worldToRun);
         NotifyWhenSimulationIsFinishedTask task = new NotifyWhenSimulationIsFinishedTask(this, UUID);
         new Thread(task).start();
+        this.reloadWorldFromXML();
     }
     private int getTotalPopulationOfEntities()
     {
@@ -66,6 +67,13 @@ public class Engine implements Serializable {
         }
         return sum;
     }
+
+    public void reloadWorldFromXML() {
+        try {
+            this.currentWorldTemplate = new World(this.xmlFileTemplate);
+        } catch (Exception ignored) {}
+    }
+
     public synchronized void pause(String uuid)  {
         if (worlds.containsKey(uuid)) {
 
@@ -172,14 +180,7 @@ public class Engine implements Serializable {
     public void runSimulationAgain(String uuid)
     {
         if (worldTemplates.containsKey(uuid)) {
-            World world = new World(worldTemplates.get(uuid));
-            String newUUID = java.util.UUID.randomUUID().toString();
-            this.worlds.put(newUUID, world);
-            this.worldTemplates.put(newUUID, new World(world));
-            this.executorService.submit(world);
-            NotifyWhenSimulationIsFinishedTask task = new NotifyWhenSimulationIsFinishedTask(this, newUUID);
-            new Thread(task).start();
-
+            this.currentWorldTemplate = new World(worldTemplates.get(uuid));
         }
     }
     public void setEnvVariableWithDTO(PropertyDTO propertyDTO) throws WarnException {
