@@ -6,7 +6,7 @@ import Exception.WARN.WarnException;
 import entity.Entity;
 import entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDWorld;
-import javafx.beans.property.IntegerProperty;
+import init.NotifyWhenSimulationIsFinishedTask;
 import world.World;
 import world.utils.Property;
 import world.utils.PropertyType;
@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -51,7 +50,8 @@ public class Engine implements Serializable {
         String UUID = java.util.UUID.randomUUID().toString();
         this.worlds.put(UUID, worldToRun);
         this.executorService.submit(worldToRun);
-        System.out.println("Simulation is running");
+        NotifyWhenSimulationIsFinishedTask task = new NotifyWhenSimulationIsFinishedTask(this, UUID);
+        new Thread(task).start();
     }
     private int getTotalPopulationOfEntities()
     {
@@ -67,14 +67,14 @@ public class Engine implements Serializable {
             World world = worlds.get(uuid);
             if(!world.isRunning())
                 throw new RuntimeException("Simulation is not running");
-            world.setPaused(true);
+            world.setPausedByUser(true);
         }
     }
     public int getAmountOfIdleThreads() {
-        return ((ThreadPoolExecutor) executorService).getQueue().size();
+        return executorService.getQueue().size();
     }
     public int getAmountOfRunningThreads() {
-        return ((ThreadPoolExecutor) executorService).getActiveCount();
+        return executorService.getActiveCount();
     }
     public synchronized void stop(String uuid) {
         if (worlds.containsKey(uuid)) {
@@ -82,17 +82,19 @@ public class Engine implements Serializable {
             World world = worlds.get(uuid);
             if(!world.isRunning())
                 throw new RuntimeException("Simulation is not running");
-            world.setPaused(false);
-            world.setStopped(true);
+            world.setPausedByUser(false);
+            world.setStoppedByUser(true);
         }
     }
 
     public synchronized void resume(String uuid) {
         if (worlds.containsKey(uuid)) {
+
             World world = worlds.get(uuid);
             if(!world.isRunning())
                 throw new RuntimeException("Simulation is not running");
-            world.setPaused(false);
+            world.setPausedByUser(false);
+           // notifyAll();
         }
     }
 
@@ -317,6 +319,16 @@ public class Engine implements Serializable {
 
     public String getThreadPoolSize() {
         return String.valueOf(this.executorService.getMaximumPoolSize());
+    }
+
+    public int getAmountOfFinishedThreads() {
+        int amountOfFinishedThreads = 0;
+        for (Map.Entry entry : worlds.entrySet()) {
+            World world = (World) entry.getValue();
+            if(world.isHasThreadStarted() && !world.isRunning())
+                amountOfFinishedThreads++;
+        }
+        return amountOfFinishedThreads;
     }
 }
 

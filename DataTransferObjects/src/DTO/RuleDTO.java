@@ -3,11 +3,11 @@ package DTO;
 import java.util.List;
 
 public class RuleDTO {
-    private String name;
-    private float probability;
-    private float ticks;
-    private int numberOfActions;
-    private List<ActionableDTO> actions;
+    private final String name;
+    private final float probability;
+    private final float ticks;
+    private final int numberOfActions;
+    private final List<ActionableDTO> actions;
 
     public String getName() {
         return name;

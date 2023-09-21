@@ -5,13 +5,9 @@ import engine.Engine;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import rule.Rule;
-import world.World;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -187,7 +183,7 @@ public class DetailsController implements Initializable {
                 break;
             case "condition":
                 ConditionDTO condition = (ConditionDTO) actionableDTO;
-                SimpleConditionDTO simpleCondition = (SimpleConditionDTO) condition.getSimpleCondition();
+                SimpleConditionDTO simpleCondition = condition.getSimpleCondition();
                 tableView.getItems().add("Entity Name: " + simpleCondition.getEntityName());
                 tableView.getItems().add("Left Expression: " + simpleCondition.getPropertyName());
                 tableView.getItems().add("Operator: " + simpleCondition.getOperator());

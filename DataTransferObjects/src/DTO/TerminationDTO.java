@@ -1,8 +1,8 @@
 package DTO;
 
 public class TerminationDTO {
-    private Integer ticks;
-    private Integer seconds;
+    private final Integer ticks;
+    private final Integer seconds;
 
     public Integer getTicks() {
         return ticks;

@@ -107,7 +107,7 @@ public class ExpressionFactory {
                    value = Boolean.parseBoolean((String) value);
                    type = PropertyType.BOOLEAN;
                } else {
-                   value = (String) value;
+                   value = value;
                    type = PropertyType.STRING;
                }
        }

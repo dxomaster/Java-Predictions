@@ -38,6 +38,7 @@ public class PredictionsController extends ResourceBundle implements Initializab
         }
         public static void showInfoMessage(String message)
         {
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information");
                 alert.setHeaderText(null);
