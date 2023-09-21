@@ -39,8 +39,8 @@ public class RunEndDTO implements java.io.Serializable {
 
     public String toString() {
         return "Run ID: " + UUID + "\n"
-                + (this.errorMessage.isEmpty() ? "Finished by: " + finishedReason + "\n" : "Simulation stopped because of an error!") + "\n" +
-                "Date: " + formattedDate + "\n";
+                + (this.errorMessage.isEmpty() ? "Finished by: " + finishedReason : "Simulation stopped because of an error!") +
+                "\nDate: " + formattedDate;
     }
 
 

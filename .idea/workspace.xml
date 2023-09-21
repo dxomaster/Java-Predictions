@@ -12,11 +12,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="merge stuff and fix problems">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="added finished threads to queue management">
+      <change afterPath="$PROJECT_DIR$/UI/src/init/NotifyWhenSimulationIsFinishedTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/UpdateQueuePoolTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/UpdateQueuePoolTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,14 +189,6 @@
       <workItem from="1695191383485" duration="716000" />
       <workItem from="1695192112903" duration="28000" />
       <workItem from="1695192337899" duration="14217000" />
-    </task>
-    <task id="LOCAL-00003" summary="did more stuff">
-      <option name="closed" value="true" />
-      <created>1691106826102</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1691106826102</updated>
     </task>
     <task id="LOCAL-00004" summary="guess what &#10;did even more stuff">
       <option name="closed" value="true" />
@@ -580,7 +574,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695231712761</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="added finished threads to queue management">
+      <option name="closed" value="true" />
+      <created>1695286376344</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1695286376344</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -598,7 +600,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed random-init issue" />
     <MESSAGE value="remove stupid try catch" />
     <MESSAGE value="fix very annoying bug" />
     <MESSAGE value="fix null exception when changing env prop value" />
@@ -623,7 +624,8 @@
     <MESSAGE value="forgot statistics lol" />
     <MESSAGE value="removed the change graph ticks from fxml" />
     <MESSAGE value="merge stuff and fix problems" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge stuff and fix problems" />
+    <MESSAGE value="added finished threads to queue management" />
+    <option name="LAST_COMMIT_MESSAGE" value="added finished threads to queue management" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -672,6 +674,11 @@
           <url>file://$PROJECT_DIR$/UI/src/init/StatisticsController.java</url>
           <line>103</line>
           <option name="timeStamp" value="186" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="188" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

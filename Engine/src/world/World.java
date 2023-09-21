@@ -11,8 +11,6 @@ import factory.RuleFactory;
 import engine.jaxb.schema.generated.PRDBySecond;
 import engine.jaxb.schema.generated.PRDByTicks;
 import engine.jaxb.schema.generated.PRDWorld;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import rule.Rule;
 import world.utils.Grid;
 import world.utils.Property;
@@ -29,19 +27,26 @@ public class World implements java.io.Serializable, Runnable {
     private boolean hasThreadStarted = false;
     private  String formattedDateTime;
     private boolean isRunning = false;
+    private long pausedDuration = 0;
 
-    public boolean isPaused() {
-        return isPaused;
+    public long getElapsedTime() {
+        return elapsedTime;
     }
 
-    public synchronized void setStopped(boolean stopped) {
-        isStopped = stopped;
+    private long elapsedTime =0;
+
+    public boolean isPausedByUser() {
+        return isPausedByUser;
+    }
+
+    public synchronized void setStoppedByUser(boolean stoppedByUser) {
+        isStoppedByUser = stoppedByUser;
         notifyAll();
     }
 
-    private boolean isStopped = false;
+    private boolean isStoppedByUser = false;
 
-    private boolean isPaused = false;
+    private boolean isPausedByUser = false;
 
     private String finishedReason = "Did not finish";
     private final List<Rule> rules;
@@ -214,7 +219,7 @@ public class World implements java.io.Serializable, Runnable {
         if(this.getErrorMessage().isEmpty()) {
             if (this.isRunning())
                 status = "Running";
-            else if (this.isPaused()) {
+            else if (this.isPausedByUser()) {
                 status = "Paused";
             }
             else {
@@ -263,15 +268,21 @@ public class World implements java.io.Serializable, Runnable {
                 updatePopulationOverTime();
 
                 ticks++;
-                currentTime = System.currentTimeMillis();
+
                 //Thread.sleep(1000);
                 checkTerminationConditions(ticks.intValue());
-                // todo notify user when simulation is finished
+
                 synchronized (this) {
-                    while (isPaused) {
+                    long startOfPause = System.currentTimeMillis();
+                    while (isPausedByUser) {
                         wait();
                     }
+                    long endOfPause = System.currentTimeMillis();
+                    pausedDuration += endOfPause - startOfPause;
+
                 }
+                currentTime = System.currentTimeMillis();
+                elapsedTime = currentTime - startTime - pausedDuration;
             }
         } catch (Exception e) {
             System.out.println(this.ticks);
@@ -282,6 +293,7 @@ public class World implements java.io.Serializable, Runnable {
         System.out.println(this);
         System.out.println("Finished by: " + finishedReason);
         System.out.println(Thread.currentThread().getName());
+
     }
     private List<Rule> getActivatedRules()
     {
@@ -305,7 +317,7 @@ public class World implements java.io.Serializable, Runnable {
         for (String entityType : entityPopulationOverTime.keySet()) {
             int population = entityList.get(entityType).size();
             entityPopulationOverTime.get(entityType).add(population);
-            entityDefinitionMap.get(entityType).setCurrentPopulation(population);//todo is this ok?
+            entityDefinitionMap.get(entityType).setCurrentPopulation(population);
         }
     }
     private void checkTerminationConditions(Integer ticks) {
@@ -313,9 +325,9 @@ public class World implements java.io.Serializable, Runnable {
 
         if (terminationByTicks != null && ticks >= terminationByTicks)
             this.finishedReason += "ticks\n";
-        if (terminationBySeconds != null && (System.currentTimeMillis() - startTime) / 1000 >= terminationBySeconds)
+        if (terminationBySeconds != null && (elapsedTime) / 1000 >= terminationBySeconds)
             this.finishedReason += " seconds\n";
-        if (isStopped)
+        if (isStoppedByUser)
             this.finishedReason += "user\n";
     }
 
@@ -326,15 +338,16 @@ public class World implements java.io.Serializable, Runnable {
     public void setEnvironmentVariables(List<Property> environmentVariables) {
         this.environmentVariables = environmentVariables;
     }
-    public void createReplacedEntities()
-    {
+    public void createReplacedEntities() throws ErrorException {
         for(Entity entity : creationBuffer)
         {
             if (grid.getOccupiedSize() + 1 <= grid.getTotalSize()) {
                 entity.setLocation(grid.getRandomUnoccupiedLocation());
                 grid.addEntity(entity);
                 entityList.get(entity.getName()).add(entity);
-            } //todo ask aviad
+            }
+            else // grid is full
+                throw new ErrorException("Grid is full");
         }
         creationBuffer.clear();
     }
@@ -398,7 +411,7 @@ public class World implements java.io.Serializable, Runnable {
         return entityPopulationOverTime.get(name);
     }
 
-    public synchronized void setPaused(boolean b) { this.isPaused = b;
+    public synchronized void setPausedByUser(boolean b) { this.isPausedByUser = b;
     notifyAll();}
 
     public Integer getCurrentTickProperty() {
@@ -410,7 +423,7 @@ public class World implements java.io.Serializable, Runnable {
     }
 
     public Integer getSeconds() {
-        return ((Long)((System.currentTimeMillis() - startTime) / 1000)).intValue();
+        return ((Long)((elapsedTime) / 1000)).intValue();
     }
 
     public Integer getTerminationBySeconds() {

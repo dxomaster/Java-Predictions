@@ -6,7 +6,7 @@ import Exception.WARN.WarnException;
 import entity.Entity;
 import entity.EntityDefinition;
 import engine.jaxb.schema.generated.PRDWorld;
-import javafx.beans.property.IntegerProperty;
+import init.NotifyWhenSimulationIsFinishedTask;
 import world.World;
 import world.utils.Property;
 import world.utils.PropertyType;
@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -51,7 +50,8 @@ public class Engine implements Serializable {
         String UUID = java.util.UUID.randomUUID().toString();
         this.worlds.put(UUID, worldToRun);
         this.executorService.submit(worldToRun);
-        System.out.println("Simulation is running");
+        NotifyWhenSimulationIsFinishedTask task = new NotifyWhenSimulationIsFinishedTask(this, UUID);
+        new Thread(task).start();
     }
     private int getTotalPopulationOfEntities()
     {
@@ -67,7 +67,7 @@ public class Engine implements Serializable {
             World world = worlds.get(uuid);
             if(!world.isRunning())
                 throw new RuntimeException("Simulation is not running");
-            world.setPaused(true);
+            world.setPausedByUser(true);
         }
     }
     public int getAmountOfIdleThreads() {
@@ -82,8 +82,8 @@ public class Engine implements Serializable {
             World world = worlds.get(uuid);
             if(!world.isRunning())
                 throw new RuntimeException("Simulation is not running");
-            world.setPaused(false);
-            world.setStopped(true);
+            world.setPausedByUser(false);
+            world.setStoppedByUser(true);
         }
     }
 
@@ -93,7 +93,7 @@ public class Engine implements Serializable {
             World world = worlds.get(uuid);
             if(!world.isRunning())
                 throw new RuntimeException("Simulation is not running");
-            world.setPaused(false);
+            world.setPausedByUser(false);
            // notifyAll();
         }
     }
