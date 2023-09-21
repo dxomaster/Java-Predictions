@@ -71,10 +71,10 @@ public class Engine implements Serializable {
         }
     }
     public int getAmountOfIdleThreads() {
-        return ((ThreadPoolExecutor) executorService).getQueue().size();
+        return executorService.getQueue().size();
     }
     public int getAmountOfRunningThreads() {
-        return ((ThreadPoolExecutor) executorService).getActiveCount();
+        return executorService.getActiveCount();
     }
     public synchronized void stop(String uuid) {
         if (worlds.containsKey(uuid)) {

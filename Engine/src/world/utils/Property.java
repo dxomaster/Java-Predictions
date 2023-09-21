@@ -73,13 +73,13 @@ public class Property implements java.io.Serializable {
         this.range = property.range;
 
         if (this.type == PropertyType.DECIMAL) {
-            this.value = new Integer((Integer) property.value);
+            this.value = property.value;
         } else if (this.type == PropertyType.FLOAT) {
-            this.value = new Float((Float) property.value);
+            this.value = property.value;
         } else if (this.type == PropertyType.BOOLEAN) {
-            this.value = new Boolean((Boolean) property.value);
+            this.value = property.value;
         } else if (this.type == PropertyType.STRING) {
-            this.value = new String((String) property.value);
+            this.value = property.value;
         }
     }
 

@@ -7,8 +7,8 @@ import static init.PredictionsController.showInfoMessage;
 
 public class NotifyWhenSimulationIsFinishedTask extends javafx.concurrent.Task<Void> {
 
-    private Engine engine;
-    private String UUID;
+    private final Engine engine;
+    private final String UUID;
 
     public NotifyWhenSimulationIsFinishedTask(Engine engine, String UUID){
         this.engine = engine;

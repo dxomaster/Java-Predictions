@@ -3,15 +3,15 @@ package DTO;
 import org.w3c.dom.ranges.Range;
 
 public class PropertyDTO {
-    private RangeDTO range;
-    private String name;
-    private String type;
+    private final RangeDTO range;
+    private final String name;
+    private final String type;
 
     public boolean isRandomlyGenerated() {
         return isRandomlyGenerated;
     }
 
-    private boolean isRandomlyGenerated;
+    private final boolean isRandomlyGenerated;
 
     public RangeDTO getRange() {
         return range;

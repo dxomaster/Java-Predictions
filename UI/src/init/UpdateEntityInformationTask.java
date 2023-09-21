@@ -6,9 +6,9 @@ import engine.Engine;
 import javafx.collections.ObservableList;
 
 public class UpdateEntityInformationTask extends javafx.concurrent.Task<Void> {
-    private Engine engine;
-    private String uuid;
-    private ObservableList<EntityDTO> entityDTOObservableList;
+    private final Engine engine;
+    private final String uuid;
+    private final ObservableList<EntityDTO> entityDTOObservableList;
 
     public UpdateEntityInformationTask(Engine engine, String uuid, ObservableList<EntityDTO> entityDTOObservableList) {
 

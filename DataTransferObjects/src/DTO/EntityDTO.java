@@ -7,19 +7,19 @@ public class EntityDTO {
         return name;
     }
 
-    private String name;
+    private final String name;
 
     public int getCurrentPopulation() {
         return currentPopulation;
     }
 
-    private int currentPopulation;
+    private final int currentPopulation;
 
     public List<PropertyDTO> getProperties() {
         return properties;
     }
 
-    private List<PropertyDTO> properties;
+    private final List<PropertyDTO> properties;
 
     public int getPopulation() {
         return population;

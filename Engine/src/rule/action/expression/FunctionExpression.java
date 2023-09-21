@@ -137,7 +137,7 @@ public class FunctionExpression implements Expression, java.io.Serializable {
 
     @Override
     public String toString() {
-        String arguments[];
+        String[] arguments;
         int length = 0;
         for (Object argument : this.arguments) {
             if (argument != null)

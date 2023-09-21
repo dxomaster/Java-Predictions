@@ -9,8 +9,8 @@ public class RangeDTO {
         return to;
     }
 
-    private float from;
-    private float to;
+    private final float from;
+    private final float to;
 
     public RangeDTO(float from, float to) {
         this.from = from;

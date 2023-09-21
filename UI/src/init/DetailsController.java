@@ -187,7 +187,7 @@ public class DetailsController implements Initializable {
                 break;
             case "condition":
                 ConditionDTO condition = (ConditionDTO) actionableDTO;
-                SimpleConditionDTO simpleCondition = (SimpleConditionDTO) condition.getSimpleCondition();
+                SimpleConditionDTO simpleCondition = condition.getSimpleCondition();
                 tableView.getItems().add("Entity Name: " + simpleCondition.getEntityName());
                 tableView.getItems().add("Left Expression: " + simpleCondition.getPropertyName());
                 tableView.getItems().add("Operator: " + simpleCondition.getOperator());

@@ -3,15 +3,16 @@ package init;
 import DTO.RunStatisticsDTO;
 import DTO.StatisticEntityDTO;
 import DTO.StatisticPropertyDTO;
-import DTO.WorldDTO;
 import Exception.ERROR.ErrorException;
 import engine.Engine;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
-import javafx.scene.paint.Color;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -22,8 +23,6 @@ import java.util.ResourceBundle;
 import static init.PredictionsController.showErrorAlert;
 
 public class StatisticsController implements javafx.fxml.Initializable{
-    private Engine engine;
-    private String UUID;
     @FXML
     private ListView<String> entityListView;
     @FXML
@@ -35,8 +34,8 @@ public class StatisticsController implements javafx.fxml.Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.engine = (Engine) resources.getObject("Engine");
-        this.UUID = (String) resources.getObject("UUID");
+        Engine engine = (Engine) resources.getObject("Engine");
+        String UUID = (String) resources.getObject("UUID");
         if(engine.isSimulationRunning(UUID)){
             //showErrorAlert(new ErrorException("Simulation is still running"));
             return;
@@ -49,9 +48,7 @@ public class StatisticsController implements javafx.fxml.Initializable{
         }
 
         RunStatisticsDTO finalWorldDTO = worldDTO;
-        showPopulationButton.setOnAction(event -> {
-            showPopulationGraph(finalWorldDTO.getEntityDefinitionDTOList());
-        });
+        showPopulationButton.setOnAction(event -> showPopulationGraph(finalWorldDTO.getEntityDefinitionDTOList()));
 
         // populate entity list
         for (StatisticEntityDTO statisticEntityDTO : worldDTO.getEntityDefinitionDTOList()) {

@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Replace implements Actionable{
-    private String entityToKill;
-    private String entityToCreate;
-    private String mode;
-    private ActionNames action;
+    private final String entityToKill;
+    private final String entityToCreate;
+    private final String mode;
+    private final ActionNames action;
 
     public Replace(String entityToKill, String entityToCreate, String mode, ActionNames action) {
         this.entityToKill = entityToKill;
