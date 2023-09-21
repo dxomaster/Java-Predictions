@@ -264,7 +264,7 @@ public class World implements java.io.Serializable, Runnable {
 
                 ticks++;
                 currentTime = System.currentTimeMillis();
-                Thread.sleep(1000);
+                //Thread.sleep(1000);
                 checkTerminationConditions(ticks.intValue());
                 // todo notify user when simulation is finished
                 synchronized (this) {

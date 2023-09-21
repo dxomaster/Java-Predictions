@@ -320,5 +320,15 @@ public class Engine implements Serializable {
     public String getThreadPoolSize() {
         return String.valueOf(this.executorService.getMaximumPoolSize());
     }
+
+    public int getAmountOfFinishedThreads() {
+        int amountOfFinishedThreads = 0;
+        for (Map.Entry entry : worlds.entrySet()) {
+            World world = (World) entry.getValue();
+            if(world.isHasThreadStarted() && !world.isRunning())
+                amountOfFinishedThreads++;
+        }
+        return amountOfFinishedThreads;
+    }
 }
 
