@@ -30,25 +30,30 @@ public class Engine implements Serializable {
     String simulationName;
     private Map<String, World> pastSimulationWorlds = new HashMap<>();
     private ThreadPoolExecutor executorService;
-    private PRDWorld template;
-    private World world;
+    private PRDWorld xmlFileTemplate;
+    private Map<String, World> worldTemplates = new HashMap<>();
+    private World currentWorldTemplate;
     Map<String, World> worlds = new HashMap<>();
     public void clearPastSimulations() {
         worlds.clear();
+        pastSimulationWorlds.clear();
     }
     public WorldDTO getWorldDTOByUUID(String uuid) {
         return worlds.get(uuid).getWorldDTO();
     }
     public void runSimulation() throws ErrorException, WarnException {
-        int rows = this.template.getPRDGrid().getRows();
-        int columns = this.template.getPRDGrid().getColumns();
+        int rows = this.xmlFileTemplate.getPRDGrid().getRows();
+        int columns = this.xmlFileTemplate.getPRDGrid().getColumns();
         int maxEntities = rows * columns;
         if (getTotalPopulationOfEntities() > maxEntities)
             throw new ErrorException("Total population of entities is greater than the grid size");
 
-        World worldToRun = new World(this.world);
+        World worldToRun = new World(this.currentWorldTemplate);
+        World template = new World(this.currentWorldTemplate);
+
         String UUID = java.util.UUID.randomUUID().toString();
         this.worlds.put(UUID, worldToRun);
+        this.worldTemplates.put(UUID, template);
         this.executorService.submit(worldToRun);
         NotifyWhenSimulationIsFinishedTask task = new NotifyWhenSimulationIsFinishedTask(this, UUID);
         new Thread(task).start();
@@ -56,7 +61,7 @@ public class Engine implements Serializable {
     private int getTotalPopulationOfEntities()
     {
         int sum = 0;
-        for (EntityDefinition entityDefinition : world.getEntityDefinitionMap().values()) {
+        for (EntityDefinition entityDefinition : currentWorldTemplate.getEntityDefinitionMap().values()) {
             sum += entityDefinition.getPopulation();
         }
         return sum;
@@ -99,11 +104,11 @@ public class Engine implements Serializable {
     }
 
     public void clearExecution() throws ErrorException {
-        this.world = new World(template);
+        this.currentWorldTemplate = new World(xmlFileTemplate);
     }
 
     public boolean isSimulationLoaded() {
-        return world != null;
+        return currentWorldTemplate != null;
     }
 
     public RunStatisticsDTO getPastSimulationStatisticsDTO(String uuid) throws ErrorException {
@@ -164,7 +169,19 @@ public class Engine implements Serializable {
         return new StatisticPropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap, consistencySum, avg);
 
     }
+    public void runSimulationAgain(String uuid)
+    {
+        if (worldTemplates.containsKey(uuid)) {
+            World world = new World(worldTemplates.get(uuid));
+            String newUUID = java.util.UUID.randomUUID().toString();
+            this.worlds.put(newUUID, world);
+            this.worldTemplates.put(newUUID, new World(world));
+            this.executorService.submit(world);
+            NotifyWhenSimulationIsFinishedTask task = new NotifyWhenSimulationIsFinishedTask(this, newUUID);
+            new Thread(task).start();
 
+        }
+    }
     public void setEnvVariableWithDTO(PropertyDTO propertyDTO) throws WarnException {
         setEnvVariable(propertyDTO.getName(), propertyDTO.getValue());
     }
@@ -172,7 +189,7 @@ public class Engine implements Serializable {
     private void setEnvVariable(String name, Object value) throws WarnException {
         if (!isSimulationLoaded())
             throw new IllegalArgumentException("No file is loaded");
-        for (Property property : world.getEnvironmentVariables()) {
+        for (Property property : currentWorldTemplate.getEnvironmentVariables()) {
             if (property.getName().equals(name)) {
                 property.setValue(value,0);
                 return;
@@ -185,7 +202,7 @@ public class Engine implements Serializable {
         if (!isSimulationLoaded())
             throw new IllegalArgumentException("No file is loaded");
         List<EnvDTO> requiredEnvDTO = new ArrayList<>();
-        for (Property property : world.getEnvironmentVariables()) {
+        for (Property property : currentWorldTemplate.getEnvironmentVariables()) {
             if (property.getRange() != null)
                 requiredEnvDTO.add(new EnvDTO(property.getName(), property.getType().propertyClass, property.getValue()
                         , property.getRange().getFrom(), property.getRange().getTo()));
@@ -208,16 +225,16 @@ public class Engine implements Serializable {
             JAXBContext jaxbContext = JAXBContext.newInstance(PRDWorld.class);
 
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            this.template = (PRDWorld) jaxbUnmarshaller.unmarshal(file);
+            this.xmlFileTemplate = (PRDWorld) jaxbUnmarshaller.unmarshal(file);
             try {
-                int threadAmount = this.template.getPRDThreadCount();
+                int threadAmount = this.xmlFileTemplate.getPRDThreadCount();
                 this.executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(threadAmount);
             }
             catch (Exception e){
                 throw new ErrorException("Error in parsing number of threads, make sure it is a positive integer.");
             }
 
-            this.world = new World(template);
+            this.currentWorldTemplate = new World(xmlFileTemplate);
             this.simulationName = filename;
 
         } catch (Exception e) {
@@ -228,7 +245,7 @@ public class Engine implements Serializable {
     public WorldDTO getSimulationParameters() {
         if (!isSimulationLoaded())
             throw new IllegalArgumentException("No file is loaded");
-        return world.getWorldDTO();
+        return currentWorldTemplate.getWorldDTO();
     }
     private void waitForWorldToInitialize(World world){
         while(!world.isInitialized())//todo is this ok?
@@ -277,7 +294,7 @@ public class Engine implements Serializable {
             //this.pastSimulationArtifactDTO = engine.pastSimulationArtifactDTO;
             this.pastSimulationWorlds = engine.pastSimulationWorlds;
             this.simulationName = engine.simulationName;
-            this.world = engine.world;
+            this.currentWorldTemplate = engine.currentWorldTemplate;
 
 
         } catch (Exception e) {
@@ -286,9 +303,9 @@ public class Engine implements Serializable {
     }
 
     public void updateEntityPopulation(String name, Integer newValue) {
-        if (world == null)
+        if (currentWorldTemplate == null)
             throw new IllegalArgumentException("No file is loaded");
-        world.updateEntityPopulation(name, newValue);
+        currentWorldTemplate.updateEntityPopulation(name, newValue);
     }
 
     public Integer getCurrentTickByUUID(String runUUID)  {

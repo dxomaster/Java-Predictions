@@ -71,6 +71,12 @@ public class ResultsController extends ResourceBundle implements Initializable {
             showErrorAlert(e);
         }
     }
+    @FXML
+    private void runSimulationAgain() throws InterruptedException {
+        this.engine.runSimulationAgain(currentUUID);
+        Thread.sleep(500); //wait for tasks to populate the list
+        this.simulations.getSelectionModel().select(0);
+    }
     private void selectRun(String runUUID){
         this.currentUUID = runUUID;
     }
@@ -84,7 +90,7 @@ public class ResultsController extends ResourceBundle implements Initializable {
                 return;
             }
             try {
-                gridPane.getChildren().remove(2);
+                gridPane.getChildren().remove(3);
             }
             catch (Exception ignored){
             }

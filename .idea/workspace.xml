@@ -13,9 +13,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="fixed current seconds + addded end of simulation alert">
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/PropertyDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/DetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/DetailsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/Results.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Results.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ResultsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,14 +187,6 @@
       <workItem from="1695191383485" duration="716000" />
       <workItem from="1695192112903" duration="28000" />
       <workItem from="1695192337899" duration="14217000" />
-    </task>
-    <task id="LOCAL-00006" summary="surprise&#10;did a lot more stuff">
-      <option name="closed" value="true" />
-      <created>1691255872142</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1691255872143</updated>
     </task>
     <task id="LOCAL-00007" summary="fixes + split creation of Entity from loading world">
       <option name="closed" value="true" />
@@ -579,7 +572,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695302165957</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="fixed current seconds + addded end of simulation alert">
+      <option name="closed" value="true" />
+      <created>1695302464208</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1695302464208</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -657,11 +658,6 @@
           <line>114</line>
           <option name="timeStamp" value="148" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="NONE" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>
-          <line>241</line>
-          <option name="timeStamp" value="165" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/world/utils/Grid.java</url>
           <line>109</line>
@@ -669,13 +665,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/init/StatisticsController.java</url>
-          <line>100</line>
+          <line>85</line>
           <option name="timeStamp" value="186" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/Engine.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="188" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

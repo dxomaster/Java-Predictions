@@ -269,7 +269,7 @@ public class World implements java.io.Serializable, Runnable {
 
                 ticks++;
 
-                //Thread.sleep(1000);
+                Thread.sleep(1000);
                 checkTerminationConditions(ticks.intValue());
 
                 synchronized (this) {
