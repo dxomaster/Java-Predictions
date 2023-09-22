@@ -24,6 +24,6 @@ public class PredictionsApplication extends Application {
         primaryStage.setTitle("Predictions");
         primaryStage.setOnCloseRequest(event -> predictionsController.shutdownExecutorService()); // Add a close request handler
         primaryStage.show();
-        primaryStage.show();
+       // primaryStage.show();
     }
 }

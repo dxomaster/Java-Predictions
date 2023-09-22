@@ -12,13 +12,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="final fixes">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="added 1 animation + fixes">
+      <change afterPath="$PROJECT_DIR$/UI/src/init/CoolAnimation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/init/Dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/init/Unicorn.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/Design.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Design.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/ExecutionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ExecutionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/EntityInformation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/EntityInformation.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ResultsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +33,7 @@
         <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -87,6 +90,7 @@
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
     &quot;last_directory_selection&quot;: &quot;/Users/edenbar/Documents/repos/java-repo/Predictions/DataTransferObjects/src&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/97250/intellijU_projects/Java-Predictions&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -190,14 +194,7 @@
       <workItem from="1695192112903" duration="28000" />
       <workItem from="1695192337899" duration="14217000" />
       <workItem from="1695309699623" duration="12197000" />
-    </task>
-    <task id="LOCAL-00007" summary="fixes + split creation of Entity from loading world">
-      <option name="closed" value="true" />
-      <created>1691385812329</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1691385812329</updated>
+      <workItem from="1695393840751" duration="6461000" />
     </task>
     <task id="LOCAL-00008" summary="fixes + split creation of Entity from loading world">
       <option name="closed" value="true" />
@@ -583,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695378976370</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="added 1 animation + fixes">
+      <option name="closed" value="true" />
+      <created>1695385782980</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1695385782980</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,7 +606,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix null exception when changing env prop value" />
     <MESSAGE value="started working on GUI" />
     <MESSAGE value="mashu mashu" />
     <MESSAGE value="done some work on engine" />
@@ -626,7 +630,8 @@
     <MESSAGE value="added finished threads to queue management" />
     <MESSAGE value="fixed current seconds + addded end of simulation alert" />
     <MESSAGE value="final fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="final fixes" />
+    <MESSAGE value="added 1 animation + fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="added 1 animation + fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

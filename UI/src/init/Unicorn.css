@@ -1,0 +1,82 @@
+.button {
+    -fx-background-color: #ae7dee; /* Button background color */
+    -fx-text-fill: #ffffff;          /* Button text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+    -fx-padding: 10px 20px;       /* Padding (top/bottom left/right) */
+}
+#root {
+    -fx-background-color: #fff5aa; /* Background color */
+}
+.label {
+    -fx-text-fill: #f1639e;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+}
+.list-view {
+    -fx-background-color: #47e7b5; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+}
+.table-view
+{
+    -fx-background-color: #f5ba71; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+}
+.table-view .column-header {
+    -fx-background-color: #f29747; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+}
+.table-view .column-header .label {
+    -fx-background-color: #f0bb4b; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+}
+.table-view .cell:odd {
+    -fx-background-color: #f5c175; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+}
+
+.table-view .cell:even {
+    -fx-background-color: #f4a64b; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+}
+.list-view .list-cell:odd {
+    -fx-background-color: #45e8b5; /* Background color */
+}
+.list-view .list-cell:even {
+    -fx-background-color: #36cd9b; /* Background color */
+}
+.tree-view {
+    -fx-background-color: #60e2b7; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+}
+.check-box {
+    -fx-background-color: #fff5aa; /* Background color */
+    -fx-text-fill: #f1639e;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+}
+.combo-box {
+    -fx-background-color: #fff5aa; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Comic Sans MS";
+}
+#loadFile {
+    -fx-background-color: #73e8f6; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+}

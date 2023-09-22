@@ -3,15 +3,12 @@ package init;
 import engine.Engine;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -25,13 +22,13 @@ public class PredictionsController extends ResourceBundle implements Initializab
         private Stage primaryStage;
 
         private Engine engine;
-        private ScaleTransition hoverAnimation;
         @FXML
         private Label fileLoadedLabel;
         @FXML
         private Button loadFileButton;
         private String simulationName;
-
+        @FXML
+        ComboBox<String> skinSelection;
         @FXML
         private HBox dynamicDisplay;
         @FXML
@@ -45,6 +42,7 @@ public class PredictionsController extends ResourceBundle implements Initializab
         }
         @Override
         public void initialize(URL url, ResourceBundle rb){
+                this.skinSelection.getItems().addAll("Default","Dark","Unicorn");
 
         }
         public static void showInfoMessage(String message)
@@ -116,7 +114,14 @@ public class PredictionsController extends ResourceBundle implements Initializab
         }
 
 
-
+        public void changeStyle()
+        {
+                String selected = this.skinSelection.getSelectionModel().getSelectedItem();
+            primaryStage.getScene().getStylesheets().clear();
+            if(selected != "Default") {
+                primaryStage.getScene().getStylesheets().add(getClass().getResource(selected + ".css").toExternalForm());
+                }
+        }
         public static void showErrorAlert(Exception e)
         {
 
@@ -164,6 +169,16 @@ public class PredictionsController extends ResourceBundle implements Initializab
                         showErrorAlert(e);
                         dynamicDisplay.getChildren().clear();
                 }
+        }
+        @FXML
+        public void showDVDAnimation(ActionEvent event)
+        {
+                if(showAnimations.isSelected()) {
+
+                        CoolAnimation coolAnimation = new CoolAnimation();
+                        coolAnimation.Animate();
+                }
+
         }
         @FXML
         protected void newExecution(ActionEvent event) {

@@ -1,0 +1,76 @@
+.button {
+    -fx-background-color: #bc6428; /* Button background color */
+    -fx-text-fill: #ffffff;          /* Button text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Arial";
+    -fx-padding: 10px 20px;       /* Padding (top/bottom left/right) */
+}
+#root {
+    -fx-background-color: #323232; /* Background color */
+}
+.label {
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Arial";
+}
+.list-view {
+    -fx-background-color: #323232; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Arial";
+}
+.table-view
+{
+    -fx-background-color: #bc6428; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Arial";
+}
+.table-view .column-header {
+    -fx-background-color: #bc6428; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Arial";
+}
+.table-view .column-header .label {
+    -fx-background-color: #bc6428; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Arial";
+}
+.table-view .cell:odd {
+    -fx-background-color: #bc6428; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Arial";
+}
+
+.table-view .cell:even {
+    -fx-background-color: #c48f6e; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Arial";
+}
+.list-view .list-cell:odd {
+    -fx-background-color: #bc6428; /* Background color */
+}
+.list-view .list-cell:even {
+    -fx-background-color: #c67b4f; /* Background color */
+}
+.check-box {
+    -fx-background-color: #323232; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Arial";
+}
+.combo-box {
+    -fx-background-color: #bc6428; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+    -fx-font-family: "Arial";
+}
+#loadFile {
+    -fx-background-color: #bc6428; /* Background color */
+    -fx-text-fill: #ffffff;          /* Label text color */
+    -fx-font-size: 14px;          /* Font size */
+}
