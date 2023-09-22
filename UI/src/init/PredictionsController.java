@@ -1,15 +1,22 @@
 package init;
 
 import engine.Engine;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.io.File;
 import java.net.URL;
 import java.util.*;
@@ -18,10 +25,11 @@ public class PredictionsController extends ResourceBundle implements Initializab
         private Stage primaryStage;
 
         private Engine engine;
-
+        private ScaleTransition hoverAnimation;
         @FXML
         private Label fileLoadedLabel;
-
+        @FXML
+        private Button loadFileButton;
         private String simulationName;
 
         @FXML
@@ -29,6 +37,8 @@ public class PredictionsController extends ResourceBundle implements Initializab
         @FXML
         private Label queueInfoLabel;
         private UpdateQueuePoolTask updateQueuePoolTask;
+        @FXML
+        CheckBox showAnimations;
 
         public void setEngine(Engine engine) {
                 this.engine = engine;
@@ -66,6 +76,13 @@ public class PredictionsController extends ResourceBundle implements Initializab
                         loader.setLocation(mainFXML);
                         loader.setResources(this);
                         Parent root = loader.load();
+                        if (this.showAnimations.isSelected()) {
+                                // Apply the fade-in transition to the results screen
+                                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
+                                fadeTransition.setFromValue(0.0);
+                                fadeTransition.setToValue(1.0);
+                                fadeTransition.play();
+                        }
                         ResultsController resultsController = loader.getController();
                         dynamicDisplay.getChildren().clear();
                         dynamicDisplay.getChildren().add(root);
@@ -102,6 +119,7 @@ public class PredictionsController extends ResourceBundle implements Initializab
 
         public static void showErrorAlert(Exception e)
         {
+
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(e.getMessage());
@@ -130,6 +148,13 @@ public class PredictionsController extends ResourceBundle implements Initializab
                         loader.setLocation(mainFXML);
                         loader.setResources(this);
                         Parent root = loader.load();
+                        if (this.showAnimations.isSelected()) {
+                                // Apply the fade-in transition to the results screen
+                                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
+                                fadeTransition.setFromValue(0.0);
+                                fadeTransition.setToValue(1.0);
+                                fadeTransition.play();
+                        }
                         DetailsController detailsController = loader.getController();
                         dynamicDisplay.getChildren().clear();
                         dynamicDisplay.getChildren().add(root);
@@ -149,6 +174,13 @@ public class PredictionsController extends ResourceBundle implements Initializab
                         loader.setLocation(mainFXML);
                         loader.setResources(this);
                         Parent root = loader.load();
+                        if (this.showAnimations.isSelected()) {
+                                // Apply the fade-in transition to the results screen
+                                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
+                                fadeTransition.setFromValue(0.0);
+                                fadeTransition.setToValue(1.0);
+                                fadeTransition.play();
+                        }
                         ExecutionController executionController = loader.getController();
                         dynamicDisplay.getChildren().clear();
                         dynamicDisplay.getChildren().add(root);
@@ -171,6 +203,8 @@ public class PredictionsController extends ResourceBundle implements Initializab
                                 return this.simulationName;
                         case "dynamicDisplay":
                                 return this.dynamicDisplay;
+                                case "showAnimations":
+                                return this.showAnimations;
                         default:
                                 return null;
                 }
@@ -182,11 +216,10 @@ public class PredictionsController extends ResourceBundle implements Initializab
         }
 
         public void shutdownExecutorService() {
-                Map<Thread, StackTraceElement[]> threadMap = Thread.getAllStackTraces();
-                        for (Thread thread : threadMap.keySet()) {
-                                thread.interrupt();
-                        }
-
+//                Map<Thread, StackTraceElement[]> threadMap = Thread.getAllStackTraces();
+//                        for (Thread thread : threadMap.keySet()) {
+//                                thread.interrupt();
+//                        }
                 if(this.updateQueuePoolTask != null)
                         this.updateQueuePoolTask.cancel();
                 this.engine.shutdownExecutorService();

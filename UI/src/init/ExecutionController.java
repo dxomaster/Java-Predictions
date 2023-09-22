@@ -4,6 +4,7 @@ import DTO.EntityDTO;
 import DTO.PropertyDTO;
 import DTO.WorldDTO;
 import engine.Engine;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -36,6 +38,7 @@ public class ExecutionController implements Initializable {
     HBox simulaionButtons;
     Label envVariablesLabel = new Label("Environment Variables:");
     Label entityPopulationLabel = new Label("Entity Population:");
+    CheckBox showAnimations;
 
     private void setupListViewSelectionListenerPopulation(ListView<EntityDTO> listView) {
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -111,7 +114,8 @@ public class ExecutionController implements Initializable {
         TextInputDialog dialog = new TextInputDialog(propertyDTO.getValue());
         dialog.setTitle("Edit Environment Variable");
         dialog.setHeaderText(propertyDTO.getName() + " (" + propertyDTO.getType() + ")");
-        String text = (propertyDTO.getType().equals("String")) ? "enter a new value:" : "Enter a new value within the range [" + propertyDTO.getRange().toString() + "]:";
+        //String text = (propertyDTO.getType().equals("String")) ? "enter a new value:" : "Enter a new value within the range [" + propertyDTO.getRange().toString() + "]:";
+        String text = propertyDTO.getRange() == null ? "enter a new value:" : "Enter a new value within the range [" + propertyDTO.getRange().toString() + "]:";
         dialog.setContentText(text);
 
         modifyProperty(propertyDTO, dialog.showAndWait());
@@ -159,12 +163,19 @@ public class ExecutionController implements Initializable {
             loader.setResources(resources);
             Parent root = loader.load();
             ResultsController resultsController = loader.getController();
-            HBox dynamicDisplay = (HBox)resources.getObject("dynamicDisplay");
+            if (this.showAnimations.isSelected()) {
+                // Apply the fade-in transition to the results screen
+                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
+                fadeTransition.setFromValue(0.0);
+                fadeTransition.setToValue(1.0);
+                fadeTransition.play();
+
+
+            }
+            HBox dynamicDisplay = (HBox) resources.getObject("dynamicDisplay");
             dynamicDisplay.getChildren().clear();
             dynamicDisplay.getChildren().add(root);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             showErrorAlert(e);
         }
     }
@@ -195,6 +206,7 @@ public class ExecutionController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         this.engine = (Engine) resources.getObject("Engine");
+        this.showAnimations = (CheckBox) resources.getObject("showAnimations");
         ListView<PropertyDTO> envVariablesDisplay = setupPropertyListView();
         ListView<EntityDTO> entityPopulationView = setupEntityPopulationsListView();
         gridPane.add(envVariablesDisplay,0,1);

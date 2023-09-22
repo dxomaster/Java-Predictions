@@ -1,31 +1,16 @@
 package init;
 
-import DTO.RunEndDTO;
-import DTO.RunStatisticsDTO;
-import DTO.WorldDTO;
 import engine.Engine;
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import static init.PredictionsController.showErrorAlert;
@@ -47,12 +32,14 @@ public class ResultsController extends ResourceBundle implements Initializable {
     ResourceBundle resources;
     private String currentUUID;
     private HBox dynamicDisplay;
+    private CheckBox showAnimations;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resources = resources;
         this.engine = (Engine) resources.getObject("Engine");
         this.dynamicDisplay = (HBox) resources.getObject("dynamicDisplay");
+        this.showAnimations = (CheckBox) resources.getObject("showAnimations");
         viewSelection.getItems().addAll("Run Progress","Entity Information", "Statistics");
         viewSelection.getSelectionModel().selectFirst();
         try {
@@ -188,6 +175,8 @@ public class ResultsController extends ResourceBundle implements Initializable {
                 return this.currentUUID;
             case "dynamicDisplay":
                 return this.dynamicDisplay;
+            case "showAnimations":
+                return this.showAnimations;
             default:
                 return null;
         }

@@ -12,19 +12,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="fixed current seconds + addded end of simulation alert">
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="final fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/RunEndDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataTransferObjects/src/DTO/StatisticPropertyDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/world/World.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/Design.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Design.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/Execution.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/Execution.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/ExecutionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ExecutionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/PredictionsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/ProgressViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ProgressViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/init/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/ResultsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/init/UpdateQueuePoolTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/init/UpdateQueuePoolTask.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,14 +190,6 @@
       <workItem from="1695192112903" duration="28000" />
       <workItem from="1695192337899" duration="14217000" />
       <workItem from="1695309699623" duration="12197000" />
-    </task>
-    <task id="LOCAL-00006" summary="surprise&#10;did a lot more stuff">
-      <option name="closed" value="true" />
-      <created>1691255872142</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1691255872143</updated>
     </task>
     <task id="LOCAL-00007" summary="fixes + split creation of Entity from loading world">
       <option name="closed" value="true" />
@@ -589,7 +575,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695302165957</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="final fixes">
+      <option name="closed" value="true" />
+      <created>1695378976370</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1695378976370</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -607,7 +601,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix very annoying bug" />
     <MESSAGE value="fix null exception when changing env prop value" />
     <MESSAGE value="started working on GUI" />
     <MESSAGE value="mashu mashu" />
@@ -632,7 +625,8 @@
     <MESSAGE value="merge stuff and fix problems" />
     <MESSAGE value="added finished threads to queue management" />
     <MESSAGE value="fixed current seconds + addded end of simulation alert" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed current seconds + addded end of simulation alert" />
+    <MESSAGE value="final fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="final fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -676,6 +670,11 @@
           <url>file://$PROJECT_DIR$/Engine/src/world/utils/Grid.java</url>
           <line>109</line>
           <option name="timeStamp" value="183" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/init/ExecutionController.java</url>
+          <line>187</line>
+          <option name="timeStamp" value="194" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

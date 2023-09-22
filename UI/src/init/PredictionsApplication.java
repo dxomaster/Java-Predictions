@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 public class PredictionsApplication extends Application {
     @Override
+
     public void start(Stage primaryStage) throws Exception {
         //load from fxml file
         FXMLLoader fxmlLoader = new FXMLLoader();
