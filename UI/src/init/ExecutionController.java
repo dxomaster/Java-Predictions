@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -33,7 +34,8 @@ public class ExecutionController implements Initializable {
     Button clear;
     ResourceBundle resources;
     HBox simulaionButtons;
-
+    Label envVariablesLabel = new Label("Environment Variables:");
+    Label entityPopulationLabel = new Label("Entity Population:");
 
     private void setupListViewSelectionListenerPopulation(ListView<EntityDTO> listView) {
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -183,9 +185,11 @@ public class ExecutionController implements Initializable {
         this.gridPane.getChildren().clear();
         this.entityPopulationListView = setupEntityPopulationsListView();
         this.envVariablesDisplay = setupPropertyListView();
-        this.gridPane.add(envVariablesDisplay,0,0);
-        this.gridPane.add(entityPopulationListView,1,0);
-        gridPane.add(this.simulaionButtons,2,0);
+        this.gridPane.add(envVariablesDisplay,0,1);
+        this.gridPane.add(entityPopulationListView,1,1);
+        gridPane.add(this.simulaionButtons,2,1);
+        gridPane.add(this.entityPopulationLabel,1,0);
+        gridPane.add(this.envVariablesLabel,0,0);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -193,9 +197,11 @@ public class ExecutionController implements Initializable {
         this.engine = (Engine) resources.getObject("Engine");
         ListView<PropertyDTO> envVariablesDisplay = setupPropertyListView();
         ListView<EntityDTO> entityPopulationView = setupEntityPopulationsListView();
-        gridPane.add(envVariablesDisplay,0,0);
-        gridPane.add(entityPopulationView,1,0);
-
+        gridPane.add(envVariablesDisplay,0,1);
+        gridPane.add(entityPopulationView,1,1);
+        gridPane.add(this.entityPopulationLabel,1,0);
+        gridPane.add(this.envVariablesLabel,0,0);
+        gridPane.getRowConstraints().get(0).setValignment(VPos.BOTTOM);
         this.simulaionButtons = new HBox();
         this.runButton = new Button("Run Simulation");
         this.clear = new Button("Clear");
@@ -216,6 +222,6 @@ public class ExecutionController implements Initializable {
 
         simulaionButtons.getChildren().add(runButton);
         simulaionButtons.getChildren().add(clear);
-        gridPane.add(simulaionButtons, 2, 0);
+        gridPane.add(simulaionButtons, 2, 1);
     }
 }

@@ -73,13 +73,12 @@ public class ProgressViewController implements Initializable {
             }
 
         }
-        currentTicksLabel.textProperty().bind(Bindings.format("Current ticks: %d", currentTicks));
+        currentTicksLabel.textProperty().bind(Bindings.format("Elapsed ticks: %d", currentTicks));
         if (maxTicks.get() == -1)
             maxTicksLabel.textProperty().bind(Bindings.format("Max ticks: N/A"));
         else
             maxTicksLabel.textProperty().bind(Bindings.format("Max ticks: %d", maxTicks));
-        maxTicksLabel.textProperty().bind(Bindings.format("Max ticks: %d", maxTicks));
-        currentSecondsLabel.textProperty().bind(Bindings.format("Current Seconds: %d", currentSeconds));
+        currentSecondsLabel.textProperty().bind(Bindings.format("Elapsed Seconds: %d", currentSeconds));
         if (maxSeconds.get() == -1)
             maxSecondsLabel.textProperty().bind(Bindings.format("Max seconds: N/A"));
         else

@@ -28,6 +28,7 @@ public class PredictionsController extends ResourceBundle implements Initializab
         private HBox dynamicDisplay;
         @FXML
         private Label queueInfoLabel;
+        private UpdateQueuePoolTask updateQueuePoolTask;
 
         public void setEngine(Engine engine) {
                 this.engine = engine;
@@ -47,6 +48,10 @@ public class PredictionsController extends ResourceBundle implements Initializab
         }
         public void startUpdateQueueInfoLabelTask()
         {
+                if(this.updateQueuePoolTask != null)
+                {
+                        this.updateQueuePoolTask.cancel();
+                }
                 UpdateQueuePoolTask updateQueuePoolTask = new UpdateQueuePoolTask(queueInfoLabel,engine);
                 Thread thread = new Thread(updateQueuePoolTask);
                 thread.setDaemon(true);
@@ -88,7 +93,9 @@ public class PredictionsController extends ResourceBundle implements Initializab
                 } catch (Exception e) {
                         showErrorAlert(e);
                 }
+
                 startUpdateQueueInfoLabelTask();
+                this.dynamicDisplay.getChildren().clear();
         }
 
 
@@ -175,6 +182,13 @@ public class PredictionsController extends ResourceBundle implements Initializab
         }
 
         public void shutdownExecutorService() {
+                Map<Thread, StackTraceElement[]> threadMap = Thread.getAllStackTraces();
+                        for (Thread thread : threadMap.keySet()) {
+                                thread.interrupt();
+                        }
+
+                if(this.updateQueuePoolTask != null)
+                        this.updateQueuePoolTask.cancel();
                 this.engine.shutdownExecutorService();
         }
 }

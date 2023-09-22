@@ -54,7 +54,7 @@ public class ResultsController extends ResourceBundle implements Initializable {
         this.engine = (Engine) resources.getObject("Engine");
         this.dynamicDisplay = (HBox) resources.getObject("dynamicDisplay");
         viewSelection.getItems().addAll("Run Progress","Entity Information", "Statistics");
-
+        viewSelection.getSelectionModel().selectFirst();
         try {
             simulations.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {

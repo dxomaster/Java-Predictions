@@ -6,10 +6,10 @@ public class StatisticPropertyDTO implements java.io.Serializable {
     private final String name;
     private final String type;
     private final Map<String, Integer> valueFrequency;
-    private final Float consistency;
+    private final String consistency;
     private final String average;
 
-    public Float getConsistency() {
+    public String getConsistency() {
         return consistency;
     }
 
@@ -17,7 +17,7 @@ public class StatisticPropertyDTO implements java.io.Serializable {
         return average;
     }
 
-    public StatisticPropertyDTO(String name, String type, Map<String, Integer> valueFrequency, Float consistency, String average) {
+    public StatisticPropertyDTO(String name, String type, Map<String, Integer> valueFrequency, String consistency, String average) {
         this.name = name;
         this.type = type;
         this.valueFrequency = valueFrequency;

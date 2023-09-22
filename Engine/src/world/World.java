@@ -142,8 +142,9 @@ public class World implements java.io.Serializable, Runnable {
                 } else if (object instanceof PRDBySecond) {
                     this.terminationBySeconds = ((PRDBySecond) object).getCount();
                 }
+
             }
-            if (terminationByTicks == null && terminationBySeconds == null)
+            if (terminationByTicks == null && terminationBySeconds == null && prdWorld.getPRDTermination().getPRDByUser() == null)
                 throw new IllegalArgumentException("At least one termination condition must be specified");
             this.entityDefinitionMap = entityDefinitionList;
             this.environmentVariables = environmentVariables;
@@ -290,9 +291,6 @@ public class World implements java.io.Serializable, Runnable {
             this.errorMessage = e.getMessage();
         }
         this.isRunning = false;
-        System.out.println(this);
-        System.out.println("Finished by: " + finishedReason);
-        System.out.println(Thread.currentThread().getName());
 
     }
     private List<Rule> getActivatedRules()
@@ -418,7 +416,7 @@ public class World implements java.io.Serializable, Runnable {
         return ticks;
     }
 
-    public int getTerminationByTicks() {
+    public Integer getTerminationByTicks() {
         return terminationByTicks;
     }
 

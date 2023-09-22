@@ -31,7 +31,7 @@ public class Engine implements Serializable {
     private Map<String, World> pastSimulationWorlds = new HashMap<>();
     private ThreadPoolExecutor executorService;
     private PRDWorld xmlFileTemplate;
-    private Map<String, World> worldTemplates = new HashMap<>();
+    private final Map<String, World> worldTemplates = new HashMap<>();
     private World currentWorldTemplate;
     Map<String, World> worlds = new HashMap<>();
     public void clearPastSimulations() {
@@ -173,8 +173,9 @@ public class Engine implements Serializable {
         consistencySum /= entityList.size();
 
        avg = (property.getType() != PropertyType.FLOAT) ? "N/A" : avgSum.toString();
-
-        return new StatisticPropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap, consistencySum, avg);
+       String consistencyString = consistencySum.isNaN() ? "N/A" : consistencySum.toString();
+       avg =  avg.equals("NaN") ? "N/A" : avg;
+        return new StatisticPropertyDTO(property.getName(), property.getType().propertyClass.getSimpleName(), frequencyMap, consistencyString, avg);
 
     }
     public void runSimulationAgain(String uuid)

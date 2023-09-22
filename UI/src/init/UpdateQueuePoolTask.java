@@ -22,8 +22,8 @@ public class UpdateQueuePoolTask extends javafx.concurrent.Task<Void>{
             int finishedThreads = engine.getAmountOfFinishedThreads();
             int idleThreads = engine.getAmountOfIdleThreads();
             int runningThreads = engine.getAmountOfRunningThreads();
-            String queuePool = "Idle Threads: " + idleThreads + "\nRunning Threads: " + runningThreads +
-                    "\nFinished Threads: " + finishedThreads + "\nThread Pool Size: " + engine.getThreadPoolSize();
+            String queuePool = "Idle Simulations: " + idleThreads + "\nRunning Simulations: " + runningThreads +
+                    "\nFinished Simulations: " + finishedThreads + "\nThread Pool Size: " + engine.getThreadPoolSize();
 
             Platform.runLater(() -> queuePoolLabel.setText(queuePool));
             Thread.sleep(200);
