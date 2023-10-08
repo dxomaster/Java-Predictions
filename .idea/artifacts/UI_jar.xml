@@ -7,7 +7,6 @@
       <element id="module-output" name="Exception" />
       <element id="library" level="project" name="jfxrt" />
       <element id="module-output" name="UI" />
-      <element id="module-output" name="Predictions" />
     </root>
   </artifact>
 </component>

@@ -13,10 +13,7 @@ import world.utils.PropertyType;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -32,6 +29,11 @@ public class Engine implements Serializable {
     private ThreadPoolExecutor executorService;
     private PRDWorld xmlFileTemplate;
     private final Map<String, World> worldTemplates = new HashMap<>();
+
+    public World getCurrentWorldTemplate() {
+        return currentWorldTemplate;
+    }
+
     private World currentWorldTemplate;
     Map<String, World> worlds = new HashMap<>();
     public void clearPastSimulations() {
@@ -219,6 +221,36 @@ public class Engine implements Serializable {
         return simulationName;
     }
 
+    public PRDWorld getXmlFileTemplate() {
+        return xmlFileTemplate;
+    }
+
+    public void loadSimulationFromString(String file, String fileName) throws ErrorException {
+        try {
+            //this.pastSimulationArtifactDTO = new ArrayList<>();
+            JAXBContext jaxbContext = JAXBContext.newInstance(PRDWorld.class);
+
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            StringReader reader = new StringReader(file);
+            this.xmlFileTemplate = (PRDWorld) jaxbUnmarshaller.unmarshal(reader);
+            try {
+                int threadAmount = this.xmlFileTemplate.getPRDThreadCount();
+                this.executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(threadAmount);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+            this.currentWorldTemplate = new World(xmlFileTemplate);
+            this.simulationName = fileName;
+
+        } catch (Exception e) {
+            throw new ErrorException("Error in loading file please make sure this is a valid XML file with");
+        }
+        System.out.println(currentWorldTemplate);
+
+    }
+
     public void loadSimulationParametersFromFile(String filename) throws ErrorException {
         try {
             //this.pastSimulationArtifactDTO = new ArrayList<>();
@@ -243,12 +275,16 @@ public class Engine implements Serializable {
             throw new ErrorException("Error in loading file please make sure this is a valid XML file with the correct schema:\n" + e.getMessage());
         }
     }
-
+    public WorldDTO getSimulationParametersFromPRDWorld(PRDWorld prdWorld) throws ErrorException {
+        World world = new World(prdWorld);
+        return world.getWorldDTO();
+    }
     public WorldDTO getSimulationParameters() {
         if (!isSimulationLoaded())
             throw new IllegalArgumentException("No file is loaded");
         return currentWorldTemplate.getWorldDTO();
     }
+
     private void waitForWorldToInitialize(World world){
         while(!world.isInitialized())//todo is this ok?
         {

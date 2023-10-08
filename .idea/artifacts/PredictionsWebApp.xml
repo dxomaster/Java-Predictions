@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="PredictionsWebApp">
+    <output-path>$PROJECT_DIR$/out/artifacts/PredictionsWebApp</output-path>
+    <root id="archive" name="PredictionsWebApp.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="PredictionsWebApp" />
+          <element id="module-output" name="Exception" />
+          <element id="module-output" name="Engine" />
+          <element id="module-output" name="UI" />
+          <element id="module-output" name="DataTransferObjects" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="jfxrt" />
+          <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/jre/lib/ext/jfxrt.jar" />
+          <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/jre/lib/rt.jar" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="PredictionsWebApp/web/Web" />
+    </root>
+  </artifact>
+</component>

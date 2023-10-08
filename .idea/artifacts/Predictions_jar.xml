@@ -5,10 +5,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/DataTransferObjects/META-INF/MANIFEST.MF" />
       </element>
-      <element id="module-output" name="Predictions" />
       <element id="module-output" name="UI" />
-      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/jre/lib/rt.jar" />
-      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/jre/lib/ext/jfxrt.jar" />
       <element id="library" level="project" name="jfxrt" />
       <element id="module-output" name="Engine" />
       <element id="module-output" name="DataTransferObjects" />
