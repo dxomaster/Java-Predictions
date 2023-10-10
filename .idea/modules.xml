@@ -8,7 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/Engine/Engine.iml" filepath="$PROJECT_DIR$/Engine/Engine.iml" />
       <module fileurl="file://$PROJECT_DIR$/Exception/Exception.iml" filepath="$PROJECT_DIR$/Exception/Exception.iml" />
       <module fileurl="file://$PROJECT_DIR$/Predictions.iml" filepath="$PROJECT_DIR$/Predictions.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../PredictionsWebApp/PredictionsWebApp.iml" filepath="$PROJECT_DIR$/../PredictionsWebApp/PredictionsWebApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PredictionsWebApp/PredictionsWebApp.iml" filepath="$PROJECT_DIR$/PredictionsWebApp/PredictionsWebApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/UI/UI.iml" filepath="$PROJECT_DIR$/UI/UI.iml" />
     </modules>
   </component>

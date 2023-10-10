@@ -12,17 +12,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="די כבר">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/PredictionsWebApp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jakarta_platform_jakartaee_web_api.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Predictions_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Predictions_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/UI_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/UI_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jfxrt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/jfxrt.xml" afterDir="false" />
+    <list default="true" id="3643ba2b-4cd9-4ce2-8c86-e4e30c353734" name="Changes" comment="started server">
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Predictions.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +97,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "onboarding.tips.debug.path": "C:/Users/97250/intellijU_projects/Java-Predictions/DTO/src/Main.java",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.13247865",
     "project.structure.side.proportion": "0.41577336",
     "run.code.analysis.last.selected.profile": "pProject Default",
@@ -119,11 +111,11 @@
       <recent name="engine.world.utils" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/../PredictionsWebApp/web" />
       <recent name="$PROJECT_DIR$/../" />
       <recent name="$PROJECT_DIR$/../AdminClient" />
       <recent name="$PROJECT_DIR$/UI/src/init" />
-      <recent name="$PROJECT_DIR$/UI/src" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 10.0.11">
@@ -311,23 +303,7 @@
       <workItem from="1696526083192" duration="3792000" />
       <workItem from="1696535600186" duration="5655000" />
       <workItem from="1696599880384" duration="312000" />
-      <workItem from="1696602605982" duration="18293000" />
-    </task>
-    <task id="LOCAL-00009" summary="fixes + split creation of Entity from loading world">
-      <option name="closed" value="true" />
-      <created>1691386216428</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1691386216428</updated>
-    </task>
-    <task id="LOCAL-00010" summary="fixes + split creation of Entity from loading world">
-      <option name="closed" value="true" />
-      <created>1691386266519</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1691386266519</updated>
+      <workItem from="1696602605982" duration="20076000" />
     </task>
     <task id="LOCAL-00011" summary="changed List&lt;Property&gt; to Map&lt;String,Property&gt; on Entity.java&#10;EntityDefinition.java">
       <option name="closed" value="true" />
@@ -705,7 +681,23 @@
       <option name="project" value="LOCAL" />
       <updated>1695400938248</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="started server">
+      <option name="closed" value="true" />
+      <created>1696785833006</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1696785833007</updated>
+    </task>
+    <task id="LOCAL-00059" summary="started server">
+      <option name="closed" value="true" />
+      <created>1696786393673</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1696786393673</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -723,7 +715,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="mashu mashu" />
     <MESSAGE value="done some work on engine" />
     <MESSAGE value="changed to if else inside catch in createValueExpression function in ExpressionFactory.java" />
     <MESSAGE value="secondary entity - need to fix issue with float/integer in random(3)" />
@@ -748,7 +739,8 @@
     <MESSAGE value="final fixes" />
     <MESSAGE value="added 1 animation + fixes" />
     <MESSAGE value="די כבר" />
-    <option name="LAST_COMMIT_MESSAGE" value="די כבר" />
+    <MESSAGE value="started server" />
+    <option name="LAST_COMMIT_MESSAGE" value="started server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
